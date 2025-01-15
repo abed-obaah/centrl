@@ -5,9 +5,10 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Logo from '../assets/logo.png';
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Link } from 'react-router-dom';
 
 const navigation = [
-  { name: 'Pricing', href: '#' },
+  { name: 'Pricing', href: '/pricing' },
   { name: 'Discover', href: '#' },
   { name: 'About', href: '#' },
 
@@ -67,9 +68,12 @@ export default function Example() {
             <p  className=''>5:33 PM GMT+1</p>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:ml-8 mt-4 lg:mt-0">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900 border-2 border-[#000000] rounded-md py-1 px-6">
-            Sign In
-          </a>
+            <Link to={'/signin'}>
+                  <a href="#" className="text-sm/6 font-semibold text-gray-900 border-2 border-[#000000] rounded-md py-1 px-6">
+                  Sign In
+                </a>
+            </Link>
+          
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
