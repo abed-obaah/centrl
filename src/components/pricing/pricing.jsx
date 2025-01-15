@@ -1,7 +1,8 @@
 import React from "react";
-import Min from '../../assets/min.png'
+import Min from '../../assets/11.png'
 import Max from '../../assets/13.png'
 import Header from '../header';
+import Footer from '../footer/footer';
 
 import { useState } from 'react'
 import {
@@ -29,7 +30,19 @@ const pricing = {
         href: '#',
         price: { monthly: '$0', annually: '$299' },
         description: 'The essentials to provide your best work for clients.',
-        features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+        features: [
+            '25 products',
+            'Up to 10,000 subscribers',
+            'Advanced analytics',
+            '24-hour support response time',
+            'Marketing automations',
+            'Marketing automations',
+            'Marketing automations',
+            'Marketing automations',
+            'Marketing automations',
+            'Marketing automations',
+            'Marketing automations',
+          ],
         mostPopular: false,
       },
       {
@@ -44,6 +57,12 @@ const pricing = {
           'Advanced analytics',
           '24-hour support response time',
           'Marketing automations',
+          'Marketing automations',
+          'Marketing automations',
+          'Marketing automations',
+          'Marketing automations',
+          'Marketing automations',
+          'Marketing automations',
         ],
         mostPopular: false,
       },
@@ -55,7 +74,11 @@ const pricing = {
   }
 
 const PricingPage = () => {
+    const [openIndex, setOpenIndex] = useState(null);
 
+    const toggleAccordion = (index) => {
+      setOpenIndex(openIndex === index ? null : index);
+    };
    
 
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -64,7 +87,7 @@ const PricingPage = () => {
   return (
     <div className="relative bg-[#F9F9F9] min-h-screen">
       {/* Background Images */}
-      <div className="absolute top-40 left-10">
+      <div className="absolute top-[10em] left-[25em]">
         <img
           src={Min}
           alt="Diamond"
@@ -75,10 +98,10 @@ const PricingPage = () => {
       <img
             src={Max}
                 alt="Third Image"
-                className="absolute left-0 bottom-0 w-[20em] h-40 object-contain"
+                className="absolute left-0 bottom-[25%] w-[20em] h-40 object-contain"
             />
 
-      <div className="absolute bottom-10 right-10">
+      <div className="absolute bottom-[50%] right-[25em]">
         <img
           src={Min}
           alt="Star"
@@ -130,18 +153,7 @@ const PricingPage = () => {
                     </p>
 
 
-                <a
-                    href={tier.href}
-                    aria-describedby={tier.id}
-                    className={classNames(
-                    tier.mostPopular
-                        ? 'bg-indigo-600 text-white shadow-xs hover:bg-indigo-500'
-                        : 'text-indigo-600 ring-1 ring-indigo-200 ring-inset hover:ring-indigo-300',
-                    'mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-                    )}
-                >
-                    Buy plan
-                </a>
+              
                 <ul role="list" className="mt-8 space-y-3 text-sm/6 text-gray-600">
                     {tier.features.map((feature) => (
                     <li key={feature} className="flex gap-x-3">
@@ -150,23 +162,75 @@ const PricingPage = () => {
                     </li>
                     ))}
                 </ul>
+                <a
+                href={tier.href}
+                aria-describedby={tier.id}
+                className={classNames(
+                    tier.mostPopular
+                    ? 'bg-indigo-600 text-white shadow-xs hover:bg-indigo-500'
+                    : tier.id === 'tier-freelancer'
+                    ? 'bg-black text-white hover:bg-gray-800' // Custom background and text for Freelancer card
+                    : tier.id === 'tier-startup'
+                    ? 'bg-[linear-gradient(90deg,_#BCD4FF_50%,_#F1EEFF_75%,_#DFCCFF_87.5%,_#DBAFF9_100%)] text-white hover:bg-indigo-400' // Custom background and text for Startup card
+                    : 'text-indigo-600 ring-1 ring-indigo-200 ring-inset hover:ring-indigo-300', // Default styling
+                    'mt-6 block w-full rounded-md px-10 py-2 text-center text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                )}
+                >
+                {tier.id === 'tier-startup' ? 'Upgrade to Centrl Premium' : 'Buy plan'}
+                </a>
+
                 </div>
             ))}
         </div>
 
         {/* FAQ Section */}
-        <div className="mx-auto mt-10 grid gap-8 w-[50%] lg:max-w-7xl xl:grid-cols-2 xl:mx-auto">
+        <div className="mx-auto mt-10 grid gap-8 w-[50%] lg:max-w-7xl xl:grid-cols-2 xl:mx-auto bg-white p-4">
             <div>
             <h2 className="text-2xl font-bold mb-4">FAQs</h2>
-          <ul className="space-y-4 text-gray-700">
-            <li>Are there hidden fees?</li>
-            <li>What forms of payment do you accept?</li>
-            <li>How secure is Central?</li>
-            <li>Do you offer discounts?</li>
-          </ul>
+            <ol className="list-decimal text-gray-700 pl-6">
+        {[
+          {
+            question: "Are there hidden fees?",
+            answer: "No, there are no hidden fees. All charges are transparent.",
+          },
+          {
+            question: "What forms of payment do you accept?",
+            answer: "We accept credit cards, PayPal, and bank transfers.",
+          },
+          {
+            question: "How secure is Central?",
+            answer: "Central uses industry-standard security measures to protect your data.",
+          },
+          {
+            question: "Do you offer discounts?",
+            answer: "Yes, we offer seasonal and volume-based discounts.",
+          },
+        ].map((item, index) => (
+          <li key={index} className="border-b border-gray-300 py-2">
+            <div
+              className="flex justify-between items-center cursor-pointer"
+              onClick={() => toggleAccordion(index)}
+            >
+              <span>{item.question}</span>
+              <i
+                className={`bi ${
+                  openIndex === index ? "bi-caret-up" : "bi-caret-down"
+                } text-gray-500`}
+              ></i>
             </div>
+            {openIndex === index && (
+              <div className="mt-2 text-gray-600 text-sm">{item.answer}</div>
+            )}
+          </li>
+        ))}
+      </ol>
+
+            </div>
+            
         </div>
+        
       </div>
+       <Footer />
     </div>
   );
 };

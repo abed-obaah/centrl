@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Switch } from '@headlessui/react';
-import Min from '../../assets/min.png';
+import Min from '../../assets/11.png';
 import Share from '../../assets/share.png';
 
 function Signin() {
