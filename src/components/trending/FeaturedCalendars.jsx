@@ -10,6 +10,7 @@ import Even from "../../assets/123.png";
 import Chilbilz from "../../assets/873.png";
 import Techbro from "../../assets/tech.png";
 import David from "../../assets/david.png";
+import { Link } from "react-router-dom";
 
 const cards = [
     {
@@ -57,11 +58,13 @@ const TrendingEvents = () => {
       {/* Section Header */}
       <div className="flex justify-between items-center w-full max-w-7xl mb-4 px-4">
         <h2 className="text-2xl font-medium">Featured Calendars</h2>
+        <Link to="/calender" className="text-blue-600 hover:underline">
         <img
         src={ArrowwLeft}
         alt={ArrowwLeft}
-        className="w-10 h-10 object-cover" 
+        className="w-6 h-6 object-cover" 
       />
+      </Link>
       </div>
       {/* Event Cards Container with Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-start max-w-screen-xl px-4">
