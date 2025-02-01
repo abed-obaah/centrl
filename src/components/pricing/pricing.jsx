@@ -3,6 +3,8 @@ import Min from '../../assets/11.png'
 import Max from '../../assets/13.png'
 import Header from '../header';
 import Footer from '../footer/footer';
+import '../../index.css';
+import FAQ from '../FAQ/index'
 
 import { useState } from 'react'
 import {
@@ -85,7 +87,7 @@ const PricingPage = () => {
       const [frequency, setFrequency] = useState(pricing.frequencies[0])
 
   return (
-    <div className="relative bg-[#F9F9F9] min-h-screen">
+    <div className="relative min-h-screen">
       {/* Background Images */}
       <div className="absolute top-[10em] left-[25em]">
         <img
@@ -184,48 +186,8 @@ const PricingPage = () => {
         </div>
 
         {/* FAQ Section */}
-        <div className="mx-auto mt-10 grid gap-8 w-[50%] lg:max-w-7xl xl:grid-cols-2 xl:mx-auto bg-white p-4">
-            <div>
-            <h2 className="text-2xl font-bold mb-4">FAQs</h2>
-            <ol className="list-decimal text-gray-700 pl-6">
-        {[
-          {
-            question: "Are there hidden fees?",
-            answer: "No, there are no hidden fees. All charges are transparent.",
-          },
-          {
-            question: "What forms of payment do you accept?",
-            answer: "We accept credit cards, PayPal, and bank transfers.",
-          },
-          {
-            question: "How secure is Central?",
-            answer: "Central uses industry-standard security measures to protect your data.",
-          },
-          {
-            question: "Do you offer discounts?",
-            answer: "Yes, we offer seasonal and volume-based discounts.",
-          },
-        ].map((item, index) => (
-          <li key={index} className="border-b border-gray-300 py-2">
-            <div
-              className="flex justify-between items-center cursor-pointer"
-              onClick={() => toggleAccordion(index)}
-            >
-              <span>{item.question}</span>
-              <i
-                className={`bi ${
-                  openIndex === index ? "bi-caret-up" : "bi-caret-down"
-                } text-gray-500`}
-              ></i>
-            </div>
-            {openIndex === index && (
-              <div className="mt-2 text-gray-600 text-sm">{item.answer}</div>
-            )}
-          </li>
-        ))}
-      </ol>
-
-            </div>
+        <div className="mx-auto mt-10 grid gap-8 w-[60%] lg:max-w-7xl xl:grid-cols-1 xl:mx-auto">
+           <FAQ/>
             
         </div>
         

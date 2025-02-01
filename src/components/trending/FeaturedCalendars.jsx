@@ -11,6 +11,7 @@ import Chilbilz from "../../assets/873.png";
 import Techbro from "../../assets/tech.png";
 import David from "../../assets/david.png";
 import { Link } from "react-router-dom";
+import { ArrowRight} from "iconsax-react";
 
 const cards = [
     {
@@ -44,30 +45,40 @@ const cards = [
       imgUrl: Techbro, // Replace with actual image URL
     },
     {
-      id: 4,
+      id: 5,
       name: "TechBro",
       description: "Join the community that revolves around tech.",
       imgUrl: David, // Replace with actual image URL
     },
+    {
+      id: 6,
+      name: "TechBro",
+      description: "Join the community that revolves around tech.",
+      imgUrl: David, // Replace with actual image URL
+    },
+    {
+      id: 7,
+      name: "TechBro",
+      description: "Join the community that revolves around tech.",
+      imgUrl: David, // Replace with actual image URL
+    },
+  
  
   ];
 
 const TrendingEvents = () => {
   return (
-    <div className="flex flex-col items-center">
-      {/* Section Header */}
-      <div className="flex justify-between items-center w-full max-w-7xl mb-4 px-4">
-        <h2 className="text-2xl font-medium">Featured Calendars</h2>
+    <div className="flex flex-col items-center bg-gradient-to-r h-[795px]"
+    style={{
+      background: "linear-gradient(to right, #F5C5AD, #C379EA, #DA63B1, #F4667D)",
+    }} >
+      <div className="flex justify-between items-center w-full max-w-7xl mb-20 px-4 py-10">
+        <h2 className="text-2xl font-medium text-[#FFFFFF]">Featured Calendars</h2>
         <Link to="/calender" className="text-blue-600 hover:underline">
-        <img
-        src={ArrowwLeft}
-        alt={ArrowwLeft}
-        className="w-6 h-6 object-cover" 
-      />
-      </Link>
+          <ArrowRight size="20" color='#FFFFFF'/>
+        </Link>
       </div>
-      {/* Event Cards Container with Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-start max-w-screen-xl px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-6 justify-start max-w-screen-xl px-4">
       {cards.map((card) => (
           <div
             key={card.id}

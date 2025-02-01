@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Switch } from '@headlessui/react';
 import Min from '../../assets/11.png';
 import Share from '../../assets/share.png';
+import { Link } from 'react-router-dom';
 
 function Signin() {
   const [isToggled, setIsToggled] = useState(true); // Always toggled by default
@@ -47,12 +48,14 @@ function Signin() {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-[#0095F6] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
+              <Link to="/home" className="text-[#0095F6] hover:underline"> 
+                    <button
+                      type="submit"
+                      className="flex w-full justify-center rounded-md bg-[#0095F6] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      Sign in
+                    </button>
+              </Link>
             </div>
           </form>
 

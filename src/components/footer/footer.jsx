@@ -101,6 +101,38 @@ const navigation = {
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             <div>
                 <p className="text-lg font-medium text-black">Join our Newsletter</p>
+                <div className="relative flex gap-x-0 my-5 w-full">
+  <label htmlFor="email-address" className="sr-only">
+    Email address
+  </label>
+  <input
+    id="email-address"
+    name="email"
+    type="email"
+    required
+    placeholder="Enter your email"
+    autoComplete="email"
+    className="w-full rounded-md border bg-white px-3.5 py-2 pr-10 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6"
+  />
+  {/* Arrow Icon */}
+  <span className="absolute inset-y-0 right-3 flex items-center text-gray-400">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9 5l7 7-7 7"
+      />
+    </svg>
+  </span>
+</div>
+
             <p>Coming Soon to</p>
             <div className='flex gap-4'>
                         <img

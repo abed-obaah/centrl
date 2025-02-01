@@ -6,7 +6,8 @@ import Pricing from "./components/pricing/pricing"
 import About from "./components/about/about"
 import Discover from "./components/discover/discover"
 import Details from "./components/trending/details/details"
-import Calenders from "./components/trending/calenders"
+import Calenders from "./components/trending/calenders";
+import Dashboard from "./components/dashboard/index";
 
 
 function Contact() {
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/discover" element={<Discover />} />
         <Route path="/details" element={<Details />} />
         <Route path="/calender" element={<Calenders />} />
+        <Route path="/home" element={<Dashboard />} />
       </Routes>
     </Router>
   );

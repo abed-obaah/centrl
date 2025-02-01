@@ -38,13 +38,19 @@ const cards = [
       imgUrl: Chilbilz, // Replace with actual image URL
     },
     {
-      id: 4,
+      id: 5,
       name: "TechBro",
       description: "Join the community that revolves around tech.",
       imgUrl: Techbro, // Replace with actual image URL
     },
     {
-      id: 4,
+      id: 6,
+      name: "TechBro",
+      description: "Join the community that revolves around tech.",
+      imgUrl: David, // Replace with actual image URL
+    },
+    {
+      id: 7,
       name: "TechBro",
       description: "Join the community that revolves around tech.",
       imgUrl: David, // Replace with actual image URL
@@ -60,7 +66,7 @@ const TrendingEvents = () => {
         <h2 className="text-=[15px] font-medium">Communities</h2>
       </div>
       {/* Event Cards Container with Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-start max-w-screen-xl px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 justify-start max-w-screen-xl px-4">
       {cards.map((card) => (
           <div
             key={card.id}

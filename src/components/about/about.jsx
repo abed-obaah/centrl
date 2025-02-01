@@ -8,7 +8,7 @@ import Footer from '../footer/footer';
 
 export default function Example() {
   return (
-    <><Header /><div className="bg-white py-24 sm:py-32">
+    <><Header /><div className="py-24 sm:py-32">
 
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
@@ -64,7 +64,7 @@ export default function Example() {
       <Team  />
     </div>
 
-    <div className="py-24 sm:py-32 bg-[#F9F9F9]">
+    <div className="py-24 sm:py-32">
   <div className="relative sm:py-16">
     <div className="mx-auto max-w-md px-6 sm:max-w-3xl lg:max-w-7xl lg:px-8">
     <div className="relative h-full w-full">
