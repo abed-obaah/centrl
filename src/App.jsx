@@ -8,6 +8,9 @@ import Discover from "./components/discover/discover"
 import Details from "./components/trending/details/details"
 import Calenders from "./components/trending/calenders";
 import Dashboard from "./components/dashboard/index";
+import Admin from "./components/Admin/index";
+import CategoryPage from "./components/Admin/CategoryPage";
+
 
 
 function Contact() {
@@ -28,6 +31,8 @@ export default function App() {
         <Route path="/details" element={<Details />} />
         <Route path="/calender" element={<Calenders />} />
         <Route path="/home" element={<Dashboard />} />
+        <Route path="/:admin" element={<Admin/>} />
+        <Route path="/category/:category" element={<CategoryPage />} />
       </Routes>
     </Router>
   );
