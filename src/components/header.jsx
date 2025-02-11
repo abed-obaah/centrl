@@ -15,34 +15,25 @@ export default function Header() {
       <div className="flex items-center justify-between py-5 max-w-[1200px] mx-auto px-4">
         {/* Logo */}
         <a href="#">
-          <img alt="Centrl" src={logo} className="size-8" />
+          <img alt="Centrl" src={logo} className="size-8" loading="lazy" />
         </a>
 
         {/* Desktop Nav */}
-        <ul className="hidden lg:flex lg:gap-10">
+        <ul className="hidden md-plus:flex md-plus:gap-10">
           <li>
-            <a
-              href="/pricing"
-              className="text-base font-medium text-[#000000CC] hover:text-gray-900"
-            >
+            <a href="/pricing" className="font-500 text-[#000000CC]">
               Pricing
             </a>
           </li>
 
           <li>
-            <a
-              href="/discover"
-              className="text-base font-medium text-[#000000CC] hover:text-gray-900"
-            >
+            <a href="/discover" className="font-500 text-[#000000CC]">
               Discover
             </a>
           </li>
 
           <li>
-            <a
-              href="about"
-              className="text-base font-medium text-[#000000CC] hover:text-gray-900"
-            >
+            <a href="about" className="font-500 text-[#000000CC]">
               About
             </a>
           </li>
@@ -52,7 +43,10 @@ export default function Header() {
         <Navbar isClicked={isClicked} toggleNavClick={toggleNavClick} />
 
         {/* Menu Icons */}
-        <div className="z-10 inline-block lg:hidden" onClick={toggleNavClick}>
+        <div
+          className="z-10 inline-block md-plus:hidden"
+          onClick={toggleNavClick}
+        >
           {isClicked ? (
             <button>
               <span className="sr-only">Close menu</span>
