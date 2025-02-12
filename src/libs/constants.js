@@ -56,3 +56,86 @@ export const cards = [
     imgUrl: David, // Replace with actual image URL
   },
 ];
+
+// data for pricing plan
+export const pricingPlans = [
+  {
+    id: 1,
+    name: 'centrl.',
+    price: '0',
+    tag: 'Free forever',
+
+    features: [
+      'Unlimited number of events',
+      'Unlimited number of guests per events',
+      'Blasts and automated reminders via email, SMS, push notification and WhatsApp',
+      'Send up to 500 invites or newsletters per week through Luma',
+      'Check in guests to your events through Luma',
+    ],
+    link: '#',
+    ctaText: 'Get started now!',
+  },
+
+  {
+    id: 2,
+    name: 'premium',
+    price: '25',
+    tag: 'Per month, billed Annually',
+
+    features: [
+      'Unlimited number of events',
+      'Unlimited number of guests per events',
+      'Blasts and automated reminders via email, SMS, push notification and WhatsApp',
+      'Send up to 500 invites or newsletters per week through Luma',
+      'Check in guests to your events through Luma',
+    ],
+    link: '#',
+    ctaText: 'Upgrade to Premium',
+  },
+
+  {
+    id: 3,
+    name: 'platinum package',
+    price: 'Custom Pricing',
+    tag: '',
+
+    features: [
+      'Unlimited number of events',
+      'Unlimited number of guests per events',
+      'Blasts and automated reminders via email, SMS, push notification and WhatsApp',
+      'Send up to 500 invites or newsletters per week through Luma',
+      'Check in guests to your events through Luma',
+    ],
+    link: '/',
+    ctaText: 'Contact Sales',
+  },
+];
+
+// data for FAQS
+export const faqs = [
+  {
+    question: 'Are there hidden fees?',
+    answer:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+  {
+    question: 'What forms of payment do you accept?',
+    answer:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+  {
+    question: 'How secure is Centrl?',
+    answer:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+  {
+    question: 'Do you offer Discounts?',
+    answer:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+  {
+    question: 'Are there any hidden fees?',
+    answer:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+];
