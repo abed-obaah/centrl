@@ -85,7 +85,7 @@ const Navbar = ({ isClicked }) => {
           isClicked ? 'translate-x-0' : 'translate-x-[190rem]'
         } fixed left-0 top-0 flex h-screen w-full items-center justify-end transition-transform duration-300 lg:hidden`}
       >
-        <div className="divide-y-2 pt-32 pb-10 w-full divide-gray-50 rounded-lg bg-white ring-1 shadow-lg ring-black/5">
+        <div className="divide-y-2 pt-32 pb-10 w-full divide-gray-50 rounded-lg bg-[#fff] ring-1 shadow-lg ring-black/5">
           <div className="px-5 pt-5 pb-6">
             <div className="mt-6">
               <nav className="grid gap-6">

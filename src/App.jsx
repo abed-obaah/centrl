@@ -10,8 +10,8 @@ import RootLayout from './layouts/RootLayout';
 
 // pages
 import Home from './pages/Home';
+import Pricing from './pages/pricing';
 import Signin from './components/auth/signin';
-import Pricing from './components/pricing/pricing';
 import About from './components/about/about';
 import Discover from './components/discover/discover';
 import Details from './components/trending/details/details';
@@ -52,24 +52,3 @@ const App = () => {
 };
 
 export default App;
-
-// export default function App() {
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/about" element={<About />} />
-//         <Route path="/contact" element={<Contact />} />
-//         <Route path="/signin" element={<Signin />} />
-//         <Route path="/pricing" element={<Pricing />} />
-//         <Route path="/about" element={<About />} />
-//         <Route path="/discover" element={<Discover />} />
-//         <Route path="/details" element={<Details />} />
-//         <Route path="/calender" element={<Calenders />} />
-//         <Route path="/home" element={<Dashboard />} />
-//         <Route path="/:admin" element={<Admin />} />
-//         <Route path="/category/:category" element={<CategoryPage />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
