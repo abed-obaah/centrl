@@ -6,18 +6,18 @@ export default function SearchBar() {
   const [location, setLocation] = useState('Lagos');
 
   return (
-    <div className="flex items-center gap-2 bg-white p-0 rounded-full border-[1.5px] shadow-md border-[#000]/15">
+    <div className="flex items-center gap-2   p-0 rounded-full border-[1.5px] shadow-md border-[#000]/15">
       {/* Search Input */}
       <input
         type="text"
         placeholder="Search events...."
-        className="px-4 py-[0.55rem] rounded-full placeholder:text-[#646060] focus:outline-none w-64 "
+        className="px-4 py-[0.55rem] bg-[transparent]  rounded-full placeholder:text-[#646060] focus:outline-none w-64 "
       />
 
       {/* Location Dropdown */}
       <div className="relative">
         <select
-          className="appearance-none w-[90px] px-3 py-2 pr-6 focus:outline-none cursor-pointer"
+          className="appearance-none bg-[transparent] w-[90px] px-3 py-2 pr-6 focus:outline-none cursor-pointer"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         >
@@ -29,7 +29,7 @@ export default function SearchBar() {
       </div>
 
       {/* Search Icon */}
-      <button className="bg-orange-500 text-white p-2 mr-1 rounded-full ml-4">
+      <button className="bg-[#FF6F02] text-white p-2 mr-1 rounded-full ml-4">
         <SearchNormal1 size="18" color="#FFF" />
       </button>
 
