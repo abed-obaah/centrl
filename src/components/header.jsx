@@ -3,7 +3,7 @@ import logo from '../assets/Logo.png';
 import { useState } from 'react';
 import Navbar from './Navbar';
 
-export default function Header() {
+const Header = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   const toggleNavClick = () => {
@@ -14,7 +14,7 @@ export default function Header() {
     <header className="fixed top-0 z-[500] w-full backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50  supports-[backdrop-filter]:bg-white/3">
       <div className="flex items-center justify-between py-5 max-w-[1200px] mx-auto px-4">
         {/* Logo */}
-        <a href="#">
+        <a href="/">
           <img alt="Centrl" src={logo} className="size-8" loading="lazy" />
         </a>
 
@@ -62,4 +62,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
