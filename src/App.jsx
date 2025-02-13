@@ -11,11 +11,11 @@ import RootLayout from './layouts/RootLayout';
 // pages
 import Home from './pages/Home';
 import Pricing from './pages/pricing';
+import Calenders from './pages/Calenders';
 import Signin from './components/auth/signin';
 import About from './components/about/about';
 import Discover from './components/discover/discover';
 import Details from './components/trending/details/details';
-import Calenders from './components/trending/calenders';
 import Dashboard from './components/dashboard/index';
 import Admin from './components/Admin/index';
 import CategoryPage from './components/Admin/CategoryPage';
@@ -36,7 +36,7 @@ const router = createBrowserRouter(
       <Route path="/discover" element={<Discover />} />
       <Route path="/details" element={<Details />} />
       <Route path="/calender" element={<Calenders />} />
-      <Route path="/home" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/:admin" element={<Admin />} />
       <Route path="/category/:category" element={<CategoryPage />} />
     </Route>

@@ -14,6 +14,12 @@ const navigation = [
     name: 'Discover',
     href: '/discover',
   },
+
+  {
+    name: 'Calendars',
+    href: '/calendar',
+  },
+
   {
     name: 'Sign In',
     href: '/',

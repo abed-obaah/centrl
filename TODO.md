@@ -6,8 +6,8 @@
 [x] - redid the hero section
 [x] - made some changes to the search bar
 [x] - added a nav bar component
-[] - restructure the files/folders in order for it to be easy to navigate
-[] - complete the feature calender section
-[]- create a constants file to store the static data
-[] - get the banner image from cto
-[]
+[x] - restructure the files/folders in order for it to be easy to navigate
+[x] - complete the feature calender section
+[x]- create a constants file to store the static data
+[x] - get the banner image from cto
+[] - fix the duplicate keys issue

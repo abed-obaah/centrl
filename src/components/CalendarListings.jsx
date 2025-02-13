@@ -1,0 +1,38 @@
+import { cards } from '../libs/constants';
+
+const CalendarListings = ({ title }) => {
+  return (
+    <section>
+      <div className="mb-8">
+        <h2 className="text-300 text-[#000]  font-600">{title}</h2>
+      </div>
+
+      <div className="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:gap-4 lg:grid-cols-4">
+        {cards.map((card) => (
+          <div key={card.id} className="bg-[#fff] rounded-2xl  p-6 ">
+            <div className="flex items-start justify-between mb-8">
+              <div className="relative">
+                <img
+                  className="w-14 h-14 object-cover"
+                  src={card.imgUrl}
+                  alt={card.name}
+                />
+              </div>
+
+              <button className="bg-[#C7C7C7]/20 text-[#000] py-2 px-4 rounded-xl font-600">
+                Subscribe
+              </button>
+            </div>
+
+            <div>
+              <h3 className="text-200 font-600 mb-8">{card.name}</h3>
+              <p className=" text-[#B0B0B0] font-normal">{card.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default CalendarListings;
