@@ -14,7 +14,7 @@ import Pricing from './pages/pricing';
 import Calenders from './pages/Calenders';
 import Signin from './components/auth/signin';
 import About from './components/about/about';
-import Discover from './components/discover/discover';
+import Discover from './pages/Discover';
 import Details from './components/trending/details/details';
 import Dashboard from './components/dashboard/index';
 import Admin from './components/Admin/index';
