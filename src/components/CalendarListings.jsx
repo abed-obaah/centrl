@@ -7,7 +7,7 @@ const CalendarListings = ({ title }) => {
         <h2 className="text-300 text-[#000]  font-600">{title}</h2>
       </div>
 
-      <div className="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:gap-4 lg:grid-cols-4">
+      <div className="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:gap-4 lg:grid-cols-4 lg:gap-6">
         {cards.map((card) => (
           <div key={card.id} className="bg-[#fff] rounded-2xl  p-6 ">
             <div className="flex items-start justify-between mb-8">
