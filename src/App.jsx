@@ -12,8 +12,9 @@ import RootLayout from './layouts/RootLayout';
 import Home from './pages/Home';
 import Pricing from './pages/pricing';
 import Calenders from './pages/Calenders';
+import About from './pages/About';
+
 import Signin from './components/auth/signin';
-import About from './components/about/about';
 import Discover from './pages/Discover';
 import Details from './components/trending/details/details';
 import Dashboard from './components/dashboard/index';
