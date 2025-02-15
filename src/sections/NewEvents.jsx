@@ -1,4 +1,3 @@
-import React from 'react';
 import Groove from '../assets/grove.png';
 import Live from '../assets/live.png';
 import Skating from '../assets/skating.png';
@@ -42,10 +41,10 @@ const events = [
 ];
 
 const categoryColors = {
-  Party: 'bg-[#0C6724]', // Green
-  Concert: 'bg-[#67380C]', // Orange
-  Business: 'bg-[#0C4367]', // Pinkish
-  Technology: 'bg-[#380C67]', // Blue
+  Party: 'bg-[#0C6724]',
+  Concert: 'bg-[#67380C]',
+  Business: 'bg-[#0C4367]',
+  Technology: 'bg-[#380C67]',
 };
 
 const NewEvents = () => {

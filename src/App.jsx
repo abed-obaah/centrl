@@ -18,7 +18,7 @@ import About from './pages/About';
 
 // import Signin from './components/auth/signin';
 import Discover from './pages/Discover';
-import Details from './components/trending/details/details';
+import Details from './pages/Trending';
 import Dashboard from './components/dashboard/index';
 import Admin from './components/Admin/index';
 import CategoryPage from './components/Admin/CategoryPage';
