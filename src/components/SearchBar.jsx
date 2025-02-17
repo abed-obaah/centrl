@@ -6,7 +6,7 @@ export default function SearchBar() {
   const [location, setLocation] = useState('Lagos');
 
   return (
-    <div className="flex items-center gap-2   p-0 rounded-full border-[1.5px] shadow-md border-[#000]/15">
+    <div className="flex items-center gap-2   p-0 rounded-full border-[1.5px]  border-[#000]/15">
       {/* Search Input */}
       <input
         type="text"

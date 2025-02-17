@@ -7,7 +7,18 @@ const WaitlistForm = () => {
   const [role, setRole] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-  const roles = ['Hiring managers', 'Staffs'];
+  const roles = [
+    'Event Organizer',
+    'Event Lover',
+    'Influencer',
+    'Startup founder',
+    'Brand/Company Representative',
+    'Investor/Sponsor',
+    'Media/Press',
+    'Government/Policy Maker',
+    'Student/Scholar',
+    'Other',
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +78,7 @@ const WaitlistForm = () => {
             </button>
 
             {isOpen && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-[#fff] border border-[#CD2574] rounded-lg shadow-lg z-10">
+              <div className="absolute pb-4 top-full left-0 right-0 mt-1 bg-[#fff] border border-[#CD2574] rounded-lg shadow-lg z-10">
                 {roles.map((option) => (
                   <button
                     key={option}
