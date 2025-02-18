@@ -51,14 +51,18 @@ const categoryColors = {
 const TrendingEvents = () => {
   return (
     <section className="pt-20">
-      <div className="container">
+      <div className="container xl:max-w-[980px]">
         <div className="flex justify-between flex-wrap items-center w-full mb-8 ">
           <h2 className="text-400 md:text-500 font-700">Trending Events</h2>
 
-          <button className="text-[#000] gap-2 flex items-center">
+          <Link
+            to="/details"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-[#000] gap-2 flex items-center"
+          >
             <span className="font-700">View More </span>
             <ArrowRight size="20" />
-          </button>
+          </Link>
         </div>
 
         <div className="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:gap-4 lg:grid-cols-4">

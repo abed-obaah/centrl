@@ -6,7 +6,7 @@ const Banner = () => {
     <section className="mt-20">
       <div className="max-w-[1200px] mx-auto px-4">
         <div className="relative rounded-xl p-8 bg-[#FFF8EF]">
-          <div className="md:grid md:grid-cols-2 md:gap-4 max-w-[900px] mx-auto   md:items-center">
+          <div className="md:grid md:grid-cols-2 md:gap-4 max-w-[980px] mx-auto   md:items-center">
             <div className="mb-16 md:mb-0 text-left max-w-[300px] mr-auto">
               <h4 className="text-500 md:text-700 mb-4 md:leading-[1.1] font-700">
                 Centrl is coming soon to Mobile{' '}

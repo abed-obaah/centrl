@@ -4,14 +4,14 @@ import StarIcon from '../assets/hero-svg-icon.svg';
 const Hero = () => {
   return (
     <main>
-      <section className="pt-36 lg:pt-32">
-        <div className="container">
-          <div className="relative rounded-xl p-8 lg:py-12  bg-[#FFFFFF]">
+      <section className="pt-36 xl:pt-24">
+        <div className="container xl:max-w-[1100px]">
+          <div className="relative rounded-xl p-8 lg:py-12  bg-white">
             <div className="md:grid md:grid-cols-2 md:gap-4 max-w-[850px] mx-auto md:items-center">
               <div className="mb-16 md:mb-0 text-center md:text-left">
-                <h1 className="text-600 lg:text-[3rem] leading-[1.3] md:leading-[1.1] mb-4 font-500">
+                <h1 className="text-600 text-black lg:text-[3rem] leading-[1.3] md:leading-[1.1] mb-4 font-500">
                   Events Worth Your Time With{' '}
-                  <span className="text-[#000] text-left font-700">CENTRL</span>
+                  <span className="text-black text-left font-700">CENTRL</span>
                 </h1>
 
                 <p className="mb-4 text-base  text-black">

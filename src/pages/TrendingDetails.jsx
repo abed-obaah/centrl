@@ -82,7 +82,7 @@ const events = [
   },
 ];
 
-const Trending = () => {
+const TrendingDetails = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -131,4 +131,4 @@ const Trending = () => {
   );
 };
 
-export default Trending;
+export default TrendingDetails;

@@ -12,28 +12,37 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 z-[500] w-full backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50  supports-[backdrop-filter]:bg-white/3">
-      <div className="flex items-center justify-between py-5 container mx-auto px-4">
+      <div className="flex items-center justify-between py-5 max-w-[1230px] mx-auto px-4">
         {/* Logo */}
         <a href="/">
           <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
         </a>
 
         {/* Desktop Nav */}
-        <ul className="hidden md-plus:flex md-plus:gap-10">
+        <ul className="hidden md-plus:flex md-plus:gap-10 xl:mr-14">
           <li>
-            <a href="/pricing" className="font-500 text-[#000000CC]">
+            <a
+              href="/pricing"
+              className="font-500 text-foreground hover:text-black transition-colors duration-300 ease-out"
+            >
               Pricing
             </a>
           </li>
 
           <li>
-            <a href="/discover" className="font-500 text-[#000000CC]">
+            <a
+              href="/discover"
+              className="font-500 text-foreground hover:text-black transition-colors duration-300 ease-out"
+            >
               Discover
             </a>
           </li>
 
           <li>
-            <a href="about" className="font-500 text-[#000000CC]">
+            <a
+              href="about"
+              className="font-500 text-foreground hover:text-black transition-colors duration-300 ease-out"
+            >
               About
             </a>
           </li>
