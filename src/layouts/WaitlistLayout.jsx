@@ -1,33 +1,35 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.png';
 import WaitlistImg from '../assets/waitlist-image.png';
 import WaitlistForm from '../components/WaitlistForm';
 
 const WaitListLayout = () => {
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       <main className="h-screen">
-        <div className="lg:grid lg:grid-cols-2">
+        <div className="xl:grid xl:grid-cols-2 h-full">
           {/* img */}
-          <div className="container">
+          <div className="container xl:fixed xl:w-1/2  xl:overflow-hidden">
             <div className="pt-5">
-              <a href="/">
+              <Link to="/" className="absolute ">
                 <img
                   alt="Centrl"
                   src={logo}
                   className="size-8"
                   loading="lazy"
                 />
-              </a>
-              <img
-                className="hidden lg:block"
-                src={WaitlistImg}
-                alt="Waitlist"
-              />
+              </Link>
             </div>
-          </div>
 
+            <img
+              className="hidden xl:block xl:size-[700px] xl:mt-[-3rem]  xl:mx-auto 2xl:mt-0 xl:object-cover"
+              src={WaitlistImg}
+              alt="Waitlist"
+              loading="lazy"
+            />
+          </div>
           {/* form */}
-          <div className="lg:bg-[#fff]   py-20 lg:py-0">
+          <div className="xl:bg-white py-16 xl:py-0 xl:col-start-2 xl:min-h-screen xl:overflow-y-auto">
             <div className="container">
               <WaitlistForm />
             </div>

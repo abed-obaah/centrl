@@ -2,10 +2,10 @@ const FilterSidebar = ({ isOpen, onClose }) => {
   return (
     <div
       className={`
-        fixed inset-y-0 py-16 lg:py-0 left-0 z-40 w-72 bg-[#fff] rounded-xl transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:relative lg:translate-x-0 lg:w-64
-      `}
+      fixed inset-y-0 py-16 lg:py-4 left-0 z-40 w-72 bg-[#fff] rounded-xl transform transition-transform duration-300 ease-in-out
+      ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+      lg:transform-none lg:w-64 lg:sticky lg:top-0 lg:h-fit
+    `}
     >
       <div className="p-4 border-b lg:border-none">
         <div className="flex items-center justify-between lg:justify-start">

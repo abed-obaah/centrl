@@ -27,12 +27,12 @@ const WaitlistForm = () => {
 
   return (
     <div>
-      <div className="bg-[#fff] max-w-[600px] lg:max-w-[450px] mx-auto  p-8 rounded-2xl lg:h-full lg:pt-20 lg:rounded-none lg:bg-[transparent]">
+      <div className="bg-white max-w-[600px] xl:max-w-[450px] mx-auto  p-8 rounded-2xl xl:h-full xl:pt-20 xl:rounded-none xl:bg-[transparent]">
         <div className="text-center">
           <h1 className="text-600 font-700 mb-8 leading-[1.1]">
             Join our journey and get early access
           </h1>
-          <p className="text-[#000] mb-16">
+          <p className="text-black mb-16">
             Be part of the{' '}
             <span className="text-[#D43953] font-600">5000+</span> event lovers
             and organizers that join our exclusive waitlist to get early
@@ -47,7 +47,7 @@ const WaitlistForm = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter Your name..."
-              className="w-full mb-4 px-4 py-3 rounded-lg border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition"
+              className="w-full mb-4 px-4 py-3 rounded-xl border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition"
             />
           </div>
 
@@ -57,7 +57,7 @@ const WaitlistForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="mail@gmail.com"
-              className="w-full px-4 mb-4 py-3 rounded-lg border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition"
+              className="w-full px-4 mb-4 py-3 rounded-xl border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition"
             />
           </div>
 
@@ -65,7 +65,7 @@ const WaitlistForm = () => {
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="w-full px-4 py-3 rounded-lg border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition text-left flex items-center justify-between"
+              className="w-full px-4 py-3 rounded-xl border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition text-left flex items-center justify-between"
             >
               <span className={role ? 'text-gray-900' : 'text-gray-400'}>
                 {role || 'Select your role'}
@@ -78,7 +78,7 @@ const WaitlistForm = () => {
             </button>
 
             {isOpen && (
-              <div className="absolute pb-4 top-full left-0 right-0 mt-1 bg-[#fff] border border-[#CD2574] rounded-lg shadow-lg z-10">
+              <div className="absolute overflow-y-auto h-[200px] pb-4 top-full left-0 right-0 mt-1 bg-[#fff] border border-[#CD2574] rounded-xl shadow-xl z-10">
                 {roles.map((option) => (
                   <button
                     key={option}
@@ -87,7 +87,7 @@ const WaitlistForm = () => {
                       setRole(option);
                       setIsOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left hover:bg-pink-50 transition first:rounded-t-lg last:rounded-b-lg"
+                    className="w-full px-4 py-2 text-left hover:bg-pink-50 transition first:rounded-t-xl last:rounded-b-xl"
                   >
                     {option}
                   </button>

@@ -14,6 +14,8 @@ export default {
       secondary: 'hsl(var(--secondary))',
       card: 'hsl(var(--card))',
       muted: 'hsl(var(--muted))',
+      black: 'hsl(var(--black))',
+      white: 'hsl(var(--white))',
     },
 
     fontFamily: {
@@ -51,7 +53,7 @@ export default {
       md: '48rem',
       'md-plus': '55rem',
       lg: '64rem',
-      xl: '68.75rem',
+      xl: '75rem',
       '2xl': '90rem',
     },
 
