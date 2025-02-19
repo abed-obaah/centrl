@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <main>
       <section className="pt-36 xl:pt-24">
-        <div className="container xl:max-w-[1100px]">
+        <div className="container xl:max-w-[1200px]">
           <div className="relative rounded-xl p-8 lg:py-12  bg-white">
             <div className="md:grid md:grid-cols-2 md:gap-4 max-w-[850px] mx-auto md:items-center">
               <div className="mb-16 md:mb-0 text-center md:text-left">
