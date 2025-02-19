@@ -34,7 +34,7 @@ const logos = [
 
 const LogoBanner = () => {
   return (
-    <div className="w-full bg-[#EFEFEF] p-8 mt-8 rounded-3xl overflow-hidden">
+    <div className="w-full bg-[#EFEFEF] px-8 py-4 mt-8  overflow-hidden">
       {/* First row of logos */}
       <div className="flex animate-scroll">
         {logos.map((logo, idx) => (
