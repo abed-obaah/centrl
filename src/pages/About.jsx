@@ -1,6 +1,6 @@
 import AboutImg from '../assets/about-img.png';
 import AboutBanner from '../assets/heroImage.png';
-import Founders from '../components/founders';
+import Founders from '../components/Founders';
 import LogoBanner from '../components/LogoBanner';
 import Members from '../components/Members';
 
