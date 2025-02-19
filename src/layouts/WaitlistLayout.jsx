@@ -7,22 +7,19 @@ const WaitListLayout = () => {
   return (
     <div className="min-h-screen">
       <main className="h-screen">
+        <div className="max-w-[1290px] 2xl:max-w-[1400px] mx-auto relative">
+          <div className="absolute z-10 top-2 left-0 mt-4 ml-4">
+            <Link to="/">
+              <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
+            </Link>
+          </div>
+        </div>
+
         <div className="xl:grid xl:grid-cols-2 h-full">
           {/* img */}
           <div className="container xl:fixed xl:w-1/2  xl:overflow-hidden">
-            <div className="pt-5">
-              <Link to="/" className="absolute ">
-                <img
-                  alt="Centrl"
-                  src={logo}
-                  className="size-8"
-                  loading="lazy"
-                />
-              </Link>
-            </div>
-
             <img
-              className="hidden xl:block xl:size-[700px] xl:mt-[-3rem]  xl:mx-auto 2xl:mt-0 xl:object-cover"
+              className="hidden xl:block xl:size-[700px] xl:mt-[-1rem]  xl:mx-auto 2xl:mt-0 xl:object-cover"
               src={WaitlistImg}
               alt="Waitlist"
               loading="lazy"

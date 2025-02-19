@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const FeaturedCalendars = () => {
   return (
     <section className="bg-gradient-to-r mt-20 py-20 from-[#FF6B98] via-[#B76EFD] to-[#FFD5BA]">
-      <div className="container xl:max-w-[1200px]">
+      <div className="container 2xl:max-w-[1200px]">
         <div className="flex justify-between flex-wrap items-center w-full mb-8 ">
           <h2 className="text-400 text-[#fff] md:text-500 font-700">
             Featured Calenders

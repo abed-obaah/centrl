@@ -11,13 +11,13 @@ export default function SearchBar() {
       <input
         type="text"
         placeholder="Search events...."
-        className="px-4 py-[0.55rem] bg-[transparent]  rounded-full placeholder:text-[#646060] focus:outline-none w-64 "
+        className="px-4 py-[0.55rem] bg-[transparent] text-50  rounded-full placeholder:text-[#646060] focus:outline-none w-64 "
       />
 
       {/* Location Dropdown */}
       <div className="relative">
         <select
-          className="appearance-none bg-[transparent] w-[90px] px-3 py-2 pr-6 focus:outline-none cursor-pointer"
+          className="appearance-none text-50 bg-[transparent] w-[90px] px-3 py-2 pr-6 focus:outline-none cursor-pointer"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         >

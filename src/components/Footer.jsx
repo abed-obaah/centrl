@@ -99,7 +99,7 @@ const navigation = {
 const Footer = () => {
   return (
     <footer className="bg-[#fff] mt-20 py-20">
-      <div className="container lg:max-w-[1200px]">
+      <div className="container 2xl:max-w-[1300px]">
         <div className="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-[1fr_2fr]">
           <div>
             <p className="text-200 mb-4 font-600 text-[#000]">
@@ -161,7 +161,7 @@ const Footer = () => {
               {navigation.centrl.map((item, index) => (
                 <li key={index} className="list-none">
                   <Link
-                    className="inline-block mb-2 text-50 font-500"
+                    className="inline-block text-foreground hover:text-black duration-300 ease-in mb-2 text-50 font-500"
                     to={item.href}
                   >
                     {item.name}
@@ -175,7 +175,7 @@ const Footer = () => {
               {navigation.info.map((item, index) => (
                 <li key={index} className="list-none">
                   <Link
-                    className="inline-block mb-2 text-50 font-500"
+                    className="inline-block mb-2 text-foreground hover:text-black duration-300 ease-in text-50 font-500"
                     to={item.href}
                   >
                     {item.name}
@@ -189,7 +189,7 @@ const Footer = () => {
               {navigation.policies.map((item, index) => (
                 <li key={index} className="list-none">
                   <Link
-                    className="inline-block mb-2 text-50 font-500"
+                    className="inline-block mb-2 text-foreground hover:text-black duration-300 ease-in text-50 font-500"
                     to={item.href}
                   >
                     {item.name}
