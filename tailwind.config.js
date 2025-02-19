@@ -14,8 +14,11 @@ export default {
       secondary: 'hsl(var(--secondary))',
       card: 'hsl(var(--card))',
       muted: 'hsl(var(--muted))',
+<<<<<<< HEAD
       black: 'hsl(var(--black))',
       white: 'hsl(var(--white))',
+=======
+>>>>>>> 2871763a48327e9974a6e53444de677654e98d6c
     },
 
     fontFamily: {
@@ -53,7 +56,11 @@ export default {
       md: '48rem',
       'md-plus': '55rem',
       lg: '64rem',
+<<<<<<< HEAD
       xl: '75rem',
+=======
+      xl: '68.75rem',
+>>>>>>> 2871763a48327e9974a6e53444de677654e98d6c
       '2xl': '90rem',
     },
 

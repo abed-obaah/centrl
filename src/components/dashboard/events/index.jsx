@@ -244,6 +244,7 @@ export default function Example() {
             <aside className="hidden xl:col-span-4 xl:block">
               <div className="sticky top-4 space-y-1">
                 <section aria-labelledby="who-to-follow-heading">
+<<<<<<< HEAD
                   <div className="rounded-lg bg-white">
                     <div className="p-6">
                      
@@ -261,6 +262,19 @@ export default function Example() {
                       <img src={event2} alt="" />
                       </div>
                     </div>
+=======
+                  <div className="rounded-lg">
+                  <div className=" flow-root">
+                       <img src={event1} alt="" />
+                      </div>
+                  </div>
+                </section>
+                <section aria-labelledby="trending-heading">
+                  <div className="rounded-lg">
+                  <div className="mt-6 flow-root">
+                      <img src={event2} alt="" />
+                      </div>
+>>>>>>> 2871763a48327e9974a6e53444de677654e98d6c
                   </div>
                 </section>
               </div>

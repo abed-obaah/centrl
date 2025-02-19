@@ -20,14 +20,32 @@ const WaitlistForm = () => {
     'Other',
   ];
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log({ name, email, role });
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, email, role });
+
+    if (!name || !email || !role) {
+      alert('Please fill all the fields.');
+      return;
+    }
+
+    const formUrl =
+      'https://docs.google.com/forms/d/e/1FAIpQLSdLwoucKmrymmplkaIvKuQPg004H_IRVQwQoAShKa7GkFTWMQ/formResponse';
+    const params = new URLSearchParams();
+    params.append('entry.1498135098', name);
+    params.append('entry.2606285', email);
+    params.append('entry.1424661284', role);
+
+    window.open(`${formUrl}?${params.toString()}`, '_blank');
   };
 
   return (
     <div>
-      <div className="bg-white max-w-[600px] xl:max-w-[450px] mx-auto  p-8 rounded-2xl xl:h-full xl:pt-20 xl:rounded-none xl:bg-[transparent]">
+      <div className="bg-[#fff] max-w-[600px] lg:max-w-[450px] mx-auto  p-8 rounded-2xl lg:h-full lg:pt-20 lg:rounded-none lg:bg-[transparent]">
         <div className="text-center">
           <h1 className="text-600 font-700 mb-8 leading-[1.1]">
             Join our journey and get early access

@@ -70,6 +70,7 @@ export default function Example() {
               </>
             ) : (
               <>
+<<<<<<< HEAD
                 <div className="relative flex size-6 flex-none items-center justify-center bg-white">
                   {activityItem.type === 'paid' ? (
                     <CheckCircleIcon aria-hidden="true" className="size-6 text-indigo-600" />
@@ -78,6 +79,16 @@ export default function Example() {
                   )}
                 </div>
                 <p className="flex-auto py-0.5 text-xs/5 text-gray-500">
+=======
+                <div className="relative flex size-6 flex-none items-center justify-center">
+                  {activityItem.type === 'paid' ? (
+                    <CheckCircleIcon aria-hidden="true" className="size-6 text-indigo-600" />
+                  ) : (
+                    <div className="size-1.5 rounded-full bg-black ring-1 ring-black" />
+                  )}
+                </div>
+                <p className="flex-auto py-0.5 text-xs/5 text-black">
+>>>>>>> 2871763a48327e9974a6e53444de677654e98d6c
                   <span className="font-medium text-gray-900">{activityItem.person.name}</span>
                    {/* {activityItem.type} the
                   invoice. */}
