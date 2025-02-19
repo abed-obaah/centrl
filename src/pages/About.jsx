@@ -35,7 +35,7 @@ const About = () => {
           <div className="mb-10">
             <h2 className="text-300 mb-4 font-700 md:text-400">Our Mission</h2>
             <p className="leading-[2] text-[#000]">
-              To empower creator, innovators, and organizers by providing tools
+              To empower creators, innovators, and organizers by providing tools
               and solutions that simplify event management, foster meaningful
               engagement, and inspire healthy competition.
             </p>
