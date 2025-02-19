@@ -1,12 +1,24 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import emailjs from 'emailjs-com';
+import SuccessModal from './SuccessModal';
+
+
 
 const WaitlistForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    role: '',
+  });
 
+  const [status, setStatus] = useState('');
+  const [isModalVisible, setModalVisible] = useState(true);
+  
   const roles = [
     'Event Organizer',
     'Event Lover',
@@ -20,28 +32,48 @@ const WaitlistForm = () => {
     'Other',
   ];
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log({ name, email, role });
-  // };
+ 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!name || !email || !role) {
+  
+    if (!formData.name || !formData.email || !formData.role) {
       alert('Please fill all the fields.');
       return;
     }
-
-    const formUrl =
-      'https://docs.google.com/forms/d/e/1FAIpQLSdLwoucKmrymmplkaIvKuQPg004H_IRVQwQoAShKa7GkFTWMQ/formResponse';
-    const params = new URLSearchParams();
-    params.append('entry.1498135098', name);
-    params.append('entry.2606285', email);
-    params.append('entry.1424661284', role);
-
-    window.open(`${formUrl}?${params.toString()}`, '_blank');
+  
+    const serviceID = 'service_ghtusin';
+    const templateID = 'template_x8lxs94';
+    const publicKey = 'yJMWzFlvhFQ5sNrRC';
+  
+    emailjs
+      .send(serviceID, templateID, formData, publicKey)
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setStatus('Email sent successfully!');
+        setModalVisible(true);
+      })
+      .catch((error) => {
+        console.error('FAILED...', error);
+        setStatus('Failed to send email. Please try again.');
+      });
+  
+    // Clear form fields
+    setFormData({ name: '', email: '', role: '' });
+    setRole('');
   };
+  
+  // Update `role` inside `formData`
+  const handleRoleSelect = (selectedRole) => {
+    setFormData({ ...formData, role: selectedRole });
+    setRole(selectedRole); // Ensure the button text updates
+    setIsOpen(false);
+  };
+  
+  
 
   return (
     <div>
@@ -62,8 +94,9 @@ const WaitlistForm = () => {
           <div>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+               name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Enter Your name..."
               className="w-full mb-4 px-4 py-3 rounded-xl border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition"
             />
@@ -72,8 +105,9 @@ const WaitlistForm = () => {
           <div>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+               name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="mail@gmail.com"
               className="w-full px-4 mb-4 py-3 rounded-xl border border-[#000]/15 focus:border-[#CD2574] focus:ring-1 focus:ring-[#CD2574] outline-none transition"
             />
@@ -101,10 +135,7 @@ const WaitlistForm = () => {
                   <button
                     key={option}
                     type="button"
-                    onClick={() => {
-                      setRole(option);
-                      setIsOpen(false);
-                    }}
+                    onClick={() => handleRoleSelect(option)}
                     className="w-full px-4 py-2 text-left hover:bg-pink-50 transition first:rounded-t-xl last:rounded-b-xl"
                   >
                     {option}
@@ -133,6 +164,7 @@ const WaitlistForm = () => {
           </a>
         </p>
       </div>
+      {isModalVisible && <SuccessModal onClose={() => setModalVisible(false)} />}
     </div>
   );
 };
