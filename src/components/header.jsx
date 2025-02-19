@@ -1,7 +1,7 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 import { useState } from 'react';
-import Navbar from './Navbar';
+import Navbar from './navbar';
 
 const Header = () => {
   const [isClicked, setIsClicked] = useState(false);
