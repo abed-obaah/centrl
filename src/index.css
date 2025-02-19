@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240, 5%, 96%;
+  --foreground: 240, 10%, 10%;
+  --primary: 220, 90%, 56%;
+  --secondary: 340, 90%, 56%;
+  --card: 0, 0%, 100%;
+  --muted: 240, 5%, 80%;
+}
+
+[data-theme='dark'] {
+  --background: 240, 10%, 10%;
+  --foreground: 240, 5%, 96%;
+  --primary: 220, 90%, 65%;
+  --secondary: 340, 90%, 65%;
+  --card: 0, 0%, 0%;
+  --muted: 240, 5%, 30%;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
