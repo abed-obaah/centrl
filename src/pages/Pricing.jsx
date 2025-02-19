@@ -7,7 +7,7 @@ import FAQ from '../components/FAQ';
 const Pricing = () => {
   return (
     <div className="relative py-36">
-      <div className="container">
+      <div className="container 2xl:max-w-[1200px]">
         <div className="text-center mb-8">
           <h1 className="text-400 mb-2 font-700 md:text-700">Pricing</h1>
           <p>Tested and trusted to lead the event space</p>

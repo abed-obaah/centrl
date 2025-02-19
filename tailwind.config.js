@@ -53,7 +53,8 @@ export default {
       md: '48rem',
       'md-plus': '55rem',
       lg: '64rem',
-      xl: '75rem',
+      // xl: '75rem',
+      xl: '68.75rem',
       '2xl': '90rem',
     },
 
