@@ -99,7 +99,7 @@ const navigation = {
 const Footer = () => {
   return (
     <footer className="bg-[#fff] mt-20 py-20">
-      <div className="container lg:max-w-[980px]">
+      <div className="container lg:max-w-[1200px]">
         <div className="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-[1fr_2fr]">
           <div>
             <p className="text-200 mb-4 font-600 text-[#000]">

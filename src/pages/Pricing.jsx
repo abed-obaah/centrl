@@ -87,7 +87,7 @@ const Pricing = () => {
 
         {/* Patter Two */}
         <img
-          className="hidden lg:block w-[100px]  absolute top-[13rem] left-[-.5rem]"
+          className="hidden lg:block w-[100px]  absolute top-[13rem] left-[-2rem]"
           src={PatternTwo}
           alt="Pattern two"
         />

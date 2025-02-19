@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 z-[500] w-full backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50  supports-[backdrop-filter]:bg-white/3">
-      <div className="flex items-center justify-between py-5 max-w-[1230px] mx-auto px-4">
+      <div className="flex items-center justify-between py-5 max-w-[1250px] 2xl:max-w-[1400px]  mx-auto px-4">
         {/* Logo */}
         <a href="/">
           <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
