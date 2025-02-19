@@ -29,7 +29,7 @@ const Founders = () => {
             <img
               src={founder.image}
               alt={founder.name}
-              className="w-full object-cover rounded-tr-lg rounded-tl-lg"
+              className="w-full object-cover md:h-[289px] rounded-tr-lg rounded-tl-lg"
             />
             {/* Founder Details */}
             <div className="bg-[#fff] px-6 pt-4 pb-8 rounded-br-3xl rounded-bl-3xl">
