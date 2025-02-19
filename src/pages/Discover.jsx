@@ -4,7 +4,7 @@ const Discover = () => {
   return (
     <>
       <div className="pt-36">
-        <div className="container">
+        <div className="container 2xl:max-w-[1200px]">
           <h1 className="text-400 mb-2 font-700 md:text-500">
             Discover Events
           </h1>

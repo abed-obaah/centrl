@@ -29,7 +29,7 @@ const Members = () => {
       <h2 className="text-300 font-600 text-[#fff] mb-8">Team Members</h2>
 
       {/* Member Cards Container with Grid Layout */}
-      <div className="md:grid space-y-6 md:space-y-0 md:grid-cols-2 gap-4 lg:grid-cols-3">
+      <div className="md:grid space-y-6 md:space-y-0 md:grid-cols-2 gap-4 lg:grid-cols-4">
         {members.map((member, index) => (
           <div key={index}>
             {/* Member Image */}
@@ -40,7 +40,7 @@ const Members = () => {
             />
             {/* Member Details */}
             <div className="bg-[#fff] px-6 pt-4 pb-8 rounded-br-3xl rounded-bl-3xl">
-              <h3 className="font-600 text-200 mb-2">{member.name}</h3>
+              <h3 className="font-600 text-200 mb-2 truncate">{member.name}</h3>
               <p className="mb-8">{member.role}</p>
               <p>{member.description}</p>
             </div>

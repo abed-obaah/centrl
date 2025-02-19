@@ -22,7 +22,7 @@ const Founders = () => {
       <h2 className="text-300 font-600 text-[#fff] mb-8">Founders</h2>
 
       {/* Founder Cards Container with Grid Layout */}
-      <div className="md:grid space-y-6 md:space-y-0 md:grid-cols-2 gap-4 lg:grid-cols-3">
+      <div className="md:grid space-y-6 md:space-y-0 md:grid-cols-2 gap-4 lg:grid-cols-4">
         {founders.map((founder, index) => (
           <div key={index}>
             {/* Founder Image */}

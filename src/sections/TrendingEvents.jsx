@@ -51,7 +51,7 @@ const categoryColors = {
 const TrendingEvents = () => {
   return (
     <section className="pt-20">
-      <div className="container xl:max-w-[1200px]">
+      <div className="container 2xl:max-w-[1200px]">
         <div className="flex justify-between flex-wrap items-center w-full mb-8 ">
           <h2 className="text-400 md:text-500 font-700">Trending Events</h2>
 
