@@ -1,6 +1,6 @@
-import Banner from '../sections/banner';
+import Banner from '../sections/Banner';
 import FeaturedCalendars from '../sections/FeaturedCalendars';
-import Hero from '../sections/hero';
+import Hero from '../sections/Hero';
 import NewEvents from '../sections/NewEvents';
 import TrendingEvents from '../sections/TrendingEvents';
 
