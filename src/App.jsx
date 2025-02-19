@@ -11,12 +11,12 @@ import WaitListLayout from './layouts/WaitlistLayout';
 
 // pages
 import Home from './pages/Home';
-import Pricing from './pages/pricing';
 import Calenders from './pages/Calenders';
 import About from './pages/About';
 import Discover from './pages/Discover';
 import Privacy from './pages/Privacy';
 import TrendingDetails from './pages/TrendingDetails';
+import Pricing from './pages/Pricing';
 // import Waitlist from './pages/Waitlist';
 
 // import Signin from './components/auth/signin';
