@@ -1,5 +1,5 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import logo from '../assets/Logo.png';
+import logo from '../assets/logo.png';
 import { useState } from 'react';
 import Navbar from './Navbar';
 
