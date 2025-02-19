@@ -17,7 +17,7 @@ const WaitlistForm = () => {
   });
 
   const [status, setStatus] = useState('');
-  const [isModalVisible, setModalVisible] = useState(true);
+  const [isModalVisible, setModalVisible] = useState(false);
   
   const roles = [
     'Event Organizer',
@@ -52,9 +52,10 @@ const WaitlistForm = () => {
     emailjs
       .send(serviceID, templateID, formData, publicKey)
       .then((response) => {
+        setModalVisible(true);
         console.log('SUCCESS!', response.status, response.text);
         setStatus('Email sent successfully!');
-        setModalVisible(true);
+        
       })
       .catch((error) => {
         console.error('FAILED...', error);

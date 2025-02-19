@@ -1,9 +1,4 @@
-import {
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from '@headlessui/react';
+import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/react'
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -13,16 +8,17 @@ import {
   ShieldCheckIcon,
   Squares2X2Icon,
   XMarkIcon,
-} from '@heroicons/react/24/outline';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import Logo from '../../assets/dsds.png';
-import { AddSquare, SearchNormal1, Notification } from 'iconsax-react';
+} from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import Logo from '../../assets/dsds.png'
+import { AddSquare ,SearchNormal1, Notification} from 'iconsax-react'
+import React, { useState } from "react";
+
 
 const solutions = [
   {
     name: 'Analytics',
-    description:
-      'Get a better understanding of where your traffic is coming from.',
+    description: 'Get a better understanding of where your traffic is coming from.',
     href: '#',
     icon: ChartBarIcon,
   },
@@ -32,12 +28,7 @@ const solutions = [
     href: '#',
     icon: CursorArrowRaysIcon,
   },
-  {
-    name: 'Security',
-    description: 'Your customers’ data will be safe and secure.',
-    href: '#',
-    icon: ShieldCheckIcon,
-  },
+  { name: 'Security', description: 'Your customers’ data will be safe and secure.', href: '#', icon: ShieldCheckIcon },
   {
     name: 'Integrations',
     description: "Connect with third-party tools that you're already using.",
@@ -46,60 +37,48 @@ const solutions = [
   },
   {
     name: 'Automations',
-    description:
-      'Build strategic funnels that will drive your customers to convert',
+    description: 'Build strategic funnels that will drive your customers to convert',
     href: '#',
     icon: ArrowPathIcon,
   },
   {
     name: 'Reports',
-    description:
-      'Get detailed reports that will help you make more informed decisions ',
+    description: 'Get detailed reports that will help you make more informed decisions ',
     href: '#',
     icon: DocumentChartBarIcon,
   },
-];
+]
 const resources = [
   {
     name: 'Help Center',
-    description:
-      'Get all of your questions answered in our forums or contact support.',
+    description: 'Get all of your questions answered in our forums or contact support.',
     href: '#',
   },
-  {
-    name: 'Guides',
-    description:
-      'Learn how to maximize our platform to get the most out of it.',
-    href: '#',
-  },
-  {
-    name: 'Events',
-    description:
-      'See what meet-ups and other events we might be planning near you.',
-    href: '#',
-  },
-  {
-    name: 'Security',
-    description: 'Understand how we take your privacy seriously.',
-    href: '#',
-  },
-];
+  { name: 'Guides', description: 'Learn how to maximize our platform to get the most out of it.', href: '#' },
+  { name: 'Events', description: 'See what meet-ups and other events we might be planning near you.', href: '#' },
+  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#' },
+]
 
 const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
+    name: 'Tom Cook',
+    email: 'tom@example.com',
+    imageUrl:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  }
 
-export default function EventHeader() {
+export default function Example({ setModalVisible }) {
+  // const [modalVisible, setModalVisible] = useState(false);
   return (
-    <Popover className="relative bg-white">
+    <Popover className="relative ">
       <div className="flex items-center justify-between p-6 md:justify-start md:space-x-10">
         <div>
           <a href="#" className="flex">
             <span className="sr-only">Your Company</span>
-            <img alt="" src={Logo} className="h-8 w-auto sm:h-10" />
+            <img
+              alt=""
+              src={Logo}
+              className="h-8 w-auto sm:h-10"
+            />
           </a>
         </div>
         <div className="-my-2 -mr-2 md:hidden">
@@ -143,14 +122,9 @@ export default function EventHeader() {
                     ))}
                   </div> */}
                   <div className="bg-gray-50 p-5 sm:p-8">
-                    <a
-                      href="#"
-                      className="-m-3 flow-root rounded-md p-3 hover:bg-gray-100"
-                    >
+                    <a href="#" className="-m-3 flow-root rounded-md p-3 hover:bg-gray-100">
                       <div className="flex items-center">
-                        <div className="text-base font-medium text-gray-900">
-                          Events
-                        </div>
+                        <div className="text-base font-medium text-gray-900">Events</div>
                         <span className="ml-3 inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs/5 font-medium text-indigo-800">
                           New
                         </span>
@@ -163,41 +137,46 @@ export default function EventHeader() {
                 </div>
               </PopoverPanel>
             </Popover>
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Events
+            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            Events
             </a>
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Discover
+            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            Discover
             </a>
+
+           
           </PopoverGroup>
           <div className="flex items-center md:ml-12">
-            <div className="flex items-center gap-4 mr-5">
-              <AddSquare size="24" color="#000" />
-              <SearchNormal1 size="24" color="#000" />
-              <a
-                href="#"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                5:33 PM GMT+1
-              </a>
+            <div className='flex items-center gap-4 mr-5'>
+                <AddSquare
+                    size="24"
+                    color="#000"
+                    />
+                     <SearchNormal1 
+                     onClick={() => setModalVisible(true)}
+                    size="24"
+                    color="#000"
+                    />
+                 <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                    5:33 PM GMT+1
+                    </a>
             </div>
+         
+               
+               <div className='flex items-center gap-4 ml-10'>
+                        <Notification
+                        size="24"
+                        color="#000"
+                        />
+                         <div className="shrink-0">
+                            <img alt="" src={user.imageUrl} className="size-10 rounded-full" />
+                        </div>
 
-            <div className="flex items-center gap-4 ml-10">
-              <Notification size="24" color="#000" />
-              <div className="shrink-0">
-                <img
-                  alt=""
-                  src={user.imageUrl}
-                  className="size-10 rounded-full"
-                />
-              </div>
-            </div>
+               </div>
+           
+           
+            
+           
           </div>
         </div>
       </div>
@@ -206,11 +185,15 @@ export default function EventHeader() {
         transition
         className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition data-closed:scale-95 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-100 data-leave:ease-in md:hidden"
       >
-        <div className="divide-y-2 divide-gray-50 rounded-lg bg-white ring-1 shadow-lg ring-black/5">
+        <div className="divide-y-2 divide-gray-50 rounded-lg  ring-1 shadow-lg ring-black/5">
           <div className="px-5 pt-5 pb-6">
             <div className="flex items-center justify-between">
               <div>
-                <img alt="Your Company" src={Logo} className="h-8 w-auto" />
+                <img
+                  alt="Your Company"
+                  src={Logo}
+                  className="h-8 w-auto"
+                />
               </div>
               <div className="-mr-2">
                 <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
@@ -237,34 +220,22 @@ export default function EventHeader() {
               </nav> */}
             </div>
           </div>
+          
           <div className="px-5 py-6">
             <div className="grid grid-cols-2 gap-4">
-              <a
-                href="#"
-                className="text-base font-medium text-gray-900 hover:text-gray-700"
-              >
+              <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
                 Pricing
               </a>
 
-              <a
-                href="#"
-                className="text-base font-medium text-gray-900 hover:text-gray-700"
-              >
+              <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
                 Docs
               </a>
 
-              <a
-                href="#"
-                className="text-base font-medium text-gray-900 hover:text-gray-700"
-              >
+              <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
                 Enterprise
               </a>
               {resources.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
-                >
+                <a key={item.name} href={item.href} className="text-base font-medium text-gray-900 hover:text-gray-700">
                   {item.name}
                 </a>
               ))}
@@ -287,5 +258,5 @@ export default function EventHeader() {
         </div>
       </PopoverPanel>
     </Popover>
-  );
+  )
 }

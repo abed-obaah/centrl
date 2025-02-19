@@ -8,6 +8,7 @@ import {
 // layouts
 import RootLayout from './layouts/RootLayout';
 import WaitListLayout from './layouts/WaitlistLayout';
+import DashboardLayout from './layouts/DashboardLayout';
 
 // pages
 import Home from './pages/Home';
@@ -41,12 +42,12 @@ const router = createBrowserRouter(
         <Route path="/discover" element={<Discover />} />
         <Route path="/details" element={<TrendingDetails />} />
         <Route path="/calendar" element={<Calenders />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+       
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/:admin" element={<Admin />} />
         <Route path="/category/:category" element={<CategoryPage />} />
       </Route>
-
+      <Route path="/dashboard" element={<DashboardLayout />} />
       <Route path="/sign-in" element={<WaitListLayout />} />
     </>
   )
