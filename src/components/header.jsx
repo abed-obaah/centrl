@@ -2,6 +2,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 import { useState } from 'react';
 import Navbar from './navbar';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isClicked, setIsClicked] = useState(false);
