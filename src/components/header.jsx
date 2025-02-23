@@ -21,30 +21,36 @@ const Header = () => {
         {/* Desktop Nav */}
         <ul className="hidden md-plus:flex md-plus:gap-10 xl:mr-14 2xl:mr-[20rem]">
           <li>
+          <Link to={'/pricing'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <a
-              href="/pricing"
+              href="#"
               className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
             >
               Pricing
             </a>
+            </Link>
           </li>
 
           <li>
+          <Link to={'/discover'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <a
-              href="/discover"
+              href="#"
               className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
             >
               Discover
             </a>
+            </Link>
           </li>
 
           <li>
+          <Link to={'/about'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <a
-              href="about"
+              href="#"
               className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
             >
               About
             </a>
+            </Link>
           </li>
         </ul>
 
