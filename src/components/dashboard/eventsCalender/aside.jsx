@@ -61,7 +61,7 @@ export default function aside() {
                         value={value} 
                         prev2Label={null} 
                         next2Label={null} 
-                        className=" rounded-md w-[200px] p-4 shadow-md border-2"
+                        className="custom-calendar rounded-md w-[200px]"
                         />
 
                           </div>
