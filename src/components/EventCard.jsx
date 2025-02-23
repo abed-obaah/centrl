@@ -16,7 +16,8 @@ const EventCard = ({ title, category, date, location, price, image }) => {
 
   return (
     <div className="bg-card rounded-lg w-full mb-6">
-      <Link className="inline-block" to="/details">
+      <Link className="inline-block" to="/details"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
         <img
           src={image}
           alt={title}

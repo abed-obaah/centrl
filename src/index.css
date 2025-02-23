@@ -41,3 +41,16 @@ body {
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
+
+.react-calendar {
+  width: 350px;
+  max-width: 100%;
+  background: white;
+  /* border: 1px solid #a0a096; */
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  line-height: 1.125em;
+}
+.p {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
