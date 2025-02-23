@@ -1,5 +1,5 @@
 import facebook from '../assets/facebook.png'
-import x from '../assets/x.png'
+import x from '../assets/X.png'
 import instagram from '../assets/instagram.png'
 import linkedin from '../assets/linkedin.png'
 
