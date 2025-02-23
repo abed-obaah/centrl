@@ -21,7 +21,7 @@ import Privacy from './pages/Privacy';
 import TrendingDetails from './pages/TrendingDetails';
 import UserProfile from './pages/UserProfile'
 import UserProfiles from './pages/[id]'
-import Competition from './pages/competition'
+import Competition from './pages/Competition'
 import Categoryid from './pages/Category[id]'
 import Partiesid from './pages/Parties[id]'
 import Settings from './pages/Settings';
