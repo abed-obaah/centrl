@@ -5,14 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && echo /* /index.html 200 > dist/_redirects",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "emailjs-com": "^3.2.0",
+    "iconsax-react": "^0.0.8",
+    "lucide-react": "^0.475.0",
     "react": "^18.3.1",
+    "react-calendar": "^5.1.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1"
   },
