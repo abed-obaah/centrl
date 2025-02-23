@@ -9,7 +9,7 @@ const WaitListLayout = () => {
       <main className="h-screen">
         <div className="max-w-[1290px] 2xl:max-w-[1500px] mx-auto relative">
           <div className="absolute z-10 top-2 left-0 mt-4 ml-4">
-            <Link to="/">
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
             </Link>
           </div>

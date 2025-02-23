@@ -19,6 +19,7 @@ const Banner = () => {
 
               <Link
                 to="/"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="rounded-xl bg-[#0A66C2] px-6 py-2  text-[white] "
               >
                 Learn More

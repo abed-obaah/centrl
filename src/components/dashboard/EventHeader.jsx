@@ -13,6 +13,8 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Logo from '../../assets/dsds.png'
 import { AddSquare ,SearchNormal1, Notification} from 'iconsax-react'
 import React, { useState } from "react";
+import { useRef, useEffect } from "react";
+import ProfileModal from "../ProfileModal";
 
 
 const solutions = [
@@ -59,15 +61,30 @@ const resources = [
   { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#' },
 ]
 
-const user = {
+
+
+export default function Example({ setModalVisible,  }) {
+  // const [modalVisible, setModalVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
     imageUrl:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   }
-
-export default function Example({ setModalVisible }) {
-  // const [modalVisible, setModalVisible] = useState(false);
   return (
     <Popover className="relative ">
       <div className="flex items-center justify-between p-6 md:justify-start md:space-x-10">
@@ -168,18 +185,19 @@ export default function Example({ setModalVisible }) {
                         size="24"
                         color="#000"
                         />
-                         <div className="shrink-0">
-                            <img alt="" src={user.imageUrl} className="size-10 rounded-full" />
+                        <div className="shrink-0 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+                          <img alt="" src={user.imageUrl} className="size-10 rounded-full" />
                         </div>
 
                </div>
            
            
-            
+               
            
           </div>
         </div>
       </div>
+      <ProfileModal isOpen={isOpen} onClose={() => setIsOpen(false)} user={user} />
 
       <PopoverPanel
         transition

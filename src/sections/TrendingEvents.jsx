@@ -68,7 +68,9 @@ const TrendingEvents = () => {
         <div className="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:gap-4 lg:grid-cols-4">
           {events.map((event, index) => (
             <div key={index} className="bg-card rounded-lg w-full">
-              <Link className="inline-block" to="/details">
+              <Link className="inline-block" to="/details"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
                 <img
                   src={event.image}
                   alt={event.title}

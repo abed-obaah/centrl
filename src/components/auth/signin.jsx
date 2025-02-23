@@ -48,7 +48,8 @@ function Signin() {
             </div>
 
             <div>
-              <Link to="/home" className="text-[#0095F6] hover:underline"> 
+              <Link to="/home" className="text-[#0095F6] hover:underline"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}> 
                     <button
                       type="submit"
                       className="flex w-full justify-center rounded-md bg-[#0095F6] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

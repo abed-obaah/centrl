@@ -163,6 +163,7 @@ const Footer = () => {
                   <Link
                     className="inline-block text-foreground hover:text-black duration-300 ease-in mb-2 text-50 font-500"
                     to={item.href}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   >
                     {item.name}
                   </Link>
@@ -177,6 +178,7 @@ const Footer = () => {
                   <Link
                     className="inline-block mb-2 text-foreground hover:text-black duration-300 ease-in text-50 font-500"
                     to={item.href}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   >
                     {item.name}
                   </Link>
@@ -191,6 +193,7 @@ const Footer = () => {
                   <Link
                     className="inline-block mb-2 text-foreground hover:text-black duration-300 ease-in text-50 font-500"
                     to={item.href}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   >
                     {item.name}
                   </Link>
