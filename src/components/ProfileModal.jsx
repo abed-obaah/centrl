@@ -15,7 +15,7 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
                     
         </div>
           
-        <Link to={'/[id]'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <Link to={'/user-profile'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <p className="text-[#000] text-sm mt-1 font-[500]">View Profile</p>
         </Link>
         
