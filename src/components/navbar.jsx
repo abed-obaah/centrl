@@ -39,11 +39,13 @@ const Navbar = ({ isClicked }) => {
         <ul className="h-full w-full bg-[#fff] pl-4 pt-[9rem]">
           {navigation.map((item) => (
             <li className="mb-4 text-300 font-500 capitalize" key={item.name}>
-              <Link to={item.href}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <a className="" href="#">
-                {item.name}
-              </a>
+              <Link
+                to={item.href}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                <a className="" href="#">
+                  {item.name}
+                </a>
               </Link>
             </li>
           ))}
@@ -54,17 +56,14 @@ const Navbar = ({ isClicked }) => {
       <nav className="hidden md-plus:inline-block">
         <div>
           <ul className="flex items-center lg:ml-12 lg:mr-auto">
-        
             <SearchBar />
-            <Link to={'/sign-in'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <a
-              href=""
+            <Link
               className="ml-4 text-50 inline-flex items-center justify-center rounded-[13px] border  px-4 py-2  font-500 border-[#000]/15 text-foreground hover:text-white hover:bg-black duration-300 ease-in shadow-xs"
+              to={'/sign-in'}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               Sign In
-            </a>
             </Link>
-            
           </ul>
         </div>
       </nav>
