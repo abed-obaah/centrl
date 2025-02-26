@@ -1,7 +1,12 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react';
-import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react'
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  TransitionChild,
+} from '@headlessui/react';
 import {
   Bars3Icon,
   CalendarIcon,
@@ -13,59 +18,64 @@ import {
   SquaresPlusIcon,
   UserGroupIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { ChevronLeftIcon, EnvelopeIcon, FunnelIcon, MagnifyingGlassIcon, PhoneIcon } from '@heroicons/react/20/solid';
-import userBg from '../assets/userProfile.png'
-import Avatar from '../assets/eko.png'
-import Star from '../assets/Star.png'
+} from '@heroicons/react/24/outline';
+import {
+  ChevronLeftIcon,
+  EnvelopeIcon,
+  FunnelIcon,
+  MagnifyingGlassIcon,
+  PhoneIcon,
+} from '@heroicons/react/20/solid';
+import userBg from '../assets/userProfile.png';
+import Avatar from '../assets/eko.png';
+import Star from '../assets/Star.png';
 import Share from '../assets/share-ico.png';
-import X from '../assets/X.png'
-import Facebook from '../assets/facebook.png'
-import instagram from '../assets/instagram.png'
-import Qr from '../assets/qr.png'
-import linkedin from '../assets/linkedin.png'
-import EventCalender from '../components/dashboard/eventsCalender/index'
+import X from '../assets/X.png';
+import Facebook from '../assets/facebook.png';
+import instagram from '../assets/instagram.png';
+import Qr from '../assets/qr.png';
+import linkedin from '../assets/linkedin.png';
+import EventCalender from '../components/dashboard/eventsCalender/index';
 import EditProfileModal from '../components/QrModal';
 import Even from '../assets/Even.png';
 import message from '../assets/Message.png';
 import logo from '../assets/sfds.png';
 import blue from '../assets/blue-tick.png';
 
-
 const user = {
   name: 'Tom Cook',
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-
+};
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Teams', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Directory', href: '#', icon: MagnifyingGlassCircleIcon, current: true },
+  {
+    name: 'Directory',
+    href: '#',
+    icon: MagnifyingGlassCircleIcon,
+    current: true,
+  },
   { name: 'Announcements', href: '#', icon: MegaphoneIcon, current: false },
   { name: 'Office Map', href: '#', icon: MapIcon, current: false },
-]
-
+];
 
 const secondaryNavigation = [
   { name: 'Apps', href: '#', icon: SquaresPlusIcon },
   { name: 'Settings', href: '#', icon: CogIcon },
-]
-
+];
 
 const tabs = [
   { name: 'Profile', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Recognition', href: '#', current: false },
-]
-
-
+];
 
 const profile = {
   name: 'Even in the Day',
-  stats:'26K likes • 165K followers',
+  stats: '26K likes • 165K followers',
   imageUrl:
     'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
   coverImageUrl:
@@ -79,18 +89,13 @@ const profile = {
     instagram: instagram,
     x: X,
     linkedin: linkedin,
-    qr:Qr,
+    qr: Qr,
     Location: 'San Francisco',
     Sits: 'Oasis, 4th floor',
     Salary: '$145,000',
     Birthday: 'June 8, 1990',
   },
-}
-
-
-
-
-
+};
 
 const directory = {
   A: [
@@ -295,9 +300,7 @@ const directory = {
         'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
   ],
-}
-
-
+};
 
 const team = [
   {
@@ -328,33 +331,31 @@ const team = [
     imageUrl:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const profileData = {
     image: Even,
     imageSocial: message,
-    imageSocials: logo ,
-    bluetick:blue,
-    name: "Even In The Day",
-    joined: "2023",
-    followers: "803,024",
-    shares: "920",
-    competitions: "50",
-    events: "45",
-    collaborations: "30",
-    profileLink: "Centrl.com/in/Evenintheday",
-    email: "evenintheday@example.com",
+    imageSocials: logo,
+    bluetick: blue,
+    name: 'Even In The Day',
+    joined: '2023',
+    followers: '803,024',
+    shares: '920',
+    competitions: '50',
+    events: '45',
+    collaborations: '30',
+    profileLink: 'Centrl.com/in/Evenintheday',
+    email: 'evenintheday@example.com',
   };
-
 
   return (
     <>
@@ -367,30 +368,30 @@ export default function Example() {
         ```
       */}
       <div className="flex h-full">
-        
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          
           <div className="relative z-0 flex flex-1 overflow-hidden">
             <main className="relative z-0 flex-1 overflow-y-auto focus:outline-hidden xl:order-last">
-             
-
               <article>
                 {/* Profile header */}
-                <div >
-                  <div className='mx-auto w-[1110px] '>
-                    <img alt="" src={userBg} className="h-32 w-full object-cover lg:h-80 rounded-lg" />
+                <div>
+                  <div className="mx-auto w-[1110px] ">
+                    <img
+                      alt=""
+                      src={userBg}
+                      className="h-32 w-full object-cover lg:h-80 rounded-lg"
+                    />
                   </div>
                   <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
                     <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
-                    <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5 relative">
-                      <div className="relative">
-                        <img
-                          alt=""
-                          src={Avatar}
-                          className="size-24 rounded-full ring-4 ring-white sm:size-32"
-                        />
+                      <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5 relative">
+                        <div className="relative">
+                          <img
+                            alt=""
+                            src={Avatar}
+                            className="size-24 rounded-full ring-4 ring-white sm:size-32"
+                          />
+                        </div>
                       </div>
-                    </div>
 
                       <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                         {/* <div className="mt-6 min-w-0 flex-1 sm:hidden 2xl:block">
@@ -401,64 +402,110 @@ export default function Example() {
                             type="button"
                             className="inline-flex justify-center gap-x-1.5 rounded-md bg-[#0866FF] px-3 py-2 text-sm font-semibold text-[#fff] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
                           >
-                           Subscribe
+                            Subscribe
                           </button>
                           <button
                             type="button"
                             className="inline-flex justify-center items-center gap-x-1.5 rounded-md bg-[#FFFFFF] px-3 py-2 text-sm font-semibold text-[#000] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
                           >
-                            <img alt="Centrl" src={Star} className="size-4" loading="lazy" />
+                            <img
+                              alt="Centrl"
+                              src={Star}
+                              className="size-4"
+                              loading="lazy"
+                            />
                             Rate
                           </button>
                           <button
                             type="button"
                             className="inline-flex justify-center items-center gap-x-1.5 rounded-md bg-[#FFFFFF] px-3 py-2 text-sm font-semibold text-[#000] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
                           >
-                            <img alt="Centrl" src={Share} className="size-4" loading="lazy" />
+                            <img
+                              alt="Centrl"
+                              src={Share}
+                              className="size-4"
+                              loading="lazy"
+                            />
                           </button>
                         </div>
                       </div>
-                      
                     </div>
                     <div className="mt-6 min-w-0 flex-1 sm:hidden 2xl:block">
-                                <div className="flex justify-between items-start">
-                                    {/* Left Section: Profile Details */}
-                                    <div>
-                                    <h1 className="truncate text-[32px] font-[700] text-[#000]">{profile.name}</h1>
-                                    <h1 className="truncate text-[15px] font-[400] text-[#000]">{profile.stats}</h1>
-                                    
-                                    {/* Social Media Icons */}
-                                    <div className="flex space-x-4 mt-4">
-                                        <img alt="Facebook" src={profile.fields.facebook} className="size-6" loading="lazy" />
-                                        <img alt="X" src={profile.fields.x} className="size-6" loading="lazy" />
-                                        <img alt="LinkedIn" src={profile.fields.linkedin} className="size-6" loading="lazy" />
-                                        <img alt="Instagram" src={profile.fields.instagram} className="size-6" loading="lazy" />
-                                    </div>
-                                    </div>
+                      <div className="flex justify-between items-start">
+                        {/* Left Section: Profile Details */}
+                        <div>
+                          <h1 className="truncate text-[32px] font-[700] text-[#000]">
+                            {profile.name}
+                          </h1>
+                          <h1 className="truncate text-[15px] font-[400] text-[#000]">
+                            {profile.stats}
+                          </h1>
 
-                                    {/* Right Section: QR Code & Profile Info */}
-                                    <div className="flex space-x-4 bg-[#fff] items-center rounded-md px-3 py-2 w-[250px]" onClick={() => setIsModalOpen(true)}       >
-                                    <img alt="QR Code" src={profile.fields.qr} className="size-20" loading="lazy" />
-                                    <p className="text-[16px] font-[500] text-[#000]">Profile Info</p>
-                                    </div>
-                                </div>
-                                </div>
+                          {/* Social Media Icons */}
+                          <div className="flex space-x-4 mt-4">
+                            <img
+                              alt="Facebook"
+                              src={profile.fields.facebook}
+                              className="size-6"
+                              loading="lazy"
+                            />
+                            <img
+                              alt="X"
+                              src={profile.fields.x}
+                              className="size-6"
+                              loading="lazy"
+                            />
+                            <img
+                              alt="LinkedIn"
+                              src={profile.fields.linkedin}
+                              className="size-6"
+                              loading="lazy"
+                            />
+                            <img
+                              alt="Instagram"
+                              src={profile.fields.instagram}
+                              className="size-6"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
 
+                        {/* Right Section: QR Code & Profile Info */}
+                        <div
+                          className="flex space-x-4 bg-[#fff] items-center rounded-md px-3 py-2 w-[250px]"
+                          onClick={() => setIsModalOpen(true)}
+                        >
+                          <img
+                            alt="QR Code"
+                            src={profile.fields.qr}
+                            className="size-20"
+                            loading="lazy"
+                          />
+                          <p className="text-[16px] font-[500] text-[#000]">
+                            Profile Info
+                          </p>
+                        </div>
+                      </div>
+                    </div>
 
                     <div className="mt-6 hidden min-w-0 flex-1 sm:block 2xl:hidden">
-                      <h1 className="truncate text-2xl font-bold text-gray-900">{profile.name}</h1>
+                      <h1 className="truncate text-2xl font-bold text-gray-900">
+                        {profile.name}
+                      </h1>
                     </div>
                   </div>
                 </div>
-                            <EventCalender/>
-                
+                <EventCalender />
               </article>
             </main>
-           
           </div>
         </div>
-        <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} profile={profileData} />
+        <EditProfileModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          profile={profileData}
+        />
       </div>
     </>
-  )
+  );
 }

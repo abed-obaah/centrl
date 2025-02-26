@@ -11,6 +11,7 @@ import WaitListLayout from './layouts/WaitlistLayout';
 import DashboardLayout from './layouts/DashboardLayout';
 import DashboardWrapper from './layouts/DashboardWrapper';
 import AdminLoginLayout from './layouts/AdminLoginLayout';
+import AdminLayout from './layouts/AdminLayout';
 
 // pages
 import Home from './pages/Home';
@@ -26,6 +27,9 @@ import Competition from './pages/Competition';
 import Categoryid from './pages/Category[id]';
 import Partiesid from './pages/Parties[id]';
 import Settings from './pages/Settings';
+import Dashboard from './pages/admin/Dashboard';
+import Users from './pages/admin/users';
+import AdminEventManagement from './pages/admin/event-management';
 // import Waitlist from './pages/Waitlist';
 
 // import Signin from './components/auth/signin';
@@ -62,7 +66,18 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="/sign-in" element={<WaitListLayout />} />
+
+      {/* Admin Login Layout and Dashboard layout */}
       <Route path="/admin" element={<AdminLoginLayout />} />
+
+      <Route element={<AdminLayout />}>
+        <Route path="/admin-dashboard" element={<Dashboard />} />
+        <Route path="/admin-users" element={<Users />} />
+        <Route
+          path="/admin-event-management"
+          element={<AdminEventManagement />}
+        />
+      </Route>
     </>
   )
 );
