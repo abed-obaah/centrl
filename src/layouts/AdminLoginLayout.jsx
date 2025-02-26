@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import Img from '../assets/admin-login-img.png';
-import LoginForm from '../components/admin/LoginForm';
+import LoginForm from '../components/admin/AdminLoginForm';
 
 const AdminLoginLayout = () => {
   return (
