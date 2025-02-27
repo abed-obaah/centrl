@@ -57,7 +57,7 @@ const AdminEventModal = ({ isOpen, onClose }) => {
           className="fixed inset-0 bg-background/80 backdrop-blur-lg"
           onClick={onClose}
         />
-        <div className="relative w-full max-w-lg rounded-xl bg-background p-6 shadow-lg">
+        <div className="relative z-[600] w-full max-w-lg rounded-xl bg-background p-6 shadow-lg">
           <h2 className="mb-4 text-200 font-700">Most Popular Event</h2>
           <div className="space-y-4">
             {events.map((event) => (

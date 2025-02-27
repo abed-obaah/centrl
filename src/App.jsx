@@ -12,8 +12,11 @@ import DashboardLayout from './layouts/DashboardLayout';
 import DashboardWrapper from './layouts/DashboardWrapper';
 import AdminLoginLayout from './layouts/AdminLoginLayout';
 import AdminLayout from './layouts/AdminLayout';
+import AdminThemeLayout from './layouts/AdminThemeLayout';
 
-// pages
+// PAGES
+
+// landing pages
 import Home from './pages/Home';
 import Calenders from './pages/Calenders';
 import Pricing from './pages/Pricing';
@@ -21,18 +24,23 @@ import About from './pages/About';
 import Discover from './pages/Discover';
 import Privacy from './pages/Privacy';
 import TrendingDetails from './pages/TrendingDetails';
+
+// user dashboard pages
 import UserProfile from './pages/UserProfile';
 import UserProfiles from './pages/[id]';
 import Competition from './pages/Competition';
 import Categoryid from './pages/Category[id]';
 import Partiesid from './pages/Parties[id]';
 import Settings from './pages/Settings';
+
+// admin pages
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/users';
 import AdminEventManagement from './pages/admin/event-management';
-// import Waitlist from './pages/Waitlist';
-
-// import Signin from './components/auth/signin';
+import Admins from './pages/admin/admins';
+import Themes from './pages/admin/themes';
+import LightThemes from './pages/admin/light-themes';
+import SampleTheme from './pages/admin/sample-theme';
 
 function Contact() {
   return <h1 className="text-3xl font-bold underline">Contact Page</h1>;
@@ -45,7 +53,6 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        {/* <Route path="/signin" element={<Signin />} /> */}
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/about" element={<About />} />
         <Route path="/discover" element={<Discover />} />
@@ -77,6 +84,13 @@ const router = createBrowserRouter(
           path="/admin-event-management"
           element={<AdminEventManagement />}
         />
+        <Route path="/admin-admins" element={<Admins />} />
+        <Route path="/admin-themes" element={<Themes />} />
+      </Route>
+
+      <Route element={<AdminThemeLayout />}>
+        <Route path="/admin-themes/light" element={<LightThemes />} />
+        <Route path="/admin-themes/sample" element={<SampleTheme />} />
       </Route>
     </>
   )

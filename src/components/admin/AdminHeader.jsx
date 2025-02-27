@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const AdminHeader = ({ toggleSidebar }) => {
   return (
     <div>
-      <nav className="fixed top-0 z-50 w-full">
+      <nav className="fixed top-0 z-[500] w-full backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50  supports-[backdrop-filter]:bg-white/3">
         <div className="flex items-center justify-between  p-4">
           <div className="flex items-center gap-2">
             <button
@@ -24,7 +24,7 @@ const AdminHeader = ({ toggleSidebar }) => {
             <button className="rounded-full p-2 hover:bg-background">
               <Bell className="h-5 w-5" />
             </button>
-            <button className="hover:bg-background">
+            <button>
               <img src={Avatar} className="h-8 w-8 rounded-full" alt="User" />
             </button>
           </div>

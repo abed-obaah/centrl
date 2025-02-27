@@ -58,7 +58,7 @@ const cards = [
 
 const AdminEventManagement = () => {
   return (
-    <div className="ml-20 max-w-[1000px]">
+    <div className="md:ml-20 md:max-w-[1000px]">
       <h2 className="text-200 text-[#000]  font-600 mb-6">
         Browse by Category
       </h2>
