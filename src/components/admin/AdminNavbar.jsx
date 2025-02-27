@@ -37,8 +37,8 @@ const AdminNavbar = ({ isOpen, toggleSidebar }) => {
               href: '/admin-event-management',
             },
             { name: 'Revenue & Payments', icon: UserIcon, href: '/revenue' },
-            { name: 'Admins', icon: UserIcon, href: '/admins' },
-            { name: 'Themes', icon: UserIcon, href: '/themes' },
+            { name: 'Admins', icon: UserIcon, href: '/admin-admins' },
+            { name: 'Themes', icon: UserIcon, href: '/admin-themes/' },
             { name: 'More', icon: MoreIcon, href: '/more' },
           ].map((item) => (
             <li key={item.name}>

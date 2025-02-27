@@ -22,8 +22,6 @@ const AdminLayout = () => {
         className={`transition-margin duration-300 ease-in-out ${
           sidebarOpen ? 'md:ml-64' : ''
         } my-24  p-4 md:ml-64`}
-
-        // xl:max-w-[800px] xl:mx-auto
       >
         <Outlet />
       </main>

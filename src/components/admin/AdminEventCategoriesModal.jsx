@@ -37,12 +37,12 @@ const AdminEventCategoriesModal = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed z-[600] inset-0  flex items-center justify-center p-4">
         <div
           className="fixed inset-0 bg-background/80 backdrop-blur-lg"
           onClick={onClose}
         />
-        <div className="relative w-full max-w-lg rounded-xl bg-background p-6 shadow-lg">
+        <div className="relative  w-full max-w-lg rounded-xl bg-background p-6 shadow-lg">
           <h2 className="mb-4 text-200 font-700">Top Event Categories</h2>
           <div className="space-y-6">
             {categories.map((category) => (
