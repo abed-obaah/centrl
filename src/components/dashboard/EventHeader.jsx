@@ -115,7 +115,9 @@ export default function Example({ setModalVisible,  }) {
                 <div className="bg-gray-50 p-5 sm:p-8">
                   <a href="#" className="-m-3 flow-root rounded-md p-3 hover:bg-gray-100">
                     <div className="flex items-center">
-                      <div className="text-base font-medium text-gray-900">Events</div>
+                      <Link to={'/event'}>
+                       <div className="text-base font-medium text-gray-900">Events</div>
+                      </Link>
                       <span className="ml-3 inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs/5 font-medium text-indigo-800">
                         New
                       </span>
@@ -128,8 +130,14 @@ export default function Example({ setModalVisible,  }) {
               </div>
             </PopoverPanel>
           </Popover>
-          <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Events</a>
-          <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Discover</a>
+          <Link to={'/event'}>
+                  <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Events</a>
+          </Link>
+          <Link to={'/discover'}>
+               <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Discover</a>
+          </Link>
+         
+          
         </PopoverGroup>
         <div className="flex items-center md:ml-12">
           <div className="flex items-center gap-4 mr-5">

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import AdminHeader from '../components/admin/AdminHeader';
-import AdminNavbar from '../components/admin/AdminNavbar';
+import CustomizeNavbar from '../components/customize/CustomizeNavbar';
 
-const AdminLayout = () => {
+const CustomizeLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -14,7 +14,7 @@ const AdminLayout = () => {
 
       <div className="fixed left-0 top-0 w-full z-40">
         <div className="max-w-[1290px] 2xl:max-w-[1500px] mx-auto relative">
-          <AdminNavbar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+          <CustomizeNavbar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         </div>
       </div>
 
@@ -29,4 +29,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default CustomizeLayout;

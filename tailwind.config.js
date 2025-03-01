@@ -14,6 +14,7 @@ export default {
       secondary: 'hsl(var(--secondary))',
       card: 'hsl(var(--card))',
       muted: 'hsl(var(--muted))',
+      muted50: '#646464',
       black: 'hsl(var(--black))',
       white: 'hsl(var(--white))',
       modalbg:'#F4F5F7',

@@ -26,19 +26,19 @@ const AdminNavbar = ({ isOpen, toggleSidebar }) => {
         <ul className="space-y-2">
           {[
             {
-              name: 'Dashboard',
+              name: 'Overview',
               icon: DashboardIcon,
-              href: '/admin-dashboard',
+              href: '/overview',
             },
-            { name: 'Users', icon: UserIcon, href: '/admin-users' },
+            { name: 'Customize', icon: UserIcon, href: '/customize' },
             {
-              name: 'Events management',
+              name: 'Registrations',
               icon: UserIcon,
-              href: '/admin-event-management',
+              href: '/registrations',
             },
-            { name: 'Revenue & Payments', icon: UserIcon, href: '/revenue' },
-            { name: 'Admins', icon: UserIcon, href: '/admin-admins' },
-            { name: 'Themes', icon: UserIcon, href: '/admin-themes/' },
+            { name: 'Guests', icon: UserIcon, href: '/guests' },
+            { name: 'Messages', icon: UserIcon, href: '/messages' },
+            { name: 'Insights', icon: UserIcon, href: '/insights' },
             { name: 'More', icon: MoreIcon, href: '/more' },
           ].map((item) => (
             <li key={item.name}>
