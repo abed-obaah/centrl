@@ -6,47 +6,48 @@ import AdminFour from '../../assets/admin-four.png';
 import AdminFive from '../../assets/admin-five.png';
 import { useState } from 'react';
 import EditAdminsModal from '../../components/admin/EditAdminsModal';
-
-const admins = [
-  {
-    id: 1,
-    name: 'Joel Onyibe',
-    username: '@userman',
-    role: 'SuperAdmin',
-    avatar: AdminOne,
-  },
-  {
-    id: 2,
-    name: 'Joel Onyibe',
-    username: '@userman',
-    role: 'Content Admin',
-    avatar: AdminTwo,
-  },
-  {
-    id: 3,
-    name: 'Joel Onyibe',
-    username: '@userman',
-    role: 'Finance',
-    avatar: AdminThree,
-  },
-  {
-    id: 4,
-    name: 'Joel Onyibe',
-    username: '@userman',
-    role: 'SuperAdmin',
-    avatar: AdminFour,
-  },
-  {
-    id: 5,
-    name: 'Joel Onyibe',
-    username: '@userman',
-    role: 'SuperAdmin',
-    avatar: AdminFive,
-  },
-];
+import AddAdminModal from '../../components/admin/AddAdminModal';
 
 const Admins = () => {
+  const [admins, setAdmins] = useState([
+    {
+      id: 1,
+      name: 'Joel Onyibe',
+      username: '@userman',
+      role: 'SuperAdmin',
+      avatar: AdminOne,
+    },
+    {
+      id: 2,
+      name: 'Joel Onyibe',
+      username: '@userman',
+      role: 'Content Admin',
+      avatar: AdminTwo,
+    },
+    {
+      id: 3,
+      name: 'Joel Onyibe',
+      username: '@userman',
+      role: 'Finance',
+      avatar: AdminThree,
+    },
+    {
+      id: 4,
+      name: 'Joel Onyibe',
+      username: '@userman',
+      role: 'SuperAdmin',
+      avatar: AdminFour,
+    },
+    {
+      id: 5,
+      name: 'Joel Onyibe',
+      username: '@userman',
+      role: 'SuperAdmin',
+      avatar: AdminFive,
+    },
+  ]);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const handleEditClick = (admin) => {
     setSelectedAdmin(admin);
@@ -57,14 +58,30 @@ const Admins = () => {
   };
 
   const handleSaveChanges = (formData) => {
-    console.log('Saving changes:', formData);
+    setAdmins(
+      admins.map((admin) =>
+        admin.id === selectedAdmin.id ? { ...admin, ...formData } : admin
+      )
+    );
     handleCloseModal();
+  };
+
+  const handleAddAdmin = (formData) => {
+    const newAdmin = {
+      id: admins.length + 1,
+      ...formData,
+    };
+    setAdmins([...admins, newAdmin]);
+    setIsAddModalOpen(false);
   };
 
   return (
     <div className="md:ml-20 md:max-w-[1000px]">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <button className="flex h-full min-h-[200px] w-full items-center justify-center rounded-xl  bg-card p-6">
+        <button
+          className="flex h-full min-h-[200px] w-full items-center justify-center rounded-xl  bg-card p-6"
+          onClick={() => setIsAddModalOpen(true)}
+        >
           <Plus className="size-10 text-black" />
         </button>
 
@@ -114,6 +131,12 @@ const Admins = () => {
           onSave={handleSaveChanges}
         />
       )}
+
+      <AddAdminModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSave={handleAddAdmin}
+      />
     </div>
   );
 };

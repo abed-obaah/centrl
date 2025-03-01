@@ -44,7 +44,7 @@ const AdminNavbar = ({ isOpen, toggleSidebar }) => {
             <li key={item.name}>
               <Link
                 to={item.href}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-100 font-500 ${
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-50 font-500 ${
                   currentPath === item.href
                     ? 'bg-white text-black font-600'
                     : 'hover:bg-white hover:text-black'

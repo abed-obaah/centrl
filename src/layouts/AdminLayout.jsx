@@ -9,7 +9,7 @@ const AdminLayout = () => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="max-w-[1290px] 2xl:max-w-[1500px] mx-auto relative">
+    <div className="max-w-[1290px] 2xl:max-w-[1500px] mx-auto">
       <AdminHeader sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
       <div className="fixed left-0 top-0 w-full z-40">

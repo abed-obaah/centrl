@@ -23,11 +23,11 @@ const AdminLoginLayout = () => {
           </Link>
         </div>
 
-        <div className="xl:grid xl:grid-cols-2 items-center  h-screen">
+        <div className="xl:grid xl:grid-cols-2 xl:items-center  w-full  h-screen">
           {/* img */}
           <div>
             <img
-              className="hidden xl:block w-[450px] mx-auto"
+              className="hidden xl:block w-[550px] xl:ml-auto"
               src={Img}
               alt="Login Image"
               loading="lazy"
