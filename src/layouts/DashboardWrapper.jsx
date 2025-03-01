@@ -11,7 +11,7 @@ const DashboardWrapper = () => {
        <EventHeader setModalVisible={setModalVisible} /> 
       <Outlet /> {/* This will render either DashboardLayout or UserProfile */}
       <Modal modalVisible={modalVisible} setModalVisible={setModalVisible} />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

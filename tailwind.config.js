@@ -16,6 +16,17 @@ export default {
       muted: 'hsl(var(--muted))',
       black: 'hsl(var(--black))',
       white: 'hsl(var(--white))',
+      modalbg:'#F4F5F7',
+      modalbutton:'#000000',
+      eventBg:'#611613',
+      eventBg7:'#291934',
+      opeque:'#E2E2E24D',
+      WhiteOpeque:'#FFFFFF80',
+      eventBgRgradient:"#69241b",
+      neutral:'#cfb8b6',
+      subColor:'#0F3B67',
+      subColorBtn:'#0A66C2'
+      // eventBg:'#490303D1',
     },
 
     fontFamily: {

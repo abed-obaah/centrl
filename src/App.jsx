@@ -30,6 +30,9 @@ import Settings from './pages/Settings';
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/users';
 import AdminEventManagement from './pages/admin/event-management';
+import Block from "./pages/dashboard/block";
+import Event from "./pages/dashboard/events/eventpage";
+import EventPage from "./pages/dashboard/events/eventpage7";
 // import Waitlist from './pages/Waitlist';
 
 // import Signin from './components/auth/signin';
@@ -57,12 +60,15 @@ const router = createBrowserRouter(
 
       <Route element={<DashboardWrapper />}>
         <Route path="/dashboard" element={<DashboardLayout />} />
+        <Route path="/block" element={<Block />} />
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/[id]" element={<UserProfiles />} />
         <Route path="/competition" element={<Competition />} />
         <Route path="/category[id]" element={<Categoryid />} />
         <Route path="/parties[id]" element={<Partiesid />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/event" element={<Event />} />
+        <Route path="/event:id" element={<EventPage />} />
       </Route>
 
       <Route path="/sign-in" element={<WaitListLayout />} />
