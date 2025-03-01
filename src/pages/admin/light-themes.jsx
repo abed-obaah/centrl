@@ -48,10 +48,10 @@ const LightThemes = () => {
   ];
 
   return (
-    <div className="md:ml-[10rem] md:max-w-[1000px] mt-24 px-4">
+    <div className="md:max-w-[1000px] mx-auto mt-24 px-4">
       <Link
         to="/admin-themes"
-        className="flex items-center gap-2 text-100 text-[red] fixed left-8 top-16  z-[500] font-700"
+        className="flex items-center gap-2 text-100 text-[red] fixed left-8 top-8  z-[500] font-700"
       >
         <ArrowLeft className="h-4 w-4 text-[red]" />
         Back
