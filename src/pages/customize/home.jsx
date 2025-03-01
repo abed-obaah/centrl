@@ -37,13 +37,13 @@ export default function block() {
 
         <div className=''>
         <form>
-                <div className="space-y-12">
+                <div className="space-y-12 space-x-12">
                     <div className="w-[900px] mx-auto grid grid-cols-1 gap-x-6 gap-y-10 pb-12 md:grid-cols-3">
                     {/* <div>
                        
                     </div> */}
 
-                    <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
+                    <div className="grid max-w-2xl grid-cols-1 gap-x-[3.5rem] gap-y-8 sm:grid-cols-6 md:col-span-2">
                         <div className="sm:col-span-3">
                        
                         <div className="mt-2"  >
