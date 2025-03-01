@@ -1,16 +1,17 @@
 import { useRef, useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Upload } from 'lucide-react';
 
-const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: admin.name,
-    username: admin.username,
+const AddAdminModal = ({ isOpen, onClose, onSave }) => {
+  const initialFormState = {
+    fullName: '',
+    username: '',
     password: '',
-    role: admin.role,
-  });
+    role: '',
+  };
 
-  const [avatarPreview, setAvatarPreview] = useState(admin.avatar);
+  const [formData, setFormData] = useState(initialFormState);
+  const [showPassword, setShowPassword] = useState(false);
+  const [avatarPreview, setAvatarPreview] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleInputChange = (e) => {
@@ -34,10 +35,23 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({
-      ...formData,
-      avatar: avatarPreview,
-    });
+    onSave({ ...formData, avatar: avatarPreview });
+
+    setFormData(initialFormState);
+    setAvatarPreview(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleModalClose = () => {
+    setFormData(initialFormState);
+    setAvatarPreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -45,33 +59,34 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
   return (
     <>
       <div
-        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[600]"
-        onClick={onClose}
+        className="fixed z-[600] inset-0 bg-background/80 backdrop-blur-sm"
+        onClick={handleModalClose}
       />
-      <div className="fixed inset-0 z-[600] flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-[800] flex items-center justify-center p-4">
         <div className="w-full max-w-md rounded-xl bg-card p-6 shadow-lg">
-          <div className="mb-6 flex items-center gap-3">
-            <img
-              src={avatarPreview}
-              alt={admin.name}
-              className="h-12 w-12 rounded-full object-cover"
-            />
-            <div>
-              <h3 className="text-100 font-600">{admin.name}</h3>
-              <p className="text-50 text-foreground">{admin.username}</p>
-            </div>
-          </div>
+          <h2 className="text-200 font-600 mb-6">Add New Admin</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="text-100 font-500">Profile Image</label>
               <div className="flex items-center gap-4">
+                {avatarPreview ? (
+                  <img
+                    src={avatarPreview || '/placeholder.svg'}
+                    alt="Avatar preview"
+                    className="h-16 w-16 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+                    <Upload className="h-6 w-6 text-foreground" />
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={() => fileInputRef.current.click()}
                   className="rounded-lg border border-muted px-4 py-2 text-100 font-500 hover:bg-background"
                 >
-                  Change Image
+                  Choose Image
                 </button>
                 <input
                   type="file"
@@ -92,6 +107,7 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
                 onChange={handleInputChange}
                 className="w-full rounded-lg border border-muted bg-card px-3 py-2 text-100 focus:border-primary focus:outline-none"
                 placeholder="Enter full name"
+                required
               />
             </div>
 
@@ -104,6 +120,7 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
                 onChange={handleInputChange}
                 className="w-full rounded-lg border border-muted bg-card px-3 py-2 text-100 focus:border-primary focus:outline-none"
                 placeholder="Enter username"
+                required
               />
             </div>
 
@@ -117,6 +134,7 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
                   onChange={handleInputChange}
                   className="w-full rounded-lg border border-muted bg-card px-3 py-2 text-100 focus:border-primary focus:outline-none"
                   placeholder="Enter password"
+                  required
                 />
                 <button
                   type="button"
@@ -139,6 +157,7 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
                 value={formData.role}
                 onChange={handleInputChange}
                 className="w-full rounded-lg border border-muted bg-card px-3 py-2 text-100 focus:border-primary focus:outline-none"
+                required
               >
                 <option value="">Select role</option>
                 <option value="SuperAdmin">SuperAdmin</option>
@@ -159,7 +178,7 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
                 type="submit"
                 className="rounded-lg bg-primary px-4 py-2 text-100 font-500 text-white"
               >
-                Save Changes
+                Add Admin
               </button>
             </div>
           </form>
@@ -169,4 +188,4 @@ const EditAdminsModal = ({ admin, isOpen, onClose, onSave }) => {
   );
 };
 
-export default EditAdminsModal;
+export default AddAdminModal;

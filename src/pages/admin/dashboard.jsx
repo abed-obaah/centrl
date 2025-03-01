@@ -14,7 +14,7 @@ const Dashboard = () => {
     useState(false);
 
   return (
-    <div className="max-w-[800px] ml-20">
+    <div className="md:max-w-[1000px] md:ml-20">
       <div className="mb-8">
         <h1 className="text-300 font-600">Welcome, Akpor!</h1>
       </div>
@@ -29,15 +29,15 @@ const Dashboard = () => {
           <div>
             <div className="flex items-center gap-10">
               <p className="text-black font-600">Total registered users</p>
-              <p className="text-500 font-700">5.9 B</p>
+              <p className="text-500 font-500">5.9 B</p>
             </div>
             <div className="flex items-center gap-12">
               <p className="text-black font-600">Total Events Created</p>
-              <p className="text-500 font-700">3</p>
+              <p className="text-500 font-500">3</p>
             </div>
             <div className="flex items-center gap-[4.5rem]">
               <p className="text-black font-600">Total Tickets Sold</p>
-              <p className="text-500 font-700">3</p>
+              <p className="text-500 font-500">3</p>
             </div>
           </div>
         </div>
@@ -48,17 +48,17 @@ const Dashboard = () => {
           <div>
             <div className="flex items-center gap-12">
               <p className="text-black font-600">Total revenue generated</p>
-              <p className="text-500 font-700">5.9 B</p>
+              <p className="text-500 font-500">5.9 B</p>
             </div>
 
             <div className="flex items-center gap-[7rem]">
               <p className="text-black font-600">Platform's share</p>
-              <p className="text-500 font-700">3</p>
+              <p className="text-500 font-500">3</p>
             </div>
 
             <div className="flex items-center gap-10">
               <p className="text-black font-600">Total payouts to organizer</p>
-              <p className="text-500 font-700">3</p>
+              <p className="text-500 font-500">3</p>
             </div>
           </div>
         </div>
