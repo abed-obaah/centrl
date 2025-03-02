@@ -6,7 +6,7 @@ const DescriptionModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 -mt-80">
+    <div className="fixed inset-0 flex items-center justify-center z-[500] -mt-80">
       {/* Backdrop with Blur */}
       <div className="fixed inset-0 bg-black/50 backdrop-blur-md " onClick={onClose}></div>
      

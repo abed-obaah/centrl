@@ -3,17 +3,18 @@ import { Outlet } from 'react-router-dom';
 import AdminHeader from '../components/admin/AdminHeader';
 import CustomizeNavbar from '../components/customize/CustomizeNavbar';
 import CustomizeHeader from '../components/customize/CustomizeHeader';
+import DescriptionModal from '../components/DescriptionModal';
 
 
 const CustomizeLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <div className="max-w-[1290px] 2xl:max-w-[1500px] mx-auto relative">
       {/* <AdminHeader sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} /> */}
-
       <CustomizeHeader/>
      
 
@@ -30,6 +31,7 @@ const CustomizeLayout = () => {
       >
         <Outlet />
       </main>
+       <DescriptionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

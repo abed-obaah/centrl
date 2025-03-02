@@ -51,6 +51,7 @@ import Admins from './pages/admin/admins';
 import Themes from './pages/admin/themes';
 import LightThemes from './pages/admin/light-themes';
 import SampleTheme from './pages/admin/sample-theme';
+import Guests from './pages/customize/guests';
 
 function Contact() {
   return <h1 className="text-3xl font-bold underline">Contact Page</h1>;
@@ -87,6 +88,7 @@ const router = createBrowserRouter(
 
       <Route element={<CustomizeLayout/>}>
            <Route path="/customize" element={<HomePage/>} />
+           <Route path="/guests" element={<Guests/>} />
       </Route>
 
       <Route path="/sign-in" element={<WaitListLayout />} />

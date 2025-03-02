@@ -12,7 +12,7 @@ import bgGradient from '../../assets/loveIn.png'
 import { ChevronDown } from 'lucide-react';
 import MoreOptions from '../../components/MoreOptions'
 import SideModal from "../../components/SidebarModal";
-import DescriptionModal from '../../components/DescriptionModal';
+// import DescriptionModal from '../../components/DescriptionModal';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
@@ -20,7 +20,7 @@ export default function block() {
     const [role, setRole] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenSide, setIsOpenSide] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+   
     const roles = [
         'Event Organizer',
         'Event Lover',
@@ -41,14 +41,6 @@ export default function block() {
         <form>
                 <div className="space-y-12 space-x-12">
                     <div className="w-[900px] mx-auto grid grid-cols-1 gap-x-6 gap-y-10 pb-12 md:grid-cols-3">
-                    {/* <Link
-        to="/admin-themes"
-        className="flex items-center gap-2 text-100 text-[red] fixed left-8 top-8  z-[500] font-700"
-      >
-        <ArrowLeft className="h-4 w-4 text-[red]" />
-        Back
-      </Link> */}
-
                     <div className="grid max-w-2xl grid-cols-1 gap-x-[3.5rem] gap-y-8 sm:grid-cols-6 md:col-span-2">
                         <div className="sm:col-span-3">
                        
@@ -235,7 +227,7 @@ export default function block() {
                     </div>
                 </div>
     </form>
-             <DescriptionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            
               <SideModal isOpen={isOpenSide} onClose={() => setIsOpenSide(false)} />
         </div>
     </>
