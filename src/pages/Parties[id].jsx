@@ -1,7 +1,12 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react';
-import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react'
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  TransitionChild,
+} from '@headlessui/react';
 import {
   Bars3Icon,
   CalendarIcon,
@@ -13,47 +18,57 @@ import {
   SquaresPlusIcon,
   UserGroupIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { ChevronLeftIcon, EnvelopeIcon, FunnelIcon, MagnifyingGlassIcon, PhoneIcon } from '@heroicons/react/20/solid';
-import userBg from '../assets/userBg.png'
-import Avatar from '../assets/avatars.png'
-import Star from '../assets/Star.png'
+} from '@heroicons/react/24/outline';
+import {
+  ChevronLeftIcon,
+  EnvelopeIcon,
+  FunnelIcon,
+  MagnifyingGlassIcon,
+  PhoneIcon,
+} from '@heroicons/react/20/solid';
+import userBg from '../assets/userBg.png';
+import Avatar from '../assets/avatars.png';
+import Star from '../assets/Star.png';
 import Share from '../assets/share-ico.png';
-import X from '../assets/X.png'
-import Facebook from '../assets/facebook.png'
-import instagram from '../assets/instagram.png'
-import linkedin from '../assets/linkedin.png'
-import react2 from '../assets/parties.png'
-import EventCalender from '../components/dashboard/eventsCalender/tech'
+import X from '../assets/X.png';
+import Facebook from '../assets/facebook.png';
+import instagram from '../assets/instagram.png';
+import linkedin from '../assets/linkedin.png';
+import react2 from '../assets/parties.png';
+import EventCalender from '../components/dashboard/eventsCalender/';
 import EditProfileModal from '../components/EditProfileModal';
-import CategoryCardHeader from '../components/CategoryCardHeader'
-
+import CategoryCardHeader from '../components/CategoryCardHeader';
 
 const user = {
   name: 'Tom Cook',
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+};
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Teams', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Directory', href: '#', icon: MagnifyingGlassCircleIcon, current: true },
+  {
+    name: 'Directory',
+    href: '#',
+    icon: MagnifyingGlassCircleIcon,
+    current: true,
+  },
   { name: 'Announcements', href: '#', icon: MegaphoneIcon, current: false },
   { name: 'Office Map', href: '#', icon: MapIcon, current: false },
-]
+];
 const secondaryNavigation = [
   { name: 'Apps', href: '#', icon: SquaresPlusIcon },
   { name: 'Settings', href: '#', icon: CogIcon },
-]
+];
 const tabs = [
   { name: 'Profile', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Recognition', href: '#', current: false },
-]
+];
 const profile = {
   name: 'Andy Mineo',
-  stats:'26K likes • 165K followers',
+  stats: '26K likes • 165K followers',
   imageUrl:
     'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
   coverImageUrl:
@@ -72,7 +87,7 @@ const profile = {
     Salary: '$145,000',
     Birthday: 'June 8, 1990',
   },
-}
+};
 const directory = {
   A: [
     {
@@ -276,7 +291,7 @@ const directory = {
         'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
   ],
-}
+};
 const team = [
   {
     name: 'Leslie Alexander',
@@ -306,10 +321,10 @@ const team = [
     imageUrl:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
@@ -318,34 +333,34 @@ export default function Example() {
 
   return (
     <>
-     
       <div className="flex h-full">
-        
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          
           <div className="relative z-0 flex flex-1 overflow-hidden">
             <main className="relative z-0 flex-1 overflow-y-auto focus:outline-hidden xl:order-last">
               <article>
                 {/* Profile header */}
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <CategoryCardHeader
-                 image={react2} 
-                 title="Parties" 
-                 button='subcribe'
-                 imageShare={Share}
-                 bgColor="bg-[#0C6724]"
-                stats="26K likes • 165K followers" 
-                 countdown="20 : 12 : 03 : 15" />
-                    
-                 <EventCalender/>
+                  <CategoryCardHeader
+                    image={react2}
+                    title="Parties"
+                    button="subcribe"
+                    imageShare={Share}
+                    bgColor="bg-[#0C6724]"
+                    stats="26K likes • 165K followers"
+                    countdown="20 : 12 : 03 : 15"
+                  />
+
+                  <EventCalender />
                 </div>
               </article>
             </main>
-           
           </div>
         </div>
-        <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <EditProfileModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </>
-  )
+  );
 }

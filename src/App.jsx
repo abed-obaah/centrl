@@ -29,7 +29,7 @@ import TrendingDetails from './pages/TrendingDetails';
 import UserProfile from './pages/UserProfile';
 import UserProfiles from './pages/[id]';
 import Competition from './pages/Competition';
-import Categoryid from './pages/Category[id]';
+import CategoryDetails from './pages/CategoryDetails';
 import Partiesid from './pages/Parties[id]';
 import Settings from './pages/Settings';
 
@@ -67,7 +67,7 @@ const router = createBrowserRouter(
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/[id]" element={<UserProfiles />} />
         <Route path="/competition" element={<Competition />} />
-        <Route path="/category[id]" element={<Categoryid />} />
+        <Route path="/category/:id" element={<CategoryDetails />} />
         <Route path="/parties[id]" element={<Partiesid />} />
         <Route path="/settings" element={<Settings />} />
       </Route>

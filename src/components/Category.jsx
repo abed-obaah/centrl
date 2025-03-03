@@ -12,56 +12,56 @@ const cards = [
     name: 'Technology',
     description: '800 Events',
     imgUrl: TechnologyImg,
-    path:'/category[id]'
+    path: '/category/1',
   },
   {
     id: 2,
     name: 'Business',
     description: '800 Events',
     imgUrl: BusinessImg,
-    path:'/category[id]'
+    path: '/category/2',
   },
   {
     id: 3,
     name: 'Concerts',
     description: '800 Events',
     imgUrl: ConcertImg,
-    path:'/category[id]'
+    path: '/category/3',
   },
   {
     id: 4,
     name: 'Concerts',
     description: '800 Events',
     imgUrl: ConcertImg,
-    path:'/category[id]'
+    path: '/category/4',
   },
   {
     id: 5,
     name: 'Education',
     description: '800 Events',
     imgUrl: EducationImg,
-    path:'/category[id]'
+    path: '/category/5',
   },
   {
     id: 6,
     name: 'Parties',
     description: '800 Events',
     imgUrl: PartiesImg,
-    path:'/parties[id]'
+    path: '/parties/1',
   },
   {
     id: 7,
     name: 'Others',
     description: '800 Events',
     imgUrl: OthersImg,
-    path:'/parties[id]'
+    path: '/parties/2',
   },
   {
     id: 8,
     name: 'Concerts',
     description: '800 Events',
     imgUrl: ConcertImg,
-    path:'/parties[id]'
+    path: '/parties/3',
   },
 ];
 
@@ -72,22 +72,25 @@ const Category = () => {
         Browse by Category
       </h2>
 
-      <div className="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:gap-4 lg:grid-cols-4">
+      <div className="md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-4">
         {cards.map((card) => (
-           <Link to={card.path} key={card.id}
-           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <div key={card.id} className="bg-[#fff] rounded-2xl  p-6 ">
-            <img
-              className="size-10 object-cover mb-8"
-              src={card.imgUrl}
-              alt={card.name}
-            />
+          <Link
+            to={card.path}
+            key={card.id}
+            className="inline-block w-full mb-4 md:mb-0"
+          >
+            <div key={card.id} className="bg-white rounded-2xl  p-6 ">
+              <img
+                className="size-10 object-cover mb-8"
+                src={card.imgUrl}
+                alt={card.name}
+              />
 
-            <div>
-              <h3 className="text-200 font-600">{card.name}</h3>
-              <p className=" text-[#B0B0B0]">{card.description}</p>
+              <div>
+                <h3 className="text-200 font-600">{card.name}</h3>
+                <p className=" text-[#B0B0B0]">{card.description}</p>
+              </div>
             </div>
-          </div>
           </Link>
         ))}
       </div>

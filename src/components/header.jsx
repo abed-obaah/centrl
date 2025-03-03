@@ -24,42 +24,30 @@ const Header = () => {
           <li>
             <Link
               to={'/pricing'}
+              className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <a
-                href="#"
-                className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
-              >
-                Pricing
-              </a>
+              Pricing
             </Link>
           </li>
 
           <li>
             <Link
               to={'/discover'}
+              className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <a
-                href="#"
-                className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
-              >
-                Discover
-              </a>
+              Discover
             </Link>
           </li>
 
           <li>
             <Link
               to={'/about'}
+              className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <a
-                href="#"
-                className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
-              >
-                About
-              </a>
+              About
             </Link>
           </li>
         </ul>
