@@ -1,5 +1,6 @@
 import homeimg from '../assets/homeimg.png';
 import StarIcon from '../assets/hero-svg-icon.svg';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -19,12 +20,14 @@ const Hero = () => {
                   whenever and wherever you need it.
                 </p>
 
-                <button
-                  type="submit"
+                <Link
+                  
+                  to={'/sign-up'}
+                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className="rounded-full bg-gradient-to-r from-[#CD2574] to-[#E46708] px-12 py-3 font-medium text-[white] shadow-sm hover:from-[#E46708] hover:to-[#CD2574] focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
                 >
                   Create Event
-                </button>
+                </Link>
               </div>
 
               {/* Hero Image */}

@@ -45,9 +45,9 @@ export default function aside() {
       <div className="sticky top-4 space-y-1">
         <section aria-labelledby="who-to-follow-heading">
           <div className="rounded-lg">
-            <div className="flow-root bg-[#fff] rounded-md p-4">
+            <div className="flow-root bg-white rounded-xl p-4 w-[22rem]">
               <div className="flex justify-between items-center">
-                <h1>Intro</h1>
+                <h1 className="text-200 font-600">Intro</h1>
                 <img
                   alt="Centrl"
                   src={edit}
@@ -55,6 +55,36 @@ export default function aside() {
                   loading="lazy"
                 />
               </div>
+
+              <p className="py-4 font-400 text-50">
+                Combining an unparalleled stage presence with the smoothest
+                voice in the industry, Bruno Mars could rightly be called the
+                21st century’s answer to Michael Jackson.
+              </p>
+              <div className="flex space-x-4 items-center">
+                <img
+                  alt="Centrl"
+                  src={diamond}
+                  className="size-4"
+                  loading="lazy"
+                />
+                <p className="text-50 font-400">
+                  100% recommended (20 reviews)
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="trending-heading">
+          <div className="rounded-lg">
+            <div className="mt-6 flow-root">
+              <Calendar
+                onChange={setValue}
+                value={value}
+                prev2Label={null}
+                next2Label={null}
+                className="custom-calendar rounded-xl border-white w-[22rem]"
+              />
 
               <p className="py-4 font-400">
                 Combining an unparalleled stage presence with the smoothest

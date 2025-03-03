@@ -1,12 +1,4 @@
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Popover,
-  PopoverButton,
-  PopoverPanel,
-} from '@headlessui/react';
+import { Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import {
   ChatBubbleLeftEllipsisIcon,
   CodeBracketIcon,
@@ -18,7 +10,7 @@ import {
   PlusIcon,
   ShareIcon,
   StarIcon,
-} from '@heroicons/react/20/solid';
+} from '@heroicons/react/20/solid'
 import {
   ArrowTrendingUpIcon,
   Bars3Icon,
@@ -27,9 +19,9 @@ import {
   HomeIcon,
   UserGroupIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline';
-import { ChevronDownIcon } from '@heroicons/react/16/solid';
-import { useState } from 'react';
+} from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from '@heroicons/react/16/solid'
+import { useState } from "react";
 import Events from './events';
 import event1 from '../../../assets/event1.png';
 import event2 from '../../../assets/event2.png';
@@ -39,18 +31,18 @@ const user = {
   email: 'chelsea.hagon@example.com',
   imageUrl:
     'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
+}
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: true },
   { name: 'Popular', href: '#', icon: FireIcon, current: false },
   { name: 'Communities', href: '#', icon: UserGroupIcon, current: false },
   { name: 'Trending', href: '#', icon: ArrowTrendingUpIcon, current: false },
-];
+]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
-];
+]
 const communities = [
   { name: 'Movies', href: '#' },
   { name: 'Food', href: '#' },
@@ -60,12 +52,12 @@ const communities = [
   { name: 'Dinosaurs', href: '#' },
   { name: 'Talents', href: '#' },
   { name: 'Gaming', href: '#' },
-];
+]
 const tabs = [
   { name: 'Recent', href: '#', current: true },
   { name: 'Most Liked', href: '#', current: false },
   { name: 'Most Answers', href: '#', current: false },
-];
+]
 const questions = [
   {
     id: '81614',
@@ -88,7 +80,7 @@ const questions = [
     `,
   },
   // More questions...
-];
+]
 const whoToFollow = [
   {
     name: 'Leonard Krasner',
@@ -98,7 +90,7 @@ const whoToFollow = [
       'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   // More people...
-];
+]
 const trendingPosts = [
   {
     id: 1,
@@ -111,22 +103,26 @@ const trendingPosts = [
     comments: 291,
   },
   // More posts...
-];
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function Example() {
-  const [activeOption, setActiveOption] = useState('Upcoming');
+
+  
+  const [activeOption, setActiveOption] = useState("Upcoming");
 
   const handleSwitchClick = (option) => {
     setActiveOption(option);
   };
-
+  
   return (
     <>
       <div className="min-h-full">
+       
+
         <div className="py-10">
           <div className="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
             {/* <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
@@ -190,10 +186,7 @@ export default function Example() {
                   />
                 </div>
                 <div className="hidden sm:block">
-                  <nav
-                    aria-label="Tabs"
-                    className="isolate flex divide-x rounded-lg  justify-between"
-                  >
+                  <nav aria-label="Tabs" className="isolate flex divide-x rounded-lg  justify-between">
                     {/* {tabs.map((tab, tabIdx) => (
                       <a
                         key={tab.name}
@@ -218,55 +211,50 @@ export default function Example() {
                     ))} */}
                     <h1>Events</h1>
 
+
                     <div className="flex items-center bg-gray-300 rounded-md">
-                      {['Upcoming', 'Past'].map((option) => (
+                    {["Upcoming", "Past"].map((option) => (
                         <div
-                          key={option}
-                          className={`px-10 flex items-center justify-center h-8 w-16 rounded-md cursor-pointer ${
-                            activeOption === option
-                              ? 'bg-black'
-                              : 'bg-transparent'
-                          }`}
-                          onClick={() => handleSwitchClick(option)}
+                        key={option}
+                        className={`px-10 flex items-center justify-center h-8 w-16 rounded-md cursor-pointer ${
+                            activeOption === option ? "bg-black" : "bg-transparent"
+                        }`}
+                        onClick={() => handleSwitchClick(option)}
                         >
-                          <div
+                        <div
                             className={`text-[14px] ${
-                              activeOption === option
-                                ? 'text-white'
-                                : 'text-black'
+                            activeOption === option ? "text-white" : "text-black"
                             }`}
-                          >
+                        >
                             {option}
-                          </div>
                         </div>
-                      ))}
+                        </div>
+                    ))}
                     </div>
+
+
                   </nav>
                 </div>
               </div>
               <div className="mt-4">
                 {/* <h1 className="">Recent questions</h1> */}
-                <Events />
+                <Events/>
               </div>
             </main>
             <aside className="hidden xl:col-span-4 xl:block">
               <div className="sticky top-4 space-y-1">
                 <section aria-labelledby="who-to-follow-heading">
-                  <div className="rounded-lg bg-white">
-                    <div className="p-6">
-                      <div className=" flow-root">
-                        <img src={event1} alt="" />
+                  <div className="rounded-lg">
+                  <div className=" flow-root">
+                       <img src={event1} alt="" />
                       </div>
-                    </div>
                   </div>
                 </section>
                 <section aria-labelledby="trending-heading">
-                  <div className="rounded-lg bg-white">
-                    <div className="p-6">
-                      <div className="mt-6 flow-root">
-                        <img src={event2} alt="" />
+                  <div className="rounded-lg">
+                  <div className="mt-6 flow-root">
+                      <img src={event2} alt="" />
                       </div>
-                    </div>
                   </div>
                 </section>
               </div>
@@ -275,5 +263,5 @@ export default function Example() {
         </div>
       </div>
     </>
-  );
+  )
 }

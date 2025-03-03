@@ -324,7 +324,7 @@ export default function Example() {
         <body class="h-full overflow-hidden">
         ```
       */}
-      <div className="flex h-full">
+      <div className="flex h-full mt-28">
         
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           
@@ -375,22 +375,22 @@ export default function Example() {
                           <h1 className="truncate text-2xl font-bold text-gray-900">{profile.name}</h1>
                         </div> */}
                         <div className="mt-12 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                          <button
+                          <p
                             type="button"
-                            className="inline-flex justify-center gap-x-1.5 rounded-md bg-[#000000] px-3 py-2 text-sm font-semibold text-[#fff] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
+                            className="inline-flex justify-center items-center gap-x-1.5 rounded-[9px] bg-[#000000] px-5 py-0 text-sm font-semibold text-[#fff] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
                           >
-                            Message
-                          </button>
+                            Edit Profile
+                          </p>
                           <button
                             type="button"
-                            className="inline-flex justify-center items-center gap-x-1.5 rounded-md bg-[#FFFFFF] px-3 py-2 text-sm font-semibold text-[#000] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
+                            className="inline-flex justify-center items-center gap-x-1.5 rounded-md bg-[#FFFFFF] px-5 py-1 text-sm font-semibold text-[#000] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
                           >
                             <img alt="Centrl" src={Star} className="size-4" loading="lazy" />
                             Rate
                           </button>
                           <button
                             type="button"
-                            className="inline-flex justify-center items-center gap-x-1.5 rounded-md bg-[#FFFFFF] px-3 py-2 text-sm font-semibold text-[#000] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
+                            className="inline-flex justify-center items-center gap-x-1.5 rounded-md bg-[#FFFFFF] px-2 py-2 text-sm font-semibold text-[#000] ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
                           >
                             <img alt="Centrl" src={Share} className="size-4" loading="lazy" />
                           </button>

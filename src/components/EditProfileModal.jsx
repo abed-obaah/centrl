@@ -6,7 +6,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 ">
       {/* Backdrop with Blur */}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-md"
@@ -44,7 +44,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Scrollable Form (with hidden scrollbar) */}
-        <div className="px-4 flex flex-col space-y-4 h-[300px] overflow-y-auto scrollbar-hide">
+        <div className="px-6 flex flex-col space-y-4 h-[300px] overflow-y-auto scrollbar-hide">
           <div>
             <label
               htmlFor="first-name"
