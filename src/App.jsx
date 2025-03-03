@@ -38,6 +38,7 @@ import Settings from './pages/Settings';
 
 // customize page
 import HomePage from './pages/customize/home'
+import Overview from './pages/customize/overview'
 
 // admin pages
 import Dashboard from './pages/admin/Dashboard';
@@ -92,6 +93,7 @@ const router = createBrowserRouter(
       <Route element={<CustomizeLayout/>}>
            <Route path="/customize" element={<HomePage/>} />
            <Route path="/guests" element={<Guests/>} />
+           <Route path="/overview" element={<Overview/>} />
       </Route>
 
       <Route path="/sign-in" element={<WaitListLayout />} />

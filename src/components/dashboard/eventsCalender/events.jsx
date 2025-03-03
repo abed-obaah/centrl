@@ -38,24 +38,6 @@ const events = [
     status: "Going",
   },
   {
-    id: 2,
-    time: "Competition",
-    title: "Even in the Capital",
-    location: "Even In The Day & 2 more",
-    region: "",
-    votes: "500 votes",
-    image: love,
-    attendees: [
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    ],
-    status: "Going",
-  },
-  {
     id: 3,
     time: "10 - 11:00AM",
     title: "City Lights",
@@ -111,7 +93,7 @@ const EventCard = ({ event, index, isHighlighted, bgImage, hideStatusIcon }) => 
       </div>
 
       {/* Status Icon (Hidden for specific cards) */}
-      {!hideStatusIcon && <img src={statusIcon} alt="status" className="w-5 h-5 z-10" />}
+      {!hideStatusIcon && <img src={statusIcon} alt="status" className="w-6 h-5 z-10" />}
     </div>
   );
 };
@@ -129,7 +111,7 @@ export default function Example() {
             <span className="font-medium text-gray-900">{activityItem.person.name}</span>
             <div className="flex flex-col items-center space-y-4 p-6">
               {events.slice(0, activityItem.person.name === 'Yesterday Saturday' ? 3 : 2).map((event, index) => (
-                   <Link to="/competition" key={event.id} className="w-full"
+                   <Link to="" key={event.id} className="w-full"
                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                    <EventCard
                      event={event}
@@ -138,7 +120,7 @@ export default function Example() {
                        (activityItem.person.name === "Yesterday Saturday" && index === 1) ||
                        (activityItem.person.name === "28th, Nov." && index === 0)
                      }
-                     bgImage={activityItem.person.name === "28th, Nov." && index === 0 ? cardBgImage2 : cardBgImage}
+                     bgImage={activityItem.person.name === "28th, Nov." && index === 0 ?"" : cardBgImage}
                      hideStatusIcon={
                        (activityItem.person.name === "Yesterday Saturday" && index === 1) ||
                        (activityItem.person.name === "28th, Nov." && index === 0)

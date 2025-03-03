@@ -6,39 +6,34 @@ const EditProfileModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 ">
       {/* Backdrop with Blur */}
       <div className="fixed inset-0 bg-black/50 backdrop-blur-md" onClick={onClose}></div>
 
       {/* Modal Content */}
-      <div className="bg-white rounded-xl shadow-lg z-10 w-[400px] max-h-[80vh] overflow-hidden">
-        <div className="w-full flex justify-between items-center border-b border-[#00000040] px-2 py-2">
-          <h2 className="text-xl font-bold">Edit Profile</h2>
+      <div className="bg-white rounded-xl shadow-lg z-10 w-[450px] max-h-[80vh] overflow-hidden">
+        <div className="w-full flex justify-between items-center border-b border-[#00000040] px-3 py-2">
+          <h2 className="text-50 font-600">Edit Profile</h2>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-200">
             <X size={24} />
           </button>
         </div>
 
         {/* Profile Image */}
-       <div className="flex items-center justify-between my-4 py-2 ml-10 border border-[#00000040] px-4 rounded-l-full rounded-r-[185.25rem] w-[350px]">
+       <div className="flex items-center justify-between my-4 py-2 ml-10 border border-[#00000040] px-2 rounded-l-full rounded-r-[185.25rem] w-[350px]">
           <img 
             src={Avatar}
             alt="Profile" 
             className="w-20 h-20 rounded-full object-cover"
           />
-          {/* <img
-                                    alt=""
-                                    src={Avatar}
-                                    className="size-24 rounded-full ring-4 ring-white sm:size-32"
-                                  /> */}
-          <p className='font-600'>Profile photo</p>
+          <p className='font-600 text-50'>Profile photo</p>
           <button className="mt-2 px-4 py-1 bg-[#036CFF] text-[#fff] rounded-lg">Upload</button>
         </div>
 
         {/* Scrollable Form (with hidden scrollbar) */}
-        <div className="px-4 flex flex-col space-y-4 h-[300px] overflow-y-auto scrollbar-hide">
+        <div className="px-6 flex flex-col space-y-4 h-[300px] overflow-y-auto scrollbar-hide">
           <div>
-            <label htmlFor="first-name" className="block text-sm font-medium text-[#000]/30 mb-1">
+            <label htmlFor="first-name" className="block text-50 font-500 text-[#000]/30 mb-1">
               First name
             </label>
             <input
@@ -51,7 +46,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label htmlFor="last-name" className="block text-sm font-medium text-[#000]/30 mb-1">
+            <label htmlFor="last-name" className="block text-50 font-500 text-[#000]/30 mb-1">
               Last name
             </label>
             <input
@@ -64,7 +59,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label htmlFor="additional-name" className="block text-sm font-medium text-[#000]/30 mb-1">
+            <label htmlFor="additional-name" className="block text-50 font-500 text-[#000]/30 mb-1">
               Additional name
             </label>
             <input
@@ -77,7 +72,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label htmlFor="tagline" className="block text-sm font-medium text-[#000]/30 mb-1">
+            <label htmlFor="tagline" className="block text-50 font-500 text-[#000]/30 mb-1">
               Tagline
             </label>
             <input
