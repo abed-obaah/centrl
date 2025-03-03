@@ -31,7 +31,7 @@ const Competition = () => {
             className="w-40 h-40"
           />
           <div>
-            <h1 className="text-[27px] font-800">Even In The Day Brand Competition</h1>
+            <h1 className="text-[27px] font-800">Evens In The Day Brand Competition</h1>
             <h2 className="text-[#000000] text-[15px]">Explore popular events near you, browse by category, or <br/> check out some of the great community calendars.</h2>
             <div className="w-56 py-4 px-2 rounded-lg bg-[#fff] flex justify-center items-center mt-4">
             <p className="text-[25px] p font-semibold bg-gradient-to-r from-[#71AC43] via-[#0DEEDC] via-[#56D2FF] to-[#FF7F7F] bg-clip-text text-transparent inline-block">
