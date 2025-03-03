@@ -90,10 +90,10 @@ export default function Example({ setModalVisible,  }) {
     <Popover className="fixed top-0 z-[500] w-full backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50  supports-[backdrop-filter]:bg-white/3">
     <div className="flex items-center justify-between px-20 py-4 md:justify-start md:space-x-10">
       <div>
-        <a href="#" className="flex">
+        <Link to={"/dashboard"} className="flex">
           <span className="sr-only">Your Company</span>
           <img alt="Centrl" src={Logo} className="size-7" loading="lazy" />
-        </a>
+        </Link>
       </div>
       <div className="-my-2 -mr-2 md:hidden">
         <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
@@ -130,10 +130,10 @@ export default function Example({ setModalVisible,  }) {
               </div>
             </PopoverPanel>
           </Popover>
-          <Link to={'/event'}>
+          <Link to={'#'}>
                   <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Events</a>
           </Link>
-          <Link to={'/discover'}>
+          <Link to={'/dashboard/discover'}>
                <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Discover</a>
           </Link>
          

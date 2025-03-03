@@ -220,7 +220,10 @@ export default function block() {
                                 )}
                             </div>
                             <MoreOptions/>
-                            <button className='bg-black text-white w-44 py-3.5 rounded-xl mt-5'>Create Event</button>
+                            <Link to={'/event:id'}>
+                             <button className='bg-black text-white w-44 py-3.5 rounded-xl mt-5'>Create Event</button>
+                            </Link>
+                            
                         </div>
                             
                     </div>

@@ -14,6 +14,7 @@ import {
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import boluvard from "../../../assets/boluvard.png"
 import love from "../../../assets/love.png";
+import { Link } from 'react-router-dom';
 
 
 const activity = [
@@ -100,9 +101,11 @@ export default function Example() {
 
   return (
     <>
+    <Link to={'/events'}></Link>
       <ul role="list" className="space-y-6">
         {activity.map((activityItem, activityItemIdx) => (
-          <li key={activityItem.id} className="relative flex gap-x-4">
+          <Link to={'/event'}>
+  <li key={activityItem.id} className="relative flex gap-x-4">
             <div
               className={classNames(
                 activityItemIdx === activity.length - 1 ? 'h-6' : '-bottom-6',
@@ -154,6 +157,8 @@ export default function Example() {
               </>
             )}
           </li>
+          </Link>
+        
         ))}
       </ul>
     </>

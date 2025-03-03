@@ -324,7 +324,7 @@ export default function Example() {
         <body class="h-full overflow-hidden">
         ```
       */}
-      <div className="flex h-full">
+      <div className="flex h-full mt-28">
         
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           

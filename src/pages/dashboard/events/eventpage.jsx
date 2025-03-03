@@ -11,6 +11,7 @@ import face from '../../../assets/face.png'
 import wallet from '../../../assets/wallet.png'
 import Verified from '../../../assets/verified-small.png'
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const EventPage = () => {
     const videoRef = useRef(null);
@@ -111,7 +112,10 @@ const EventPage = () => {
                 <div className="rounded-lg">
                   <div className="flex justify-between items-center bg-neutral px-8 py-2 mx-auto rounded-tl-[23px] rounded-tr-[23px]" >
                     <p className="font-600 text-100">Registration</p>
-                    <button className="text-white text-50 font-500 bg-subColor p-2 rounded-lg">Manage Event</button>
+                    <Link to={'/customize'}>
+                     <button className="text-white text-50 font-500 bg-subColor p-2 rounded-lg">Manage Event</button>
+                    </Link>
+                   
                   </div>
                   <div className="flex items-center mt-5 px-8 space-x-3">
                     <img src={face} alt="Event" className="w-8 h-8 rounded-full object-cover" />

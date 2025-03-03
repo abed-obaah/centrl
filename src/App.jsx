@@ -14,6 +14,7 @@ import AdminLoginLayout from './layouts/AdminLoginLayout';
 import AdminLayout from './layouts/AdminLayout';
 import AdminThemeLayout from './layouts/AdminThemeLayout';
 import CustomizeLayout from './layouts/CustomizeLayout';
+import SignInLayout from './layouts/SignInLayout';
 
 // PAGES
 
@@ -23,6 +24,7 @@ import Calenders from './pages/Calenders';
 import Pricing from './pages/Pricing';
 import About from './pages/About';
 import Discover from './pages/Discover';
+import Discovered from './pages/dashboard/discover';
 import Privacy from './pages/Privacy';
 import TrendingDetails from './pages/TrendingDetails';
 
@@ -84,6 +86,7 @@ const router = createBrowserRouter(
         <Route path="/settings" element={<Settings />} />
         <Route path="/event" element={<Event />} />
         <Route path="/event:id" element={<EventPage />} />
+        <Route path="/dashboard/discover" element={<Discovered />} />
       </Route>
 
       <Route element={<CustomizeLayout/>}>
@@ -92,6 +95,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="/sign-in" element={<WaitListLayout />} />
+      <Route path="/sign-up" element={<SignInLayout />} />
 
       {/* Admin Login Layout and Dashboard layout */}
       <Route path="/admin" element={<AdminLoginLayout />} />

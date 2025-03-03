@@ -12,6 +12,7 @@ import { ChevronDown } from 'lucide-react';
 import MoreOptions from '../../components/MoreOptions'
 import SideModal from "../../components/SidebarModal";
 import DescriptionModal from '../../components/DescriptionModal';
+import { Link } from 'react-router-dom';
 
 export default function block() {
     const [role, setRole] = useState('');
@@ -30,6 +31,28 @@ export default function block() {
         'Student/Scholar',
         'Other',
       ];
+
+
+      const [bgImage, setBgImage] = useState(bgGradient);
+
+      const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const imageUrl = URL.createObjectURL(file);
+          setBgImage(imageUrl);
+        }
+      };
+
+      const [videoName, setVideoName] = useState("Upload Video");
+
+  const handleVideoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setVideoName(file.name);
+    }
+  };
+
+
   return (
     <>
         {/* <Header/> */}
@@ -55,25 +78,48 @@ export default function block() {
                                 </div>
                                     
                            </div>
-                           <div  className="mt-5 flex items-center justify-between w-full rounded-md bg-white px-3 py-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                <div className=''>
-                                    <p>Upload Video</p>
-                                </div>
-                             <img src={Upload}  alt="" className="w-8 h-10 object-contain"  />
-                           </div>
+                           <label
+      htmlFor="videoUpload"
+      className="cursor-pointer mt-5 flex items-center justify-between w-full rounded-md bg-white px-3 py-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+    >
+      <div>
+        <p className="truncate">{videoName}</p>
+      </div>
+
+      <img src={Upload} alt="Upload" className="w-8 h-10 object-contain" />
+
+      <input
+        id="videoUpload"
+        type="file"
+        accept="video/*"
+        onChange={handleVideoUpload}
+        className="hidden"
+      />
+    </label>
                            <div
                             style={{
-                                backgroundImage: `url(${bgGradient})`,
+                                backgroundImage: `url(${bgImage})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                             }}
-                            className="mt-5 flex items-end justify-between w-full h-64 rounded-xl px-3 py-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                            className="relative mt-5 flex items-end justify-between w-full h-64 rounded-xl px-3 py-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                             >
                             <div className="items-end mt-10">
-                                <p className='text-md font-semibold'>Plus +</p>
-                                <p className='mt-10'></p>
+                                <p className="text-md font-semibold">Plus +</p>
+                                <p className="mt-10"></p>
                             </div>
-                            <img src={Upload} alt="" className="w-8 h-10 object-contain" />
+
+                            {/* Upload button */}
+                            <label htmlFor="imageUpload" className="cursor-pointer">
+                                <img src={Upload} alt="Upload" className="w-8 h-10 object-contain" />
+                            </label>
+                            <input
+                                id="imageUpload"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                className="hidden"
+                            />
                             </div>
 
 
@@ -219,7 +265,10 @@ export default function block() {
                                 )}
                             </div>
                             <MoreOptions/>
-                            <button className='bg-[#FF6F02] text-white w-40 py-3.5 rounded-xl mt-5'>Create Event</button>
+                            <Link to={'/event:id'}>
+                                  <button className='bg-[#FF6F02] text-white w-40 py-3.5 rounded-xl mt-5'>Create Event</button>
+                            </Link>
+                            
                         </div>
                             
                     </div>
