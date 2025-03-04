@@ -35,9 +35,9 @@ const Calendar = ({ onSelectDate }) => {
   };
 
   return (
-    <div className="overflow-x-hidden mb-8 md:mb-0 h-fit bg-card rounded-lg p-4 shadow-sm animate-fade-in">
+    <div className="mb-8 md:mb-0 h-fit bg-card rounded-xl p-4 shadow-sm max-w-[320px] md:mx-auto">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-300 font-600">
+        <h2 className="text-200 font-600">
           {format(currentMonth, 'MMMM yyyy')}
         </h2>
         <div className="flex space-x-1">

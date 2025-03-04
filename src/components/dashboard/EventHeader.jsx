@@ -1,6 +1,6 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import logo from '../../assets/logo.png';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import EventNavbar from './EventNavbar';
 import { Search } from 'lucide-react';
@@ -12,7 +12,7 @@ const EventHeader = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const modalRef = useRef(null);
+  // const modalRef = useRef(null);
 
   const userData = {
     name: 'Tim Cook',
@@ -29,23 +29,23 @@ const EventHeader = () => {
     <>
       <header className="fixed top-0 z-[500] w-full backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50  supports-[backdrop-filter]:bg-white/3">
         <div className="flex items-center justify-between p-4 max-w-[1290px] 2xl:max-w-[1500px] mx-auto">
-          <div className="flex items-center gap-20">
+          <div className="flex items-center gap-20 xl:gap-32 2xl:gap-[12rem]">
             {/* Logo */}
-            <a href="/">
+            <Link to="/">
               <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
-            </a>
+            </Link>
 
             {/* Desktop Nav */}
             <ul className="hidden md-plus:flex md-plus:gap-6">
               <li>
                 <Link
-                  to={'/pricing'}
+                  to={'/events'}
                   className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
                   onClick={() =>
                     window.scrollTo({ top: 0, behavior: 'smooth' })
                   }
                 >
-                  Pricing
+                  Events
                 </Link>
               </li>
 
@@ -79,12 +79,9 @@ const EventHeader = () => {
                   color="#000"
                   className="cursor-pointer"
                 />
-                <a
-                  href="#"
-                  className="hidden md:block font-500 text-50 text-foreground"
-                >
+                <span className="hidden md:block font-500 text-50 text-foreground">
                   5:33 PM GMT+1
-                </a>
+                </span>
               </div>
               <div className="flex items-center gap-4 ml-10">
                 <Notification size="24" color="#000" />

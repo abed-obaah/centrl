@@ -47,21 +47,21 @@ const cards = [
     name: 'Parties',
     description: '800 Events',
     imgUrl: PartiesImg,
-    path: '/parties/1',
+    path: '/category/6',
   },
   {
     id: 7,
     name: 'Others',
     description: '800 Events',
     imgUrl: OthersImg,
-    path: '/parties/2',
+    path: '/category/7',
   },
   {
     id: 8,
     name: 'Concerts',
     description: '800 Events',
     imgUrl: ConcertImg,
-    path: '/parties/3',
+    path: '/category/8',
   },
 ];
 
@@ -77,6 +77,7 @@ const Category = () => {
           <Link
             to={card.path}
             key={card.id}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="inline-block w-full mb-4 md:mb-0"
           >
             <div key={card.id} className="bg-white rounded-2xl  p-6 ">
