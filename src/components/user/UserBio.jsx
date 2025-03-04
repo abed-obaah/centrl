@@ -9,10 +9,10 @@ const UserBio = ({ profile }) => {
           <PencilIcon className="h-4 w-4" />
         </button>
       </div>
-      <p className="text-sm text-gray-700 mb-4">{profile.intro}</p>
+      <p className="text-50 leading-[1.6] mb-4">{profile.intro}</p>
       <div className="flex gap-2">
         <img src={DiamondIcon} alt="diamond" />
-        <p>{profile.rating}</p>
+        <p className="text-50">{profile.rating}</p>
       </div>
     </div>
   );

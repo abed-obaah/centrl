@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { SearchNormal1 } from 'iconsax-react';
 import Rave from '../assets/rave.png';
 import skating from '../assets/skating.png';
@@ -6,19 +5,18 @@ import pride from '../assets/prideland.png';
 import prides from '../assets/groove.png';
 import { useNavigate } from 'react-router-dom';
 
-const Modal = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const Modal = ({ modalVisible, setModalVisible }) => {
+  const navigate = useNavigate();
 
   if (!modalVisible) return null;
-  const navigate = useNavigate();
 
   return (
     <div className="fixed z-[600] inset-0 flex items-center justify-center">
       <div
-        className="fixed  inset-0 z-50 bg-background/80 backdrop-blur-lg"
+        className="fixed inset-0 z-50 bg-background/80 backdrop-blur-lg"
         onClick={() => setModalVisible(false)}
       />
-      <div className="bg-background z-[800] shadow-lg w-full max-w-lg">
+      <div className="bg-background z-[800] shadow-lg w-full max-w-lg rounded-lg overflow-hidden">
         {/* Search Bar */}
         <div className="flex items-center bg-white px-4 py-5">
           <input
@@ -35,7 +33,7 @@ const Modal = () => {
         </h2>
 
         {/* Event List */}
-        <div className="mt-3 space-y-3 px-6">
+        <div className="mt-3 space-y-3 px-6 max-h-[60vh] overflow-y-auto pb-4">
           {[
             {
               name: 'Rave',
@@ -71,13 +69,16 @@ const Modal = () => {
           ].map((event, index) => (
             <div
               key={index}
-              className="flex items-center gap-3"
-              onClick={() => navigate(event.screen)}
+              className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
+              onClick={() => {
+                navigate(event.screen);
+                setModalVisible(false);
+              }}
             >
               <img
-                src={event.img}
+                src={event.img || '/placeholder.svg'}
                 alt={event.name}
-                className="w-10 h-10 rounded-lg"
+                className="w-10 h-10 rounded-lg object-cover"
               />
               <div>
                 <p className="text-gray-900 font-medium">{event.name}</p>
@@ -90,12 +91,14 @@ const Modal = () => {
         </div>
 
         {/* Close Button */}
-        <button
-          onClick={() => setModalVisible(false)}
-          className="mt-4 w-full bg-gray-200 text-gray-600 p-2 rounded-lg hover:bg-gray-300"
-        >
-          Close
-        </button>
+        <div className="px-6 pb-6 pt-2">
+          <button
+            onClick={() => setModalVisible(false)}
+            className="w-full bg-gray-200 text-gray-600 p-2 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

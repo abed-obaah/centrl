@@ -70,7 +70,7 @@ const EventHeader = () => {
               toggleNavClick={toggleNavClick}
             />
 
-            <div className="flex items-center md:ml-12">
+            <div className="flex items-center md:gap-8 md:ml-12">
               <div className="flex items-center gap-4">
                 <AddSquare size="24" color="#000" />
                 <Search
@@ -92,7 +92,7 @@ const EventHeader = () => {
                   <img
                     alt={userData.name}
                     src={userData.imageUrl}
-                    className="size-10 rounded-full"
+                    className="size-9 rounded-full"
                   />
                   {isOpen && (
                     <ProfileModal

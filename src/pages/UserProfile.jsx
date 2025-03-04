@@ -100,134 +100,139 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="mt-24">
-        <div className="container max-w-[1000px] mx-auto">
-          {/* Profile header */}
-          <div className="mb-8">
-            <div className="w-full relative">
-              <div className="w-full relative group">
-                <img
-                  src={bannerImage}
-                  alt="Profile cover"
-                  className="h-32 w-full object-cover lg:h-[291px] rounded-xl cursor-pointer"
-                  onClick={triggerBannerImageUpload}
-                />
-
-                <input
-                  type="file"
-                  ref={bannerInputRef}
-                  onChange={handleBannerImageChange}
-                  accept="image/*"
-                  className="hidden"
-                />
-              </div>
-
-              <button
-                className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md"
+      <div className="mt-24 mb-20">
+        <div className="container">
+          <div className="max-w-[1100px] mx-auto relative">
+            <div className="relative group">
+              <img
+                src={bannerImage}
+                alt="Profile cover"
+                className="h-32 w-full object-cover lg:h-[291px] rounded-xl cursor-pointer"
                 onClick={triggerBannerImageUpload}
-              >
-                <PencilIcon className="h-4 w-4 text-gray-600" />
-              </button>
+              />
+
+              <input
+                type="file"
+                ref={bannerInputRef}
+                onChange={handleBannerImageChange}
+                accept="image/*"
+                className="hidden"
+              />
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between -mt-12 sm:-mt-16 px-4 sm:px-0">
-              <div className="flex items-end space-x-5">
-                <div className="relative group">
-                  <img
-                    src={profileImage}
-                    alt="Profile"
-                    className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 cursor-pointer"
-                    onClick={triggerProfileImageUpload}
-                  />
+            <button
+              className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md"
+              onClick={triggerBannerImageUpload}
+            >
+              <PencilIcon className="h-4 w-4 text-gray-600" />
+            </button>
+          </div>
+          {/* Profile header */}
+          <div className="max-w-[1000px] mx-auto">
+            <div className="mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between -mt-12 sm:-mt-16 px-4 sm:px-0">
+                <div className="flex items-end space-x-5">
+                  <div className="relative group">
+                    <img
+                      src={profileImage}
+                      alt="Profile"
+                      className="h-24 w-24 rounded-full ring-4 ring-background sm:h-32 sm:w-32 cursor-pointer"
+                      onClick={triggerProfileImageUpload}
+                    />
 
-                  <input
-                    type="file"
-                    ref={profileInputRef}
-                    onChange={handleProfileImageChange}
-                    accept="image/*"
-                    className="hidden"
-                  />
+                    <input
+                      type="file"
+                      ref={profileInputRef}
+                      onChange={handleProfileImageChange}
+                      accept="image/*"
+                      className="hidden"
+                    />
+                    <button
+                      className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md"
+                      onClick={triggerProfileImageUpload}
+                    >
+                      <PencilIcon className="h-4 w-4 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="mt-4 sm:mt-0 flex space-x-2">
                   <button
-                    className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md"
-                    onClick={triggerProfileImageUpload}
+                    type="button"
+                    onClick={() => setIsModalOpen(true)}
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-black rounded-lg"
                   >
-                    <PencilIcon className="h-4 w-4 text-gray-600" />
+                    Edit Profile
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex items-center px-4 py-2 text-black bg-white  rounded-lg"
+                  >
+                    <img src={Star} alt="Rate" className="h-4 w-4 mr-2" />
+                    Rate
+                  </button>
+                  <Button
+                    className="bg-white rounded-2xl p-2"
+                    onClick={handleShare}
+                  >
+                    <img src={Share} className="w-6 h-6 object-contain" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <h2 className="md:text-400 font-700 text-black">
+                  {profile.name}
+                </h2>
+                <p className="text-sm text-black">{profile.stats}</p>
+              </div>
+
+              <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex gap-4">
+                  {Object.entries(profile.social).map(([key, icon]) => (
+                    <img key={key} src={icon} alt={key} className="size-5" />
+                  ))}
+                </div>
+
+                <div className="mt-4 sm:mt-0 flex space-x-6">
+                  <button
+                    className={`font-600 ${
+                      activeTab === 'calendar'
+                        ? 'text-black'
+                        : 'text-foreground'
+                    }`}
+                    onClick={() => setActiveTab('calendar')}
+                  >
+                    Calendar
+                  </button>
+                  <button
+                    className={`font-600 ${
+                      activeTab === 'following'
+                        ? 'text-black'
+                        : 'text-foreground'
+                    }`}
+                    onClick={() => setActiveTab('following')}
+                  >
+                    Following
                   </button>
                 </div>
               </div>
 
-              <div className="mt-4 sm:mt-0 flex space-x-2">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(true)}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-black rounded-lg"
-                >
-                  Edit Profile
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex items-center px-4 py-2 text-black bg-white  rounded-lg"
-                >
-                  <img src={Star} alt="Rate" className="h-4 w-4 mr-2" />
-                  Rate
-                </button>
-                <Button
-                  className="bg-white rounded-2xl p-2"
-                  onClick={handleShare}
-                >
-                  <img src={Share} className="w-6 h-6 object-contain" />
-                </Button>
-              </div>
+              <hr className="text-[#000]/15 mt-16" />
             </div>
 
-            <div className="mt-6">
-              <h2 className="md:text-400 font-700 text-black">
-                {profile.name}
-              </h2>
-              <p className="text-sm text-black">{profile.stats}</p>
-            </div>
+            {activeTab === 'calendar' && (
+              <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-6">
+                <div className="md:sticky md:top-28 md:self-start">
+                  <UserBio profile={profile} />
 
-            <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex gap-4">
-                {Object.entries(profile.social).map(([key, icon]) => (
-                  <img key={key} src={icon} alt={key} className="size-5" />
-                ))}
+                  <Calendar onSelectDate={handleDateSelect} />
+                </div>
+
+                <TechEvents selectedDate={selectedDate} />
               </div>
-
-              <div className="mt-4 sm:mt-0 flex space-x-6">
-                <button
-                  className={`font-600 ${
-                    activeTab === 'calendar' ? 'text-black' : 'text-foreground'
-                  }`}
-                  onClick={() => setActiveTab('calendar')}
-                >
-                  Calendar
-                </button>
-                <button
-                  className={`font-600 ${
-                    activeTab === 'following' ? 'text-black' : 'text-foreground'
-                  }`}
-                  onClick={() => setActiveTab('following')}
-                >
-                  Following
-                </button>
-              </div>
-            </div>
-
-            <hr className="text-[#000]/15 mt-16" />
+            )}
           </div>
-
-          {activeTab === 'calendar' && (
-            <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-6">
-              <div className="md:sticky md:top-28 md:self-start">
-                <UserBio profile={profile} />
-
-                <Calendar onSelectDate={handleDateSelect} />
-              </div>
-
-              <TechEvents selectedDate={selectedDate} />
-            </div>
-          )}
         </div>
 
         {/* Modal */}
