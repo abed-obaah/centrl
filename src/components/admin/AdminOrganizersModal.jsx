@@ -55,7 +55,7 @@ const AdminOrganizersModal = ({ isOpen, onClose }) => {
           className="fixed inset-0 backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50"
           onClick={onClose}
         />
-        <div className="relative w-full max-w-lg rounded-xl bg-background p-6 shadow-lg">
+        <div className="relative  w-full max-w-lg rounded-xl bg-background p-6 shadow-lg">
           <h2 className="mb-4 text-200 font-700">Top-performing Organizers</h2>
           <div className="space-y-4">
             {organizers.map((organizer) => (

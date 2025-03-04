@@ -3,7 +3,6 @@ import { Search } from 'lucide-react';
 import boluvard from '../../../assets/boluvard.png';
 import love from '../../../assets/love.png';
 
-// Define activity data
 const activity = [
   {
     id: 1,
@@ -21,7 +20,6 @@ const activity = [
   },
 ];
 
-// Define events data
 const events = [
   {
     id: 1,
@@ -59,11 +57,11 @@ const events = [
 
 const EventCard = ({ event }) => {
   return (
-    <div className="flex items-start gap-4 p-4 bg-white rounded-xl">
+    <div className="md:flex md:items-start md:gap-4 p-4 bg-white rounded-xl">
       <img
         src={event.image}
         alt={event.title}
-        className="size-[130px] rounded-lg object-cover"
+        className="size-[80px] mb-2 md:mb-0 md:size-[130px] rounded-lg object-cover"
       />
 
       <div className="flex-1">
@@ -73,7 +71,7 @@ const EventCard = ({ event }) => {
         <p className="text-100 text-foreground mb-2">{event.region}</p>
 
         <div>
-          <div className="flex -space-x-2">
+          <div className="flex -space-x-2 mb-4 md:mb-0">
             {event.attendees.slice(0, 4).map((attendee, index) => (
               <div
                 key={index}
@@ -90,12 +88,9 @@ const EventCard = ({ event }) => {
         </div>
       </div>
 
-      <div className="ml-2">
-        {/* Search Input */}
-        <span className="text-50 text-foreground/50 px-4 py-1 rounded-xl border border-[#000]/15 bg-[#f9f9f9]">
-          {event.status}
-        </span>
-      </div>
+      <span className="text-50 text-foreground/50 px-4 py-1 rounded-xl border border-[#000]/15 bg-[#f9f9f9]">
+        {event.status}
+      </span>
     </div>
   );
 };
@@ -107,19 +102,20 @@ const DayEvents = ({ day, dayEvents, isLastDay }) => {
       <div className="relative flex items-center mb-2">
         <div className="relative">
           {/* Timeline bullet */}
-          <div className="absolute left-0 w-4 h-4 bg-black rounded-full z-10"></div>
+          <div className="absolute left-0 top-[-1rem] w-4 h-4 bg-black rounded-full z-10"></div>
 
           {/* Vertical dashed line */}
           {!isLastDay && (
-            <div className="absolute h-[800px]  left-[.4rem] top-4 w-0 border-l-2 border-dashed border-foreground"></div>
+            <div className="absolute h-[850px]  left-[.4rem] top-[-1rem] w-0 border-l-2 border-dashed border-foreground"></div>
           )}
         </div>
 
         {/* Day label */}
-        <h3 className="text-200 font-500 text-black ml-6">{day.person.name}</h3>
+        <h3 className="text-200 font-500 text-black ml-6 mb-4">
+          {day.person.name}
+        </h3>
       </div>
 
-      {/* Events list with proper left padding for alignment */}
       <div className="space-y-3 ml-6 pl-2">
         {dayEvents.map((event, index) => (
           <EventCard
@@ -133,7 +129,7 @@ const DayEvents = ({ day, dayEvents, isLastDay }) => {
   );
 };
 
-const TechEvents = ({ selectedDate = new Date() }) => {
+const TechEvents = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -169,7 +165,7 @@ const TechEvents = ({ selectedDate = new Date() }) => {
                 <input
                   type="text"
                   placeholder="Search events..."
-                  className="p-2 border border-border rounded-md bg-card shadow-sm"
+                  className="p-2 border w-[250px] border-[#000]/15 rounded-md bg-card focus:outline-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus

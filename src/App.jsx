@@ -33,20 +33,19 @@ import UserProfile from './pages/UserProfile';
 import UserProfiles from './pages/[id]';
 import Competition from './pages/Competition';
 import CategoryDetails from './pages/CategoryDetails';
-import Partiesid from './pages/Parties[id]';
 import Settings from './pages/Settings';
 
 // customize page
-import HomePage from './pages/customize/home'
-import Overview from './pages/customize/overview'
+import HomePage from './pages/customize/home';
+import Overview from './pages/customize/overview';
 
 // admin pages
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/users';
 import AdminEventManagement from './pages/admin/event-management';
-import Block from "./pages/dashboard/block";
-import Event from "./pages/dashboard/events/eventpage";
-import EventPage from "./pages/dashboard/events/eventpage7";
+import Block from './pages/dashboard/block';
+import Event from './pages/dashboard/events/eventpage';
+import EventPage from './pages/dashboard/events/eventpage7';
 // import Waitlist from './pages/Waitlist';
 
 // import Signin from './components/auth/signin';
@@ -83,17 +82,16 @@ const router = createBrowserRouter(
         <Route path="/[id]" element={<UserProfiles />} />
         <Route path="/competition" element={<Competition />} />
         <Route path="/category/:id" element={<CategoryDetails />} />
-        <Route path="/parties[id]" element={<Partiesid />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/event" element={<Event />} />
         <Route path="/event:id" element={<EventPage />} />
         <Route path="/dashboard/discover" element={<Discovered />} />
       </Route>
 
-      <Route element={<CustomizeLayout/>}>
-           <Route path="/customize" element={<HomePage/>} />
-           <Route path="/guests" element={<Guests/>} />
-           <Route path="/overview" element={<Overview/>} />
+      <Route element={<CustomizeLayout />}>
+        <Route path="/customize" element={<HomePage />} />
+        <Route path="/guests" element={<Guests />} />
+        <Route path="/overview" element={<Overview />} />
       </Route>
 
       <Route path="/sign-in" element={<WaitListLayout />} />
