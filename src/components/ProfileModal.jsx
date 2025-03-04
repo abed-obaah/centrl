@@ -9,7 +9,7 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
         <img
           src={user.imageUrl}
           alt={user.name}
-          className="w-10 h-10 rounded-full"
+          className="size-9 rounded-full"
         />
         <div>
           <p className="text-[15px] font-500">{user.name}</p>
