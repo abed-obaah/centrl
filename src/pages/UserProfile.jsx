@@ -15,11 +15,18 @@ import UserBio from '../components/user/UserBio';
 import { Button } from '@headlessui/react';
 import EditProfileModal from '../components/user/EditProfileModal';
 
+import Num from '../assets/Future100.png';
+import Rave from '../assets/rave.png';
+import Even from '../assets/123.png';
+import Chilbilz from '../assets/873.png';
+import Techbro from '../assets/tech.png';
+import David from '../assets/david.png';
+import Followers from '../components/user/Followers';
+
 const profile = {
   name: 'Andy Mineo',
   stats: '26K likes • 165K followers',
-  intro:
-    "Combining an unparalleled stage presence with the smoothest voice in the industry, Bruno Mars could rightly be called the 21st century's answer to Michael Jackson.",
+  bio: "Combining an unparalleled stage presence with the smoothest voice in the industry, Bruno Mars could rightly be called the 21st century's answer to Michael Jackson.",
   rating: '100% recommended (20 reviews)',
   imageUrl: Avatar,
   coverImageUrl: userBg,
@@ -30,6 +37,56 @@ const profile = {
     linkedin: linkedin,
   },
 };
+
+const followers = [
+  {
+    id: 1,
+    name: 'Rave',
+    image: Rave,
+    count: '95k',
+    isSubscribed: true,
+  },
+
+  {
+    id: 2,
+    name: 'David',
+    image: David,
+    count: '95k',
+    isSubscribed: true,
+  },
+
+  {
+    id: 3,
+    name: 'Even In The Day',
+    image: Even,
+    count: '95k',
+    isSubscribed: true,
+  },
+
+  {
+    id: 4,
+    name: 'Future100',
+    image: Num,
+    count: '95k',
+    isSubscribed: true,
+  },
+
+  {
+    id: 5,
+    name: 'Tech Bro',
+    image: Techbro,
+    count: '95k',
+    isSubscribed: true,
+  },
+
+  {
+    id: 6,
+    name: 'ChilBiz',
+    image: Chilbilz,
+    count: '95k',
+    isSubscribed: true,
+  },
+];
 
 const UserProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -221,17 +278,27 @@ const UserProfile = () => {
               <hr className="text-[#000]/15 mt-16" />
             </div>
 
-            {activeTab === 'calendar' && (
-              <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-6">
-                <div className="md:sticky md:top-28 md:self-start">
-                  <UserBio profile={profile} />
+            <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-6">
+              <div className="md:sticky md:top-28 md:self-start">
+                <UserBio profile={profile} />
 
-                  <Calendar onSelectDate={handleDateSelect} />
-                </div>
-
-                <TechEvents selectedDate={selectedDate} />
+                <Calendar onSelectDate={handleDateSelect} />
               </div>
-            )}
+              {activeTab === 'calendar' && (
+                <TechEvents selectedDate={selectedDate} />
+              )}
+
+              <div className="h-full">
+                <h2 className="font-600 text-300 mb-4">Subscriptions</h2>
+                {activeTab === 'following' && (
+                  <div className="bg-white space-y-10 rounded-xl p-6">
+                    {followers.map((follower) => (
+                      <Followers key={follower.id} follower={follower} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 

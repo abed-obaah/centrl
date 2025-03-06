@@ -15,6 +15,7 @@ import AdminLayout from './layouts/AdminLayout';
 import AdminThemeLayout from './layouts/AdminThemeLayout';
 import CustomizeLayout from './layouts/CustomizeLayout';
 import SignInLayout from './layouts/SignInLayout';
+import UserSettingsLayout from './layouts/UserSettingsLayout';
 
 // PAGES
 
@@ -30,7 +31,7 @@ import TrendingDetails from './pages/TrendingDetails';
 
 // user dashboard pages
 import UserProfile from './pages/UserProfile';
-import UserProfiles from './pages/[id]';
+import UserViewProfile from './pages/UserViewProfile';
 import Competition from './pages/Competition';
 import CategoryDetails from './pages/CategoryDetails';
 import Settings from './pages/Settings';
@@ -79,10 +80,9 @@ const router = createBrowserRouter(
         <Route path="/dashboard" element={<DashboardLayout />} />
         <Route path="/block" element={<Block />} />
         <Route path="/user-profile" element={<UserProfile />} />
-        <Route path="/[id]" element={<UserProfiles />} />
+        <Route path="/user-profile/:id" element={<UserViewProfile />} />
         <Route path="/competition" element={<Competition />} />
         <Route path="/category/:id" element={<CategoryDetails />} />
-        <Route path="/settings" element={<Settings />} />
         <Route path="/event" element={<Event />} />
         <Route path="/event:id" element={<EventPage />} />
         <Route path="/dashboard/discover" element={<Discovered />} />
@@ -92,6 +92,10 @@ const router = createBrowserRouter(
         <Route path="/customize" element={<HomePage />} />
         <Route path="/guests" element={<Guests />} />
         <Route path="/overview" element={<Overview />} />
+      </Route>
+
+      <Route element={<UserSettingsLayout />}>
+        <Route path="/settings" element={<Settings />} />
       </Route>
 
       <Route path="/sign-in" element={<WaitListLayout />} />
