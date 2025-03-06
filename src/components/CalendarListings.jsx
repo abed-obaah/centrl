@@ -20,11 +20,14 @@ const CalendarListings = ({ title }) => {
                 />
               </div>
 
-                <Link to={'/[id]'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                  <button className="bg-[#C7C7C7]/20 text-50 text-[#000] py-2 px-4 rounded-xl font-600">
-                    Subscribe
-                  </button>
-               </Link>
+              <Link
+                to={`/user-profile/${card.id}`}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                <button className="bg-[#C7C7C7]/20 text-50 text-[#000] py-2 px-4 rounded-xl font-600">
+                  Subscribe
+                </button>
+              </Link>
             </div>
 
             <div>

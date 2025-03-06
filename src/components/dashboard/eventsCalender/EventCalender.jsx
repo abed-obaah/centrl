@@ -16,7 +16,6 @@ const EventCalender = () => {
           <div className="md:sticky md:top-28 md:self-start">
             <Calendar onSelectDate={handleDateSelect} />
           </div>
-          {/* <Calendar onSelectDate={handleDateSelect} /> */}
 
           <TechEvents selectedDate={selectedDate} />
         </div>
