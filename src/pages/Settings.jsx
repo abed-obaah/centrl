@@ -8,7 +8,7 @@ import DashboardIcon from '../assets/dashboard-icon.svg';
 import UserIcon from '../assets/user-icon.svg';
 import MoreIcon from '../assets/more-icon.svg';
 
-export default function Example() {
+export default function Settings() {
   const [activeSection, setActiveSection] = useState('account');
 
   return (
@@ -17,7 +17,7 @@ export default function Example() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Sidebar Navigation */}
           <div className="md:col-span-1">
-            <div className="md:sticky md:top-20 space-y-6 flex flex-col">
+            <div className="md:sticky md:top-32 space-y-6 flex flex-col">
               <button
                 className={`flex items-center gap-2 ${
                   activeSection === 'account' ? 'text-blue-500' : ''
