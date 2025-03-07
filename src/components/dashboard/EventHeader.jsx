@@ -72,7 +72,9 @@ const EventHeader = () => {
 
             <div className="flex items-center md:gap-8 md:ml-12">
               <div className="flex items-center gap-4">
-                <AddSquare size="24" color="#000" />
+                <Link to="/block">
+                  <AddSquare size="24" color="#000" />
+                </Link>
                 <Search
                   onClick={() => setModalVisible(true)}
                   size="24"
