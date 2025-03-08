@@ -40,14 +40,14 @@ export default function MoreOptions() {
   };
 
   return (
-    <ul role="list" className="space-y-1 w-[500px] mt-5">
-      <label className="block text-100 font-500 mb-2">More options</label>
+    <ul role="list" className="space-y-[.2rem]  mt-5">
+      <p className="text-100 font-500 mb-2">More options</p>
       {itemsData.map((item) => (
         <li
           key={item.id}
-          className="overflow-hidden bg-white px-4 py-2 shadow-sm sm:rounded-md sm:px-3"
+          className="bg-white px-4 py-2 shadow-sm sm:rounded-md sm:px-3"
         >
-          <div className="flex items-center space-x-3 justify-between">
+          <div className="flex w-full items-center  justify-between">
             {/* Left side with image and label */}
             <div className="flex items-center">
               <img src={item.image} alt={item.label} className="size-7 mr-2" />
@@ -74,11 +74,11 @@ export default function MoreOptions() {
                 </Switch>
               ) : (
                 <div className="flex items-center space-x-3">
-                  <span className="text-muted50 text-50 font-500">
+                  <span className="text-black text-50 font-500">
                     {item.value}
                   </span>
                   {item.editable && (
-                    <button className="text-blue-500">
+                    <button>
                       <img src={edit} alt="Edit" className="w-4 h-4" />
                     </button>
                   )}

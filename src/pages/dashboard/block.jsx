@@ -48,10 +48,10 @@ export default function block() {
 
   return (
     <>
-      <div className="mt-32 px-4 md:px-0 mb-20 max-w-[900px] mx-auto">
+      <div className="mt-32 px-4 md:px-0 mb-20 max-w-[1000px]  mx-auto">
         <form>
-          <div className="md:grid md:grid-cols-2 md:gap-12">
-            <div className="md:sticky md:top-28 md:self-start">
+          <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-12">
+            <div className="md:sticky  md:top-28 md:self-start">
               <div>
                 <div className="mt-2">
                   <div
