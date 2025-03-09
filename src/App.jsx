@@ -35,6 +35,7 @@ import UserViewProfile from './pages/UserViewProfile';
 import Competition from './pages/Competition';
 import CategoryDetails from './pages/CategoryDetails';
 import Settings from './pages/Settings';
+import UserEventPage from './pages/dashboard/events/UserEventPage';
 
 // customize page
 import HomePage from './pages/customize/home';
@@ -45,7 +46,6 @@ import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/users';
 import AdminEventManagement from './pages/admin/event-management';
 import Block from './pages/dashboard/block';
-import Event from './pages/dashboard/events/eventpage';
 import EventPage from './pages/dashboard/events/eventpage7';
 // import Waitlist from './pages/Waitlist';
 
@@ -83,7 +83,7 @@ const router = createBrowserRouter(
         <Route path="/user-profile/:id" element={<UserViewProfile />} />
         <Route path="/competition" element={<Competition />} />
         <Route path="/category/:id" element={<CategoryDetails />} />
-        <Route path="/event" element={<Event />} />
+        <Route path="/events" element={<UserEventPage />} />
         <Route path="/event:id" element={<EventPage />} />
         <Route path="/dashboard/discover" element={<Discovered />} />
       </Route>

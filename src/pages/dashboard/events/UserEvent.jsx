@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import boluvard from '../../../assets/boluvard.png';
 import love from '../../../assets/love.png';
-import TabSwitcher from '../../../components/dashboard/events/TabSwitcher';
 
 const activity = [
   {
@@ -130,8 +128,6 @@ const DayEvents = ({ day, dayEvents, isLastDay }) => {
 };
 
 const UserEvent = () => {
-  const [activeTab, setActiveTab] = useState('Upcoming');
-
   const eventsGroupedByDay = activity.map((day, index) => {
     return {
       day,

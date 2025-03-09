@@ -1,4 +1,4 @@
-import Events from '../pages/dashboard/events/index';
+import Events from '../pages/dashboard/events/UserEventPage';
 
 const DashboardLayout = () => {
   // const [modalVisible, setModalVisible] = useState(false);
