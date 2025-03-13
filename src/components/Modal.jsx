@@ -33,7 +33,7 @@ const Modal = ({ modalVisible, setModalVisible }) => {
         </h2>
 
         {/* Event List */}
-        <div className="mt-3 space-y-3 px-6 max-h-[60vh] overflow-y-auto pb-4">
+        <div className="mt-3  px-6 max-h-[60vh] overflow-y-auto pb-4">
           {[
             {
               name: 'Rave',
@@ -88,16 +88,6 @@ const Modal = ({ modalVisible, setModalVisible }) => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Close Button */}
-        <div className="px-6 pb-6 pt-2">
-          <button
-            onClick={() => setModalVisible(false)}
-            className="w-full bg-gray-200 text-gray-600 p-2 rounded-lg hover:bg-gray-300 transition-colors"
-          >
-            Close
-          </button>
         </div>
       </div>
     </div>

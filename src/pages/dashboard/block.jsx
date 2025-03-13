@@ -51,8 +51,8 @@ export default function block() {
       <div className="mt-32 px-4 md:px-0 mb-20 max-w-[1000px]  mx-auto">
         <form>
           <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-12">
-            <div className="md:sticky  md:top-28 md:self-start">
-              <div>
+            <div className="md:sticky  md:top-28 md:self-start ">
+              <div className="max-w-[300px] ml-auto">
                 <div className="mt-2">
                   <div
                     onClick={() => setIsOpenSide(true)}
@@ -120,7 +120,7 @@ export default function block() {
               </div>
             </div>
 
-            <div className="">
+            <div className="max-w-[500px]">
               <div className="mb-10">
                 <label
                   htmlFor="last-name"
