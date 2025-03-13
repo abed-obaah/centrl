@@ -1,5 +1,7 @@
+import { Edit } from 'lucide-react';
 import boluvard from '../../../assets/boluvard.png';
 import love from '../../../assets/love.png';
+import { useNavigate } from 'react-router-dom';
 
 const activity = [
   {
@@ -31,7 +33,7 @@ const events = [
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     ],
-    status: 'Going',
+    status: 'edit',
   },
 
   {
@@ -54,8 +56,24 @@ const events = [
 ];
 
 const EventCard = ({ event }) => {
+  const navigate = useNavigate();
+
+  // Handle click event
+  const handleCardClick = () => {
+    if (event.status === 'edit') {
+      navigate(`/overview`);
+    }
+  };
+
+  // Determine cursor style based on status
+  const cursorStyle =
+    event.status === 'edit' ? 'cursor-pointer' : 'cursor-default';
+
   return (
-    <div className="md:flex md:items-start md:gap-4 p-4 bg-white rounded-xl">
+    <div
+      onClick={handleCardClick}
+      className={`${cursorStyle} md:flex md:items-start md:gap-4 p-4 bg-white  rounded-xl`}
+    >
       <img
         src={event.image}
         alt={event.title}
@@ -87,7 +105,11 @@ const EventCard = ({ event }) => {
       </div>
 
       <span className="text-50 text-foreground/50 px-4 py-1 rounded-xl border border-[#000]/15 bg-[#f9f9f9]">
-        {event.status}
+        {event.status === 'edit' ? (
+          <Edit className="size-4 text-foreground" />
+        ) : (
+          event.status
+        )}
       </span>
     </div>
   );
