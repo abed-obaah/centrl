@@ -1,68 +1,72 @@
-import Invites from '../../components/Invites';
+import Invites from "../../components/Invites";
 
-import edit from '../../assets/Edit_Fill.png';
-import addRing from '../../assets/Add_Ring.png';
-import { Link } from 'react-router-dom';
-import Guests from '../../components/user/Guests';
-import Hosts from '../../components/user/Hosts';
+import edit from "../../assets/Edit_Fill.png";
+import addRing from "../../assets/Add_Ring.png";
+import { Link } from "react-router-dom";
+import Guests from "../../components/user/Guests";
+import Hosts from "../../components/user/Hosts";
 
 const Dashboard = () => {
   return (
-    <div className="md:max-w-[1000px] md:ml-20">
+    <div className="md:ml-20 md:max-w-[1000px]">
       <div className="mb-8">
         <h1 className="text-300 font-600">Overview</h1>
       </div>
 
       {/* Overview Cards */}
-      <div className="mb-12 grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl bg-card p-6 shadow-sm">
+      <div className="mb-12 mr-auto grid max-w-[761px] gap-4 md:grid-cols-2">
+        <div className="rounded-xl bg-card px-6 py-4 shadow-sm">
           <div className="flex justify-between">
-            <h2 className="mb-16 text-200  text-foreground font-700">
+            <h2 className="mb-16 text-100 font-600 text-foreground">
               Event Brief
             </h2>
-            <Link to={'/customize'}>
-              <img src={edit} alt="" className="w-4 h-4 object-contain" />
+            <Link to={"/customize"}>
+              <img src={edit} alt="" className="h-4 w-4 object-contain" />
             </Link>
           </div>
 
-          <div>
-            <div className="flex items-center gap-10">
-              <p className="text-black font-600">Saturday, Aug 17</p>
+          <div className="translate-y-4">
+            <div className="mb-1 flex items-center gap-10">
+              <p className="text-50 font-600 text-black">Saturday, Aug 17</p>
             </div>
-            <div className="flex items-center gap-12">
-              <p className="text-black font-600">10:00 AM GMT+1</p>
+            <div className="mb-1 flex items-center gap-12">
+              <p className="text-50 font-600 text-black">10:00 AM GMT+1</p>
+            </div>
+            <div className="mb-1 flex items-center gap-[4.5rem]">
+              <p className="text-50 font-600 text-black">Zoom</p>
             </div>
             <div className="flex items-center gap-[4.5rem]">
-              <p className="text-black font-600">Zoom</p>
-            </div>
-            <div className="flex items-center gap-[4.5rem]">
-              <p className="text-black font-600">28 Online Participants</p>
+              <p className="text-50 font-600 text-black">
+                28 Online Participants
+              </p>
             </div>
           </div>
         </div>
 
         <div className="rounded-xl bg-card p-6 shadow-sm">
           <div className="flex justify-between">
-            <h2 className="mb-16 text-200 font-600 text-foreground">
+            <h2 className="mb-16 text-100 font-600 text-foreground">
               Reminder
             </h2>
-            <img src={addRing} alt="" className="w-6 h-6 object-contain" />
+            <img src={addRing} alt="" className="h-6 w-6 object-contain" />
           </div>
 
-          <div className="flex space-x-8">
+          <div className="mb-4 flex space-x-8">
             <div className="flex items-center gap-1">
-              <p className="text-500 font-500">0</p>
-              <p className="text-black font-600">Sent</p>
+              <p className="text-600 font-500">0</p>
+              <p className="translate-y-1 text-50 font-600 text-black">Sent</p>
             </div>
 
             <div className="flex items-center gap-1">
-              <p className="text-500 font-500">3</p>
-              <p className="text-black font-600">Pending</p>
+              <p className="text-600 font-500">3</p>
+              <p className="translate-y-1 text-50 font-600 text-black">
+                Pending
+              </p>
             </div>
           </div>
           <div className="">
             <div className="flex items-center gap-10">
-              <p className="text-foreground font-400">
+              <p className="text-50 font-600 text-black">
                 Send reminders to your guests to keep them excited about your
                 upcoming event
               </p>
@@ -71,7 +75,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <hr className="text-[#000]/15 pb-12" />
+      <hr className="pb-12 text-[#000]/15" />
 
       {/* Invites */}
       <Invites />

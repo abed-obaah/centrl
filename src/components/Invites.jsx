@@ -1,27 +1,27 @@
-import optionsImage from '../assets/optionsImage.png';
-import edit from '../assets/Subtract.svg';
-import { useState } from 'react';
-import { Switch } from '@headlessui/react';
+import optionsImage from "../assets/optionsImage.png";
+import edit from "../assets/Subtract.svg";
+import { useState } from "react";
+import { Switch } from "@headlessui/react";
 
 const itemsData = [
   {
     id: 1,
-    label: 'Cooper Franci',
-    value: 'Pending',
-    email: 'ubahobaah@gmail.com',
-    age: 'Aug 23',
+    label: "Cooper Franci",
+    value: "Pending",
+    email: "ubahobaah@gmail.com",
+    age: "Aug 23",
     editable: true,
     image: optionsImage,
   },
 ];
 
-export default function MoreOptions({ search = '' }) {
+export default function MoreOptions({ search = "" }) {
   // Store toggle state for each item
   const [toggleStates, setToggleStates] = useState(
     itemsData.reduce((acc, item) => {
-      if (item.type === 'toggle') acc[item.id] = false; // Default state is false
+      if (item.type === "toggle") acc[item.id] = false; // Default state is false
       return acc;
-    }, {})
+    }, {}),
   );
 
   const handleToggle = (id) => {
@@ -32,12 +32,12 @@ export default function MoreOptions({ search = '' }) {
   };
 
   const filteredItems = itemsData.filter((item) =>
-    (item.label || '').toLowerCase().includes(search.toLowerCase())
+    (item.label || "").toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
-    <ul role="list" className="space-y-1 pb-12">
-      <label className="block text-500 font-700 mb-2">Invites</label>
+    <ul role="list" className="max-w-[761px] space-y-1 pb-12">
+      <label className="mb-2 block text-500 font-700">Invites</label>
       {filteredItems.length > 0 ? (
         filteredItems.map((item) => (
           <li
@@ -45,23 +45,23 @@ export default function MoreOptions({ search = '' }) {
             className="overflow-hidden bg-white px-4 py-4 shadow-sm sm:rounded-md sm:px-3"
           >
             <div className="flex items-center gap-4">
-              <div className="flex items-center flex-[1.5] min-w-0">
+              <div className="flex min-w-0 flex-[1.5] items-center">
                 <img
                   src={item.image}
                   alt={item.label}
-                  className="w-10 h-10 mr-2 flex-shrink-0"
+                  className="mr-2 h-10 w-10 flex-shrink-0"
                 />
-                <span className="text-100 font-400 truncate">{item.label}</span>
+                <span className="truncate text-100 font-400">{item.label}</span>
               </div>
-              <div className="flex-[1] min-w-0 text-left">
-                <span className="text-100 font-400 truncate">{item.email}</span>
+              <div className="min-w-0 flex-[1] text-left">
+                <span className="truncate text-100 font-400">{item.email}</span>
               </div>
-              <div className="flex-[1] min-w-0 text-left">
-                <span className="text-100 font-400 truncate">{item.age}</span>
+              <div className="min-w-0 flex-[1] text-left">
+                <span className="truncate text-100 font-400">{item.age}</span>
               </div>
-              <div className="flex items-center flex-shrink-0">
+              <div className="flex flex-shrink-0 items-center">
                 <div className="flex items-center gap-2">
-                  <span className="text-muted50 text-50 font-500">
+                  <span className="text-50 font-500 text-muted50">
                     {item.value}
                   </span>
                 </div>

@@ -1,58 +1,58 @@
-import optionsImage from '../assets/optionsImage.png';
+import optionsImage from "../assets/optionsImage.png";
 
 const itemsData = [
   {
     id: 1,
-    label: 'Cooper Franci',
-    value: 'Pending',
-    email: 'ubahobaah@gmail.com',
-    age: 'Aug 23',
+    label: "Cooper Franci",
+    value: "Pending",
+    email: "ubahobaah@gmail.com",
+    age: "Aug 23",
     editable: true,
     image: optionsImage,
   },
   {
     id: 3,
-    label: 'Abram Lubin',
-    value: 'Aug 23',
-    email: 'ubahobaah@gmail.com',
-    age: '',
+    label: "Abram Lubin",
+    value: "Aug 23",
+    email: "ubahobaah@gmail.com",
+    age: "",
     image: optionsImage,
   },
   {
     id: 4,
-    label: 'Makenna Korsgaard',
-    value: 'Aug 23',
-    email: 'ubahobaah@gmail.com',
-    age: '',
+    label: "Makenna Korsgaard",
+    value: "Aug 23",
+    email: "ubahobaah@gmail.com",
+    age: "",
     editable: true,
     image: optionsImage,
   },
   {
     id: 5,
-    label: 'Ahmad Siphron',
-    value: 'Aug 23',
-    email: 'ubahobaah@gmail.com',
-    age: '',
+    label: "Ahmad Siphron",
+    value: "Aug 23",
+    email: "ubahobaah@gmail.com",
+    age: "",
     image: optionsImage,
   },
   {
     id: 6,
-    label: 'Aspen Herwitz',
-    value: 'Aug 23',
-    email: 'ubahobaah@gmail.com',
-    age: '',
+    label: "Aspen Herwitz",
+    value: "Aug 23",
+    email: "ubahobaah@gmail.com",
+    age: "",
     image: optionsImage,
   },
 ];
 
-export default function MoreOptions({ search = '' }) {
+export default function MoreOptions({ search = "" }) {
   const filteredItems = itemsData.filter((item) =>
-    (item.label || '').toLowerCase().includes(search.toLowerCase())
+    (item.label || "").toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
-    <ul role="list" className="space-y-1 mt-5">
-      <label className="block text-100 font-500 mb-2">More options</label>
+    <ul role="list" className="space-y- mr-auto mt-5 max-w-[744px]">
+      <label className="mb-2 block text-100 font-500">More options</label>
       {filteredItems.length > 0 ? (
         filteredItems.map((item) => (
           <li
@@ -60,23 +60,23 @@ export default function MoreOptions({ search = '' }) {
             className="overflow-hidden bg-white px-4 py-4 shadow-sm sm:rounded-md sm:px-3"
           >
             <div className="flex items-center gap-4">
-              <div className="flex items-center flex-[1.5] min-w-0">
+              <div className="flex min-w-0 flex-[1.5] items-center">
                 <img
                   src={item.image}
                   alt={item.label}
-                  className="w-10 h-10 mr-2 flex-shrink-0"
+                  className="mr-2 h-10 w-10 flex-shrink-0"
                 />
-                <span className="text-100 font-400 truncate">{item.label}</span>
+                <span className="truncate text-100 font-400">{item.label}</span>
               </div>
-              <div className="flex-[1] min-w-0 text-left">
-                <span className="text-100 font-400 truncate">{item.email}</span>
+              <div className="min-w-0 flex-[1] text-left">
+                <span className="truncate text-100 font-400">{item.email}</span>
               </div>
-              <div className="flex-[1] min-w-0 text-left">
-                <span className="text-100 font-400 truncate">{item.age}</span>
+              <div className="min-w-0 flex-[1] text-left">
+                <span className="truncate text-100 font-400">{item.age}</span>
               </div>
-              <div className="flex items-center flex-shrink-0">
+              <div className="flex flex-shrink-0 items-center">
                 <div className="flex items-center gap-2">
-                  <span className="text-muted50 text-50 font-500">
+                  <span className="text-50 font-500 text-muted50">
                     {item.value}
                   </span>
                 </div>

@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import Map from '../../assets/map.png';
-import Upload from '../../assets/upload.png';
-import Indicator from '../../assets/indicator.png';
-import userImage from '../../assets/user.png';
-import bgGradient from '../../assets/gradient.png';
-import MoreOptions from '../../components/MoreOptions';
-import SideModal from '../../components/SidebarModal';
-import DescriptionModal from '../../components/DescriptionModal';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import Map from "../../assets/map.png";
+import Upload from "../../assets/upload.png";
+import Indicator from "../../assets/indicator.png";
+import userImage from "../../assets/user.png";
+import bgGradient from "../../assets/gradient.png";
+import MoreOptions from "../../components/MoreOptions";
+import SideModal from "../../components/SidebarModal";
+import DescriptionModal from "../../components/DescriptionModal";
+import { Link } from "react-router-dom";
 
 export default function block() {
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSide, setIsOpenSide] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const roles = [
-    'Event Organizer',
-    'Event Lover',
-    'Influencer',
-    'Startup founder',
-    'Brand/Company Representative',
-    'Investor/Sponsor',
-    'Media/Press',
-    'Government/Policy Maker',
-    'Student/Scholar',
-    'Other',
+    "Event Organizer",
+    "Event Lover",
+    "Influencer",
+    "Startup founder",
+    "Brand/Company Representative",
+    "Investor/Sponsor",
+    "Media/Press",
+    "Government/Policy Maker",
+    "Student/Scholar",
+    "Other",
   ];
 
   const [bgImage, setBgImage] = useState(bgGradient);
@@ -37,7 +37,7 @@ export default function block() {
     }
   };
 
-  const [videoName, setVideoName] = useState('Upload Video');
+  const [videoName, setVideoName] = useState("Upload Video");
 
   const handleVideoUpload = (e) => {
     const file = e.target.files[0];
@@ -48,26 +48,26 @@ export default function block() {
 
   return (
     <>
-      <div className="mt-32 px-4 md:px-0 mb-20 max-w-[1000px]  mx-auto">
-        <form>
-          <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-12">
-            <div className="md:sticky  md:top-28 md:self-start ">
-              <div className="max-w-[300px] ml-auto">
+      <div className="mb-20 mt-32 px-4 md:px-0">
+        <form className="">
+          <div className="mx-auto max-w-[800px] md:grid md:grid-cols-[1fr_2fr] md:gap-12">
+            <div className="md:sticky md:top-28">
+              <div className="mx-auto max-w-[300px]">
                 <div className="mt-2">
                   <div
                     onClick={() => setIsOpenSide(true)}
-                    className=" flex  space-x-4 w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm/6 flex w-full cursor-pointer space-x-4 rounded-md bg-white px-3 py-1.5 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2"
                   >
-                    <img src={Map} alt="" className="w-8 h-10 object-contain" />
+                    <img src={Map} alt="" className="h-10 w-8 object-contain" />
 
                     <div className="">
                       <p>Theme</p>
-                      <p className="text-[#000000] font-semibold">Minimalist</p>
+                      <p className="font-semibold text-[#000000]">Minimalist</p>
                     </div>
                   </div>
                   <label
                     htmlFor="videoUpload"
-                    className="cursor-pointer mt-5 flex items-center justify-between w-full rounded-md bg-white px-3 py-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm/6 mt-5 flex w-full cursor-pointer items-center justify-between rounded-md bg-white px-3 py-3 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2"
                   >
                     <div>
                       <p className="truncate">{videoName}</p>
@@ -76,7 +76,7 @@ export default function block() {
                     <img
                       src={Upload}
                       alt="Upload"
-                      className="w-8 h-10 object-contain"
+                      className="h-10 w-8 object-contain"
                     />
 
                     <input
@@ -90,13 +90,13 @@ export default function block() {
                   <div
                     style={{
                       backgroundImage: `url(${bgImage})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
                     }}
-                    className="relative mt-5 flex items-end justify-between w-full h-64 rounded-xl px-3 py-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                    className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm relative mt-5 flex h-64 w-full items-end justify-between rounded-xl px-3 py-3 outline-1 -outline-offset-1 focus:outline-2"
                   >
-                    <div className="items-end mt-10">
-                      <p className=" font-700">Plus +</p>
+                    <div className="mt-10 items-end">
+                      <p className="font-700">Plus +</p>
                       <p className="mt-10"></p>
                     </div>
 
@@ -105,7 +105,7 @@ export default function block() {
                       <img
                         src={Upload}
                         alt="Upload"
-                        className="w-8 h-10 object-contain"
+                        className="h-10 w-8 object-contain"
                       />
                     </label>
                     <input
@@ -120,11 +120,11 @@ export default function block() {
               </div>
             </div>
 
-            <div className="max-w-[500px]">
+            <div className="max-w-[800px]">
               <div className="mb-10">
                 <label
                   htmlFor="last-name"
-                  className="block mb-2 font-500 text-black"
+                  className="mb-2 block font-500 text-black"
                 >
                   Event Title
                 </label>
@@ -134,7 +134,7 @@ export default function block() {
                   type="text"
                   autoComplete="family-name"
                   placeholder="Name your event"
-                  className="w-full px-4 py-3 rounded-lg  bg-white placeholder:text-[#000]/70     outline-none"
+                  className="w-full rounded-lg bg-white px-4 py-3 outline-none placeholder:text-[#000]/70"
                 />
               </div>
 
@@ -147,7 +147,7 @@ export default function block() {
                       name="city"
                       type="text"
                       autoComplete="address-level2"
-                      className="w-24 rounded-xl bg-white p-3    outline-none "
+                      className="w-24 rounded-xl bg-white p-3 outline-none"
                     />
 
                     <div className="relative">
@@ -156,34 +156,34 @@ export default function block() {
                         name="city"
                         type="text"
                         autoComplete="address-level2"
-                        className="w-24 rounded-xl  bg-white p-3   outline-none "
+                        className="w-24 rounded-xl bg-white p-3 outline-none"
                       />
 
-                      <span className="text-black font-500 absolute right-4 top-3">
+                      <span className="absolute right-4 top-3 font-500 text-black">
                         PM
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <span className="text-black font-500  rounded-md bg-white px-6 py-1.5 ">
+                <span className="rounded-md bg-white px-6 py-1.5 font-500 text-black">
                   Public
                 </span>
               </div>
 
               <div className="mb-10">
-                <p className="font-500 text-black mb-2">Location</p>
+                <p className="mb-2 font-500 text-black">Location</p>
                 <div className="flex items-center gap-6">
                   <div className="w-full">
                     <div className="flex items-center gap-4 rounded-xl bg-white px-2 py-2">
                       <img src={Indicator} alt="icon" className="size-8" />
-                      <p className="text-black font-600">Virtual</p>
+                      <p className="font-600 text-black">Virtual</p>
                     </div>
                   </div>
                   <div className="w-full">
-                    <div className="flex  items-center gap-4 rounded-xl bg-white px-2 py-2">
+                    <div className="flex items-center gap-4 rounded-xl bg-white px-2 py-2">
                       <img src={userImage} alt="icon" className="size-8" />
-                      <p className="text-black font-600">In Person</p>
+                      <p className="font-600 text-black">In Person</p>
                     </div>
                   </div>
                 </div>
@@ -200,34 +200,31 @@ export default function block() {
                     type="text"
                     readOnly
                     placeholder="Description..."
-                    className="w-full px-4 py-3 rounded-lg  bg-white outline-none"
+                    className="w-full rounded-lg bg-white px-4 py-3 outline-none"
                   />
                 </div>
               </div>
 
-              <div className="relative mb-10">
-                <label className="block  font-500 mb-2">Event Category</label>
+              <div className="relative">
+                <label className="mb-2 block font-500">Event Category</label>
                 <button
                   type="button"
                   onClick={() => setIsOpen(!isOpen)}
-                  className="w-full text-left text-[#000]/70 px-4 py-3 rounded-lg  bg-white outline-none "
+                  className="w-full rounded-lg bg-white px-4 py-3 text-left text-[#000]/70 outline-none"
                 >
-                  <span className={role ? 'text-gray-900' : 'text-gray-400'}>
-                    {role || 'None Selected'}
+                  <span className={role ? "text-gray-900" : "text-gray-400"}>
+                    {role || "None Selected"}
                   </span>
                 </button>
 
                 {isOpen && (
-                  <div className="absolute pb-4 top-full left-0 right-0 mt-1 bg-[#fff] border border-[#CD2574] rounded-lg shadow-lg z-10">
+                  <div className="absolute left-0 right-0 top-full z-10 mt-1 h-[200px] overflow-y-auto rounded-xl border border-[#CD2574] bg-[#fff] pb-4 shadow-xl">
                     {roles.map((option) => (
                       <button
                         key={option}
                         type="button"
-                        onClick={() => {
-                          setRole(option);
-                          setIsOpen(false);
-                        }}
-                        className=" px-4 py-2 text-left hover:bg-pink-50 transition first:rounded-t-lg last:rounded-b-lg"
+                        onClick={() => handleRoleSelect(option)}
+                        className="hover:bg-pink-50 w-full px-4 py-2 text-left transition first:rounded-t-xl last:rounded-b-xl"
                       >
                         {option}
                       </button>
@@ -235,9 +232,10 @@ export default function block() {
                   </div>
                 )}
               </div>
+
               <MoreOptions />
-              <Link to={'/event:id'}>
-                <button className="bg-[#FF6F02] text-white w-40 py-2 rounded-xl mt-5">
+              <Link to={"/event:id"}>
+                <button className="mt-5 w-40 rounded-xl bg-[#FF6F02] py-2 text-white">
                   Create Event
                 </button>
               </Link>
