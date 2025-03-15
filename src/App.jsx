@@ -3,58 +3,58 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 // layouts
-import RootLayout from './layouts/RootLayout';
-import WaitListLayout from './layouts/WaitlistLayout';
-import DashboardLayout from './layouts/DashboardLayout';
-import DashboardWrapper from './layouts/DashboardWrapper';
-import AdminLoginLayout from './layouts/AdminLoginLayout';
-import AdminLayout from './layouts/AdminLayout';
-import AdminThemeLayout from './layouts/AdminThemeLayout';
-import CustomizeLayout from './layouts/CustomizeLayout';
-import SignInLayout from './layouts/SignInLayout';
-import UserSettingsLayout from './layouts/UserSettingsLayout';
+import RootLayout from "./layouts/RootLayout";
+import WaitListLayout from "./layouts/WaitlistLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
+import DashboardWrapper from "./layouts/DashboardWrapper";
+import AdminLoginLayout from "./layouts/AdminLoginLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import AdminThemeLayout from "./layouts/AdminThemeLayout";
+import CustomizeLayout from "./layouts/CustomizeLayout";
+import SignInLayout from "./layouts/SignInLayout";
+import UserSettingsLayout from "./layouts/UserSettingsLayout";
 
 // PAGES
 
 // landing pages
-import Home from './pages/Home';
-import Calenders from './pages/Calenders';
-import Pricing from './pages/Pricing';
-import About from './pages/About';
-import Discover from './pages/Discover';
-import Discovered from './pages/dashboard/discover';
-import Privacy from './pages/Privacy';
-import TrendingDetails from './pages/TrendingDetails';
+import Home from "./pages/Home";
+import Calenders from "./pages/Calenders";
+import Pricing from "./pages/Pricing";
+import About from "./pages/About";
+import Discover from "./pages/Discover";
+import Discovered from "./pages/dashboard/discover";
+import Privacy from "./pages/Privacy";
+import TrendingDetails from "./pages/TrendingDetails";
 
 // user dashboard pages
-import UserProfile from './pages/UserProfile';
-import UserViewProfile from './pages/UserViewProfile';
-import Competition from './pages/Competition';
-import CategoryDetails from './pages/CategoryDetails';
-import Settings from './pages/Settings';
-import UserEventPage from './pages/dashboard/events/UserEventPage';
+import UserProfile from "./pages/UserProfile";
+import UserViewProfile from "./pages/UserViewProfile";
+import Competition from "./pages/Competition";
+import CategoryDetails from "./pages/CategoryDetails";
+import Settings from "./pages/Settings";
+import UserEventPage from "./pages/dashboard/events/UserEventPage";
 
 // customize page
-import HomePage from './pages/customize/home';
-import Overview from './pages/customize/overview';
+import HomePage from "./pages/customize/home";
+import Overview from "./pages/customize/overview";
 
 // admin pages
-import Dashboard from './pages/admin/Dashboard';
-import Users from './pages/admin/users';
-import AdminEventManagement from './pages/admin/event-management';
-import Block from './pages/dashboard/block';
-import EventPage from './pages/dashboard/events/eventpage7';
+import Dashboard from "./pages/admin/Dashboard";
+import Users from "./pages/admin/users";
+import AdminEventManagement from "./pages/admin/event-management";
+import Block from "./pages/dashboard/block";
+import EventPage from "./pages/dashboard/events/eventpage7";
 // import Waitlist from './pages/Waitlist';
 
 // import Signin from './components/auth/signin';
-import Admins from './pages/admin/admins';
-import Themes from './pages/admin/themes';
-import LightThemes from './pages/admin/light-themes';
-import SampleTheme from './pages/admin/sample-theme';
-import Guests from './pages/customize/guests';
+import Admins from "./pages/admin/admins";
+import Themes from "./pages/admin/themes";
+import LightThemes from "./pages/admin/light-themes";
+import SampleTheme from "./pages/admin/sample-theme";
+import Guests from "./pages/customize/guests";
 
 function Contact() {
   return <h1 className="text-3xl font-bold underline">Contact Page</h1>;
@@ -98,7 +98,7 @@ const router = createBrowserRouter(
         <Route path="/settings" element={<Settings />} />
       </Route>
 
-      <Route path="/sign-in" element={<WaitListLayout />} />
+      {/* <Route path="/sign-in" element={<WaitListLayout />} /> */}
       <Route path="/sign-up" element={<SignInLayout />} />
 
       {/* Admin Login Layout and Dashboard layout */}
@@ -119,8 +119,8 @@ const router = createBrowserRouter(
         <Route path="/admin-themes/light" element={<LightThemes />} />
         <Route path="/admin-themes/sample" element={<SampleTheme />} />
       </Route>
-    </>
-  )
+    </>,
+  ),
 );
 
 const App = () => {
