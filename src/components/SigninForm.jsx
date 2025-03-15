@@ -59,11 +59,13 @@ const SignInForm = () => {
 
   return (
     <div>
-      <div className="w-[400px] rounded-xl border border-[#000]/15 bg-white px-6 py-4">
+      <div className="w-[350px] rounded-xl border border-[#000]/15 bg-white px-6 py-4">
         <div>
           <div className="mb-8">
             <p className="text-200 font-700 text-foreground">Welcome to</p>
-            <h1 className="mb text-700 font-700 text-black">CENTRL</h1>
+            <h1 className="mb text-700 font-700 leading-[1.1] text-black">
+              Centrl
+            </h1>
             <p className="font-600 text-foreground">Sign in or sign up below</p>
           </div>
 
