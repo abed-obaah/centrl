@@ -59,9 +59,9 @@ const SignInForm = () => {
 
   return (
     <div>
-      <div className="w-[350px] rounded-xl border border-[#000]/15 bg-white px-6 py-4">
+      <div className="h-[454px] w-[381px] rounded-xl border border-[#000]/15 bg-white px-6 py-4">
         <div>
-          <div className="mb-8">
+          <div className="mb-8 pt-4">
             <p className="text-200 font-700 text-foreground">Welcome to</p>
             <h1 className="mb text-700 font-700 leading-[1.1] text-black">
               Centrl
@@ -94,7 +94,7 @@ const SignInForm = () => {
 
             <button
               type="submit"
-              className="mt-8 w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-6 py-2 text-100 font-700 text-white transition-all duration-300 ease-in-out hover:from-[#E46708] hover:to-[#CD2574]"
+              className="mt-8 w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-6 py-2 text-100 font-500 text-white transition-all duration-300 ease-in-out hover:from-[#E46708] hover:to-[#CD2574]"
             >
               Continue with Email
             </button>
@@ -103,7 +103,7 @@ const SignInForm = () => {
             </div>
             <button
               type="submit"
-              className="font-bold flex w-full items-center justify-center rounded-lg border-[1.8px] border-[#000]/15 bg-white px-6 py-2 text-100 font-600 text-[#5c6c75] transition-all duration-300 ease-in-out"
+              className="flex w-full items-center justify-center rounded-lg border-[1.8px] border-[#000]/15 bg-white px-6 py-2 text-100 font-600 text-[#5c6c75] transition-all duration-300 ease-in-out"
             >
               <div className="flex items-center gap-x-2">
                 <FcGoogle className="size-7" />

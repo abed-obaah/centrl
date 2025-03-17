@@ -1,40 +1,40 @@
-import { Link } from 'react-router-dom';
-import AppStore from '../assets/app.png';
-import PlayStore from '../assets/play.png';
+import { Link } from "react-router-dom";
+import AppStore from "../assets/app.png";
+import PlayStore from "../assets/play.png";
 
 const navigation = {
   centrl: [
-    { name: 'Create Events', href: '#' },
-    { name: 'Pricing', href: '#' },
-    { name: 'Discover', href: '#' },
-    { name: 'Centrl Mobile Ticket App ', href: '#' },
-    { name: 'Join Future100 community ', href: '#' },
-    { name: "What's new", href: '#' },
-    { name: 'FAQs', href: '#' },
-    { name: 'Sitemap', href: '#' },
+    { name: "Create Events", href: "#" },
+    { name: "Pricing", href: "#" },
+    { name: "Discover", href: "#" },
+    { name: "Centrl Mobile Ticket App ", href: "#" },
+    { name: "Join Future100 community ", href: "#" },
+    { name: "What's new", href: "#" },
+    { name: "FAQs", href: "#" },
+    { name: "Sitemap", href: "#" },
   ],
 
   info: [
-    { name: 'About Us', href: '#' },
-    { name: 'Partner with us', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Impact', href: '#' },
-    { name: 'Support', href: '#' },
-    { name: 'Help', href: '#' },
+    { name: "About Us", href: "#" },
+    { name: "Partner with us", href: "#" },
+    { name: "Careers", href: "#" },
+    { name: "Impact", href: "#" },
+    { name: "Support", href: "#" },
+    { name: "Help", href: "#" },
   ],
 
   policies: [
-    { name: 'Terms of Use', href: '#' },
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Cookies', href: '#' },
-    { name: 'Accessibility', href: '#' },
-    { name: 'Brand Guidelines', href: '#' },
+    { name: "Terms of Use", href: "#" },
+    { name: "Privacy Policy", href: "#" },
+    { name: "Cookies", href: "#" },
+    { name: "Accessibility", href: "#" },
+    { name: "Brand Guidelines", href: "#" },
   ],
 
   social: [
     {
-      name: 'Facebook',
-      href: '#',
+      name: "Facebook",
+      href: "#",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -46,8 +46,8 @@ const navigation = {
       ),
     },
     {
-      name: 'Instagram',
-      href: '#',
+      name: "Instagram",
+      href: "#",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -59,8 +59,8 @@ const navigation = {
       ),
     },
     {
-      name: 'X',
-      href: '#',
+      name: "X",
+      href: "#",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
@@ -68,8 +68,8 @@ const navigation = {
       ),
     },
     {
-      name: 'GitHub',
-      href: '#',
+      name: "GitHub",
+      href: "#",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -81,8 +81,8 @@ const navigation = {
       ),
     },
     {
-      name: 'YouTube',
-      href: '#',
+      name: "YouTube",
+      href: "#",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -98,14 +98,14 @@ const navigation = {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#fff] mt-20 py-20">
+    <footer className="mt-20 bg-[#fff] py-20">
       <div className="container 2xl:max-w-[1300px]">
         <div className="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-[1fr_2fr]">
           <div>
-            <p className="text-200 mb-4 font-600 text-[#000]">
+            <p className="mb-4 text-200 font-600 text-[#000]">
               Join our Newsletter
             </p>
-            <div className="relative flex gap-x-0 mb-4  w-full">
+            <div className="relative mb-4 flex w-full gap-x-0">
               <label htmlFor="email-address" className="sr-only">
                 Email address
               </label>
@@ -116,17 +116,17 @@ const Footer = () => {
                 required
                 placeholder="Enter your email"
                 autoComplete="email"
-                className="w-full rounded-md border bg-white px-3.5 py-2 pr-10 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6"
+                className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 sm:text-sm/6 w-full rounded-md border border-[#C2C2C2] bg-white px-3.5 py-2 pr-10 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2"
               />
               {/* Arrow Icon */}
-              <span className="absolute inset-y-0 right-3 flex items-center text-gray-400">
+              <span className="text-gray-400 absolute inset-y-0 right-3 flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                 >
                   <path
                     strokeLinecap="round"
@@ -137,33 +137,35 @@ const Footer = () => {
               </span>
             </div>
 
-            <p className="font-600 mb-4">Coming Soon to</p>
+            <p className="mb-4 font-600">Coming Soon to</p>
             <div className="flex gap-4">
               <img
                 src={AppStore}
                 alt="App Store"
-                className="w-[130px] h-auto"
-                style={{ objectFit: 'contain' }}
+                className="h-auto w-[130px]"
+                style={{ objectFit: "contain" }}
               />
               <img
                 src={PlayStore}
                 alt="Play Store"
-                className="w-[130px] h-auto"
-                style={{ objectFit: 'contain' }}
+                className="h-auto w-[130px]"
+                style={{ objectFit: "contain" }}
               />
             </div>
           </div>
 
           {/* Links */}
-          <div className="md:flex md:flex-wrap md:gap-8 lg:justify-self-end lg:gap-10">
+          <div className="md:flex md:flex-wrap md:gap-8 lg:gap-10 lg:justify-self-end">
             <div className="mt-16 md:mt-0">
-              <h3 className="mb-4 font-700 text-200">Use Centrl</h3>
+              <h3 className="mb-4 text-200 font-700">Use Centrl</h3>
               {navigation.centrl.map((item, index) => (
                 <li key={index} className="list-none">
                   <Link
-                    className="inline-block text-foreground hover:text-black duration-300 ease-in mb-2 text-50 font-500"
+                    className="mb-2 inline-block text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
                     to={item.href}
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
                   >
                     {item.name}
                   </Link>
@@ -172,13 +174,15 @@ const Footer = () => {
             </div>
 
             <div className="mt-16 md:mt-0">
-              <h3 className="mb-4 font-700 text-200">Company Info</h3>
+              <h3 className="mb-4 text-200 font-700">Company Info</h3>
               {navigation.info.map((item, index) => (
                 <li key={index} className="list-none">
                   <Link
-                    className="inline-block mb-2 text-foreground hover:text-black duration-300 ease-in text-50 font-500"
+                    className="mb-2 inline-block text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
                     to={item.href}
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
                   >
                     {item.name}
                   </Link>
@@ -187,13 +191,15 @@ const Footer = () => {
             </div>
 
             <div className="mt-16 md:mt-0">
-              <h3 className="mb-4 font-700 text-200">Terms & Policies</h3>
+              <h3 className="mb-4 text-200 font-700">Terms & Policies</h3>
               {navigation.policies.map((item, index) => (
                 <li key={index} className="list-none">
                   <Link
-                    className="inline-block mb-2 text-foreground hover:text-black duration-300 ease-in text-50 font-500"
+                    className="mb-2 inline-block text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
                     to={item.href}
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
                   >
                     {item.name}
                   </Link>
@@ -204,13 +210,13 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-8 md:flex md:items-center md:justify-between">
-          <p className="font-700 text-200 mb-4 md:mb-0">CENTRL.</p>
+          <p className="mb-4 text-200 font-700 md:mb-0">CENTRL.</p>
           <div className="flex gap-x-6 md:order-2">
             {navigation.social.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-[#888] hover:text-gray-300"
+                className="hover:text-gray-300 text-[#888]"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon aria-hidden="true" className="size-6" />
