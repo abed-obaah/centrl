@@ -20,9 +20,9 @@ const SignInLayout = () => {
 
         <div className="h-full xl:grid xl:grid-cols-2">
           {/* img */}
-          <div className="container flex h-full items-center justify-center xl:fixed xl:w-1/2 xl:overflow-hidden">
+          <div className="container hidden h-full items-center justify-center xl:fixed xl:flex xl:w-1/2 xl:overflow-hidden">
             <img
-              className="hidden xl:mx-auto xl:mt-[-1rem] xl:block xl:size-[500px] xl:object-cover 2xl:my-auto"
+              className="xl:mx-auto xl:mt-[-1rem] xl:block xl:size-[500px] xl:object-cover 2xl:my-auto"
               src={SignImg}
               alt="Sign In Image"
               loading="lazy"
