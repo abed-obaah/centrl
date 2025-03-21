@@ -72,7 +72,6 @@ const router = createBrowserRouter(
         <Route path="/discover" element={<Discover />} />
         <Route path="/details" element={<TrendingDetails />} />
         <Route path="/calendar" element={<Calenders />} />
-
         <Route path="/privacy" element={<Privacy />} />
       </Route>
 

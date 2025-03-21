@@ -210,7 +210,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-8 md:flex md:items-center md:justify-between">
-          <p className="mb-4 text-200 font-700 md:mb-0">CENTRL.</p>
+          <p className="mb-4 text-200 font-700 md:mb-0">Centrl</p>
           <div className="flex gap-x-6 md:order-2">
             {navigation.social.map((item) => (
               <a

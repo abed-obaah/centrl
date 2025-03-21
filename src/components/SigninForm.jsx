@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const SignInForm = () => {
   const [formData, setFormData] = useState({
@@ -11,30 +12,23 @@ const SignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
 
+  // Check if we're returning from Google auth with the google id from the user data object
   useEffect(() => {
-    // Parse URL parameters
-    const searchParams = new URLSearchParams(location.search);
-    const googleAuthStatus = searchParams.get("status");
-    const userData = searchParams.get("user");
+    // redirect with the goggle id parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    const userData = urlParams.get("user_data");
 
-    console.log("googleAuthStatus", googleAuthStatus);
-    console.log("userData", userData);
-
-    if (googleAuthStatus === "success" && userData) {
+    if (token && userData) {
       try {
-        // Parse user data if it's JSON-encoded
-        const user =
-          typeof userData === "string"
-            ? JSON.parse(decodeURIComponent(userData))
-            : userData;
+        const user = JSON.parse(decodeURIComponent(userData));
 
-        localStorage.setItem("user", JSON.stringify(user));
+        // Store auth data
+        login(user, token);
 
-        if (user.google_id) {
-          localStorage.setItem("token", user.google_id);
-        }
-
+        // Clear URL parameters and navigate to dashboard
         window.history.replaceState(
           {},
           document.title,
@@ -42,22 +36,11 @@ const SignInForm = () => {
         );
         navigate("/dashboard");
       } catch (error) {
-        console.error(
-          "Error processing Google authentication response:",
-          error,
-        );
+        console.error("Error processing authentication data:", error);
         setStatus("Error processing login data. Please try again.");
       }
     }
-    // Handle failed Google authentication
-    else if (googleAuthStatus === "error") {
-      const errorMessage =
-        searchParams.get("message") || "Google authentication failed";
-      setStatus(errorMessage);
-      // Clear URL parameters
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }, [location, navigate]);
+  }, [location, login, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -74,18 +57,13 @@ const SignInForm = () => {
     try {
       setIsLoading(true);
 
-      const response = await axios.post(
-        "https://api.centrl.ng/google_login.php",
-        formData,
-      );
+      const response = await axios.post("/api/google_login.php", formData);
 
       console.log("response", response);
 
       // Handle successful login
       if (response.data.status === "success") {
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("token", response.data.token);
-
+        login(response.data.user, response.data.token);
         setStatus("Login successful!");
         navigate("/dashboard");
       }
@@ -106,18 +84,27 @@ const SignInForm = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = () => {
     try {
-      const redirectUri = encodeURIComponent(
-        window.location.origin + window.location.pathname,
-      );
+      const redirectUrl = `${window.location.origin}/signin`;
 
-      window.location.href = `https://api.centrl.ng/google_callback.php?redirect_uri=${redirectUri}`;
+      window.location.href = `/api/google_callback.php?redirect_uri=${encodeURIComponent(redirectUrl)}`;
     } catch (error) {
       console.error("Google login failed:", error);
       setStatus("Google login failed. Please try again.");
     }
   };
+
+  if (
+    location.pathname.includes("google_callback.php") ||
+    location.search.includes("code=")
+  ) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Processing login...
+      </div>
+    );
+  }
 
   return (
     <div>
