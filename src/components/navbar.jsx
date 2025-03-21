@@ -43,9 +43,7 @@ const Navbar = ({ isClicked }) => {
                 to={item.href}
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               >
-                <a className="" href="#">
-                  {item.name}
-                </a>
+                <span>{item.name}</span>
               </Link>
             </li>
           ))}

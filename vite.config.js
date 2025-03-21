@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   base: "/",
   server: {
+    port: 3000,
     proxy: {
       "/api": {
         target: "https://api.centrl.ng",
@@ -13,13 +14,4 @@ export default defineConfig({
       },
     },
   },
-  // server: {
-  //   port: 3000,
-
-  //   "/api.centrl.ng": {
-  //     target: "https://api.centrl.ng",
-  //     changeOrigin: true,
-  //     rewrite: (path) => path.replace(/^\/api/, ""),
-  //   },
-  // },
 });
