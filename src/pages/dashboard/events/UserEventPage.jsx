@@ -4,11 +4,18 @@ import event1 from '../../../assets/event1.png';
 import event2 from '../../../assets/event2.png';
 import pageImage from '../../../assets/page-image.png';
 import TabSwitcher from '../../../components/dashboard/events/TabSwitcher';
+<<<<<<< HEAD
 // import { useSelector } from "react-redux";
 
 const UserEventPage = () => {
   const [activeTab, setActiveTab] = useState('Upcoming');
   // const { token, user_id, name, email, googleId } = useSelector((state) => state.auth);
+=======
+
+const UserEventPage = () => {
+  const [activeTab, setActiveTab] = useState('Upcoming');
+
+>>>>>>> 83782e7569708ed05d55e155a4244e2e84113bcb
   return (
     <>
       <div className="mt-32 px-4 md:px-0 mb-20 max-w-[1000px] mx-auto">
@@ -34,7 +41,11 @@ const UserEventPage = () => {
               />
             )}
           </div>
+<<<<<<< HEAD
           {/* <p><strong>Name:</strong> {name}</p> */}
+=======
+
+>>>>>>> 83782e7569708ed05d55e155a4244e2e84113bcb
           <div className="md:sticky md:top-32 md:self-start">
             <img className="mb-4" src={event1} alt="event1" />
             <img src={event2} alt="event 2" />

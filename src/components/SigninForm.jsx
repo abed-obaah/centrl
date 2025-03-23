@@ -18,6 +18,7 @@ const SignInForm = () => {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
   // };
 
+<<<<<<< HEAD
   const handleGoogleLogin = () => {
     window.location.href = "https://api.centrl.ng/google_callback.php";
   };
@@ -46,6 +47,32 @@ const SignInForm = () => {
   //   setIsLoading(false);
   // };
 
+=======
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    try {
+      const data = await googleAuth();
+      if (data?.status === "success") {
+        dispatch(
+          setUser({
+            token: data.token,
+            name: data.user.name,
+            email: data.user.email,
+            googleId: data.user.google_id,
+          })
+        );
+        navigate("/dashboard"); // Redirect after successful login
+      } else {
+        setStatus("Google authentication failed.");
+      }
+    } catch (error) {
+      setStatus("Something went wrong. Try again.");
+      console.error("Google Login Error:", error);
+    }
+    setIsLoading(false);
+  };
+
+>>>>>>> 83782e7569708ed05d55e155a4244e2e84113bcb
   // const handleEmailSubmit = async (e) => {
   //   e.preventDefault(); // Prevent form from refreshing the page
   //   const response = await registerEmail(formData.email);
@@ -65,6 +92,7 @@ const SignInForm = () => {
   };
 
   const handleBlur = async () => {
+<<<<<<< HEAD
     setIsLoading(true); // Start loading
     try {
       if (email.trim() !== "") {
@@ -96,6 +124,17 @@ const SignInForm = () => {
   
 
 
+=======
+    if (email.trim() !== "") {
+      const response = await registerEmail(email);
+      if (response) {
+        console.log("Email registered successfully:", response);
+      } else {
+        console.log("Failed to register email.");
+      }
+    }
+  };
+>>>>>>> 83782e7569708ed05d55e155a4244e2e84113bcb
   return (
     <div>
       <div className="h-[454px] w-[381px] rounded-xl border border-[#000]/15 bg-white px-6 py-4">
