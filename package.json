@@ -12,6 +12,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+<<<<<<< HEAD
+=======
+    "@reduxjs/toolkit": "^2.6.1",
+>>>>>>> 1723add (redux added)
     "axios": "^1.8.3",
     "date-fns": "^4.1.0",
     "emailjs-com": "^3.2.0",
@@ -22,7 +26,13 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
     "react-qr-code": "^2.0.15",
+<<<<<<< HEAD
     "react-router-dom": "^7.1.1"
+=======
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.1.1",
+    "redux-persist": "^6.0.0"
+>>>>>>> 1723add (redux added)
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
