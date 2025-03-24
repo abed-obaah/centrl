@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux"; // Import useSelector
 import Map from "../../assets/map.png";
 import Upload from "../../assets/upload.png";
 import Indicator from "../../assets/indicator.png";
@@ -8,6 +9,7 @@ import MoreOptions from "../../components/MoreOptions";
 import SideModal from "../../components/SidebarModal";
 import DescriptionModal from "../../components/DescriptionModal";
 import { Link } from "react-router-dom";
+import { createEvent} from "../../api/eventApi";
 
 export default function block() {
   const [role, setRole] = useState("");
@@ -26,6 +28,10 @@ export default function block() {
     "Student/Scholar",
     "Other",
   ];
+
+  const { token} = useSelector((state) => state.auth);
+  const user_id = useSelector((state) => state.auth.user_id);
+
 
   const [bgImage, setBgImage] = useState(bgGradient);
 
@@ -46,10 +52,36 @@ export default function block() {
     }
   };
 
+
+  const handleRoleSelect = (option) => {
+    setRole(option);
+    setIsOpen(false);
+  };
+
+  const handleCreateEvent = async (e) => {
+    e.preventDefault();
+    if (!token || !user_id) {
+      console.error("Token or user_id is missing");
+      return;
+    }
+    try {
+      const response = await createEvent({
+        title: "Event Title", // Replace with actual title
+        category: role,
+        token: token,
+        user_id: user_id,
+      });
+      console.log("Event created:", response);
+    } catch (error) {
+      console.error("Failed to create event:", error);
+    }
+  };
+  
+
   return (
     <>
       <div className="mb-20 mt-32 px-4 md:px-0">
-        <form className="">
+        <form className="" onSubmit={handleCreateEvent}>
           <div className="mx-auto max-w-[800px] md:grid md:grid-cols-[1fr_2fr] md:gap-12">
             <div className="md:sticky md:top-28">
               <div className="mx-auto max-w-[300px]">
@@ -234,11 +266,12 @@ export default function block() {
               </div>
 
               <MoreOptions />
-              <Link to={"/event:id"}>
-                <button className="mt-5 w-40 rounded-xl bg-[#FF6F02] py-2 text-white">
+              {/* <Link to={"/event:id"}> */}
+                <button type="submit"
+                className="mt-5 w-40 rounded-xl bg-[#FF6F02] py-2 text-white">
                   Create Event
                 </button>
-              </Link>
+              {/* </Link> */}
             </div>
           </div>
         </form>

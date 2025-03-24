@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-do';
 
 const ProfileModal = ({ isOpen, onClose, user }) => {
   if (!isOpen) return null;
-
+  console.log("Token:", user.token)
+  console.log("id:", user.user_id);
+ 
   return (
     <div className="absolute right-10 mt-0 w-56 bg-white shadow-lg rounded-xl p-2 z-50">
       <div className="flex space-x-4 border-b border-b-[#000]/15 pb-2">
@@ -12,10 +14,11 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
           className="size-9 rounded-full"
         />
         <div>
-          <p className="text-[15px] font-500">{user.name}</p>
+          <p className="text-[15px] font-500">{user.name} </p>
           <p className="text-[10px] font-500 text-[#646060]">{user.email}</p>
         </div>
       </div>
+     
 
       <div className="flex flex-col space-y-2 py-2">
         <Link

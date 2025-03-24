@@ -18,6 +18,7 @@ const EventHeader = () => {
 
   const userData = {
     name,
+    token,
     email,
     imageUrl: profileImage 
       ? profileImage 

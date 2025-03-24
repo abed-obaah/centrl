@@ -1,46 +1,60 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import { updateUserProfile } from "../../api/userApi";
+import { useSelector } from "react-redux";
 
-const EditProfileModal = ({ isOpen, onClose, profile, onSave }) => {
-  const [firstName, setFirstName] = useState(profile.firstName || 'Andy');
-  const [lastName, setLastName] = useState(profile.lastName || 'Mineo');
+const EditProfileModal = ({ isOpen, onClose, profileDetails, userProfile, token }) => {
+  const [firstName, setFirstName] = useState(userProfile?.name?.split(' ')[0] || 'Andy');
+  const [lastName, setLastName] = useState(userProfile?.name?.split(' ').slice(1).join(' ') || 'Mineo');
+  const user_id = useSelector((state) => state.auth.user_id);
+  
   const [additionalName, setAdditionalName] = useState(
-    profile.additionalName || 'El perro'
+    profileDetails?.additional_name || ''
   );
-  const [tagline, setTagline] = useState(profile.tagline || '');
-  const [bio, setBio] = useState(profile.bio || '');
+  const [tagline, setTagline] = useState(profileDetails?.tagline || '');
+  const [bio, setBio] = useState(profileDetails?.bio || '');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave({
-      firstName,
-      lastName,
-      additionalName,
-      bio,
+    const fullName = `${firstName.trim()} ${lastName.trim()}`;
+    const profileData = {
+      name: fullName,
+      additional_name: additionalName,
       tagline,
-    });
+      bio,
+      // profile_image: "https://example.com/profile.jpg",
+      // banner_image: "https://example.com/banner.jpg",
+      // rate: "",
+    };
+
+    try {
+      const response = await updateUserProfile(token, profileData);
+      console.log("Profile updated:", response);
+      onClose(); // Close modal on success
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+    }
   };
 
   return (
-    <div className="fixed z-[600]  inset-0  flex items-center justify-center ">
+    <div className="fixed z-[600] inset-0 flex items-center justify-center">
       <div
         className="fixed inset-0 z-50 bg-background/80 backdrop-blur-lg"
         onClick={onClose}
       />
-      <div className="bg-white z-[800] max-h-[90vh] overflow-y-auto   rounded-lg w-full max-w-[600px] mx-4">
+      <div className="bg-white z-[800] max-h-[90vh] overflow-y-auto rounded-lg w-full max-w-[600px] mx-4">
         <div className="flex justify-between items-center p-6 border-b border-[#000]/15">
           <span className="text-100 font-500">Edit Profile</span>
           <button onClick={onClose} className="text-black hover:text-gray-700">
             <X size={20} />
           </button>
         </div>
-
-        <form onSubmit={handleSubmit} className="p-6 ">
+        <form onSubmit={handleSubmit} className="p-6">
           <div className="mb-4">
-            <label className="block  text-foreground font-500 mb-2">
-              First name
+            <label className="block text-foreground font-500 mb-2">
+              First Name
             </label>
             <input
               type="text"
@@ -52,7 +66,7 @@ const EditProfileModal = ({ isOpen, onClose, profile, onSave }) => {
 
           <div className="mb-4">
             <label className="block text-foreground font-500 mb-2">
-              Last name
+              Last Name
             </label>
             <input
               type="text"
@@ -64,7 +78,7 @@ const EditProfileModal = ({ isOpen, onClose, profile, onSave }) => {
 
           <div className="mb-4">
             <label className="block text-foreground font-500 mb-2">
-              Additional name
+              Additional Name
             </label>
             <input
               type="text"
