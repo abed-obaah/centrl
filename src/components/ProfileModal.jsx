@@ -1,4 +1,4 @@
-import { Link } from 'react-router-do';
+import { Link } from 'react-router-dom';
 
 const ProfileModal = ({ isOpen, onClose, user }) => {
   if (!isOpen) return null;
