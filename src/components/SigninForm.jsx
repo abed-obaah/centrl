@@ -13,53 +13,10 @@ const SignInForm = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
 
-
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
   const handleGoogleLogin = () => {
     window.location.href = "https://api.centrl.ng/google_callback.php";
   };
 
-  // const handleGoogleLogin = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const data = await googleAuth();
-  //     if (data?.status === "success") {
-  //       dispatch(
-  //         setUser({
-  //           token: data.token,
-  //           name: data.user.name,
-  //           email: data.user.email,
-  //           googleId: data.user.google_id,
-  //         })
-  //       );
-  //       navigate("/dashboard"); // Redirect after successful login
-  //     } else {
-  //       setStatus("Google authentication failed.");
-  //     }
-  //   } catch (error) {
-  //     setStatus("Something went wrong. Try again.");
-  //     console.error("Google Login Error:", error);
-  //   }
-  //   setIsLoading(false);
-  // };
-
-  // const handleEmailSubmit = async (e) => {
-  //   e.preventDefault(); // Prevent form from refreshing the page
-  //   const response = await registerEmail(formData.email);
-
-  //   if (response) {
-  //     console.log("Email registered successfully:", response);
-  //     // Handle success (e.g., show a message or redirect user)
-  //   } else {
-  //     console.log("Failed to register email.");
-  //     // Handle failure (e.g., show error message)
-  //   }
-  // };
-
- 
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
@@ -69,17 +26,17 @@ const SignInForm = () => {
     try {
       if (email.trim() !== "") {
         const response = await registerEmail(email);
-        // console.log(response);
+        console.log("email response", response);
         if (response?.status === "success") {
           dispatch(
             setUser({
               token: response.token,
-              user_id: response.user.user_id,
+              user_id: response.user.id,
               name: response.user.name,
               email: response.user.email,
               googleId: response.user.google_id,
               profileImage: response.profile.profile_image,
-            })
+            }),
           );
           navigate("/dashboard"); // Redirect after successful login
         } else {
@@ -93,8 +50,6 @@ const SignInForm = () => {
       setIsLoading(false); // Stop loading
     }
   };
-  
-
 
   return (
     <div>
@@ -114,7 +69,7 @@ const SignInForm = () => {
 
           <form
           //  onSubmit={handleEmailSubmit}
-           >
+          >
             <div className="space-y-4">
               <div>
                 <label
@@ -124,18 +79,17 @@ const SignInForm = () => {
                   Email
                 </label>
                 <input
-        type="email"
-        id="email"
-        name="email"
-        value={email}
-        onChange={handleChange}
-        onBlur={handleBlur} // Triggers API call when user leaves the field
-        placeholder="you@email.com"
-        className="text-sm w-full rounded-lg border border-[#000]/15 px-4 py-2.5 outline-none transition"
-        required
-      />
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                  onBlur={handleBlur} // Triggers API call when user leaves the field
+                  placeholder="you@email.com"
+                  className="text-sm w-full rounded-lg border border-[#000]/15 px-4 py-2.5 outline-none transition"
+                  required
+                />
               </div>
-        
             </div>
 
             <button
@@ -149,7 +103,7 @@ const SignInForm = () => {
             <div className="my-2 text-center">
               <p className="font-200 text-200 text-black">or</p>
             </div>
-            
+
             <button
               type="button"
               onClick={handleGoogleLogin}

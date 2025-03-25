@@ -45,7 +45,7 @@ import Overview from "./pages/customize/overview";
 import Dashboard from "./pages/admin/Dashboard";
 import Users from "./pages/admin/users";
 import AdminEventManagement from "./pages/admin/event-management";
-import Block from "./pages/dashboard/block";
+import CreateEvent from "./pages/dashboard/CreateEvent";
 import EventPage from "./pages/dashboard/events/eventpage7";
 // import Waitlist from './pages/Waitlist';
 
@@ -77,7 +77,7 @@ const router = createBrowserRouter(
 
       <Route element={<DashboardWrapper />}>
         <Route path="/dashboard" element={<DashboardLayout />} />
-        <Route path="/block" element={<Block />} />
+        <Route path="/create-event" element={<CreateEvent />} />
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/user-profile/:id" element={<UserViewProfile />} />
         <Route path="/competition" element={<Competition />} />
@@ -97,7 +97,6 @@ const router = createBrowserRouter(
         <Route path="/settings" element={<Settings />} />
       </Route>
 
-      {/* <Route path="/sign-in" element={<WaitListLayout />} /> */}
       <Route path="/sign-up" element={<SignInLayout />} />
 
       {/* Admin Login Layout and Dashboard layout */}
