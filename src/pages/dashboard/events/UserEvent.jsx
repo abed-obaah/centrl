@@ -153,14 +153,6 @@ const DayEvents = ({ day, dayEvents, isLastDay }) => {
 };
 
 const UserEvent = () => {
-  // const eventsGroupedByDay = activity.map((day, index) => {
-  //   return {
-  //     day,
-  //     events,
-  //     isLastDay: index === activity.length - 1,
-  //   };
-  // });
-
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -187,14 +179,6 @@ const UserEvent = () => {
   return (
     <div>
       <div className="relative space-y-10 pl-2">
-        {/* {eventsGroupedByDay.map(({ day, events, isLastDay }) => (
-          <DayEvents
-            key={day.id}
-            day={day}
-            dayEvents={events}
-            isLastDay={isLastDay}
-          />
-        ))} */}
         {events.map((event) => (
           <div key={event.id}>
             <p>{event.event_title}</p>
