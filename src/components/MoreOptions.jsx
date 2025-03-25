@@ -1,7 +1,7 @@
 import optionsImage from "../assets/optionsImage.png";
 import { useEffect, useState, useRef } from "react";
 import { Switch } from "@headlessui/react";
-import { Pencil, X, ChevronDown, Plus } from "lucide-react";
+import { Pencil, X, ChevronDown } from "lucide-react";
 
 const itemsData = [
   {
@@ -62,7 +62,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
   const [toggleStates, setToggleStates] = useState({});
   const [showCollaboratorModal, setShowCollaboratorModal] = useState(false);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-  const [collaboratorEmail, setCollaboratorEmail] = useState("");
+  const [collaboratorName, setCollaboratorName] = useState("");
   const [collaborators, setCollaborators] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState(
     eventData.language || "English",
@@ -194,23 +194,18 @@ export default function MoreOptions({ eventData, onOptionChange }) {
   // Add a collaborator
   const addCollaborator = (e) => {
     e.preventDefault();
-    if (!collaboratorEmail) return;
+    if (!collaboratorName) return;
 
-    const newCollaborator = {
-      name: collaboratorEmail.split("@")[0],
-      email: collaboratorEmail,
-    };
-
-    const updatedCollaborators = [...collaborators, newCollaborator];
+    const updatedCollaborators = [...collaborators, collaboratorName];
     setCollaborators(updatedCollaborators);
     onOptionChange("collaborators", updatedCollaborators);
-    setCollaboratorEmail("");
+    setCollaboratorName("");
     setShowCollaboratorModal(false);
   };
 
   // Remove a collaborator
-  const removeCollaborator = (email) => {
-    const updatedCollaborators = collaborators.filter((c) => c.email !== email);
+  const removeCollaborator = (name) => {
+    const updatedCollaborators = collaborators.filter((c) => c.name !== name);
     setCollaborators(updatedCollaborators);
     onOptionChange("collaborators", updatedCollaborators);
   };
@@ -383,12 +378,10 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                 >
                   <div className="flex items-center">
                     <div className="text-sm mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-muted">
-                      {collaborator.name?.charAt(0) || "U"}
+                      {collaborator.charAt(0) || "U"}
                     </div>
                     <div>
-                      <p className="text-sm font-medium">
-                        {collaborator.name || collaborator.email.split("@")[0]}
-                      </p>
+                      <p className="text-sm font-medium">{collaborator}</p>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -399,7 +392,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                       type="button"
                       onClick={(e) => {
                         e.preventDefault();
-                        removeCollaborator(collaborator.email);
+                        removeCollaborator(collaborator);
                       }}
                       className="text-muted50 hover:text-black"
                     >
@@ -433,12 +426,12 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
             <div className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-1 block">Email</label>
+                <label className="text-sm font-medium mb-1 block">Name</label>
                 <input
-                  type="email"
-                  value={collaboratorEmail}
-                  onChange={(e) => setCollaboratorEmail(e.target.value)}
-                  placeholder="Enter collaborator email"
+                  type="text"
+                  value={collaboratorName}
+                  onChange={(e) => setCollaboratorName(e.target.value)}
+                  placeholder="Enter collaborator name"
                   className="w-full rounded-md bg-white px-3 py-2 outline-none"
                 />
               </div>
