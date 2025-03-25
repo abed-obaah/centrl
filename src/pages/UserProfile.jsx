@@ -23,8 +23,7 @@ import Techbro from "../assets/tech.png";
 import David from "../assets/david.png";
 import Followers from "../components/user/Followers";
 import { useSelector } from "react-redux";
-import { getUserProfile,updateProfileImages } from "../api/userApi";
-
+import { getUserProfile, updateProfileImages } from "../api/userApi";
 
 const profile = {
   name: "Andy Mineo",
@@ -98,19 +97,15 @@ const UserProfile = () => {
   const [bannerImage, setBannerImage] = useState(profile.coverImageUrl);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-
-
-
   const { token } = useSelector((state) => state.auth); // Get token from Redux
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [profileDetails, setProfileDetails] = useState(null);
 
-
   useEffect(() => {
     if (!token) return;
-    
+
     const fetchProfile = async () => {
       try {
         const data = await getUserProfile(token);
@@ -127,7 +122,6 @@ const UserProfile = () => {
     fetchProfile();
   }, [token]);
 
-
   const profileInputRef = useRef(null);
   const bannerInputRef = useRef(null);
 
@@ -142,23 +136,23 @@ const UserProfile = () => {
   const handleProfileImageChange = async (e) => {
     const file = e.target.files[0];
     console.log("📸 Selected Profile Image: ", file);
-  
+
     if (file) {
       // Instantly show the selected image on the frontend
       setProfileImage(URL.createObjectURL(file));
-  
+
       try {
         // Call the API to upload the image
         const response = await updateProfileImages(token, null, file);
         console.log("✅ Profile image updated:", response);
-  
+
         if (response?.data?.profile_image_url) {
           // Update the profileDetails with new image URL
           setProfileDetails((prev) => ({
             ...prev,
             profile_image: response.data.profile_image_url,
           }));
-  
+
           // Optionally, clear the local state once persisted
           setProfileImage(null);
         }
@@ -167,8 +161,6 @@ const UserProfile = () => {
       }
     }
   };
-  
-  
 
   // const handleBannerImageChange = (event) => {
   //   const file = event.target.files[0];
@@ -182,28 +174,26 @@ const UserProfile = () => {
     profileInputRef.current.click();
   };
 
-// Trigger file input when image is clicked
-const triggerBannerImageUpload = () => {
-  bannerInputRef.current.click();
-};
+  // Trigger file input when image is clicked
+  const triggerBannerImageUpload = () => {
+    bannerInputRef.current.click();
+  };
 
-// Handle banner image selection
-const handleBannerImageChange = async (e) => {
-  const file = e.target.files[0];
-  console.log("📸 Selected File: ", file);
-  
-  if (file) {
-    setBannerImage(URL.createObjectURL(file));
-    try {
-      const response = await updateProfileImages(token, file, null);
-      console.log("✅ Banner image updated:", response);
-    } catch (error) {
-      console.error("❌ Failed to update banner image:", error);
+  // Handle banner image selection
+  const handleBannerImageChange = async (e) => {
+    const file = e.target.files[0];
+    console.log("📸 Selected File: ", file);
+
+    if (file) {
+      setBannerImage(URL.createObjectURL(file));
+      try {
+        const response = await updateProfileImages(token, file, null);
+        console.log("✅ Banner image updated:", response);
+      } catch (error) {
+        console.error("❌ Failed to update banner image:", error);
+      }
     }
-  }
-};
-
-
+  };
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
@@ -244,23 +234,24 @@ const handleBannerImageChange = async (e) => {
         <div className="container">
           <div className="relative mx-auto max-w-[1100px]">
             <div className="group relative">
-                        <img
-              src={profileDetails?.banner_image 
-                    ? `https://api.centrl.ng/uploads/banners/${profileDetails.banner_image}` 
-                    : bannerImage}
-              alt="Profile cover"
-              className="h-32 w-full cursor-pointer rounded-xl object-cover lg:h-[291px]"
-              onClick={triggerBannerImageUpload}
-            />
+              <img
+                src={
+                  profileDetails?.banner_image
+                    ? `https://api.centrl.ng/uploads/banners/${profileDetails.banner_image}`
+                    : bannerImage
+                }
+                alt="Profile cover"
+                className="h-32 w-full cursor-pointer rounded-xl object-cover lg:h-[291px]"
+                onClick={triggerBannerImageUpload}
+              />
 
-
-            <input
-              type="file"
-              ref={bannerInputRef}
-              onChange={handleBannerImageChange}
-              accept="image/*"
-              className="hidden"
-            />
+              <input
+                type="file"
+                ref={bannerInputRef}
+                onChange={handleBannerImageChange}
+                accept="image/*"
+                className="hidden"
+              />
             </div>
 
             <button
@@ -275,34 +266,33 @@ const handleBannerImageChange = async (e) => {
             <div className="mb-8">
               <div className="-mt-12 flex flex-col px-4 sm:-mt-16 sm:flex-row sm:items-end sm:justify-between sm:px-0">
                 <div className="flex items-end space-x-5">
-                <div className="group relative">
-                        <img
-                          src={
-                            profileDetails?.profile_image
-                              ? `https://api.centrl.ng/uploads/profiles/${profileDetails.profile_image}`
-                              : profileImage
-                          }
-                          alt="Profile"
-                          className="h-24 w-24 cursor-pointer rounded-full ring-4 ring-background sm:h-32 sm:w-32"
-                          onClick={triggerProfileImageUpload}
-                        />
+                  <div className="group relative">
+                    <img
+                      src={
+                        profileDetails?.profile_image
+                          ? `https://api.centrl.ng/uploads/profiles/${profileDetails.profile_image}`
+                          : profileImage
+                      }
+                      alt="Profile"
+                      className="h-24 w-24 cursor-pointer rounded-full ring-4 ring-background sm:h-32 sm:w-32"
+                      onClick={triggerProfileImageUpload}
+                    />
 
-                        <input
-                          type="file"
-                          ref={profileInputRef}
-                          onChange={handleProfileImageChange}
-                          accept="image/*"
-                          className="hidden"
-                        />
+                    <input
+                      type="file"
+                      ref={profileInputRef}
+                      onChange={handleProfileImageChange}
+                      accept="image/*"
+                      className="hidden"
+                    />
 
-                        <button
-                          className="absolute bottom-0 right-0 rounded-full bg-white p-2 shadow-md"
-                          onClick={triggerProfileImageUpload}
-                        >
-                          <PencilIcon className="text-gray-600 h-4 w-4" />
-                        </button>
-                      </div>
-
+                    <button
+                      className="absolute bottom-0 right-0 rounded-full bg-white p-2 shadow-md"
+                      onClick={triggerProfileImageUpload}
+                    >
+                      <PencilIcon className="text-gray-600 h-4 w-4" />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="mt-4 flex space-x-2 sm:mt-0">
@@ -331,15 +321,18 @@ const handleBannerImageChange = async (e) => {
 
               <div className="mt-6">
                 <h2 className="font-700 text-black md:text-400">
-                {userProfile ? userProfile.name : "Loading..."}
+                  {userProfile ? userProfile.name : "Loading..."}
                 </h2>
                 {/* <p className="text-sm text-black">{profile.stats}</p> */}
                 <div className="flex items-center gap-2">
-                  <p className="text-sm text-black">{profileDetails?.likes || 0} Likes</p>
+                  <p className="text-sm text-black">
+                    {profileDetails?.likes || 0} Likes
+                  </p>
                   <p className="text-sm text-black">•</p>
-                  <p className="text-sm text-black">{profileDetails?.followers || 0} Followers</p>
+                  <p className="text-sm text-black">
+                    {profileDetails?.followers || 0} Followers
+                  </p>
                 </div>
-
               </div>
 
               <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -381,7 +374,6 @@ const handleBannerImageChange = async (e) => {
                 {/* <UserBio profile={profile} /> */}
                 <UserBio profile={profileDetails} />
 
-
                 <Calendar onSelectDate={handleDateSelect} />
               </div>
               {activeTab === "calendar" && (
@@ -393,15 +385,15 @@ const handleBannerImageChange = async (e) => {
 
         {/* Modal */}
         {isModalOpen && (
-            <EditProfileModal
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-              profileDetails={profileDetails}
-              userProfile={userProfile}
-              onSave={handleSaveProfile}
-              token={token}
-            />
-          )}
+          <EditProfileModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            profileDetails={profileDetails}
+            userProfile={userProfile}
+            onSave={handleSaveProfile}
+            token={token}
+          />
+        )}
       </div>
     </>
   );

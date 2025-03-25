@@ -1,17 +1,30 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const createEvent = async (eventData, bannerImageFile, backgroundImageFile, videoFile, token) => {
+export const createEvent = async (
+  fullEventData,
+  bannerImage,
+  videoFile,
+  token,
+) => {
   const formData = new FormData();
 
-  // Append text fields
-  Object.keys(eventData).forEach((key) => {
-    formData.append(key, eventData[key]);
+  // Append all fields from fullEventData
+  Object.keys(fullEventData).forEach((key) => {
+    if (key !== "banner_image" && key !== "video") {
+      formData.append(key, fullEventData[key]);
+    }
   });
 
   // Append files if they exist
-  if (bannerImageFile) formData.append("banner_image", bannerImageFile);
-  if (backgroundImageFile) formData.append("background_image", backgroundImageFile);
+  if (bannerImage) formData.append("banner_image", bannerImage);
   if (videoFile) formData.append("video", videoFile);
+
+  console.log("Form data entries:");
+  for (var pair of formData.entries()) {
+    console.log(
+      pair[0] + ": " + (pair[1] instanceof File ? "File object" : pair[1]),
+    );
+  }
 
   try {
     const response = await axios({
@@ -19,15 +32,32 @@ export const createEvent = async (eventData, bannerImageFile, backgroundImageFil
       url: "https://api.centrl.ng/create_event.php",
       data: formData,
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       },
-      withCredentials: false, // Try setting to false if true fails
     });
+
+    // console.log("response from backend", response.data);
 
     return response.data;
   } catch (error) {
-    console.error("API Error:", error.response ? error.response.data : error.message);
+    console.error("API Error:", error.response.data);
+    throw error;
+  }
+};
+
+export const getEvents = async (token) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: "https://api.centrl.ng/get_events.php",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.response.data);
     throw error;
   }
 };

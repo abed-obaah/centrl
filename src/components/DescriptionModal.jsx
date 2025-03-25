@@ -1,8 +1,19 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
-const DescriptionModal = ({ isOpen, onClose }) => {
+const DescriptionModal = ({ isOpen, description = "", onSave, onClose }) => {
+  const [value, setValue] = useState(description);
+
+  useEffect(() => {
+    setValue(description);
+  }, [description]);
+
   if (!isOpen) return null;
+
+  const handleSave = () => {
+    onSave(value);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-[500] mt-10 flex justify-center">
@@ -23,16 +34,26 @@ const DescriptionModal = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        <p className="px-4 pt-6 text-50">
-          Global community and platform dedicated to empowering professionals,
-          executives, entrepreneurs, and leaders to drive Change.
-        </p>
+        <div className="p-4">
+          <textarea
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder="Global community and platform dedicated to empowering professionals, executives, entrepreneurs, and leaders to drive Change."
+            className="h-[180px] w-full resize-none bg-[#F4F5F7] pl-4 pt-4"
+          />
+        </div>
 
         {/* Buttons */}
         <div className="absolute bottom-0 right-0 w-full space-x-2 rounded-bl-xl rounded-br-xl bg-white py-3 pr-2 text-right">
           <button
+            onClick={handleSave}
+            className="rounded-xl bg-primary px-8 py-1.5 font-500 text-white"
+          >
+            Save
+          </button>
+          <button
             onClick={onClose}
-            className="rounded-xl bg-modalbutton px-8 py-1.5 font-600 text-white"
+            className="rounded-xl bg-modalbutton px-8 py-1.5 font-500 text-white"
           >
             Cancel
           </button>

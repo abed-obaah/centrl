@@ -1,12 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const ProfileModal = ({ isOpen, onClose, user }) => {
   if (!isOpen) return null;
-  console.log("Token:", user.token)
-  console.log("id:", user.user_id);
- 
+
   return (
-    <div className="absolute right-10 mt-0 w-56 bg-white shadow-lg rounded-xl p-2 z-50">
+    <div className="absolute right-10 z-50 mt-0 w-56 rounded-xl bg-white p-2 shadow-lg">
       <div className="flex space-x-4 border-b border-b-[#000]/15 pb-2">
         <img
           src={user.imageUrl}
@@ -18,14 +16,13 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
           <p className="text-[10px] font-500 text-[#646060]">{user.email}</p>
         </div>
       </div>
-     
 
       <div className="flex flex-col space-y-2 py-2">
         <Link
-          to={'/user-profile'}
-          className="text-black text-50  font-600"
+          to={"/user-profile"}
+          className="text-50 font-600 text-black"
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: "smooth" });
             onClose();
           }}
         >
@@ -33,10 +30,10 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
         </Link>
 
         <Link
-          to={'/'}
-          className="text-black text-50  font-600"
+          to={"/"}
+          className="text-50 font-600 text-black"
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: "smooth" });
             onClose();
           }}
         >
@@ -44,17 +41,17 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
         </Link>
 
         <Link
-          to={'/settings'}
-          className="text-black text-50  font-600"
+          to={"/settings"}
+          className="text-50 font-600 text-black"
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: "smooth" });
             onClose();
           }}
         >
           Settings
         </Link>
 
-        <p className="text-black text-50 cursor-pointer font-600">Logout</p>
+        <p className="cursor-pointer text-50 font-600 text-black">Logout</p>
       </div>
     </div>
   );
