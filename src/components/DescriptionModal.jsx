@@ -39,7 +39,7 @@ const DescriptionModal = ({ isOpen, description = "", onSave, onClose }) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="Global community and platform dedicated to empowering professionals, executives, entrepreneurs, and leaders to drive Change."
-            className="h-[180px] w-full resize-none bg-[#F4F5F7] pl-4 pt-4"
+            className="h-[180px] w-full resize-none bg-[#F4F5F7] pl-4 pt-4 outline-none"
           />
         </div>
 
@@ -50,12 +50,6 @@ const DescriptionModal = ({ isOpen, description = "", onSave, onClose }) => {
             className="rounded-xl bg-primary px-8 py-1.5 font-500 text-white"
           >
             Save
-          </button>
-          <button
-            onClick={onClose}
-            className="rounded-xl bg-modalbutton px-8 py-1.5 font-500 text-white"
-          >
-            Cancel
           </button>
         </div>
       </div>
