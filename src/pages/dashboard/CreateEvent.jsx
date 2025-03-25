@@ -11,6 +11,7 @@ import DescriptionModal from "../../components/DescriptionModal";
 import { createEvent } from "../../api/eventApi";
 import { Spinner } from "../../components/Spinner";
 import { Link, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const defaultEventData = {
   event_title: "",
@@ -37,6 +38,7 @@ export default function CreateEvent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   // Form state
   const [eventData, setEventData] = useState({ ...defaultEventData });
@@ -233,6 +235,9 @@ export default function CreateEvent() {
       console.log("Event created:", response);
       setSuccess(true);
       resetForm();
+
+      // Navigate to the new event page
+      // navigate(`/event/${response.id}`);
     } catch (error) {
       console.error("Failed to create event:", error);
 
@@ -373,10 +378,6 @@ export default function CreateEvent() {
                         onChange={handleInputChange}
                         className="w-36 rounded-xl bg-white p-3 outline-none"
                       />
-
-                      {/* <span className="absolute right-4 top-3 font-500 text-black">
-                        PM
-                      </span> */}
                     </div>
                   </div>
                 </div>
