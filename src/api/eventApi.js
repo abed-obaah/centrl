@@ -37,7 +37,7 @@ export const createEvent = async (
       },
     });
 
-    // console.log("response from backend", response.data);
+    console.log("response from backend", response.data);
 
     return response.data;
   } catch (error) {

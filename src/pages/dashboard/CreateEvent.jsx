@@ -63,6 +63,26 @@ export default function CreateEvent() {
   const userId = useSelector((state) => state.auth.user_id);
   const token = useSelector((state) => state.auth.token);
 
+  const isFormComplete = () => {
+    const requiredFields = [
+      eventData.event_title,
+      bannerImage,
+      eventData.start_date,
+      eventData.start_time,
+      eventData.about,
+      eventData.event_category,
+    ];
+
+    if (eventData.location_type === "virtual" && !eventData.event_link) {
+      return false;
+    }
+    if (eventData.location_type === "in-person" && !eventData.location) {
+      return false;
+    }
+
+    return requiredFields.every((field) => field);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEventData({
@@ -155,7 +175,7 @@ export default function CreateEvent() {
       user_id: userId,
       event_title: eventData.event_title,
       start_time: startDateTime,
-      event_type: eventData.event_type === "public" ? "Online" : "Private",
+      event_type: eventData.event_type === "public" ? "public" : "Private",
       event_link: eventData.event_link || null,
       location: eventData.location || null,
       about: eventData.about,
@@ -167,7 +187,7 @@ export default function CreateEvent() {
         eventData.capacity === "Unlimited"
           ? 0
           : parseInt(eventData.capacity, 10) || 0,
-      collaborators: JSON.stringify(eventData.collaborators || []),
+      collaborators: eventData.collaborators || [],
       language: eventData.language,
       video: null,
       banner_image: null,
@@ -289,7 +309,6 @@ export default function CreateEvent() {
                     className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm relative mt-5 flex h-64 w-full items-end justify-between rounded-xl px-3 py-3 outline-1 -outline-offset-1 focus:outline-2"
                   >
                     <div className="mt-10 items-end">
-                      <p className="font-700">Plus +</p>
                       <p className="mt-10"></p>
                     </div>
 
@@ -342,7 +361,7 @@ export default function CreateEvent() {
                       type="date"
                       value={eventData.start_date}
                       onChange={handleInputChange}
-                      className="w-36 rounded-xl bg-white p-3 outline-none"
+                      className="w-40 rounded-xl bg-white p-3 outline-none"
                     />
 
                     <div className="relative">
@@ -494,7 +513,7 @@ export default function CreateEvent() {
                 </button>
 
                 {isOpen && (
-                  <div className="absolute left-0 right-0 top-full z-10 mt-1 h-[200px] overflow-y-auto rounded-xl border border-[#CD2574] bg-[#fff] pb-4 shadow-xl">
+                  <div className="absolute left-0 right-0 top-full z-10 mt-1 h-[200px] overflow-y-auto rounded-xl border border-primary bg-[#fff] pb-4 shadow-xl">
                     {roles.map((option) => (
                       <button
                         key={option}
@@ -517,8 +536,10 @@ export default function CreateEvent() {
 
               <button
                 type="submit"
-                disabled={loading}
-                className={`mt-5 w-40 rounded-xl bg-[#FF6F02] py-2 text-white`}
+                disabled={!isFormComplete() || loading}
+                className={`mt-5 w-40 rounded-xl bg-[#FF6F02] py-2 text-white ${
+                  !isFormComplete() ? "cursor-not-allowed opacity-50" : ""
+                }`}
               >
                 {loading ? <Spinner text="Creating Event" /> : "Create Event"}
               </button>
