@@ -61,3 +61,19 @@ export const getEvents = async (token) => {
     throw error;
   }
 };
+
+export const getEvent = async (eventId, token) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `https://api.centrl.ng/get_events.php?id=${eventId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.response.data);
+    throw error;
+  }
+};

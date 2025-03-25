@@ -83,7 +83,7 @@ const router = createBrowserRouter(
         <Route path="/competition" element={<Competition />} />
         <Route path="/category/:id" element={<CategoryDetails />} />
         <Route path="/events" element={<UserEventPage />} />
-        <Route path="/event:id" element={<EventPage />} />
+        <Route path="/event/:id" element={<EventPage />} />
         <Route path="/dashboard/discover" element={<Discovered />} />
       </Route>
 
