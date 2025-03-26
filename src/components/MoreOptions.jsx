@@ -56,7 +56,7 @@ const languages = [
 ];
 
 // Ticket types
-const ticketTypes = ["Basic", "Diamond", "VIP"];
+const ticketTypes = ["Paid"];
 
 export default function MoreOptions({ eventData, onOptionChange }) {
   const [toggleStates, setToggleStates] = useState({});
@@ -70,13 +70,11 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
   // Ticket state
   const [ticketValue, setTicketValue] = useState(
-    eventData.ticket_type || "Free",
+    eventData.ticket_type === "Paid" ? "Paid" : "Free",
   );
   const [showTicketModal, setShowTicketModal] = useState(false);
   const [ticketPrices, setTicketPrices] = useState({
-    Basic: eventData.ticket_price || 0,
-    Diamond: eventData.ticket_price || 0,
-    VIP: eventData.ticket_price || 0,
+    Paid: eventData.ticket_price || 0,
   });
 
   const [capacityValue, setCapacityValue] = useState(
@@ -222,11 +220,12 @@ export default function MoreOptions({ eventData, onOptionChange }) {
     setTicketValue(value);
     onOptionChange("ticket_type", value);
 
-    // If switching to paid, update the ticket price
-    if (value !== "Free") {
-      onOptionChange("ticket_price", ticketPrices[value]);
-    } else {
+    // Reset price to 0 when switching to Free
+    if (value === "Free") {
       onOptionChange("ticket_price", 0);
+    } else {
+      // Use the saved price when switching to Paid
+      onOptionChange("ticket_price", ticketPrices["Paid"] || 0);
     }
   };
 
@@ -237,10 +236,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
       ...prev,
       [type]: numericPrice,
     }));
-
-    if (ticketValue === type) {
-      onOptionChange("ticket_price", numericPrice);
-    }
+    onOptionChange("ticket_price", numericPrice);
   };
 
   // Update capacity value
@@ -492,37 +488,35 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                 Free
               </div>
 
-              {/* Paid options */}
-              <div className="space-y-2">
-                <h4 className="text-sm font-medium">Paid Tickets</h4>
-
-                {ticketTypes.map((type) => (
-                  <div key={type} className="space-y-2">
-                    <div
-                      onClick={() => updateTicketValue(type)}
-                      className={`flex cursor-pointer items-center justify-between rounded-md p-3 ${
-                        ticketValue === type ? "bg-muted" : "bg-white"
-                      }`}
-                    >
-                      <span>{type}</span>
-                      {ticketValue === type && (
-                        <div className="flex items-center">
-                          <span className="mr-2">₦</span>
-                          <input
-                            type="number"
-                            value={ticketPrices[type]}
-                            onChange={(e) =>
-                              updateTicketPrice(type, e.target.value)
-                            }
-                            onClick={(e) => e.stopPropagation()}
-                            className="w-24 rounded-md bg-white px-2 py-1 outline-none"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
+              {/* Paid option */}
+              <div
+                onClick={() => updateTicketValue("Paid")}
+                className={`cursor-pointer rounded-md p-3 ${
+                  ticketValue === "Paid" ? "bg-muted" : "bg-white"
+                }`}
+              >
+                Paid
               </div>
+
+              {/* Price input only shown when Paid is selected */}
+              {ticketValue === "Paid" && (
+                <div className="mt-4 px-3">
+                  <label className="text-sm font-medium mb-1 block">
+                    Ticket Price
+                  </label>
+                  <div className="flex items-center">
+                    <span className="mr-2">₦</span>
+                    <input
+                      type="number"
+                      value={ticketPrices["Paid"]}
+                      onChange={(e) =>
+                        updateTicketPrice("Paid", e.target.value)
+                      }
+                      className="w-full rounded-md bg-white px-3 py-2 outline-none"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

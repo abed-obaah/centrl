@@ -232,12 +232,12 @@ export default function CreateEvent() {
         token,
       );
 
-      console.log("Event created:", response);
+      // console.log("Event created:", response);
       setSuccess(true);
       resetForm();
 
       // Navigate to the new event page
-      // navigate(`/event/${response.id}`);
+      navigate(`/event/${response.data.id}`);
     } catch (error) {
       console.error("Failed to create event:", error);
 
@@ -538,7 +538,7 @@ export default function CreateEvent() {
               <button
                 type="submit"
                 disabled={!isFormComplete() || loading}
-                className={`mt-5 w-40 rounded-xl bg-[#FF6F02] py-2 text-white ${
+                className={`mt-5 w-40 rounded-xl bg-primary py-2 text-white ${
                   !isFormComplete() ? "cursor-not-allowed opacity-50" : ""
                 }`}
               >

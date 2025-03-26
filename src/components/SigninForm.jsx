@@ -2,11 +2,10 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { googleAuth, registerEmail } from "../api/authApi";
+import { registerEmail } from "../api/authApi";
 import { setUser } from "../redux/authSlice";
 
 const SignInForm = () => {
-  const [formData, setFormData] = useState({ email: "" });
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ const SignInForm = () => {
   };
 
   const handleBlur = async () => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     try {
       if (email.trim() !== "") {
         const response = await registerEmail(email);
@@ -38,7 +37,7 @@ const SignInForm = () => {
               profileImage: response.profile.profile_image,
             }),
           );
-          navigate("/dashboard"); // Redirect after successful login
+          navigate("/dashboard");
         } else {
           setStatus("Failed to register email.");
         }
@@ -53,7 +52,7 @@ const SignInForm = () => {
 
   return (
     <div>
-      <div className="h-[454px] w-[381px] rounded-xl border border-[#000]/15 bg-white px-6 py-4">
+      <div className="h-[454px] w-[381px] rounded-xl bg-white px-6 py-4">
         <div>
           <div className="mb-8 pt-4">
             <p className="text-200 font-700 text-foreground">Welcome to</p>
