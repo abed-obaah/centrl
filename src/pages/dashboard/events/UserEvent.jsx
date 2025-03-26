@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { getEvents } from "../../../api/eventApi";
 import { Spinner } from "../../../components/Spinner";
 import { format, parseISO } from "date-fns";
+import MeetingLink from "../../../components/MeetingLink";
 
 const groupEventsByDate = (events) => {
   const grouped = events.reduce((acc, event) => {
@@ -26,6 +27,7 @@ const groupEventsByDate = (events) => {
 
 const EventCard = ({ event }) => {
   const navigate = useNavigate();
+  const userId = useSelector((state) => state.auth.user_id);
 
   const placeholderAttendees = [
     "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -34,8 +36,10 @@ const EventCard = ({ event }) => {
 
   // Handle click event
   const handleCardClick = () => {
-    if (event.status === "edit") {
-      navigate(`/overview`);
+    if (userId === event.creator_id) {
+      navigate(`/customize/${event.id}`);
+    } else {
+      navigate(`/event/${event.id}`);
     }
   };
 
@@ -48,14 +52,10 @@ const EventCard = ({ event }) => {
     }
   };
 
-  // Determine cursor style based on status
-  const cursorStyle =
-    event.status === "edit" ? "cursor-pointer" : "cursor-default";
-
   return (
     <div
       onClick={handleCardClick}
-      className={`${cursorStyle} rounded-xl bg-white p-4 md:flex md:items-start md:gap-4`}
+      className={`cursor-pointer rounded-xl bg-white p-4 md:flex md:items-start md:gap-4`}
     >
       <img
         src={event.banner_image}
@@ -68,7 +68,16 @@ const EventCard = ({ event }) => {
           {formatEventTime(event.start_time)}
         </span>
         <h3 className="text-200 font-600 capitalize">{event.event_title}</h3>
-        <p className="text-100 text-foreground/70">{event.location}</p>
+        {event.event_link !== "null" && (
+          <div className="inline-block">
+            <MeetingLink url={event.event_link} />
+          </div>
+        )}
+
+        {event.location !== "null" && (
+          <p className="text-gray-400 capitalize">{event.location}</p>
+        )}
+
         <p className="mb-2 text-100 text-foreground">{event.language}</p>
 
         <div>
@@ -89,22 +98,20 @@ const EventCard = ({ event }) => {
         </div>
       </div>
 
-      <span className="rounded-xl border border-[#000]/15 bg-[#f9f9f9] px-4 py-1 text-50 text-foreground/50">
-        {event.status === "edit" ? (
-          <Edit className="size-4 text-foreground" />
-        ) : (
-          event.status
-        )}
-      </span>
+      {userId === event.user_id && (
+        <span className="rounded-xl text-50 text-foreground/50">
+          <Edit className="size-5 text-foreground" />
+        </span>
+      )}
     </div>
   );
 };
 
-const DayEvents = ({ day, dateStr, dayEvents, isLastDay }) => {
+const DayEvents = ({ dateStr, dayEvents, isLastDay }) => {
   const formatDate = (dateStr) => {
     try {
       const date = parseISO(dateStr);
-      return format(date, "do, MMM");
+      return format(date, "do, MMMM yyyy");
     } catch (error) {
       return dateStr;
     }
@@ -112,20 +119,18 @@ const DayEvents = ({ day, dateStr, dayEvents, isLastDay }) => {
 
   return (
     <div className="relative">
-      {/* Day heading with timeline bullet */}
       <div className="relative mb-2 flex items-center">
         <div className="relative">
-          {/* Timeline bullet */}
           <div className="absolute left-0 top-[-1rem] z-10 h-4 w-4 rounded-full bg-black"></div>
 
           {/* Vertical dashed line */}
           {!isLastDay && (
-            <div className="absolute left-[.4rem] top-[-1rem] h-[850px] w-0 border-l-2 border-dashed border-foreground"></div>
+            <div className="absolute left-[.4rem] top-[-1rem] h-[500px] w-0 border-l-2 border-dashed border-foreground"></div>
           )}
         </div>
 
         {/* Day label */}
-        <h3 className="mb-4 ml-6 text-200 font-500 text-black">
+        <h3 className="mb-4 ml-6 text-100 font-500 text-black">
           {formatDate(dateStr)}{" "}
         </h3>
       </div>
@@ -135,7 +140,7 @@ const DayEvents = ({ day, dateStr, dayEvents, isLastDay }) => {
           <EventCard
             key={event.id}
             event={event}
-            // isLast={isLastDay && index === dayEvents.length - 1}
+            isLast={isLastDay && index === dayEvents.length - 1}
           />
         ))}
       </div>
@@ -183,13 +188,15 @@ const UserEvent = () => {
 
   const groupedEvents = groupEventsByDate(events);
 
+  console.log("events", events);
+
   return (
     <div>
-      <div className="relative space-y-10 pl-2">
-        {groupedEvents.map(({ day, events }, index) => (
+      <div className="relative space-y-5 pl-2">
+        {groupedEvents.map(({ date, events }, index) => (
           <DayEvents
             key={index}
-            day={day}
+            dateStr={date}
             dayEvents={events}
             isLastDay={index === groupedEvents.length - 1}
           />

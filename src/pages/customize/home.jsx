@@ -234,7 +234,7 @@ export default function block() {
                   </div>
                 )}
               </div>
-              <MoreOptions />
+              {/* <MoreOptions /> */}
               <Link to={"/event:id"}>
                 <button className="mt-5 w-40 rounded-xl bg-black py-2 text-white">
                   Create Event

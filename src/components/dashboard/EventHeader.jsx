@@ -93,7 +93,11 @@ const EventHeader = () => {
                   className="cursor-pointer"
                 />
                 <span className="hidden text-50 font-500 text-foreground md:block">
-                  5:33 PM GMT+1
+                  {new Date().toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}
                 </span>
               </div>
               <div className="ml-10 flex items-center gap-4">
