@@ -20,6 +20,10 @@ const EventPage = () => {
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.user_id);
 
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
   useEffect(() => {
     const fetchEventData = async () => {
       try {
@@ -36,7 +40,7 @@ const EventPage = () => {
     fetchEventData();
   }, [id]);
 
-  console.log("eventData", eventData);
+  // console.log("eventData", eventData);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -59,6 +63,9 @@ const EventPage = () => {
     const date = new Date(dateString);
     return format(date, "h:mm a");
   };
+
+  console.log("userId", userId);
+  console.log("eventId", eventData.user_id);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#FEF6D5] p-8 text-black">
@@ -208,17 +215,17 @@ const EventPage = () => {
               <div className="mt-4 flex justify-center text-center">
                 <Link
                   to={
-                    userId === eventData.user_id
+                    String(userId) === String(eventData.user_id)
                       ? "/customize"
                       : `/register/${eventData.id}`
                   }
                   className={
-                    userId === eventData.user_id
+                    String(userId) === String(eventData.user_id)
                       ? "mt-3 w-[450px] rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] py-2 text-white"
                       : "mt-3 w-[450px] rounded-lg bg-primary py-2 text-white"
                   }
                 >
-                  {userId === eventData.user_id
+                  {String(userId) === String(eventData.user_id)
                     ? "Manage Event"
                     : "Click to Register"}
                 </Link>
