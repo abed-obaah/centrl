@@ -79,7 +79,12 @@ const MeetingLink = ({ url, className = "" }) => {
         hostname.includes("youtube.com") &&
         (path.includes("/live/") || path.includes("/watch"))
       ) {
-        return "youtube-live";
+        // Check if it's a live stream or regular video
+        if (path.includes("/live/")) {
+          return "youtube-live";
+        } else {
+          return "youtube";
+        }
       }
 
       // Twitch
@@ -243,6 +248,18 @@ const MeetingLink = ({ url, className = "" }) => {
             className="h-4 w-4 object-contain"
           />
           <span>YouTube Live</span>
+        </>
+      )}
+
+      {/* Regular YouTube Video */}
+      {service === "youtube" && (
+        <>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png"
+            alt="YouTube"
+            className="h-4 w-4 object-contain"
+          />
+          <span>YouTube Video</span>
         </>
       )}
 
