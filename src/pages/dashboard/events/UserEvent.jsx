@@ -36,11 +36,7 @@ const EventCard = ({ event }) => {
 
   // Handle click event
   const handleCardClick = () => {
-    if (userId === event.creator_id) {
-      navigate(`/customize/${event.id}`);
-    } else {
-      navigate(`/event/${event.id}`);
-    }
+    navigate(`/event/${event.id}`);
   };
 
   const formatEventTime = (dateTimeString) => {
@@ -98,7 +94,7 @@ const EventCard = ({ event }) => {
         </div>
       </div>
 
-      {userId === event.user_id && (
+      {String(userId) === String(event.user_id) && (
         <span className="rounded-xl text-50 text-foreground/50">
           <Edit className="size-5 text-foreground" />
         </span>

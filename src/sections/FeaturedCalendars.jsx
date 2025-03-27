@@ -1,6 +1,7 @@
 import { ArrowRight } from "iconsax-react";
 import { cards } from "../libs/constants";
 import { Link } from "react-router-dom";
+import Image from "../components/Image";
 
 const FeaturedCalendars = () => {
   return (
@@ -26,7 +27,7 @@ const FeaturedCalendars = () => {
             <div key={card.id} className="rounded-2xl bg-[#fff] p-6">
               <div className="mb-8 flex items-start justify-between">
                 <div className="relative">
-                  <img
+                  <Image
                     className="h-14 w-14 object-cover"
                     src={card.imgUrl}
                     alt={card.name}
