@@ -1,6 +1,7 @@
-import homeimg from "../assets/homeimg.png";
+import HeroImage from "../assets/homeimg.png";
 import StarIcon from "../assets/hero-svg-icon.svg";
 import { Link } from "react-router-dom";
+import Image from "../components/Image";
 
 const Hero = () => {
   return (
@@ -33,7 +34,7 @@ const Hero = () => {
 
               {/* Hero Image */}
               <div className="mx-auto w-[250px] md:ml-auto md:mr-0 md:w-[350px] lg:w-[420px]">
-                <img className="w-full" src={homeimg} alt="Hero Image" />
+                <Image className="w-full" src={HeroImage} alt="Hero Image" />
               </div>
             </div>
 
