@@ -49,7 +49,7 @@ const AdminHeader = () => {
                     aria-labelledby="options-menu"
                   >
                     <Link
-                      to="/profile"
+                      to="/user-profile"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >

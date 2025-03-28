@@ -1,7 +1,32 @@
 import { Link } from "react-router-dom";
+import { logoutUser } from "../api/logoutApi"; // API call function
+import { logout } from "../redux/authSlice"; // Redux logout action
+import { useDispatch, useSelector } from "react-redux";
 
 const ProfileModal = ({ isOpen, onClose, user }) => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+
   if (!isOpen) return null;
+
+  const handleLogout = async () => {
+    try {
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
+      const response = await logoutUser(token);
+
+      if (response.status === "success") {
+        dispatch(logout()); // Clear user data from Redux store
+        console.log("Logout successful");
+        onClose(); // Close modal after logging out
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <div className="absolute right-10 z-50 mt-0 w-56 rounded-xl bg-white p-2 shadow-lg">
@@ -51,7 +76,13 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
           Settings
         </Link>
 
-        <p className="cursor-pointer text-50 font-600 text-black">Logout</p>
+        {/* Logout Option */}
+        <p
+          className="cursor-pointer text-50 font-600 text-black"
+          onClick={handleLogout}
+        >
+          Logout
+        </p>
       </div>
     </div>
   );
