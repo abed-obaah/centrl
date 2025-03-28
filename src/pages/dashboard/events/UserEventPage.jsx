@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import UserEvent from './UserEvent';
-import event1 from '../../../assets/event1.png';
-import event2 from '../../../assets/event2.png';
-import pageImage from '../../../assets/page-image.png';
-import TabSwitcher from '../../../components/dashboard/events/TabSwitcher';
-// import { useSelector } from "react-redux";
+import { useState } from "react";
+import UserEvent from "./UserEvent";
+import event1 from "../../../assets/event1.png";
+import event2 from "../../../assets/event2.png";
+import pageImage from "../../../assets/page-image.png";
+import TabSwitcher from "../../../components/dashboard/events/TabSwitcher";
+import Image from "../../../components/Image";
 
 const UserEventPage = () => {
-  const [activeTab, setActiveTab] = useState('Upcoming');
+  const [activeTab, setActiveTab] = useState("Upcoming");
 
   return (
     <>
-      <div className="mt-32 px-4 md:px-0 mb-20 max-w-[1000px] mx-auto">
+      <div className="mx-auto mb-20 mt-32 max-w-[1000px] px-4 md:px-0">
         <div className="md:grid md:grid-cols-[2fr_1fr] md:gap-6">
           <div>
-            <div className="flex justify-between mb-6 items-center">
+            <div className="mb-6 flex items-center justify-between">
               <h2 className="text-400 font-600">Events</h2>
-              <div className="flex items-center bg-[#000]/15 rounded-2xl  pl-0">
+              <div className="flex items-center rounded-2xl bg-[#000]/15 pl-0">
                 <TabSwitcher
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
@@ -24,11 +24,11 @@ const UserEventPage = () => {
               </div>
             </div>
 
-            {activeTab === 'Upcoming' && <UserEvent />}
+            {activeTab === "Upcoming" && <UserEvent />}
 
-            {activeTab === 'Past' && (
+            {activeTab === "Past" && (
               <img
-                className="w-[400px] mt-20 2xl:w-[500px] object-cover mx-auto"
+                className="mx-auto mt-20 w-[400px] object-cover 2xl:w-[500px]"
                 src={pageImage}
                 alt="page Image"
               />
@@ -36,8 +36,8 @@ const UserEventPage = () => {
           </div>
 
           <div className="md:sticky md:top-32 md:self-start">
-            <img className="mb-4" src={event1} alt="event1" />
-            <img src={event2} alt="event 2" />
+            <Image className="mb-4" src={event1} alt="event1" />
+            <Image src={event2} alt="event 2" />
           </div>
         </div>
       </div>

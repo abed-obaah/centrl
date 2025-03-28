@@ -6,6 +6,7 @@ import { getEvents } from "../../../api/eventApi";
 import { Spinner } from "../../../components/Spinner";
 import { format, parseISO } from "date-fns";
 import MeetingLink from "../../../components/MeetingLink";
+import Image from "../../../components/Image";
 
 const groupEventsByDate = (events) => {
   const grouped = events.reduce((acc, event) => {
@@ -48,14 +49,19 @@ const EventCard = ({ event }) => {
     }
   };
 
+  console.log("Event:", event);
+
   return (
     <div
       onClick={handleCardClick}
       className={`cursor-pointer rounded-xl bg-white p-4 md:flex md:items-start md:gap-4`}
     >
-      <img
+      <Image
         src={event.banner_image}
         alt={event.event_title}
+        width={130}
+        height={130}
+        background="red"
         className="mb-2 size-[80px] rounded-lg object-cover md:mb-0 md:size-[130px]"
       />
 
@@ -71,7 +77,9 @@ const EventCard = ({ event }) => {
         )}
 
         {event.location !== "null" && (
-          <p className="text-gray-400 capitalize">{event.location}</p>
+          <p className="text-gray-400 line-clamp-1 capitalize">
+            {event.location}
+          </p>
         )}
 
         <p className="mb-2 text-100 text-foreground">{event.language}</p>
@@ -117,12 +125,7 @@ const DayEvents = ({ dateStr, dayEvents, isLastDay }) => {
     <div className="relative">
       <div className="relative mb-2 flex items-center">
         <div className="relative">
-          <div className="absolute left-0 top-[-1rem] z-10 h-4 w-4 rounded-full bg-black"></div>
-
-          {/* Vertical dashed line */}
-          {!isLastDay && (
-            <div className="absolute left-[.4rem] top-[-1rem] h-[500px] w-0 border-l-2 border-dashed border-foreground"></div>
-          )}
+          <div className="absolute -left-2 -top-4 z-10 h-4 w-4 rounded-full bg-black"></div>
         </div>
 
         {/* Day label */}
@@ -184,11 +187,12 @@ const UserEvent = () => {
 
   const groupedEvents = groupEventsByDate(events);
 
-  console.log("events", events);
+  // console.log("events", events);
 
   return (
     <div>
       <div className="relative space-y-5 pl-2">
+        <div className="absolute bottom-0 left-[.4rem] top-0 w-0 border-l-2 border-dashed border-foreground"></div>
         {groupedEvents.map(({ date, events }, index) => (
           <DayEvents
             key={index}

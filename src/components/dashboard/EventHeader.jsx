@@ -6,7 +6,7 @@ import EventNavbar from "./EventNavbar";
 import { Search } from "lucide-react";
 import { AddSquare, Notification } from "iconsax-react";
 import ProfileModal from "../ProfileModal";
-import Modal from "../Modal";
+import SearchModal from "../SearchModal";
 import { useSelector } from "react-redux";
 
 const EventHeader = () => {
@@ -142,7 +142,10 @@ const EventHeader = () => {
           </div>
         </div>
       </header>
-      <Modal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <SearchModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </>
   );
 };

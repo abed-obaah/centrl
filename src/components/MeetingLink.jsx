@@ -127,7 +127,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Zoom"
             className="h-4 w-4 object-contain"
           />
-          <span>Zoom Meeting</span>
+          <span>Zoom</span>
         </>
       )}
 
@@ -151,7 +151,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Microsoft Teams"
             className="h-4 w-4 object-contain"
           />
-          <span>Teams Meeting</span>
+          <span>Teams</span>
         </>
       )}
 
@@ -163,7 +163,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Webex"
             className="h-4 w-4 object-contain"
           />
-          <span>Webex Meeting</span>
+          <span>Webex</span>
         </>
       )}
 
@@ -175,7 +175,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Jitsi"
             className="h-4 w-4 object-contain"
           />
-          <span>Jitsi Meeting</span>
+          <span>Jitsi</span>
         </>
       )}
 
@@ -187,7 +187,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Hopin"
             className="h-4 w-4 object-contain"
           />
-          <span>Hopin Event</span>
+          <span>Hopin</span>
         </>
       )}
 
@@ -199,7 +199,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Airmeet"
             className="h-4 w-4 object-contain"
           />
-          <span>Airmeet Event</span>
+          <span>Airmeet</span>
         </>
       )}
 
@@ -211,7 +211,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Remo"
             className="h-4 w-4 object-contain"
           />
-          <span>Remo Event</span>
+          <span>Remo</span>
         </>
       )}
 
@@ -223,7 +223,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="BigMarker"
             className="h-4 w-4 object-contain"
           />
-          <span>BigMarker Webinar</span>
+          <span>BigMarker</span>
         </>
       )}
 
@@ -235,7 +235,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Livestorm"
             className="h-4 w-4 object-contain"
           />
-          <span>Livestorm Webinar</span>
+          <span>Livestorm</span>
         </>
       )}
 
@@ -247,7 +247,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="YouTube Live"
             className="h-4 w-4 object-contain"
           />
-          <span>YouTube Live</span>
+          <span>YouTube</span>
         </>
       )}
 
@@ -259,7 +259,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="YouTube"
             className="h-4 w-4 object-contain"
           />
-          <span>YouTube Video</span>
+          <span>YouTube</span>
         </>
       )}
 
@@ -271,7 +271,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Twitch"
             className="h-4 w-4 object-contain"
           />
-          <span>Twitch Stream</span>
+          <span>Twitch</span>
         </>
       )}
 
@@ -283,7 +283,7 @@ const MeetingLink = ({ url, className = "" }) => {
             alt="Vimeo Live"
             className="h-4 w-4 object-contain"
           />
-          <span>Vimeo Livestream</span>
+          <span>Vimeo</span>
         </>
       )}
     </a>

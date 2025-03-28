@@ -28,6 +28,8 @@ const FeaturedCalendars = () => {
               <div className="mb-8 flex items-start justify-between">
                 <div className="relative">
                   <Image
+                    width={56}
+                    height={56}
                     className="h-14 w-14 object-cover"
                     src={card.imgUrl}
                     alt={card.name}

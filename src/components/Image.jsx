@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Image = ({
   src,
@@ -7,137 +7,75 @@ const Image = ({
   height,
   className = "",
   priority = false,
+  placeholder = "empty",
+  blurDataURL,
+  onLoad,
+  onError,
+  ...props
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [imgSrc, setImgSrc] = useState(src);
-
-  // Handle image loading
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
-  // Handle image error
-  const handleImageError = () => {
-    setIsLoading(false);
-  };
+  const [error, setError] = useState(false);
+  const imgRef = useRef(null);
 
   useEffect(() => {
-    setIsLoading(true);
-    setImgSrc(src);
-  }, [src]);
+    if (!imgRef.current) return;
 
-  const containerStyle = {
-    position: "relative",
-    width: width || "100%",
-    height: height || "auto",
-    overflow: "hidden",
+    if (imgRef.current.complete) {
+      handleImageLoaded();
+    }
+  }, []);
+
+  const handleImageLoaded = () => {
+    setIsLoading(false);
+    onLoad?.();
   };
 
+  const handleImageError = () => {
+    setIsLoading(false);
+    setError(true);
+    onError?.();
+  };
+
+  const isLocalImage = src.startsWith("/");
+
+  const imageSrc = isLocalImage ? src : src;
+
+  // Determine the blur placeholder style
+  const blurStyle =
+    placeholder === "blur" && isLoading
+      ? {
+          filter: "blur(20px)",
+          backgroundSize: "cover",
+          backgroundImage: `url(${blurDataURL || src})`,
+        }
+      : {};
+
   return (
-    <div style={containerStyle}>
-      {/* Skeleton loader */}
-      {isLoading && (
-        <div
-          className="absolute inset-0 animate-pulse bg-[#f6f5f5]"
-          aria-hidden="true"
-        />
+    <div className={`relative`}>
+      <img
+        ref={imgRef}
+        src={imageSrc}
+        alt={alt}
+        width={width}
+        height={height}
+        onLoad={handleImageLoaded}
+        onError={handleImageError}
+        className={`object-cover ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-200 ${error ? "hidden" : "block"} ${className}`}
+        loading={priority ? "eager" : "lazy"}
+        {...props}
+      />
+
+      {isLoading && placeholder === "blur" && (
+        <div className="absolute inset-0" style={blurStyle} />
       )}
 
-      {/* Actual image */}
-      <img
-        src={imgSrc || "/placeholder.svg"}
-        alt={alt}
-        onLoad={handleImageLoad}
-        onError={handleImageError}
-        className={className}
-        style={{
-          display: "block",
-          objectFit: "cover",
-          opacity: isLoading ? 0 : 1,
-          transition: "opacity 0.3s ease",
-        }}
-        loading={priority ? "eager" : "lazy"}
-      />
+      {error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-[#e8e4e4] text-black">
+          <span>Failed to load image</span>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Image;
-
-// import { useState, useEffect } from "react";
-
-// const Image = ({
-//   src,
-//   alt,
-//   width,
-//   height,
-//   className = "",
-//   placeholderColor = "#f3f4f6",
-//   blurAmount = 5,
-//   priority = false,
-// }) => {
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [imgSrc, setImgSrc] = useState(src);
-
-//   // Handle image loading
-//   const handleImageLoad = () => {
-//     setIsLoading(false);
-//   };
-
-//   // Handle image error
-//   const handleImageError = () => {
-//     setIsLoading(false);
-//   };
-
-//   // Reset loading state when src changes
-//   useEffect(() => {
-//     setIsLoading(true);
-//     setImgSrc(src);
-//   }, [src]);
-
-//   const containerStyle = {
-//     position: "relative",
-//     width: width || "100%",
-//     height: height || "auto",
-//     overflow: "hidden",
-//   };
-
-//   const placeholderStyle = {
-//     position: "absolute",
-//     top: 0,
-//     left: 0,
-//     width: "100%",
-//     height: "100%",
-//     backgroundColor: placeholderColor,
-//     filter: `blur(${blurAmount}px)`,
-//     transition: "opacity 0.3s ease",
-//     opacity: isLoading ? 1 : 0,
-//   };
-
-//   // Create image styles
-//   const imageStyle = {
-//     display: "block",
-//     width: "100%",
-//     height: "100%",
-//     objectFit: "cover",
-//     opacity: isLoading ? 0 : 1,
-//     transition: "opacity 0.3s ease",
-//   };
-
-//   return (
-//     <div style={containerStyle} className={className}>
-//       <div style={placeholderStyle} aria-hidden="true" />
-
-//       <img
-//         src={imgSrc || "/placeholder.svg"}
-//         alt={alt}
-//         onLoad={handleImageLoad}
-//         onError={handleImageError}
-//         style={imageStyle}
-//         loading={priority ? "eager" : "lazy"}
-//       />
-//     </div>
-//   );
-// };
-
-// export default Image;
