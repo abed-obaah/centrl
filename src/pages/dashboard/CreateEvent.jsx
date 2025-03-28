@@ -63,10 +63,10 @@ export default function CreateEvent() {
   ];
 
   const userId = useSelector((state) => state.auth.user_id);
-  const token = useSelector((state) => state.auth.token);
-  const name = useSelector((state) => state.auth.name);
-  const email = useSelector((state) => state.auth.email);
-  const profileImage = useSelector((state) => state.auth.profileImage);
+
+  const { token, name, email, profileImage } = useSelector(
+    (state) => state.auth,
+  );
 
   const isFormComplete = () => {
     const requiredFields = [

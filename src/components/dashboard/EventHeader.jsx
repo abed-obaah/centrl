@@ -7,57 +7,64 @@ import { Search } from "lucide-react";
 import { AddSquare, Notification } from "iconsax-react";
 import ProfileModal from "../ProfileModal";
 import SearchModal from "../SearchModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getUserProfile, updateProfileImages } from "../../api/userApi";
+import { getUserProfile } from "../../api/userApi";
+import { setUser } from "../../redux/authSlice";
 
 const EventHeader = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { token, user_id, name, email, googleId } = useSelector(
+  const dispatch = useDispatch();
+  const { token, user_id, name, email, googleId, profileImage } = useSelector(
     (state) => state.auth,
   );
-  
+
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [profileDetails, setProfileDetails] = useState(null);
-  const [profileImage, setProfileImage] = useState(
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-  );
-  
+
+  const defaultImage =
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
+
   const userData = {
     name,
     token,
     email,
     user_id,
     googleId,
-    imageUrl: profileImage, // Use the updated profile image here
+    imageUrl: profileImage || defaultImage,
   };
-  
-  // console.log("Profile Image URL:", profileImage);
-  
+
   const toggleNavClick = () => {
     setIsClicked(!isClicked);
   };
-  
 
   useEffect(() => {
     if (!token) return;
-  
+
     const fetchProfile = async () => {
       try {
         const data = await getUserProfile(token);
-        console.log("Profile Data:", data);
-        
+        // console.log("Profile Data:", data);
+
         setUserProfile(data.user);
         setProfileDetails(data.profile);
-        
-        // Correctly set the profile image with full URL
+
         if (data.profile && data.profile.profile_image) {
-          setProfileImage(
-            `https://api.centrl.ng/uploads/profiles/${data.profile.profile_image}`
+          const fullImageUrl = `https://api.centrl.ng/uploads/profiles/${data.profile.profile_image}`;
+
+          dispatch(
+            setUser({
+              token,
+              user_id,
+              name,
+              email,
+              googleId,
+              profileImage: fullImageUrl,
+            }),
           );
         }
       } catch (err) {
@@ -66,9 +73,9 @@ const EventHeader = () => {
         setLoading(false);
       }
     };
-  
+
     fetchProfile();
-  }, [token]);
+  }, [token, dispatch, user_id, name, email, googleId]);
 
   return (
     <>
@@ -143,7 +150,7 @@ const EventHeader = () => {
                   <img
                     alt={userData.name}
                     src={userData.imageUrl}
-                    className="size-9 rounded-full"
+                    className="size-9 rounded-full object-cover"
                   />
                   {isOpen && (
                     <ProfileModal

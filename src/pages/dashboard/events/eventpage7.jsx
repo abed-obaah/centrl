@@ -4,7 +4,6 @@ import location from "../../../assets/navigation-2.svg";
 import bg from "../../../assets/bg.png";
 import Maps from "../../../assets/maps.png";
 import RegisterEventBg from "../../../assets/registerEventBg.png";
-import face from "../../../assets/face.png";
 import Verified from "../../../assets/verified-small.png";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
