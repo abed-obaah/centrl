@@ -64,6 +64,9 @@ export default function CreateEvent() {
 
   const userId = useSelector((state) => state.auth.user_id);
   const token = useSelector((state) => state.auth.token);
+  const name = useSelector((state) => state.auth.name);
+  const email = useSelector((state) => state.auth.email);
+  const profileImage = useSelector((state) => state.auth.profileImage);
 
   const isFormComplete = () => {
     const requiredFields = [
@@ -175,6 +178,9 @@ export default function CreateEvent() {
 
     return {
       user_id: userId,
+      name: name,
+      email: email,
+      image: profileImage,
       event_title: eventData.event_title,
       start_time: startDateTime,
       event_type: eventData.event_type === "public" ? "public" : "Private",
@@ -376,7 +382,8 @@ export default function CreateEvent() {
                         type="time"
                         value={eventData.start_time}
                         onChange={handleInputChange}
-                        className="w-36 rounded-xl bg-white p-3 outline-none"
+                        step="3600"
+                        className="w-40 rounded-xl bg-white p-3 outline-none"
                       />
                     </div>
                   </div>

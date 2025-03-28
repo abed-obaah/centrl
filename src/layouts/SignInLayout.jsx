@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import SignImg from "../assets/sign-in-image.png";
 import SignInForm from "../components/SigninForm";
+import Image from "../components/Image";
 
 const SignInLayout = () => {
   return (
@@ -21,7 +22,7 @@ const SignInLayout = () => {
         <div className="h-full xl:grid xl:grid-cols-2">
           {/* img */}
           <div className="container hidden h-full items-center justify-center xl:fixed xl:flex xl:w-1/2 xl:overflow-hidden">
-            <img
+            <Image
               className="xl:mx-auto xl:mt-[-1rem] xl:block xl:size-[500px] xl:object-cover 2xl:my-auto"
               src={SignImg}
               alt="Sign In Image"
