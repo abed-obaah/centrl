@@ -136,31 +136,33 @@ const UserProfile = () => {
   const handleProfileImageChange = async (e) => {
     const file = e.target.files[0];
     console.log("📸 Selected Profile Image: ", file);
-
+  
     if (file) {
       // Instantly show the selected image on the frontend
       setProfileImage(URL.createObjectURL(file));
-
+  
       try {
         // Call the API to upload the image
         const response = await updateProfileImages(token, null, file);
         console.log("✅ Profile image updated:", response);
-
-        if (response?.data?.profile_image_url) {
+  
+        if (response?.status === "success" && response?.data?.profile?.profile_image) {
           // Update the profileDetails with new image URL
           setProfileDetails((prev) => ({
             ...prev,
-            profile_image: response.data.profile_image_url,
+            profile_image: response.data.profile.profile_image,
           }));
-
-          // Optionally, clear the local state once persisted
-          setProfileImage(null);
+  
+          // Hard reload the page only if the update was successful
+          window.location.reload();
         }
       } catch (error) {
         console.error("❌ Failed to update profile image:", error);
       }
     }
   };
+  
+  
 
   // const handleBannerImageChange = (event) => {
   //   const file = event.target.files[0];
@@ -267,16 +269,17 @@ const UserProfile = () => {
               <div className="-mt-12 flex flex-col px-4 sm:-mt-16 sm:flex-row sm:items-end sm:justify-between sm:px-0">
                 <div className="flex items-end space-x-5">
                   <div className="group relative">
-                    <img
-                      src={
-                        profileDetails?.profile_image
-                          ? `https://api.centrl.ng/uploads/profiles/${profileDetails.profile_image}`
-                          : profileImage
-                      }
-                      alt="Profile"
-                      className="h-24 w-24 cursor-pointer rounded-full ring-4 ring-background sm:h-32 sm:w-32"
-                      onClick={triggerProfileImageUpload}
-                    />
+                  <img
+                  src={
+                    profileDetails?.profile_image
+                      ? `https://api.centrl.ng/uploads/profiles/${profileDetails.profile_image}`
+                      : profileImage
+                  }
+                  alt="Profile"
+                  className="h-24 w-24 cursor-pointer rounded-full ring-4 ring-background sm:h-32 sm:w-32 object-cover"
+                  style={{ aspectRatio: "1 / 1" }} // Ensures a perfect square without distortion
+                  onClick={triggerProfileImageUpload}
+                />
 
                     <input
                       type="file"

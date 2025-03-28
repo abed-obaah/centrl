@@ -1,6 +1,6 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/logo.png";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EventNavbar from "./EventNavbar";
 import { Search } from "lucide-react";
@@ -9,32 +9,66 @@ import ProfileModal from "../ProfileModal";
 import Modal from "../Modal";
 import { useSelector } from "react-redux";
 
+import { getUserProfile, updateProfileImages } from "../../api/userApi";
+
 const EventHeader = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { token, user_id, name, email, googleId, profileImage } = useSelector(
+  const { token, user_id, name, email, googleId } = useSelector(
     (state) => state.auth,
   );
-
-  // const modalRef = useRef(null);
-
+  
+  const [userProfile, setUserProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [profileDetails, setProfileDetails] = useState(null);
+  const [profileImage, setProfileImage] = useState(
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  );
+  
   const userData = {
     name,
     token,
     email,
     user_id,
     googleId,
-    imageUrl: profileImage
-      ? profileImage
-      : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: profileImage, // Use the updated profile image here
   };
-
-  // console.log("userData:", userData);
-
+  
+  // console.log("Profile Image URL:", profileImage);
+  
   const toggleNavClick = () => {
     setIsClicked(!isClicked);
   };
+  
+
+  useEffect(() => {
+    if (!token) return;
+  
+    const fetchProfile = async () => {
+      try {
+        const data = await getUserProfile(token);
+        console.log("Profile Data:", data);
+        
+        setUserProfile(data.user);
+        setProfileDetails(data.profile);
+        
+        // Correctly set the profile image with full URL
+        if (data.profile && data.profile.profile_image) {
+          setProfileImage(
+            `https://api.centrl.ng/uploads/profiles/${data.profile.profile_image}`
+          );
+        }
+      } catch (err) {
+        setError("Failed to fetch user profile.");
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchProfile();
+  }, [token]);
 
   return (
     <>
