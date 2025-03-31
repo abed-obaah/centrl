@@ -10,11 +10,13 @@ import { useSelector } from "react-redux";
 import { getEvent } from "../../../api/eventApi";
 import MeetingLink from "../../../components/MeetingLink";
 import Image from "../../../components/Image";
+import CheckoutModal from "../../../components/checkout/checkout-modal";
 
 const EventPage = () => {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(null);
   const videoRef = useRef(null);
   const token = useSelector((state) => state.auth.token);
@@ -62,6 +64,10 @@ const EventPage = () => {
   const formatTime = (dateString) => {
     const date = new Date(dateString);
     return format(date, "h:mm a");
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const getInitialsAvatar = (name, email, size = 48) => {
@@ -113,6 +119,15 @@ const EventPage = () => {
         {text}
       </div>
     );
+  };
+
+  const isEventCreator = String(userId) === String(eventData.user_id);
+
+  const handleClick = (e) => {
+    if (!isEventCreator) {
+      e.preventDefault();
+      setIsModalOpen(true);
+    }
   };
 
   return (
@@ -271,20 +286,15 @@ const EventPage = () => {
               </div>
               <div className="mt-4 flex justify-center text-center">
                 <Link
-                  to={
-                    String(userId) === String(eventData.user_id)
-                      ? "/customize"
-                      : `/register/${eventData.id}`
-                  }
+                  to={isEventCreator ? "/customize" : "#"}
+                  onClick={handleClick}
                   className={
-                    String(userId) === String(eventData.user_id)
+                    isEventCreator
                       ? "mt-3 w-[450px] rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] py-2 text-white"
                       : "mt-3 w-[450px] rounded-lg bg-primary py-2 text-white"
                   }
                 >
-                  {String(userId) === String(eventData.user_id)
-                    ? "Manage Event"
-                    : "Click to Register"}
+                  {isEventCreator ? "Manage Event" : "Click to Register"}
                 </Link>
               </div>
             </div>
@@ -317,6 +327,14 @@ const EventPage = () => {
           </div>
         </div>
       </div>
+
+      {isModalOpen && (
+        <CheckoutModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          eventData={eventData}
+        />
+      )}
     </div>
   );
 };
