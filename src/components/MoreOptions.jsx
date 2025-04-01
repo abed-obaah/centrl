@@ -73,8 +73,13 @@ export default function MoreOptions({ eventData, onOptionChange }) {
     eventData.ticket_type === "Paid" ? "Paid" : "Free",
   );
   const [showTicketModal, setShowTicketModal] = useState(false);
+  // const [ticketPrices, setTicketPrices] = useState({
+  //   Paid: eventData.ticket_price || 0,
+  // });
+
   const [ticketPrices, setTicketPrices] = useState({
-    Paid: eventData.ticket_price || 0,
+    Basic: eventData.ticket_price_basic || 0,
+    Diamond: eventData.ticket_price_diamond || 0,
   });
 
   const [capacityValue, setCapacityValue] = useState(
@@ -113,9 +118,8 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
     // Initialize ticket prices
     setTicketPrices({
-      Basic: eventData.ticket_price || 0,
-      Diamond: eventData.ticket_price || 0,
-      VIP: eventData.ticket_price || 0,
+      Basic: eventData.ticket_price_basic || 0,
+      Diamond: eventData.ticket_price_diamond || 0,
     });
 
     // Initialize capacity value
@@ -216,27 +220,56 @@ export default function MoreOptions({ eventData, onOptionChange }) {
   };
 
   // Update ticket value
+  // const updateTicketValue = (value) => {
+  //   setTicketValue(value);
+  //   onOptionChange("ticket_type", value);
+
+  //   // Reset price to 0 when switching to Free
+  //   if (value === "Free") {
+  //     onOptionChange("ticket_price", 0);
+  //   } else {
+  //     // Use the saved price when switching to Paid
+  //     onOptionChange("ticket_price", ticketPrices["Paid"] || 0);
+  //   }
+  // };
+
   const updateTicketValue = (value) => {
     setTicketValue(value);
     onOptionChange("ticket_type", value);
 
-    // Reset price to 0 when switching to Free
+    // Reset prices to 0 when switching to Free
     if (value === "Free") {
-      onOptionChange("ticket_price", 0);
+      onOptionChange("ticket_price_basic", 0);
+      onOptionChange("ticket_price_diamond", 0);
     } else {
-      // Use the saved price when switching to Paid
-      onOptionChange("ticket_price", ticketPrices["Paid"] || 0);
+      // Use the saved prices when switching to Paid
+      onOptionChange("ticket_price_basic", ticketPrices.Basic || 0);
+      onOptionChange("ticket_price_diamond", ticketPrices.Diamond || 0);
     }
   };
 
   // Update ticket price
+  // const updateTicketPrice = (type, price) => {
+  //   const numericPrice = Number(price);
+  //   setTicketPrices((prev) => ({
+  //     ...prev,
+  //     [type]: numericPrice,
+  //   }));
+  //   onOptionChange("ticket_price", numericPrice);
+  // };
+
   const updateTicketPrice = (type, price) => {
     const numericPrice = Number(price);
     setTicketPrices((prev) => ({
       ...prev,
       [type]: numericPrice,
     }));
-    onOptionChange("ticket_price", numericPrice);
+
+    if (type === "Basic") {
+      onOptionChange("ticket_price_basic", numericPrice);
+    } else if (type === "Diamond") {
+      onOptionChange("ticket_price_diamond", numericPrice);
+    }
   };
 
   // Update capacity value
@@ -267,7 +300,6 @@ export default function MoreOptions({ eventData, onOptionChange }) {
             className="bg-white px-4 py-2 shadow-sm sm:rounded-md sm:px-3"
           >
             <div className="flex w-full items-center justify-between">
-              {/* Left side with image and label */}
               <div className="flex items-center">
                 <img
                   src={item.image || "/placeholder.svg"}
@@ -277,7 +309,6 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                 <span className="text-100 font-400">{item.label}</span>
               </div>
 
-              {/* Right side with toggle or value/edit button */}
               <div className="items-center">
                 {item.type === "toggle" ? (
                   <Switch
@@ -500,20 +531,58 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
               {/* Price input only shown when Paid is selected */}
               {ticketValue === "Paid" && (
-                <div className="mt-4 px-3">
-                  <label className="text-sm font-medium mb-1 block">
-                    Ticket Price
-                  </label>
-                  <div className="flex items-center">
-                    <span className="mr-2">₦</span>
-                    <input
-                      type="number"
-                      value={ticketPrices["Paid"]}
-                      onChange={(e) =>
-                        updateTicketPrice("Paid", e.target.value)
-                      }
-                      className="w-full rounded-md bg-white px-3 py-2 outline-none"
-                    />
+                // <div className="mt-4 px-3">
+                //   <label className="text-sm font-medium mb-1 block">
+                //     Ticket Price
+                //   </label>
+                //   <div className="flex items-center">
+                //     <span className="mr-2">₦</span>
+                //     <input
+                //       type="number"
+                //       value={ticketPrices["Paid"]}
+                //       onChange={(e) =>
+                //         updateTicketPrice("Paid", e.target.value)
+                //       }
+                //       className="w-full rounded-md bg-white px-3 py-2 outline-none"
+                //     />
+                //   </div>
+                // </div>
+
+                <div className="mt-4 space-y-4">
+                  {/* Basic Package */}
+                  <div className="px-3">
+                    <label className="text-sm font-medium mb-1 block">
+                      Basic Package Price
+                    </label>
+                    <div className="flex items-center">
+                      <span className="mr-2">₦</span>
+                      <input
+                        type="number"
+                        value={ticketPrices.Basic}
+                        onChange={(e) =>
+                          updateTicketPrice("Basic", e.target.value)
+                        }
+                        className="w-full rounded-md bg-white px-3 py-2 outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Diamond Package */}
+                  <div className="px-3">
+                    <label className="text-sm font-medium mb-1 block">
+                      Diamond Package Price
+                    </label>
+                    <div className="flex items-center">
+                      <span className="mr-2">₦</span>
+                      <input
+                        type="number"
+                        value={ticketPrices.Diamond}
+                        onChange={(e) =>
+                          updateTicketPrice("Diamond", e.target.value)
+                        }
+                        className="w-full rounded-md bg-white px-3 py-2 outline-none"
+                      />
+                    </div>
                   </div>
                 </div>
               )}

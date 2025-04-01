@@ -9,6 +9,7 @@ export default function BillingInformationStep({
   eventData,
   onPlaceOrder,
   ticketQuantity,
+  selectedPackage,
 }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -143,7 +144,7 @@ export default function BillingInformationStep({
         </div>
       </div>
 
-      <div className="absolute right-[19.5rem] top-0 h-full w-[1px] bg-muted"></div>
+      <div className="absolute right-[17.5rem] top-0 h-full w-[1px] bg-muted"></div>
 
       <div className="pl-2">
         <div className="mb-4 overflow-hidden rounded-lg border border-primary">
@@ -158,7 +159,7 @@ export default function BillingInformationStep({
           <h3 className="mb-4 text-100 font-700">Summary</h3>
 
           <div className="mb-2 flex justify-between">
-            <span className="text-100">Tickets</span>
+            <span className="text-100">{selectedPackage} Tickets</span>
             <div className="flex gap-1">
               <span className="text-100">{formatCurrency(subtotal)}</span>{" "}
               <p className="text-muted">× {ticketQuantity}</p>
