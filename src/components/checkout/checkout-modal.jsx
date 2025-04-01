@@ -2,11 +2,11 @@ import { useState } from "react";
 import TicketQuantityStep from "./ticket-quantity-step";
 import PaymentSummaryStep from "./payment-summary-step";
 import BillingInformationStep from "./billing-information-step";
-import { X } from "lucide-react";
 
 export default function CheckoutModal({ isOpen, onClose, eventData }) {
   const [step, setStep] = useState(1);
   const [ticketQuantity, setTicketQuantity] = useState(1);
+  const [selectedPackage, setSelectedPackage] = useState("Basic");
   const [billingInfo, setBillingInfo] = useState({
     firstName: "",
     lastName: "",
@@ -25,6 +25,10 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     setStep(3);
   };
 
+  const handlePackageSelect = (packageType) => {
+    setSelectedPackage(packageType);
+  };
+
   const handlePlaceOrder = () => {
     // Here you would handle the order submission
     console.log("Order placed", { ticketQuantity, billingInfo });
@@ -40,8 +44,17 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     }
   };
 
+  const getPackagePrice = () => {
+    if (selectedPackage === "Basic") {
+      return eventData.ticket_price_basic || 0;
+    } else if (selectedPackage === "Diamond") {
+      return eventData.ticket_price_diamond || 0;
+    }
+    return eventData.ticket_price || 0;
+  };
+
   const calculateSubtotal = () => {
-    return eventData.ticket_price * ticketQuantity;
+    return getPackagePrice() * ticketQuantity;
   };
 
   const calculateFees = () => {
@@ -74,6 +87,8 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
             fees={calculateFees()}
             total={calculateTotal()}
             eventData={eventData}
+            selectedPackage={selectedPackage}
+            onPackageSelect={handlePackageSelect}
             onBack={handleBack}
             onContinue={handlePaymentContinue}
           />
@@ -88,6 +103,7 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
             fees={calculateFees()}
             total={calculateTotal()}
             eventData={eventData}
+            selectedPackage={selectedPackage}
             onBack={handleBack}
             onPlaceOrder={handlePlaceOrder}
           />

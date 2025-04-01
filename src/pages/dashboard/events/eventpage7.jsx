@@ -270,20 +270,34 @@ const EventPage = () => {
                 <div className="h-1 w-1 rounded-full bg-black"></div>
                 <p className="text-50 text-black">{eventData.email}</p>
               </div>
+
               <div className="mt-5 flex items-center space-x-3 px-9">
                 <p className="text-100 text-black">Price:</p>
-                <p className="text-200 font-500 text-black">
-                  <span> </span>
-                  {eventData.ticket_price === 0 ||
-                  eventData.ticket_price === "0.00"
-                    ? "Free"
-                    : Intl.NumberFormat("en-NG", {
+                {parseFloat(eventData.ticket_price_basic) === 0 &&
+                parseFloat(eventData.ticket_price_diamond) === 0 ? (
+                  <p className="text-200 font-500 text-black">Free</p>
+                ) : (
+                  <div className="flex flex-col">
+                    <p className="text-200 font-500 text-black">
+                      Basic:{" "}
+                      {Intl.NumberFormat("en-NG", {
                         style: "currency",
                         currency: "NGN",
                         maximumFractionDigits: 0,
-                      }).format(eventData.ticket_price)}
-                </p>
+                      }).format(eventData.ticket_price_basic)}
+                    </p>
+                    <p className="text-200 font-500 text-black">
+                      Diamond:{" "}
+                      {Intl.NumberFormat("en-NG", {
+                        style: "currency",
+                        currency: "NGN",
+                        maximumFractionDigits: 0,
+                      }).format(eventData.ticket_price_diamond)}
+                    </p>
+                  </div>
+                )}
               </div>
+
               <div className="mt-4 flex justify-center text-center">
                 <Link
                   to={isEventCreator ? "/customize" : "#"}

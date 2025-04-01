@@ -24,7 +24,9 @@ const defaultEventData = {
   location_type: "virtual",
   about: "",
   ticket_type: "Free",
-  ticket_price: 0,
+  ticket_price_basic: 0,
+  ticket_price_diamond: 0,
+  // ticket_price: 0,
   require_approval: false,
   capacity: "Unlimited",
   collaborators: [],
@@ -189,7 +191,9 @@ export default function CreateEvent() {
       about: eventData.about,
       event_category: eventData.event_category,
       ticket_type: eventData.ticket_type || "Free",
-      ticket_price: eventData.ticket_price || 0.0,
+      ticket_price_basic: eventData.ticket_price_basic || 0.0,
+      ticket_price_diamond: eventData.ticket_price_diamond || 0.0,
+      // ticket_price: eventData.ticket_price || 0.0,
       require_approval: eventData.require_approval ? 1 : 0,
       capacity:
         eventData.capacity === "Unlimited"
@@ -540,7 +544,6 @@ export default function CreateEvent() {
                 eventData={eventData}
                 onOptionChange={handleOptionChange}
               />
-              {/* <Link to={"/event:id"}> */}
 
               <button
                 type="submit"
@@ -551,7 +554,6 @@ export default function CreateEvent() {
               >
                 {loading ? <Spinner text="Creating Event" /> : "Create Event"}
               </button>
-              {/* </Link> */}
             </div>
           </div>
         </form>
