@@ -2,9 +2,8 @@ import { useState } from "react";
 import TicketQuantityStep from "./ticket-quantity-step";
 import PaymentSummaryStep from "./payment-summary-step";
 import BillingInformationStep from "./billing-information-step";
-import { registerEvent } from "../../api/registerEvent";
 import { useSelector } from "react-redux";
-import { X } from "lucide-react";
+import { registerEvent } from "../../api/registerEvent";
 
 export default function CheckoutModal({ isOpen, onClose, eventData }) {
   const token = useSelector((state) => state.auth.token);
@@ -13,10 +12,12 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
   const [ticketQuantity, setTicketQuantity] = useState(1);
+  const [selectedPackage, setSelectedPackage] = useState("Basic");
   const [billingInfo, setBillingInfo] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     paymentMethod: "credit",
   });
 
@@ -36,9 +37,9 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     setStep(3);
   };
 
-  // const handlePaymentContinue = () => {
-  //   setStep(3);
-  // };
+  const handlePackageSelect = (packageType) => {
+    setSelectedPackage(packageType);
+  };
 
   // const handlePlaceOrder = () => {
   //   // Here you would handle the order submission
@@ -52,22 +53,27 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
   const handlePlaceOrder = async () => {
     setLoading(true);
     setError(null);
-
+  
+    const amount = getPackagePrice() * ticketQuantity;
+    const fee = amount * 0.05; // 5% fee
+    const total = amount + fee;
+  
     const orderData = {
       id: eventData.id,
       event_name: eventData.event_title,
-      ticket_type: selectedTicket, // Include the selected ticket type here
-      ticketQuantity,
-      total: calculateTotal(),
+      ticket_type: selectedTicket,
+      ticket_quantity: ticketQuantity,
+      amount: amount,   // ✅ Send amount
+      fee: fee,         // ✅ Send fee
+      total: total,     // ✅ Send total
       first_name: billingInfo.firstName,
       last_name: billingInfo.lastName,
       email: billingInfo.email,
       phone: billingInfo.phone,
     };
-
+  
     console.log("🚀 About to send order:", JSON.stringify(orderData, null, 2));
-    console.log("🔑 Token:", token);
-
+  
     try {
       const response = await registerEvent(orderData, token);
       console.log("✅ Order Success:", response);
@@ -82,6 +88,7 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     }
   };
 
+
   
   
 
@@ -92,8 +99,17 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     }
   };
 
+  const getPackagePrice = () => {
+    if (selectedPackage === "Basic") {
+      return eventData.ticket_price_basic || 0;
+    } else if (selectedPackage === "Diamond") {
+      return eventData.ticket_price_diamond || 0;
+    }
+    return eventData.ticket_price || 0;
+  };
+
   const calculateSubtotal = () => {
-    return eventData.ticket_price * ticketQuantity;
+    return getPackagePrice() * ticketQuantity;
   };
 
   const calculateFees = () => {
@@ -126,6 +142,8 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
             fees={calculateFees()}
             total={calculateTotal()}
             eventData={eventData}
+            selectedPackage={selectedPackage}
+            onPackageSelect={handlePackageSelect}
             onBack={handleBack}
             onContinue={handlePaymentContinue}
             selectedTicket={selectedTicket}
@@ -135,18 +153,17 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
 
         {step === 3 && (
           <BillingInformationStep
-          billingInfo={billingInfo}
-          setBillingInfo={setBillingInfo}
-          ticketQuantity={ticketQuantity}
-          subtotal={calculateSubtotal()}
-          fees={calculateFees()}
-          total={calculateTotal()}
-          eventData={eventData}
-          onBack={handleBack}
-          onPlaceOrder={handlePlaceOrder}
-          loading={loading}
-          error={error}
-        />
+            billingInfo={billingInfo}
+            setBillingInfo={setBillingInfo}
+            ticketQuantity={ticketQuantity}
+            subtotal={calculateSubtotal()}
+            fees={calculateFees()}
+            total={calculateTotal()}
+            eventData={eventData}
+            selectedPackage={selectedPackage}
+            onBack={handleBack}
+            onPlaceOrder={handlePlaceOrder}
+          />
         )}
       </div>
     </div>
