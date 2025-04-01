@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { formatCurrency } from "../../utils/helpers";
 import Image from "../Image";
 import VerifiedImg from "../../assets/verified-icon.svg";
@@ -10,6 +11,8 @@ export default function PaymentSummaryStep({
   eventData,
   onBack,
   onContinue,
+  selectedTicket, // Removed state declaration
+  setSelectedTicket, // Removed state declaration
 }) {
   return (
     <div className="relative grid max-w-3xl grid-cols-1 gap-4 rounded-lg bg-white p-6 md:grid-cols-[1.5fr_1fr] md:gap-6">
@@ -43,7 +46,15 @@ export default function PaymentSummaryStep({
 
         <div className="absolute right-[19.5rem] top-0 h-full w-[1px] bg-muted"></div>
 
-        <div className="mb-4 rounded-lg border border-primary bg-white p-4">
+        {/* Basic Ticket */}
+        <div
+          className={`mb-4 rounded-lg border p-4 cursor-pointer transition ${
+            selectedTicket === "Basic"
+              ? "border-primary bg-primary/10"
+              : "border-muted bg-white"
+          }`}
+          onClick={() => setSelectedTicket("Basic")}
+        >
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-100 font-500">Basic</h3>
             <p className="text-100 font-600">$ 59.00</p>
@@ -54,7 +65,15 @@ export default function PaymentSummaryStep({
           </p>
         </div>
 
-        <div className="mb-4 rounded-lg border border-muted bg-white p-4">
+        {/* Diamond Ticket */}
+        <div
+          className={`mb-4 rounded-lg border p-4 cursor-pointer transition ${
+            selectedTicket === "Diamond"
+              ? "border-primary bg-primary/10"
+              : "border-muted bg-white"
+          }`}
+          onClick={() => setSelectedTicket("Diamond")}
+        >
           <div className="mb-4 flex items-center justify-between">
             <h3 className="mb-2 text-200 font-500">Diamond</h3>
             <p className="text-100 font-600">$ 250.00</p>
@@ -62,7 +81,7 @@ export default function PaymentSummaryStep({
           <p className="mb-4 text-50 text-foreground">
             Industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type.
-          </p>{" "}
+          </p>
         </div>
       </div>
 
@@ -112,8 +131,14 @@ export default function PaymentSummaryStep({
           </button>
 
           <button
-            onClick={onContinue}
-            className="flex-1 rounded-lg bg-subColorBtn px-4 py-2 text-50 font-500 text-white hover:bg-subColorBtn/90"
+            // onClick={onContinue}
+            onClick={() => onContinue(selectedTicket)} 
+            disabled={!selectedTicket} // Prevent checkout if no ticket is selected
+            className={`flex-1 rounded-lg px-4 py-2 text-50 font-500 text-white transition ${
+              selectedTicket
+                ? "bg-subColorBtn hover:bg-subColorBtn/90"
+                : "bg-gray-300 cursor-not-allowed"
+            }`}
           >
             Checkout
           </button>
@@ -122,3 +147,4 @@ export default function PaymentSummaryStep({
     </div>
   );
 }
+
