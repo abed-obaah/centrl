@@ -4,6 +4,8 @@ import PaymentSummaryStep from "./payment-summary-step";
 import BillingInformationStep from "./billing-information-step";
 import { useSelector } from "react-redux";
 import { registerEvent } from "../../api/registerEvent";
+import axios from "axios";
+
 
 export default function CheckoutModal({ isOpen, onClose, eventData }) {
   const token = useSelector((state) => state.auth.token);
@@ -50,6 +52,44 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
   //   setTicketQuantity(1);
   // };
 
+  // const handlePlaceOrder = async () => {
+  //   setLoading(true);
+  //   setError(null);
+  
+  //   const amount = getPackagePrice() * ticketQuantity;
+  //   const fee = amount * 0.05; // 5% fee
+  //   const total = amount + fee;
+  
+  //   const orderData = {
+  //     id: eventData.id,
+  //     event_name: eventData.event_title,
+  //     ticket_type: selectedTicket,
+  //     ticket_quantity: ticketQuantity,
+  //     amount: amount,   // ✅ Send amount
+  //     fee: fee,         // ✅ Send fee
+  //     total: total,     // ✅ Send total
+  //     first_name: billingInfo.firstName,
+  //     last_name: billingInfo.lastName,
+  //     email: billingInfo.email,
+  //     phone: billingInfo.phone,
+  //   };
+  
+  //   console.log("🚀 About to send order:", JSON.stringify(orderData, null, 2));
+  
+  //   try {
+  //     const response = await registerEvent(orderData, token);
+  //     console.log("✅ Order Success:", response);
+  //     onClose();
+  //     setStep(1);
+  //     setTicketQuantity(1);
+  //   } catch (err) {
+  //     console.error("❌ Order Failed:", err);
+  //     setError(err.response?.data?.message || "Failed to place order.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handlePlaceOrder = async () => {
     setLoading(true);
     setError(null);
@@ -59,35 +99,32 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     const total = amount + fee;
   
     const orderData = {
-      id: eventData.id,
+      event_id: eventData.id,
       event_name: eventData.event_title,
       ticket_type: selectedTicket,
       ticket_quantity: ticketQuantity,
-      amount: amount,   // ✅ Send amount
-      fee: fee,         // ✅ Send fee
-      total: total,     // ✅ Send total
+      amount: total * 100, // Convert to kobo
       first_name: billingInfo.firstName,
       last_name: billingInfo.lastName,
       email: billingInfo.email,
       phone: billingInfo.phone,
     };
   
-    console.log("🚀 About to send order:", JSON.stringify(orderData, null, 2));
-  
     try {
-      const response = await registerEvent(orderData, token);
-      console.log("✅ Order Success:", response);
-      onClose();
-      setStep(1);
-      setTicketQuantity(1);
+      const response = await axios.post(
+        "https://api.centrl.ng/initiate_payment.php", // Update with your API URL
+        orderData
+      );
+  
+      const paystackUrl = response.data.authorization_url; // Assuming the API returns a URL for Paystack
+      window.open(paystackUrl, "_blank"); // Open the Paystack URL in a new tab
     } catch (err) {
-      console.error("❌ Order Failed:", err);
-      setError(err.response?.data?.message || "Failed to place order.");
+      console.error("❌ Payment Initialization Failed:", err);
+      setError("Failed to initialize payment. Please try again.");
     } finally {
       setLoading(false);
     }
   };
-
 
   
   
