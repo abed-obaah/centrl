@@ -4,6 +4,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // layouts
 import RootLayout from "./layouts/RootLayout";
@@ -74,7 +75,7 @@ const router = createBrowserRouter(
         <Route path="/calendar" element={<Calenders />} />
         <Route path="/privacy" element={<Privacy />} />
       </Route>
-
+{/* 
       <Route element={<DashboardWrapper />}>
         <Route path="/dashboard" element={<DashboardLayout />} />
         <Route path="/create-event" element={<CreateEvent />} />
@@ -85,38 +86,52 @@ const router = createBrowserRouter(
         <Route path="/events" element={<UserEventPage />} />
         <Route path="/event/:id" element={<EventPage />} />
         <Route path="/dashboard/discover" element={<Discovered />} />
-      </Route>
+      </Route> */}
+       <Route path="/sign-up" element={<SignInLayout />} />
 
-      <Route element={<CustomizeLayout />}>
-        <Route path="/customize" element={<HomePage />} />
-        <Route path="/guests" element={<Guests />} />
-        <Route path="/overview" element={<Overview />} />
-      </Route>
+{/* Protected Routes */}
+<Route element={<ProtectedRoute />}>
+  <Route element={<DashboardWrapper />}>
+    <Route path="/dashboard" element={<DashboardLayout />} />
+    <Route path="/create-event" element={<CreateEvent />} />
+    <Route path="/user-profile" element={<UserProfile />} />
+    <Route path="/user-profile/:id" element={<UserViewProfile />} />
+    <Route path="/competition" element={<Competition />} />
+    <Route path="/category/:id" element={<CategoryDetails />} />
+    <Route path="/events" element={<UserEventPage />} />
+    <Route path="/event/:id" element={<EventPage />} />
+    <Route path="/dashboard/discover" element={<Discovered />} />
+  </Route>
 
-      <Route element={<UserSettingsLayout />}>
-        <Route path="/settings" element={<Settings />} />
-      </Route>
+  <Route element={<CustomizeLayout />}>
+    <Route path="/customize" element={<HomePage />} />
+    <Route path="/guests" element={<Guests />} />
+    <Route path="/overview" element={<Overview />} />
+  </Route>
 
-      <Route path="/sign-up" element={<SignInLayout />} />
+  <Route element={<UserSettingsLayout />}>
+    <Route path="/settings" element={<Settings />} />
+  </Route>
 
-      {/* Admin Login Layout and Dashboard layout */}
-      <Route path="/admin" element={<AdminLoginLayout />} />
+  {/* Admin Login Layout and Dashboard layout */}
+  <Route path="/admin" element={<AdminLoginLayout />} />
 
-      <Route element={<AdminLayout />}>
-        <Route path="/admin-dashboard" element={<Dashboard />} />
-        <Route path="/admin-users" element={<Users />} />
-        <Route
-          path="/admin-event-management"
-          element={<AdminEventManagement />}
-        />
-        <Route path="/admin-admins" element={<Admins />} />
-        <Route path="/admin-themes" element={<Themes />} />
-      </Route>
+  <Route element={<AdminLayout />}>
+    <Route path="/admin-dashboard" element={<Dashboard />} />
+    <Route path="/admin-users" element={<Users />} />
+    <Route
+      path="/admin-event-management"
+      element={<AdminEventManagement />}
+    />
+    <Route path="/admin-admins" element={<Admins />} />
+    <Route path="/admin-themes" element={<Themes />} />
+  </Route>
 
-      <Route element={<AdminThemeLayout />}>
-        <Route path="/admin-themes/light" element={<LightThemes />} />
-        <Route path="/admin-themes/sample" element={<SampleTheme />} />
-      </Route>
+  <Route element={<AdminThemeLayout />}>
+    <Route path="/admin-themes/light" element={<LightThemes />} />
+    <Route path="/admin-themes/sample" element={<SampleTheme />} />
+  </Route>
+</Route>
     </>,
   ),
 );

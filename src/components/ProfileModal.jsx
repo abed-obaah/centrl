@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../api/logoutApi"; // API call function
 import { logout } from "../redux/authSlice"; // Redux logout action
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ProfileModal = ({ isOpen, onClose, user }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate(); // Hook for navigation
 
   if (!isOpen) return null;
 
@@ -19,9 +21,12 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
       const response = await logoutUser(token);
 
       if (response.status === "success") {
-        dispatch(logout()); // Clear user data from Redux store
+        dispatch(logout()); // Clear Redux store
         console.log("Logout successful");
-        onClose(); // Close modal after logging out
+        onClose(); // Close modal before navigating
+
+        // Navigate to sign-up and replace history to prevent back navigation
+        navigate("/sign-up", { replace: true });
       }
     } catch (error) {
       console.error("Logout failed:", error);
