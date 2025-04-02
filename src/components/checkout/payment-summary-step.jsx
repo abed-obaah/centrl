@@ -13,8 +13,8 @@ export default function PaymentSummaryStep({
   onPackageSelect,
   onBack,
   onContinue,
-  selectedTicket, // Removed state declaration
-  setSelectedTicket, // Removed state declaration
+  selectedTicket,
+  setSelectedTicket,
 }) {
   const hasBasicPackage = eventData.ticket_price_basic > 0;
   const hasDiamondPackage = eventData.ticket_price_diamond > 0;
@@ -49,51 +49,55 @@ export default function PaymentSummaryStep({
           </span>
         </div>
 
-        <div className="absolute right-[19.5rem] top-0 h-full w-[1px] bg-muted"></div>
+        <div className="absolute right-[19.5rem] top-0 hidden h-full w-[1px] bg-muted md:block"></div>
 
-            {hasBasicPackage && (
-              <div
-                className={`mb-4 rounded-lg border ${
-                  selectedPackage === "Basic" ? "border-primary" : "border-muted"
-                } cursor-pointer bg-white p-4`}
-                onClick={() => {
-                  onPackageSelect("Basic");
-                  setSelectedTicket("Basic"); // Set selected ticket when choosing a package
-                }}
-              >
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-100 font-500">Basic</h3>
-                  <p className="text-100 font-600">₦ {eventData.ticket_price_basic}</p>
-                </div>
-                <p className="mb-4 text-50 text-foreground">
-                  Industry. Lorem Ipsum has been the industry's standard dummy text
-                  ever since the 1500s, when an unknown printer took a galley of
-                  type.
-                </p>
-              </div>
-            )}
+        {hasBasicPackage && (
+          <div
+            className={`mb-4 rounded-lg border ${
+              selectedPackage === "Basic" ? "border-primary" : "border-muted"
+            } cursor-pointer bg-white p-4`}
+            onClick={() => {
+              onPackageSelect("Basic");
+              setSelectedTicket("Basic");
+            }}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-100 font-500">Basic</h3>
+              <p className="text-100 font-600">
+                ₦ {eventData.ticket_price_basic}
+              </p>
+            </div>
+            <p className="mb-4 text-50 text-foreground">
+              Industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type.
+            </p>
+          </div>
+        )}
 
-            {hasDiamondPackage && (
-              <div
-                className={`mb-4 rounded-lg border ${
-                  selectedPackage === "Diamond" ? "border-primary" : "border-muted"
-                } cursor-pointer bg-white p-4`}
-                onClick={() => {
-                  onPackageSelect("Diamond");
-                  setSelectedTicket("Diamond"); // Set selected ticket when choosing a package
-                }}
-              >
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="mb-2 text-200 font-500">Diamond</h3>
-                  <p className="text-100 font-600">₦ {eventData.ticket_price_diamond}</p>
-                </div>
-                <p className="mb-4 text-50 text-foreground">
-                  Industry. Lorem Ipsum has been the industry's standard dummy text
-                  ever since the 1500s, when an unknown printer took a galley of type.
-                </p>
-              </div>
-            )}
-
+        {hasDiamondPackage && (
+          <div
+            className={`mb-4 rounded-lg border ${
+              selectedPackage === "Diamond" ? "border-primary" : "border-muted"
+            } cursor-pointer bg-white p-4`}
+            onClick={() => {
+              onPackageSelect("Diamond");
+              setSelectedTicket("Diamond");
+            }}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="mb-2 text-200 font-500">Diamond</h3>
+              <p className="text-100 font-600">
+                ₦ {eventData.ticket_price_diamond}
+              </p>
+            </div>
+            <p className="mb-4 text-50 text-foreground">
+              Industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type.
+            </p>
+          </div>
+        )}
 
         {/* <div className="mb-4 rounded-lg border border-primary bg-white p-4">
           <div className="mb-4 flex items-center justify-between">
@@ -165,7 +169,7 @@ export default function PaymentSummaryStep({
 
           <button
             // onClick={onContinue}
-            onClick={() => onContinue(selectedTicket)} 
+            onClick={() => onContinue(selectedTicket)}
             disabled={!selectedTicket} // Prevent checkout if no ticket is selected
             className={`flex-1 rounded-lg px-4 py-2 text-50 font-500 text-white transition ${
               selectedTicket
@@ -180,4 +184,3 @@ export default function PaymentSummaryStep({
     </div>
   );
 }
-

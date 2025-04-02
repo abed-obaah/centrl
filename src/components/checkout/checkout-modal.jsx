@@ -3,31 +3,25 @@ import TicketQuantityStep from "./ticket-quantity-step";
 import PaymentSummaryStep from "./payment-summary-step";
 import BillingInformationStep from "./billing-information-step";
 import { useSelector } from "react-redux";
-import { registerEvent } from "../../api/registerEvent";
 import axios from "axios";
 
-
 export default function CheckoutModal({ isOpen, onClose, eventData }) {
-  const token = useSelector((state) => state.auth.token);
-  const userId = useSelector((state) => state.auth.user_id);
+  const { name, email } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [selectedPackage, setSelectedPackage] = useState("Basic");
   const [billingInfo, setBillingInfo] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+    fullName: name,
+    email: email,
     phone: "",
     paymentMethod: "credit",
   });
 
-  const [selectedTicket, setSelectedTicket] = useState(null); 
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   if (!isOpen) return null;
-
-
 
   const handleTicketSelect = (quantity) => {
     setTicketQuantity(quantity);
@@ -35,7 +29,7 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
   };
 
   const handlePaymentContinue = (selectedTicket) => {
-    setSelectedTicket(selectedTicket); // Set selected ticket when continuing to payment
+    setSelectedTicket(selectedTicket);
     setStep(3);
   };
 
@@ -43,80 +37,32 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     setSelectedPackage(packageType);
   };
 
-  // const handlePlaceOrder = () => {
-  //   // Here you would handle the order submission
-  //   console.log("Order placed", { ticketQuantity, billingInfo });
-  //   onClose();
-  //   // Reset state
-  //   setStep(1);
-  //   setTicketQuantity(1);
-  // };
-
-  // const handlePlaceOrder = async () => {
-  //   setLoading(true);
-  //   setError(null);
-  
-  //   const amount = getPackagePrice() * ticketQuantity;
-  //   const fee = amount * 0.05; // 5% fee
-  //   const total = amount + fee;
-  
-  //   const orderData = {
-  //     id: eventData.id,
-  //     event_name: eventData.event_title,
-  //     ticket_type: selectedTicket,
-  //     ticket_quantity: ticketQuantity,
-  //     amount: amount,   // ✅ Send amount
-  //     fee: fee,         // ✅ Send fee
-  //     total: total,     // ✅ Send total
-  //     first_name: billingInfo.firstName,
-  //     last_name: billingInfo.lastName,
-  //     email: billingInfo.email,
-  //     phone: billingInfo.phone,
-  //   };
-  
-  //   console.log("🚀 About to send order:", JSON.stringify(orderData, null, 2));
-  
-  //   try {
-  //     const response = await registerEvent(orderData, token);
-  //     console.log("✅ Order Success:", response);
-  //     onClose();
-  //     setStep(1);
-  //     setTicketQuantity(1);
-  //   } catch (err) {
-  //     console.error("❌ Order Failed:", err);
-  //     setError(err.response?.data?.message || "Failed to place order.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const handlePlaceOrder = async () => {
     setLoading(true);
     setError(null);
-  
+
     const amount = getPackagePrice() * ticketQuantity;
     const fee = amount * 0.05; // 5% fee
     const total = amount + fee;
-  
+
     const orderData = {
       event_id: eventData.id,
       event_name: eventData.event_title,
       ticket_type: selectedTicket,
       ticket_quantity: ticketQuantity,
       amount: total * 100, // Convert to kobo
-      first_name: billingInfo.firstName,
-      last_name: billingInfo.lastName,
+      first_name: billingInfo.fullName,
       email: billingInfo.email,
       phone: billingInfo.phone,
     };
-  
+
     try {
       const response = await axios.post(
-        "https://api.centrl.ng/initiate_payment.php", // Update with your API URL
-        orderData
+        "https://api.centrl.ng/initiate_payment.php",
+        orderData,
       );
-  
-      const paystackUrl = response.data.authorization_url; // Assuming the API returns a URL for Paystack
+
+      const paystackUrl = response.data.authorization_url;
       window.open(paystackUrl, "_blank"); // Open the Paystack URL in a new tab
     } catch (err) {
       console.error("❌ Payment Initialization Failed:", err);
@@ -125,10 +71,6 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
       setLoading(false);
     }
   };
-
-  
-  
-
 
   const handleBack = () => {
     if (step > 1) {
@@ -173,7 +115,7 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
         )}
 
         {step === 2 && (
-           <PaymentSummaryStep
+          <PaymentSummaryStep
             ticketQuantity={ticketQuantity}
             subtotal={calculateSubtotal()}
             fees={calculateFees()}
@@ -184,7 +126,7 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
             onBack={handleBack}
             onContinue={handlePaymentContinue}
             selectedTicket={selectedTicket}
-            setSelectedTicket={setSelectedTicket} 
+            setSelectedTicket={setSelectedTicket}
           />
         )}
 
