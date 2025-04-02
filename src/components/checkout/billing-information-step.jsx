@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/helpers";
 
 export default function BillingInformationStep({
@@ -11,50 +12,45 @@ export default function BillingInformationStep({
   ticketQuantity,
   selectedPackage,
 }) {
+  const { user_id: userId } = useSelector((state) => state.auth);
+
+  const handleGoogleLogin = () => {
+    window.location.href = "https://api.centrl.ng/google_callback.php";
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setBillingInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePaymentMethodChange = (method) => {
-    setBillingInfo((prev) => ({ ...prev, paymentMethod: method }));
-  };
+  // const handlePaymentMethodChange = (method) => {
+  //   setBillingInfo((prev) => ({ ...prev, paymentMethod: method }));
+  // };
 
   return (
     <div className="relative grid max-w-3xl grid-cols-1 gap-4 rounded-lg bg-white p-6 md:grid-cols-[1.5fr_1fr] md:gap-6">
       <div>
         <div className="mb-6">
           <h2 className="text-300 font-600">Billing Information</h2>
-          <p className="text-50 text-foreground">
-            <a href="#" className="text-primary">
-              Log in
-            </a>{" "}
-            for a faster experience
-          </p>
+          {!userId && (
+            <p className="text-50 text-foreground">
+              <button onClick={handleGoogleLogin} className="text-primary">
+                Log in
+              </button>{" "}
+              for a faster experience
+            </p>
+          )}
         </div>
 
-        <div className="mb-4 grid grid-cols-2 gap-4">
+        <div className="mb-4">
           <div>
             <input
               type="text"
-              id="firstName"
-              name="firstName"
-              value={billingInfo.firstName}
+              id="fullName"
+              name="fullName"
+              value={billingInfo.fullName}
               onChange={handleInputChange}
-              placeholder="First Name"
-              className="w-full rounded-md border border-muted bg-white p-2 text-50"
-              required
-            />
-          </div>
-
-          <div>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={billingInfo.lastName}
-              onChange={handleInputChange}
-              placeholder="Last Name"
+              placeholder="Full Name"
               className="w-full rounded-md border border-muted bg-white p-2 text-50"
               required
             />
@@ -89,7 +85,8 @@ export default function BillingInformationStep({
           </div>
         </div>
 
-        <div className="mb-6">
+        {/* to be implemented later */}
+        {/* <div className="mb-6">
           <h3 className="text-lg mb-4 font-700">Pay with</h3>
 
           <div className="space-y-3">
@@ -141,10 +138,10 @@ export default function BillingInformationStep({
               </label>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
-      <div className="absolute right-[17.5rem] top-0 h-full w-[1px] bg-muted"></div>
+      <div className="absolute right-[17.5rem] top-0 hidden h-full w-[1px] bg-muted md:block"></div>
 
       <div className="pl-2">
         <div className="mb-4 overflow-hidden rounded-lg border border-primary">

@@ -44,6 +44,7 @@ export default function CreateEvent() {
 
   // Form state
   const [eventData, setEventData] = useState({ ...defaultEventData });
+  const [customCategory, setCustomCategory] = useState("");
 
   // File state
   const [bannerImage, setBannerImage] = useState(null);
@@ -52,16 +53,14 @@ export default function CreateEvent() {
   const [videoName, setVideoName] = useState("Upload Video");
 
   const roles = [
-    "Event Organizer",
-    "Event Lover",
-    "Influencer",
-    "Startup founder",
-    "Brand/Company Representative",
-    "Investor/Sponsor",
-    "Media/Press",
-    "Government/Policy Maker",
-    "Student/Scholar",
-    "Other",
+    "Business",
+    "Party",
+    "Technology",
+    "Concert",
+    "Education",
+    "Gaming & Sport",
+    "Wellbeing",
+    "Others",
   ];
 
   const userId = useSelector((state) => state.auth.user_id);
@@ -178,6 +177,11 @@ export default function CreateEvent() {
   const prepareEventData = () => {
     const startDateTime = `${eventData.start_date}T${eventData.start_time}:00`;
 
+    const finalCategory =
+      eventData.event_category === "Others"
+        ? customCategory
+        : eventData.event_category;
+
     return {
       user_id: userId,
       name: name,
@@ -189,7 +193,7 @@ export default function CreateEvent() {
       event_link: eventData.event_link || null,
       location: eventData.location || null,
       about: eventData.about,
-      event_category: eventData.event_category,
+      event_category: finalCategory,
       ticket_type: eventData.ticket_type || "Free",
       ticket_price_basic: eventData.ticket_price_basic || 0.0,
       ticket_price_diamond: eventData.ticket_price_diamond || 0.0,
@@ -539,6 +543,19 @@ export default function CreateEvent() {
                   </div>
                 )}
               </div>
+
+              {eventData.event_category === "Others" && (
+                <div className="my-6">
+                  <label className="mb-2 block font-500">Custom Category</label>
+                  <input
+                    type="text"
+                    value={customCategory}
+                    onChange={(e) => setCustomCategory(e.target.value)}
+                    placeholder="Enter your custom category"
+                    className="w-full rounded-lg bg-white px-4 py-3 outline-none placeholder:text-[#000]/70"
+                  />
+                </div>
+              )}
 
               <MoreOptions
                 eventData={eventData}
