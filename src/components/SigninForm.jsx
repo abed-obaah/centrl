@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerEmail } from "../api/authApi";
 import { setUser } from "../redux/authSlice";
+import { toast } from "sonner";
 
 const SignInForm = () => {
-  const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleGoogleLogin = () => {
     window.location.href = "https://api.centrl.ng/google_callback.php";
@@ -18,35 +19,60 @@ const SignInForm = () => {
 
   const handleChange = (e) => {
     setEmail(e.target.value);
+    if (emailError) setEmailError("");
   };
 
-  const handleBlur = async () => {
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const handleEmailSubmit = async () => {
+    // Validate email before submission
+    if (!email.trim()) {
+      setEmailError("Email is required");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
     setIsLoading(true);
+
     try {
-      if (email.trim() !== "") {
-        const response = await registerEmail(email);
-        console.log("email response", response);
-        if (response?.status === "success") {
-          dispatch(
-            setUser({
-              token: response.token,
-              user_id: response.user.id,
-              name: response.user.name,
-              email: response.user.email,
-              googleId: response.user.google_id,
-              profileImage: response.profile.profile_image,
-            }),
-          );
-          navigate("/dashboard");
-        } else {
-          setStatus("Failed to register email.");
-        }
+      const loadingToast = toast.loading("Authenticating...");
+
+      const response = await registerEmail(email);
+
+      toast.dismiss(loadingToast);
+
+      // console.log("email response", response);
+      if (response?.status === "success") {
+        dispatch(
+          setUser({
+            token: response.token,
+            user_id: response.user.id,
+            name: response.user.name,
+            email: response.user.email,
+            googleId: response.user.google_id,
+            profileImage: response.profile.profile_image,
+          }),
+        );
+
+        toast.success("Successfully authenticated!");
+        navigate("/dashboard");
+      } else {
+        toast.error(response?.message || "Failed to register email");
       }
     } catch (error) {
-      setStatus("Something went wrong. Try again.");
-      console.error("Error during process:", error);
+      toast.error(
+        "Something went wrong with our service. Please try again later.",
+      );
+      console.error("Error during authentication:", error);
     } finally {
-      setIsLoading(false); // Stop loading
+      setIsLoading(false);
     }
   };
 
@@ -64,11 +90,7 @@ const SignInForm = () => {
 
           <hr className="mb-6 text-[#000]/15" />
 
-          {status && <div className="mb-4 font-500 text-[red]">{status}</div>}
-
-          <form
-          //  onSubmit={handleEmailSubmit}
-          >
+          <form>
             <div className="space-y-4">
               <div>
                 <label
@@ -83,20 +105,27 @@ const SignInForm = () => {
                   name="email"
                   value={email}
                   onChange={handleChange}
-                  onBlur={handleBlur} // Triggers API call when user leaves the field
                   placeholder="you@email.com"
-                  className="text-sm w-full rounded-lg border border-[#000]/15 px-4 py-2.5 outline-none transition"
+                  className={`text-sm w-full rounded-lg border ${
+                    emailError ? "border-red-500" : "border-[#000]/15"
+                  } px-4 py-2.5 outline-none transition`}
                   required
                 />
+                {emailError && (
+                  <p className="text-sm text-red-500 mt-1">{emailError}</p>
+                )}
               </div>
             </div>
 
             <button
-              type="submit"
+              type="button"
               disabled={isLoading}
-              className="mt-8 w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-6 py-2 text-100 font-500 text-white transition-all duration-300 ease-in-out hover:from-[#E46708] hover:to-[#CD2574]"
+              onClick={handleEmailSubmit}
+              className={`mt-8 w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-6 py-2 text-100 font-500 text-white transition-all duration-300 ease-in-out ${
+                !isLoading && "hover:from-[#E46708] hover:to-[#CD2574]"
+              } ${isLoading && "cursor-not-allowed opacity-75"}`}
             >
-              {isLoading ? "Loading..." : "Continue with Email"}
+              {isLoading ? "Processing..." : "Continue with Email"}
             </button>
 
             <div className="my-2 text-center">

@@ -2,16 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+const initialState = {
+  isAuthenticated: false,
+  token: null,
+  user_id: null,
+  name: null,
+  email: null,
+  googleId: null,
+  profileImage: null,
+};
+
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    token: null,
-    user_id: null,
-    name: null,
-    email: null,
-    googleId: null,
-    profileImage: null,
-  },
+  initialState,
   reducers: {
     setUser: (state, action) => {
       state.token = action.payload.token;
@@ -22,12 +25,7 @@ const authSlice = createSlice({
       state.profileImage = action.payload.profileImage;
     },
     logout: (state) => {
-      state.token = null;
-      state.user_id = null;
-      state.name = null;
-      state.email = null;
-      state.googleId = null;
-      state.profileImage = null;
+      return initialState;
     },
   },
 });

@@ -3,10 +3,13 @@ import { logoutUser } from "../api/logoutApi"; // API call function
 import { logout } from "../redux/authSlice"; // Redux logout action
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Image from "./Image";
+import AvatarFallback from "./AvatarFallback";
+import { toast } from "sonner";
 
 const ProfileModal = ({ isOpen, onClose, user }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
+  const { token, googleId } = useSelector((state) => state.auth);
   const navigate = useNavigate(); // Hook for navigation
 
   if (!isOpen) return null;
@@ -15,14 +18,27 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
     try {
       if (!token) {
         console.error("No token found");
+        dispatch(logout()); // Still try to clear state
+        navigate("/sign-up", { replace: true });
         return;
       }
 
-      const response = await logoutUser(token);
+      const loadingToast = toast.loading("Logging out...");
+
+      // Pass isGoogleAuth flag based on whether user has a googleId
+      const isGoogleAuth = !!googleId;
+      const response = await logoutUser(token, isGoogleAuth);
+
+      toast.dismiss(loadingToast);
 
       if (response.status === "success") {
         dispatch(logout()); // Clear Redux store
-        console.log("Logout successful");
+
+        // Clear any additional local storage from google
+        localStorage.removeItem("google_auth_state");
+        sessionStorage.clear();
+
+        toast.success("Logout successful");
         onClose(); // Close modal before navigating
 
         // Navigate to sign-up and replace history to prevent back navigation
@@ -30,17 +46,32 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
       }
     } catch (error) {
       console.error("Logout failed:", error);
+
+      toast.error("Something went wrong. Please try again.");
+
+      // Force logout locally even if API call fails
+      dispatch(logout());
+      navigate("/sign-up", { replace: true });
     }
   };
 
   return (
     <div className="absolute right-10 z-50 mt-0 w-56 rounded-xl bg-white p-2 shadow-lg">
-      <div className="flex space-x-4 border-b border-b-[#000]/15 pb-2">
-        <img
-          src={user.imageUrl}
-          alt={user.name}
-          className="size-9 rounded-full"
-        />
+      <div className="flex space-x-2 border-b border-b-[#000]/15 pb-2">
+        {user.imageUrl ? (
+          <Image
+            src={user.imageUrl}
+            alt={user.name}
+            className="size-9 rounded-full object-cover"
+          />
+        ) : (
+          <AvatarFallback
+            name={user.name || "User"}
+            size="md"
+            className="size-9"
+          />
+        )}
+
         <div>
           <p className="text-[15px] font-500">{user.name} </p>
           <p className="text-[10px] font-500 text-[#646060]">{user.email}</p>

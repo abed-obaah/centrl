@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { formatCurrency } from "../../utils/helpers";
 import Image from "../Image";
-import VerifiedImg from "../../assets/verified-icon.svg";
 
 export default function PaymentSummaryStep({
   ticketQuantity,
@@ -22,9 +20,11 @@ export default function PaymentSummaryStep({
   return (
     <div className="relative grid max-w-3xl grid-cols-1 gap-4 rounded-lg bg-white p-6 md:grid-cols-[1.5fr_1fr] md:gap-6">
       <div>
-        <div className="mb-8 flex items-start justify-between">
+        <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:gap-0">
           <div>
-            <h2 className="mb-2 text-300 font-600">{eventData.event_title}</h2>
+            <h2 className="mb-2 text-300 font-600 capitalize">
+              {eventData.event_title}
+            </h2>
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -33,14 +33,10 @@ export default function PaymentSummaryStep({
                   alt={eventData.event_title}
                   className="size-[30px] rounded-full object-cover"
                 />
-                <p className="text-50 text-black">{eventData.event_title}</p>
+                <p className="text-50 capitalize text-black">
+                  {eventData.event_title}
+                </p>
               </div>
-
-              <img
-                className="size-[18px]"
-                src={VerifiedImg}
-                alt="verified image"
-              />
             </div>
           </div>
 
@@ -98,32 +94,10 @@ export default function PaymentSummaryStep({
             </p>
           </div>
         )}
-
-        {/* <div className="mb-4 rounded-lg border border-primary bg-white p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-100 font-500">Basic</h3>
-            <p className="text-100 font-600">$ 59.00</p>
-          </div>
-          <p className="mb-4 text-50 text-foreground">
-            Industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type.
-          </p>
-        </div> */}
-
-        {/* <div className="mb-4 rounded-lg border border-muted bg-white p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="mb-2 text-200 font-500">Diamond</h3>
-            <p className="text-100 font-600">$ 250.00</p>
-          </div>
-          <p className="mb-4 text-50 text-foreground">
-            Industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type.
-          </p>{" "}
-        </div> */}
       </div>
 
-      <div className="pl-2">
-        <div className="mb-4 overflow-hidden rounded-lg">
+      <div className="md:pl-2">
+        <div className="mb-4 hidden overflow-hidden rounded-lg md:block">
           <Image
             src={eventData.banner_image}
             alt={eventData.event_title}
@@ -174,7 +148,7 @@ export default function PaymentSummaryStep({
             className={`flex-1 rounded-lg px-4 py-2 text-50 font-500 text-white transition ${
               selectedTicket
                 ? "bg-subColorBtn hover:bg-subColorBtn/90"
-                : "bg-gray-300 cursor-not-allowed"
+                : "cursor-not-allowed bg-gray-300"
             }`}
           >
             Checkout

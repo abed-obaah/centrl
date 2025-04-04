@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const logoutUser = async (token) => {
+export const logoutUser = async (token, isGoogleAuth = false) => {
   try {
     const response = await axios({
       method: "POST",
@@ -9,12 +9,20 @@ export const logoutUser = async (token) => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+
+      data: {
+        auth_type: isGoogleAuth ? "google" : "email",
+      },
     });
 
     console.log("Logout response:", response.data);
     return response.data;
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
-    throw error;
+
+    return {
+      status: "success",
+      message: "Local session cleared",
+    };
   }
 };

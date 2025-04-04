@@ -4,14 +4,22 @@ import PaymentSummaryStep from "./payment-summary-step";
 import BillingInformationStep from "./billing-information-step";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { updateUserProfile } from "../../api/userApi";
+import { toast } from "sonner";
 
 export default function CheckoutModal({ isOpen, onClose, eventData }) {
-  const { name, email } = useSelector((state) => state.auth);
+  const {
+    name,
+    user_id: userId,
+    token,
+    email,
+  } = useSelector((state) => state.auth);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
   const [ticketQuantity, setTicketQuantity] = useState(1);
-  const [selectedPackage, setSelectedPackage] = useState("Basic");
+  const [selectedPackage, setSelectedPackage] = useState("all");
   const [billingInfo, setBillingInfo] = useState({
     fullName: name,
     email: email,
@@ -20,6 +28,7 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
   });
 
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({});
 
   if (!isOpen) return null;
 
@@ -37,7 +46,23 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     setSelectedPackage(packageType);
   };
 
+  const validatePhoneNumber = (phone) => {
+    return phone && phone.trim().length >= 11;
+  };
+
   const handlePlaceOrder = async () => {
+    // Reset validation errors
+    setValidationErrors({});
+
+    // Validate phone number
+    if (!validatePhoneNumber(billingInfo.phone)) {
+      setValidationErrors({
+        phone: "Please enter a valid phone number",
+      });
+      toast.error("Please enter a valid phone number");
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -57,6 +82,20 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
     };
 
     try {
+      if (userId && token && billingInfo.phone) {
+        try {
+          await updateUserProfile(token, {
+            phone: billingInfo.phone,
+          });
+          toast.success("Phone number updated successfully");
+        } catch (profileError) {
+          console.error("Failed to update phone number:", profileError);
+          toast.error(
+            "Failed to update your profile, but continuing with order",
+          );
+        }
+      }
+
       const response = await axios.post(
         "https://api.centrl.ng/initiate_payment.php",
         orderData,
@@ -101,12 +140,12 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[600] flex items-center justify-center">
+    <div className="fixed inset-0 z-[600] mt-[5rem] flex items-start justify-center overflow-auto px-6 md:px-0">
       <div
         className="fixed inset-0 z-50 bg-background/80 backdrop-blur-lg"
         onClick={onClose}
       />
-      <div className="relative z-[800] shadow-lg">
+      <div className="relative z-[800] w-full shadow-lg">
         {step === 1 && (
           <TicketQuantityStep
             onSelect={handleTicketSelect}
@@ -142,6 +181,8 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
             selectedPackage={selectedPackage}
             onBack={handleBack}
             onPlaceOrder={handlePlaceOrder}
+            loading={loading}
+            validationErrors={validationErrors}
           />
         )}
       </div>

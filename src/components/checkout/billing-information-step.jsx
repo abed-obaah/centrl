@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/helpers";
+import { Spinner } from "../Spinner";
 
 export default function BillingInformationStep({
   billingInfo,
@@ -11,6 +12,8 @@ export default function BillingInformationStep({
   onPlaceOrder,
   ticketQuantity,
   selectedPackage,
+  loading,
+  validationErrors = {},
 }) {
   const { user_id: userId } = useSelector((state) => state.auth);
 
@@ -28,7 +31,7 @@ export default function BillingInformationStep({
   // };
 
   return (
-    <div className="relative grid max-w-3xl grid-cols-1 gap-4 rounded-lg bg-white p-6 md:grid-cols-[1.5fr_1fr] md:gap-6">
+    <div className="rounded-lg bg-white p-6 md:grid md:grid-cols-[1.5fr_1fr] md:gap-6">
       <div>
         <div className="mb-6">
           <h2 className="text-300 font-600">Billing Information</h2>
@@ -44,6 +47,12 @@ export default function BillingInformationStep({
 
         <div className="mb-4">
           <div>
+            <label
+              htmlFor="fullName"
+              className="mb-1 inline-block text-50 font-500"
+            >
+              Name
+            </label>
             <input
               type="text"
               id="fullName"
@@ -57,32 +66,41 @@ export default function BillingInformationStep({
           </div>
         </div>
 
-        <div className="mb-4 grid grid-cols-2 gap-4">
-          <div className="mb-6">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={billingInfo.email}
-              onChange={handleInputChange}
-              placeholder="Email"
-              className="w-full rounded-md border border-muted bg-white p-2 text-50"
-              required
-            />
-          </div>
+        <div className="mb-6">
+          <label htmlFor="email" className="mb-1 inline-block text-50 font-500">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={billingInfo.email}
+            onChange={handleInputChange}
+            placeholder="Email"
+            className="w-full rounded-md border border-muted bg-white p-2 text-50"
+            required
+          />
+        </div>
 
-          <div className="mb-6">
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={billingInfo.phone}
-              onChange={handleInputChange}
-              placeholder="Phone Number"
-              className="w-full rounded-md border border-muted bg-white p-2 text-50"
-              required
-            />
-          </div>
+        <div className="mb-6">
+          <label htmlFor="phone" className="mb-1 inline-block text-50 font-500">
+            Phone Number
+          </label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={billingInfo.phone}
+            onChange={handleInputChange}
+            placeholder="Phone Number *"
+            className={`w-full rounded-md border ${validationErrors.phone ? "border-red-500" : "border-muted"} bg-white p-2 text-50`}
+            required
+          />
+          {validationErrors.phone && (
+            <p className="mt-1 text-xs text-red-500">
+              {validationErrors.phone}
+            </p>
+          )}
         </div>
 
         {/* to be implemented later */}
@@ -141,10 +159,10 @@ export default function BillingInformationStep({
         </div> */}
       </div>
 
-      <div className="absolute right-[17.5rem] top-0 hidden h-full w-[1px] bg-muted md:block"></div>
+      <div className="absolute right-[14.8rem] top-0 hidden h-full w-[1px] bg-muted md:block"></div>
 
       <div className="pl-2">
-        <div className="mb-4 overflow-hidden rounded-lg border border-primary">
+        <div className="mb-4 hidden overflow-hidden rounded-lg border border-primary md:block">
           <img
             src={eventData.banner_image}
             alt={eventData.event_title}
@@ -182,9 +200,10 @@ export default function BillingInformationStep({
 
         <button
           onClick={onPlaceOrder}
+          disabled={loading}
           className="mt-8 w-full rounded-lg bg-subColorBtn py-2 text-50 font-500 text-white hover:bg-subColorBtn/90"
         >
-          Place Order
+          {loading ? <Spinner /> : "Place Order"}
         </button>
       </div>
     </div>
