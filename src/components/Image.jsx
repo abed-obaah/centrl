@@ -36,15 +36,14 @@ const Image = ({
     onError?.();
   };
 
-  const isLocalImage = src.startsWith("/");
+  // const isLocalImage = src.startsWith("/");
 
-  const imageSrc = isLocalImage ? src : src;
+  const imageSrc = src;
 
-  // Determine the blur placeholder style
   const blurStyle =
     placeholder === "blur" && isLoading
       ? {
-          filter: "blur(20px)",
+          filter: "blur(60px)",
           backgroundSize: "cover",
           backgroundImage: `url(${blurDataURL || src})`,
         }
@@ -60,7 +59,7 @@ const Image = ({
         height={height}
         onLoad={handleImageLoaded}
         onError={handleImageError}
-        className={`object-cover ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-200 ${error ? "hidden" : "block"} ${className}`}
+        className={`object-cover ${isLoading ? "opacity-70" : "opacity-100"} transition-opacity duration-200 ${error ? "hidden" : "block"} ${className}`}
         loading={priority ? "eager" : "lazy"}
         {...props}
       />

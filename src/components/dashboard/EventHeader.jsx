@@ -1,6 +1,6 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/logo.png";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EventNavbar from "./EventNavbar";
 import { Search } from "lucide-react";
@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getUserProfile } from "../../api/userApi";
 import { setUser } from "../../redux/authSlice";
+import AvatarFallback from "../AvatarFallback";
+import Image from "../Image";
 
 const EventHeader = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -26,16 +28,13 @@ const EventHeader = () => {
   const [error, setError] = useState(null);
   const [profileDetails, setProfileDetails] = useState(null);
 
-  const defaultImage =
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
-
   const userData = {
     name,
     token,
     email,
     user_id,
     googleId,
-    imageUrl: profileImage || defaultImage,
+    imageUrl: profileImage,
   };
 
   const toggleNavClick = () => {
@@ -147,6 +146,31 @@ const EventHeader = () => {
                   className="relative shrink-0 cursor-pointer"
                   onClick={() => setIsOpen(!isOpen)}
                 >
+                  {userData.imageUrl ? (
+                    <img
+                      alt={userData.name}
+                      src={userData.imageUrl}
+                      className="size-9 rounded-full object-cover"
+                    />
+                  ) : (
+                    <AvatarFallback
+                      name={userData.name || "User"}
+                      size="md"
+                      className="size-9"
+                    />
+                  )}
+                  {isOpen && (
+                    <ProfileModal
+                      isOpen={isOpen}
+                      onClose={() => setIsOpen(false)}
+                      user={userData}
+                    />
+                  )}
+                </div>
+                {/* <div
+                  className="relative shrink-0 cursor-pointer"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
                   <img
                     alt={userData.name}
                     src={userData.imageUrl}
@@ -159,7 +183,7 @@ const EventHeader = () => {
                       user={userData}
                     />
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
 
