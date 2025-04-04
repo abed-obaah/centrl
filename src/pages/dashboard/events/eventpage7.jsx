@@ -179,17 +179,21 @@ const EventPage = () => {
           <div className="hidden md:block">
             <h2 className="mt-6 text-left text-50 font-500">Hosted by</h2>
             <div className="mt-6 flex items-center space-x-3">
-              <Image
-                src={eventData.banner_image}
-                alt={eventData.event_title}
-                width={48}
-                height={48}
-                className="rounded-lg object-cover"
-              />
+              {!eventData.image === "null" ? (
+                <Image
+                  src={eventData.image}
+                  alt={eventData.name}
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 rounded-full object-cover"
+                />
+              ) : (
+                getInitialsAvatar(eventData.name, eventData.email, 32)
+              )}
 
               <div className="flex items-center space-x-3">
                 <p className="text-left text-50 font-500 capitalize">
-                  {eventData.event_title}
+                  {eventData.name}
                 </p>
                 <img
                   src={Verified}
