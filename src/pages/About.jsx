@@ -45,7 +45,11 @@ const About = () => {
             <h2 className="text-300 mb-4 font-700 md:text-400">Our Vision</h2>
             <p>
               To become the go-to platform for individual and organizations
+<<<<<<< HEAD
               aiming to host impactful events adn foster collaboration
+=======
+              aiming to host impactful events and foster collaboration
+>>>>>>> f9919fc (texts corrections)
               worldwide.
             </p>
           </div>

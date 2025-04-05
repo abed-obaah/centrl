@@ -319,7 +319,11 @@ const UserProfile = () => {
                 </h2>
                 <div className="flex items-center gap-2">
                   <p className="text-sm text-black">
+<<<<<<< HEAD
                     {profileDetails?.likes || 0} Likes
+=======
+                    {profileDetails?.likes || 0} Events
+>>>>>>> f9919fc (texts corrections)
                   </p>
                   <p className="text-sm text-black">•</p>
                   <p className="text-sm text-black">
