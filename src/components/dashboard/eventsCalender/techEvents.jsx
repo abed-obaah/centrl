@@ -1,31 +1,11 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-import { Search } from 'lucide-react';
-import boluvard from '../../../assets/boluvard.png';
-import love from '../../../assets/love.png';
-=======
 import { useState } from "react";
 import { Search } from "lucide-react";
 import boluvard from "../../../assets/boluvard.png";
 import love from "../../../assets/love.png";
->>>>>>> f9919fc (texts corrections)
 
 const activity = [
   {
     id: 1,
-<<<<<<< HEAD
-    type: 'created',
-    person: { name: '24th, Dec.' },
-    date: '7d ago',
-    dateTime: '2023-01-23T10:32',
-  },
-  {
-    id: 2,
-    type: 'edited',
-    person: { name: '28th, Nov.' },
-    date: '6d ago',
-    dateTime: '2023-01-23T11:03',
-=======
     type: "created",
     person: { name: "24th, Dec." },
     date: "7d ago",
@@ -37,26 +17,12 @@ const activity = [
     person: { name: "28th, Nov." },
     date: "6d ago",
     dateTime: "2023-01-23T11:03",
->>>>>>> f9919fc (texts corrections)
   },
 ];
 
 const events = [
   {
     id: 1,
-<<<<<<< HEAD
-    time: '8 - 9:00AM',
-    title: 'Love in the Boulevard',
-    location: 'Hard Rock',
-    region: 'Federal Capital Territory',
-    image: boluvard,
-    attendees: [
-      'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    ],
-    status: 'Going',
-=======
     time: "8 - 9:00AM",
     title: "Love in the Boulevard",
     location: "Hard Rock",
@@ -68,7 +34,6 @@ const events = [
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     ],
     status: "Going",
->>>>>>> f9919fc (texts corrections)
   },
 
   {

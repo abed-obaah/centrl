@@ -28,7 +28,7 @@ const DescriptionModal = ({ isOpen, description = "", onSave, onClose }) => {
           <h2 className="px-4 text-300 font-500">Description</h2>
           <button
             onClick={onClose}
-            className="hover:bg-gray-200 rounded-full p-2"
+            className="rounded-full p-2 hover:bg-gray-200"
           >
             <X size={24} />
           </button>
@@ -38,11 +38,7 @@ const DescriptionModal = ({ isOpen, description = "", onSave, onClose }) => {
           <textarea
             value={value}
             onChange={(e) => setValue(e.target.value)}
-<<<<<<< HEAD
-            placeholder="Global community and platform dedicated to empowering professionals, executives, entrepreneurs, and leaders to drive Change."
-=======
             placeholder="Tell us about your event.."
->>>>>>> f9919fc (texts corrections)
             className="h-[180px] w-full resize-none bg-[#F4F5F7] pl-4 pt-4 outline-none"
           />
         </div>
