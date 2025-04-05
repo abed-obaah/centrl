@@ -156,27 +156,27 @@ const EventPage = () => {
     <div className="flex w-full items-center justify-center bg-[#FEF6D5] px-4 py-8 text-black">
       <div className="mt-28 w-full max-w-[900px] md:flex md:justify-between md:gap-6">
         {/* Event Image & Title */}
-        <div className="flex flex-col items-center">
-          {eventData.video && (
-            <video
-              className="h-[286px] w-full rounded-lg object-cover lg:h-[286px] lg:w-[283px]"
-              loop
-              autoPlay
-              muted
-              ref={videoRef}
-              src={eventData.video}
-            ></video>
-          )}
-          <div className="hidden md:block">
+        <div className="flex flex-col items-center md:items-start">
+          <div className="hidden w-full md:block">
+            {eventData.video && (
+              <video
+                className="h-[286px] w-full rounded-lg object-cover lg:h-[286px] lg:w-[283px]"
+                loop
+                autoPlay
+                muted
+                ref={videoRef}
+                src={eventData.video}
+              ></video>
+            )}
+          </div>
+          <div className="w-full">
             <Image
               src={eventData.banner_image}
               alt={eventData.event_title}
-              width={283}
-              height={283}
-              className="mt-5 size-[283px] rounded-lg"
+              className="mt-5 w-full rounded-lg md:size-[283px]"
             />
           </div>
-          <div className="hidden md:block">
+          <div className="hidden w-full md:block">
             <h2 className="mt-6 text-left text-50 font-500">Hosted by</h2>
             <div className="mt-6 flex items-center space-x-3">
               {!eventData.image === "null" ? (
@@ -203,7 +203,7 @@ const EventPage = () => {
               </div>
             </div>
 
-            <div className="mt-5 flex justify-between">
+            <div className="mt-5 flex w-full justify-between">
               <div className="flex -space-x-1">
                 <img
                   alt=""
