@@ -116,42 +116,21 @@ export const faqs = [
   {
     question: "Are there hidden fees?",
     answer:
-<<<<<<< HEAD
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-=======
       "No, Centrl does not have hidden fees. The only charges include a small platform fee when purchasing tickets through Centrl.",
->>>>>>> f9919fc (texts corrections)
   },
   {
     question: "What forms of payment do you accept?",
     answer:
-<<<<<<< HEAD
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-=======
       "Centrl integrates with Paystack as its payment gateway, allowing users to pay via bank transfers, credit/debit cards, and other payment methods supported by Paystack",
->>>>>>> f9919fc (texts corrections)
   },
   {
     question: "How secure is Centrl?",
     answer:
-<<<<<<< HEAD
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-=======
       "Centrl prioritizes user privacy and security. Since we are an event platform, we do not collect sensitive data. The information we gather is limited to name, email and phone number. However, we continously explore new ways to enhance user privacy and security."
->>>>>>> f9919fc (texts corrections)
   },
   {
     question: "Do you offer Discounts?",
     answer:
-<<<<<<< HEAD
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
-  {
-    question: "Are there any hidden fees?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-=======
       "Currently, Centrl does not offer discounts.",
->>>>>>> f9919fc (texts corrections)
   },
 ];
