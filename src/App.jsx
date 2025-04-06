@@ -59,7 +59,7 @@ import Guests from "./pages/customize/guests";
 import { Toaster } from "sonner";
 
 function Contact() {
-  return <h1 className="text-3xl font-bold underline">Contact Page</h1>;
+  return <h1 className="text-3xl font-bold underline">Contat Page</h1>;
 }
 
 const router = createBrowserRouter(
