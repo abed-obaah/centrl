@@ -159,14 +159,14 @@ export default function BillingInformationStep({
         </div> */}
       </div>
 
-      <div className="absolute right-[14.8rem] top-0 hidden h-full w-[1px] bg-muted md:block"></div>
+      <div className="absolute right-[15.5rem] top-0 hidden h-full w-[1px] bg-muted md:block"></div>
 
       <div className="pl-2">
         <div className="mb-4 hidden overflow-hidden rounded-lg border border-primary md:block">
           <img
             src={eventData.banner_image}
             alt={eventData.event_title}
-            className="h-48 w-full object-cover"
+            className="h-48 w-52 object-cover"
           />
         </div>
 

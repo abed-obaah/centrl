@@ -145,7 +145,7 @@ export default function CheckoutModal({ isOpen, onClose, eventData }) {
         className="fixed inset-0 z-50 bg-background/80 backdrop-blur-lg"
         onClick={onClose}
       />
-      <div className="relative z-[800] w-full shadow-lg">
+      <div className="relative z-[800]">
         {step === 1 && (
           <TicketQuantityStep
             onSelect={handleTicketSelect}

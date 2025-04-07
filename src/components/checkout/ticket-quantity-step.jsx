@@ -2,7 +2,7 @@ export default function TicketQuantityStep({ onSelect }) {
   const ticketOptions = [1, 2, 3, 4, 5, 6];
 
   return (
-    <div className="flex max-w-2xl flex-col items-center rounded-lg bg-white p-6">
+    <div className="mx-auto flex max-w-2xl flex-col items-center rounded-lg bg-white p-6">
       <h2 className="mb-6 text-center text-300 font-700">How many tickets?</h2>
 
       <div className="grid grid-cols-3 gap-4">
