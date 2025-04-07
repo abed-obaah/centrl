@@ -314,7 +314,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                   <Switch
                     checked={toggleStates[item.id] || false}
                     onChange={() => handleToggle(item.id)}
-                    className={`border-transparent relative inline-flex h-5 w-10 shrink-0 cursor-pointer rounded-full border-2 border-muted transition-colors duration-200 ease-in-out ${toggleStates[item.id] ? "bg-primary" : "bg-muted"}`}
+                    className={`relative inline-flex h-5 w-10 shrink-0 cursor-pointer rounded-full border-2 border-muted transition-colors duration-200 ease-in-out ${toggleStates[item.id] ? "bg-primary" : "bg-muted"}`}
                   >
                     <span className="sr-only">Use setting</span>
                     <span
@@ -334,7 +334,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                         e.preventDefault();
                         handleActionClick(item.action);
                       }}
-                      className="text-sm font-medium flex items-center text-black"
+                      className="flex items-center text-sm font-medium text-black"
                     >
                       {item.action === "language" && selectedLanguage !== "Add"
                         ? selectedLanguage
@@ -366,7 +366,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                           handleEditableClick(item);
                         }}
                       >
-                        <Pencil className="text-gray-500 h-4 w-4" />
+                        <Pencil className="h-4 w-4 text-gray-500" />
                       </button>
                     )}
                   </div>
@@ -383,7 +383,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                 {languages.map((language) => (
                   <div
                     key={language}
-                    className="text-sm cursor-pointer px-4 py-2 hover:bg-muted"
+                    className="cursor-pointer px-4 py-2 text-sm hover:bg-muted"
                     onClick={() => selectLanguage(language)}
                   >
                     {language}
@@ -404,7 +404,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                   className="flex items-center justify-between py-1"
                 >
                   <div className="flex items-center">
-                    <div className="text-sm mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-muted">
+                    <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-muted text-sm">
                       {collaborator.charAt(0) || "U"}
                     </div>
                     <div>
@@ -412,7 +412,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <span className="bg-green-400 text-xs mr-2 rounded px-2 py-0.5">
+                    <span className="mr-2 rounded bg-green-400 px-2 py-0.5 text-xs">
                       Collaborator
                     </span>
                     <button
@@ -453,7 +453,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
             <div className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-1 block">Name</label>
+                <label className="mb-1 block text-sm font-medium">Name</label>
                 <input
                   type="text"
                   value={collaboratorName}
@@ -470,14 +470,14 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                     e.preventDefault();
                     setShowCollaboratorModal(false);
                   }}
-                  className="text-sm rounded-md border border-muted px-4 py-2"
+                  className="rounded-md border border-muted px-4 py-2 text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   onClick={addCollaborator}
-                  className="text-sm rounded-md bg-primary px-4 py-2 text-white"
+                  className="rounded-md bg-primary px-4 py-2 text-sm text-white"
                 >
                   Add
                 </button>
@@ -551,7 +551,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                 <div className="mt-4 space-y-4">
                   {/* Basic Package */}
                   <div className="px-3">
-                    <label className="text-sm font-medium mb-1 block">
+                    <label className="mb-1 block text-sm font-medium">
                       Basic Package Price
                     </label>
                     <div className="flex items-center">
@@ -569,7 +569,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
                   {/* Diamond Package */}
                   <div className="px-3">
-                    <label className="text-sm font-medium mb-1 block">
+                    <label className="mb-1 block text-sm font-medium">
                       Diamond Package Price
                     </label>
                     <div className="flex items-center">
@@ -636,7 +636,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
                 {capacityValue === "Limited" && (
                   <div className="mt-4 px-3">
-                    <label className="text-sm font-medium mb-1 block">
+                    <label className="mb-1 block text-sm font-medium">
                       Number of attendees
                     </label>
                     <input
