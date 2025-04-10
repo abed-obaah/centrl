@@ -109,6 +109,7 @@ const MeetingLink = ({ url, className = "" }) => {
     return (
       <a
         href={url}
+        target="_blank"
         className={`flex items-center gap-1 underline ${className}`}
       >
         <Link2 className="h-4 w-4" />
@@ -118,7 +119,11 @@ const MeetingLink = ({ url, className = "" }) => {
   }
 
   return (
-    <a href={url} className={`flex items-center gap-2 ${className}`}>
+    <a
+      href={url}
+      target="_blank"
+      className={`flex items-center gap-2 ${className}`}
+    >
       {/* Zoom */}
       {service === "zoom" && (
         <>

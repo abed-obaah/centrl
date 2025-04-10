@@ -12,6 +12,7 @@ import { createEvent } from "../../api/eventApi";
 import { Spinner } from "../../components/Spinner";
 import { Link, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const defaultEventData = {
   event_title: "",
@@ -111,6 +112,12 @@ export default function CreateEvent() {
 
   const handleVideoUpload = (e) => {
     const file = e.target.files[0];
+
+    if (file && file.size > 10 * 1024 * 1024) {
+      toast.error("File size exceeds 10 MB. Please upload a smaller file.");
+      return;
+    }
+
     if (file) {
       const sanitizedFilename = sanitizeFilename(file.name);
       setVideoFile(file);
@@ -269,13 +276,13 @@ export default function CreateEvent() {
       <div className="mb-20 mt-32 px-4 md:px-0">
         <div className="container">
           {error && (
-            <div className="text-red-700 mb-4 rounded-md bg-[red] p-4 text-white">
+            <div className="mb-4 rounded-md bg-[red] p-4 text-red-700 text-white">
               {error}
             </div>
           )}
 
           {success && (
-            <div className="text-green-700 mb-4 rounded-md bg-[green] p-4 text-white">
+            <div className="mb-4 rounded-md bg-[green] p-4 text-green-700 text-white">
               Event created successfully!
             </div>
           )}
@@ -288,7 +295,7 @@ export default function CreateEvent() {
                 <div className="mt-2">
                   <div
                     onClick={() => setIsOpenSide(true)}
-                    className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm/6 flex w-full cursor-pointer space-x-4 rounded-md bg-white px-3 py-1.5 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2"
+                    className="flex w-full cursor-pointer space-x-4 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   >
                     <img src={Map} alt="" className="h-10 w-8 object-contain" />
 
@@ -325,7 +332,7 @@ export default function CreateEvent() {
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
-                    className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm relative mt-5 flex h-64 w-full items-end justify-between rounded-xl px-3 py-3 outline-1 -outline-offset-1 focus:outline-2"
+                    className="relative mt-5 flex h-64 w-full items-end justify-between rounded-xl px-3 py-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                   >
                     <div className="mt-10 items-end">
                       <p className="mt-10"></p>
@@ -420,7 +427,7 @@ export default function CreateEvent() {
                     onClick={() => handleLocationTypeChange("virtual")}
                   >
                     <div
-                      className={`flex items-center gap-4 rounded-xl ${eventData.location_type === "virtual" ? "ring-blue-200 bg-white ring-2" : "bg-white"} px-2 py-2`}
+                      className={`flex items-center gap-4 rounded-xl ${eventData.location_type === "virtual" ? "bg-white ring-2 ring-blue-200" : "bg-white"} px-2 py-2`}
                     >
                       <img
                         src={Indicator || "/placeholder.svg"}
@@ -435,7 +442,7 @@ export default function CreateEvent() {
                     onClick={() => handleLocationTypeChange("in-person")}
                   >
                     <div
-                      className={`flex items-center gap-4 rounded-xl ${eventData.location_type === "in-person" ? "ring-blue-200 bg-white ring-2" : "bg-white"} px-2 py-2`}
+                      className={`flex items-center gap-4 rounded-xl ${eventData.location_type === "in-person" ? "bg-white ring-2 ring-blue-200" : "bg-white"} px-2 py-2`}
                     >
                       <img
                         src={userImage || "/placeholder.svg"}
@@ -472,7 +479,7 @@ export default function CreateEvent() {
                 <div className="mb-10 mt-4">
                   <div className="relative">
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <MapPin className="text-gray-400 h-5 w-5" />
+                      <MapPin className="h-5 w-5 text-gray-400" />
                     </div>
                     <input
                       type="text"
@@ -535,7 +542,7 @@ export default function CreateEvent() {
                         key={option}
                         type="button"
                         onClick={() => handleRoleSelect(option)}
-                        className="hover:bg-pink-50 w-full px-4 py-2 text-left transition first:rounded-t-xl last:rounded-b-xl"
+                        className="w-full px-4 py-2 text-left transition first:rounded-t-xl last:rounded-b-xl hover:bg-pink-50"
                       >
                         {option}
                       </button>
