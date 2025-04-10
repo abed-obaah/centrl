@@ -22,6 +22,10 @@ const EventCard = ({ event }) => {
   // Handle click event
   const handleCardClick = () => {
     navigate(`/event/${event.id}`);
+    scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (

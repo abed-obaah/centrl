@@ -13,47 +13,43 @@ import CheckoutModal from "../../../components/checkout/checkout-modal";
 import { Share2 } from "lucide-react";
 import PlanImg from "../../../assets/pricing-card.svg";
 import Logo from "../../../assets/event-details-logo.svg";
+import { useFetch } from "../../../hooks/useFetch";
+import { Spinner } from "../../../components/Spinner";
 
 const EventPage = () => {
   const { id } = useParams();
-  const [eventData, setEventData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [error, setError] = useState(null);
   const videoRef = useRef(null);
-  const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.user_id);
 
-  if (!userId) {
-    throw new Error("User not found");
-  }
+  const {
+    data: eventData,
+    isLoading,
+    isError,
+    error,
+  } = useFetch({
+    queryKey: ["event", id],
+    fetcher: () => getEvent(id),
+    dataPath: "data",
+  });
 
-  useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const response = await getEvent(id, token);
-        setEventData(response.data);
-      } catch (err) {
-        setError("Failed to fetch eventData data");
-        console.error("Error fetching eventData:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEventData();
-  }, [id]);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
+  const handleVideoRef = (ref) => {
+    if (ref) {
+      videoRef.current = ref;
+      ref.play().catch((error) => {
         console.error("Autoplay failed:", error);
       });
     }
-  }, []);
+  };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  if (isError)
+    return <div>Error: {error?.message || "Failed to fetch event data"}</div>;
   if (!eventData) return <div>Event not found</div>;
 
   const formatDate = (dateString) => {
@@ -164,7 +160,7 @@ const EventPage = () => {
                 loop
                 autoPlay
                 muted
-                ref={videoRef}
+                ref={handleVideoRef}
                 src={eventData.video}
               ></video>
             )}
@@ -285,29 +281,31 @@ const EventPage = () => {
                 <p className="text-100 font-600">Registration</p>
               </div>
               <div className="mt-5 flex items-center gap-4">
-                {!eventData.image === "null" ? (
-                  <Image
-                    src={eventData.image}
-                    alt="Event"
-                    width={32}
-                    height={32}
-                    className="h-8 w-8 rounded-full object-cover"
-                  />
-                ) : (
-                  getInitialsAvatar(eventData.name, eventData.email, 32)
-                )}
-                {/* <p className="text-100 text-black ">{eventData.name}</p> */}
                 {!userId ? (
-                  <div>
+                  <div className="flex items-center gap-4">
                     <img src={Logo} alt="Centrl" />
                     <button onClick={handleGoogleLogin}>
                       Sign In / Click the button below to register
                     </button>
                   </div>
                 ) : (
-                  <p className="text-50 font-500 text-black">
-                    {eventData.email}
-                  </p>
+                  <div className="flex items-center gap-4">
+                    {!eventData.image === "null" ? (
+                      <Image
+                        src={eventData.image}
+                        alt="Event"
+                        width={32}
+                        height={32}
+                        className="h-8 w-8 rounded-full object-cover"
+                      />
+                    ) : (
+                      getInitialsAvatar(eventData.name, eventData.email, 32)
+                    )}
+
+                    <p className="text-50 font-500 text-black">
+                      {eventData.email}
+                    </p>
+                  </div>
                 )}
               </div>
 
