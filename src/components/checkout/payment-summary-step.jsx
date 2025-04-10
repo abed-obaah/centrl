@@ -1,5 +1,6 @@
 import { formatCurrency } from "../../utils/helpers";
 import Image from "../Image";
+import AvatarFallback from "../AvatarFallback";
 
 export default function PaymentSummaryStep({
   ticketQuantity,
@@ -17,6 +18,57 @@ export default function PaymentSummaryStep({
   const hasBasicPackage = eventData.ticket_price_basic > 0;
   const hasDiamondPackage = eventData.ticket_price_diamond > 0;
 
+  const getInitialsAvatar = (name, email, size = 48) => {
+    // Handle undefined/null cases
+    if (!name && !email) {
+      name = "U";
+    }
+
+    // Use name if available, otherwise use first part of email
+    let text = "";
+    if (name) {
+      const nameParts = name.trim().split(" ");
+      text = nameParts
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase();
+    } else if (email) {
+      text = email.split("@")[0][0].toUpperCase();
+    } else {
+      text = "U";
+    }
+
+    text = text.substring(0, 2);
+
+    const colors = [
+      "#FF5733",
+      "#33FF57",
+      "#3357FF",
+      "#F3FF33",
+      "#FF33F3",
+      "#33FFF3",
+      "#FF8C33",
+      "#8C33FF",
+      "#33FF8C",
+      "#FF338C",
+    ];
+    const color = colors[text.charCodeAt(0) % colors.length];
+
+    return (
+      <div
+        className={`flex items-center justify-center rounded-full font-bold text-white`}
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+          backgroundColor: color,
+          fontSize: `${size / 2}px`,
+        }}
+      >
+        {text}
+      </div>
+    );
+  };
+
   return (
     <div className="relative grid max-w-3xl grid-cols-1 gap-4 rounded-lg bg-white p-6 md:grid-cols-[1.5fr_1fr] md:gap-6">
       <div>
@@ -28,13 +80,19 @@ export default function PaymentSummaryStep({
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <Image
-                  src={eventData.banner_image}
-                  alt={eventData.event_title}
-                  className="size-[30px] rounded-full object-cover"
-                />
+                {!eventData.image === "null" ? (
+                  <Image
+                    src={eventData.image}
+                    alt={eventData.name}
+                    width={32}
+                    height={32}
+                    className="h-8 w-8 rounded-full object-cover"
+                  />
+                ) : (
+                  getInitialsAvatar(eventData.name, eventData.email, 32)
+                )}
                 <p className="text-50 capitalize text-black">
-                  {eventData.event_title}
+                  {eventData.name}
                 </p>
               </div>
             </div>

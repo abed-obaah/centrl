@@ -8,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 // layouts
 import RootLayout from "./layouts/RootLayout";
-import WaitListLayout from "./layouts/WaitlistLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import DashboardWrapper from "./layouts/DashboardWrapper";
 import AdminLoginLayout from "./layouts/AdminLoginLayout";
@@ -48,7 +47,6 @@ import Users from "./pages/admin/users";
 import AdminEventManagement from "./pages/admin/event-management";
 import CreateEvent from "./pages/dashboard/CreateEvent";
 import EventPage from "./pages/dashboard/events/eventpage7";
-// import Waitlist from './pages/Waitlist';
 
 // import Signin from './components/auth/signin';
 import Admins from "./pages/admin/admins";
@@ -91,8 +89,8 @@ const router = createBrowserRouter(
       <Route path="/sign-up" element={<SignInLayout />} />
 
       {/* Protected Routes */}
-      <Route element={<ProtectedRoute />}>
-        <Route element={<DashboardWrapper />}>
+      <Route element={<DashboardWrapper />}>
+        <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardLayout />} />
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/user-profile" element={<UserProfile />} />
@@ -100,10 +98,12 @@ const router = createBrowserRouter(
           <Route path="/competition" element={<Competition />} />
           <Route path="/category/:id" element={<CategoryDetails />} />
           <Route path="/events" element={<UserEventPage />} />
-          <Route path="/event/:id" element={<EventPage />} />
           <Route path="/dashboard/discover" element={<Discovered />} />
         </Route>
+        <Route path="/event/:id" element={<EventPage />} />
+      </Route>
 
+      <Route element={<ProtectedRoute />}>
         <Route element={<CustomizeLayout />}>
           <Route path="/customize" element={<HomePage />} />
           <Route path="/guests" element={<Guests />} />

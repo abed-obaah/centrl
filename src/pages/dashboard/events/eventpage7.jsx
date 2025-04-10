@@ -233,7 +233,7 @@ const EventPage = () => {
         </div>
 
         <div className="mt-8 flex flex-col md:mt-0">
-          <h1 className="text-500 font-bold capitalize md:mb-4 md:text-800">
+          <h1 className="text-500 font-semibold capitalize md:mb-4 md:text-800">
             {eventData.event_title}
           </h1>
           <div className="flex items-center md:gap-4">
