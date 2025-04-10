@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../../api/userApi";
 import { setUser } from "../../redux/authSlice";
 import AvatarFallback from "../AvatarFallback";
-import Image from "../Image";
 
 const EventHeader = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -76,6 +75,9 @@ const EventHeader = () => {
     fetchProfile();
   }, [token, dispatch, user_id, name, email, googleId]);
 
+  // Check if user is authenticated
+  const isAuthenticated = !!token;
+
   return (
     <>
       <header className="via-neutral-100/50 supports-[backdrop-filter]:bg-white/3 fixed top-0 z-[500] w-full bg-gradient-to-r from-white/50 to-white/50 backdrop-blur-md">
@@ -122,69 +124,76 @@ const EventHeader = () => {
             />
 
             <div className="flex items-center md:ml-12 md:gap-8">
-              <div className="flex items-center gap-4">
-                <Link to="/create-event">
-                  <AddSquare size="24" color="#000" />
-                </Link>
-                <Search
-                  onClick={() => setModalVisible(true)}
-                  size="24"
-                  color="#000"
-                  className="cursor-pointer"
-                />
-                <span className="hidden text-50 font-500 text-foreground md:block">
-                  {new Date().toLocaleTimeString("en-US", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}
-                </span>
-              </div>
-              <div className="ml-10 flex items-center gap-4">
-                <Notification size="24" color="#000" />
-                <div
-                  className="relative shrink-0 cursor-pointer"
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  {userData.imageUrl ? (
-                    <img
-                      alt={userData.name}
-                      src={userData.imageUrl}
-                      className="size-9 rounded-full object-cover"
+              {isAuthenticated ? (
+                /* Show these elements only when user is logged in */
+                <>
+                  <div className="flex items-center gap-4">
+                    <Link to="/create-event">
+                      <AddSquare size="24" color="#000" />
+                    </Link>
+                    <Search
+                      onClick={() => setModalVisible(true)}
+                      size="24"
+                      color="#000"
+                      className="cursor-pointer"
                     />
-                  ) : (
-                    <AvatarFallback
-                      name={userData.name || "User"}
-                      size="md"
-                      className="size-9"
-                    />
-                  )}
-                  {isOpen && (
-                    <ProfileModal
-                      isOpen={isOpen}
-                      onClose={() => setIsOpen(false)}
-                      user={userData}
-                    />
-                  )}
+                    <span className="hidden text-50 font-500 text-foreground md:block">
+                      {new Date().toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
+                    </span>
+                  </div>
+                  <div className="ml-10 flex items-center gap-4">
+                    <Notification size="24" color="#000" />
+                    <div
+                      className="relative shrink-0 cursor-pointer"
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
+                      {userData.imageUrl ? (
+                        <img
+                          alt={userData.name}
+                          src={userData.imageUrl}
+                          className="size-9 rounded-full object-cover"
+                        />
+                      ) : (
+                        <AvatarFallback
+                          name={userData.name || "User"}
+                          size="md"
+                          className="size-9"
+                        />
+                      )}
+                      {isOpen && (
+                        <ProfileModal
+                          isOpen={isOpen}
+                          onClose={() => setIsOpen(false)}
+                          user={userData}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="flex items-center gap-4">
+                  <span className="hidden text-50 font-500 text-foreground md:block">
+                    {new Date().toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}
+                  </span>
+                  <Link
+                    className="shadow-xs ml-4 inline-flex items-center justify-center rounded-[13px] border border-[#000]/15 px-4 py-2 text-50 font-500 text-foreground duration-300 ease-in hover:bg-black hover:text-white"
+                    to={"/sign-up"}
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
+                  >
+                    Sign In
+                  </Link>
                 </div>
-                {/* <div
-                  className="relative shrink-0 cursor-pointer"
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  <img
-                    alt={userData.name}
-                    src={userData.imageUrl}
-                    className="size-9 rounded-full object-cover"
-                  />
-                  {isOpen && (
-                    <ProfileModal
-                      isOpen={isOpen}
-                      onClose={() => setIsOpen(false)}
-                      user={userData}
-                    />
-                  )}
-                </div> */}
-              </div>
+              )}
             </div>
 
             {/* Menu Icons */}
