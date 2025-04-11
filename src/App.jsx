@@ -46,7 +46,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import Users from "./pages/admin/users";
 import AdminEventManagement from "./pages/admin/event-management";
 import CreateEvent from "./pages/dashboard/CreateEvent";
-import EventPage from "./pages/dashboard/events/eventpage7";
+import EventPage from "./pages/dashboard/events/eventpage";
 
 // import Signin from './components/auth/signin';
 import Admins from "./pages/admin/admins";

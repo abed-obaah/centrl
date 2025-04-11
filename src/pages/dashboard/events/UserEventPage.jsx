@@ -35,7 +35,7 @@ const UserEventPage = () => {
             )}
           </div>
 
-          <div className="md:sticky md:top-32 md:self-start">
+          <div className="hidden md:sticky md:top-32 md:block md:self-start">
             <Image className="mb-4" src={event1} alt="event1" />
             <Image src={event2} alt="event 2" />
           </div>

@@ -97,12 +97,12 @@ const DayEvents = ({ dateStr, dayEvents, isLastDay }) => {
         </div>
 
         {/* Day label */}
-        <h3 className="mb-4 ml-6 text-100 font-500 text-black">
+        <h3 className="mb-4 ml-4 text-100 font-500 text-black md:ml-6">
           {formatDate(dateStr)}{" "}
         </h3>
       </div>
 
-      <div className="ml-6 space-y-3 pl-2">
+      <div className="space-y-3 pl-2 md:ml-6">
         {dayEvents.map((event, index) => (
           <EventCard
             key={event.id}

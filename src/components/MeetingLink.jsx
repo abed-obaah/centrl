@@ -1,4 +1,4 @@
-import { Link2, Video } from "lucide-react";
+import { Link2 } from "lucide-react";
 
 const MeetingLink = ({ url, className = "" }) => {
   const getMeetingService = (url) => {
@@ -72,6 +72,14 @@ const MeetingLink = ({ url, className = "" }) => {
       // Livestorm (webinar platform)
       if (hostname.includes("livestorm.com")) {
         return "livestorm";
+      }
+
+      // YouTube Shorts
+      if (
+        (hostname.includes("youtube.com") && path.includes("/shorts/")) ||
+        (hostname.includes("youtu.be") && path.includes("/shorts/"))
+      ) {
+        return "youtube-shorts";
       }
 
       // YouTube Live
@@ -241,6 +249,18 @@ const MeetingLink = ({ url, className = "" }) => {
             className="h-4 w-4 object-contain"
           />
           <span>Livestorm</span>
+        </>
+      )}
+
+      {/* YouTube Shorts */}
+      {service === "youtube-shorts" && (
+        <>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png"
+            alt="YouTube Shorts"
+            className="h-4 w-4 object-contain"
+          />
+          <span>YouTube Shorts</span>
         </>
       )}
 
