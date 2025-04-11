@@ -5,7 +5,7 @@ export default function TicketQuantityStep({ onSelect }) {
     <div className="mx-auto flex max-w-2xl flex-col items-center rounded-lg bg-white p-6">
       <h2 className="mb-6 text-center text-300 font-700">How many tickets?</h2>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
         {ticketOptions.map((quantity) => (
           <button
             key={quantity}
