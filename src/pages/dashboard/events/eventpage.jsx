@@ -1,12 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import location from "../../../assets/navigation-2.svg";
 import bg from "../../../assets/bg.png";
-import Maps from "../../../assets/maps.png";
 import Verified from "../../../assets/verified-small.png";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
-import { getEvent } from "../../../api/eventApi";
+import { getEvent, getEventReg } from "../../../api/eventApi";
 import MeetingLink from "../../../components/MeetingLink";
 import Image from "../../../components/Image";
 import CheckoutModal from "../../../components/checkout/checkout-modal";
@@ -15,12 +14,25 @@ import PlanImg from "../../../assets/pricing-card.svg";
 import Logo from "../../../assets/event-details-logo.svg";
 import { useFetch } from "../../../hooks/useFetch";
 import { Spinner } from "../../../components/Spinner";
+import { registerEvent } from "../../../api/registerEvent";
+import { toast } from "sonner";
 
 const EventPage = () => {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const videoRef = useRef(null);
-  const userId = useSelector((state) => state.auth.user_id);
+  const {
+    user_id: userId,
+    email,
+    profileImage,
+    name,
+    token,
+  } = useSelector((state) => state.auth);
+
+  const [registrationCount, setRegistrationCount] = useState(0);
+  const [isFreeRegModalOpen, setIsFreeRegModalOpen] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   const {
     data: eventData,
@@ -33,12 +45,37 @@ const EventPage = () => {
     dataPath: "data",
   });
 
+  // New query for registration count
+  const {
+    data: registrationData,
+    isLoadingReg,
+    isErrorReg,
+  } = useFetch({
+    queryKey: ["event-registration", id],
+    fetcher: () => getEventReg(id),
+    dataPath: null,
+  });
+
+  console.log("eventData", eventData);
+
+  useEffect(() => {
+    if (registrationData && registrationData.status === "success") {
+      setRegistrationCount(registrationData.total_registered);
+    }
+  }, [registrationData]);
+
   const handleVideoRef = (ref) => {
     if (ref) {
       videoRef.current = ref;
-      ref.play().catch((error) => {
-        console.error("Autoplay failed:", error);
-      });
+      // Only try to autoplay on desktop
+      if (!window.matchMedia("(max-width: 768px)").matches) {
+        ref.play().catch((error) => {
+          console.error("Autoplay failed:", error);
+        });
+      } else {
+        ref.load();
+        ref.pause();
+      }
     }
   };
 
@@ -64,6 +101,10 @@ const EventPage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const closeFreeRegModal = () => {
+    setIsFreeRegModalOpen(false);
   };
 
   const getInitialsAvatar = (name, email, size = 48) => {
@@ -122,7 +163,18 @@ const EventPage = () => {
   const handleClick = (e) => {
     if (!isEventCreator) {
       e.preventDefault();
-      setIsModalOpen(true);
+
+      const isFreeEvent =
+        (Number.parseFloat(eventData.ticket_price) === 0 ||
+          eventData.ticket_type === "free") &&
+        Number.parseFloat(eventData.ticket_price_basic) === 0 &&
+        Number.parseFloat(eventData.ticket_price_diamond) === 0;
+
+      if (isFreeEvent) {
+        setIsFreeRegModalOpen(true);
+      } else {
+        setIsModalOpen(true);
+      }
     }
   };
 
@@ -148,9 +200,45 @@ const EventPage = () => {
     window.location.href = "https://api.centrl.ng/google_callback.php";
   };
 
+  const renderRegistrationCount = () => {
+    if (isLoadingReg) {
+      return <p className="text-left text-50 font-500">Loading...</p>;
+    }
+
+    if (isErrorReg) {
+      return <p className="text-left text-50 font-500">0 Going</p>;
+    }
+
+    return (
+      <p className="text-left text-50 font-500">
+        {registrationCount} {registrationCount === 1 ? "Person" : "People"}{" "}
+        Going
+      </p>
+    );
+  };
+
+  const MapPreview = ({ latitude, longitude }) => {
+    if (!latitude || !longitude) return null;
+
+    return (
+      <div className="mb-4 mt-2 w-full">
+        <p className="mb-2 text-100 font-500 text-black md:text-200">
+          Location
+        </p>
+        <iframe
+          title="Location Map"
+          width="100%"
+          height="200"
+          src={`https://www.openstreetmap.org/export/embed.html?bbox=${longitude - 0.01},${latitude - 0.01},${longitude + 0.01},${latitude + 0.01}&marker=${latitude},${longitude}`}
+          style={{ borderRadius: "8px" }}
+        ></iframe>
+      </div>
+    );
+  };
+
   return (
     <div className="flex w-full items-center justify-center bg-[#FEF6D5] px-4 py-8 text-black">
-      <div className="mt-16 w-full max-w-[900px] md:mt-28 md:flex md:justify-between md:gap-6">
+      <div className="mt-12 w-full max-w-[900px] md:flex md:justify-between md:gap-6">
         {/* Event Image & Title */}
         <div className="flex flex-col items-center md:items-start">
           <div className="hidden w-full md:block">
@@ -223,7 +311,7 @@ const EventPage = () => {
                 />
               </div>
 
-              <p className="text-left text-50 font-500">302 Going</p>
+              {renderRegistrationCount()}
             </div>
           </div>
         </div>
@@ -290,21 +378,19 @@ const EventPage = () => {
                   </div>
                 ) : (
                   <div className="flex items-center gap-4">
-                    {!eventData.image === "null" ? (
+                    {!profileImage === "null" ? (
                       <Image
-                        src={eventData.image}
+                        src={profileImage}
                         alt="Event"
                         width={32}
                         height={32}
                         className="h-8 w-8 rounded-full object-cover"
                       />
                     ) : (
-                      getInitialsAvatar(eventData.name, eventData.email, 32)
+                      getInitialsAvatar(name, email, 32)
                     )}
 
-                    <p className="text-50 font-500 text-black">
-                      {eventData.email}
-                    </p>
+                    <p className="text-50 font-500 text-black">{email}</p>
                   </div>
                 )}
               </div>
@@ -409,26 +495,22 @@ const EventPage = () => {
                 />
               </div>
 
-              <p className="text-left text-50 font-500">302 Going</p>
+              {renderRegistrationCount()}
             </div>
           </div>
 
           <div className="mt-20 w-full max-w-[550px]">
-            <h2 className="border-b-gray border-b pb-10 text-50 font-500">
+            <h2 className="border-b-gray border-b pb-5 text-50 font-500">
               About Event
             </h2>
-            <p className="whitespace-pre-line pt-10">{eventData.about}</p>
+            <p className="whitespace-pre-line pt-5">{eventData.about}</p>
           </div>
 
-          <div className="mt-10 flex w-full justify-between space-x-8">
-            <div className="h-64 w-96 rounded-2xl border-[1.5px] border-[#cfb8b6] p-4">
-              <h1 className="text-100 font-400 text-black">Location</h1>
-              <img
-                src={Maps}
-                alt="Event"
-                className="mt-10 h-40 w-full rounded-lg object-cover"
-              />
-            </div>
+          <div className="mt-10 flex w-full justify-between space-x-4">
+            <MapPreview
+              latitude={Number(eventData.latitude)}
+              longitude={Number(eventData.longitude)}
+            />
 
             <div className="relative hidden h-64 w-40 overflow-hidden rounded-2xl lg:block">
               <img
@@ -447,6 +529,128 @@ const EventPage = () => {
           onClose={closeModal}
           eventData={eventData}
         />
+      )}
+
+      {/* not fully functional yet */}
+      {isFreeRegModalOpen && (
+        <div className="fixed inset-0 z-[600] mt-[5rem] flex items-start justify-center overflow-auto px-6 md:px-0">
+          <div
+            className="fixed inset-0 z-50 bg-background/80 backdrop-blur-lg"
+            onClick={closeFreeRegModal}
+          />
+          <div className="z-[800] w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            {registrationSuccess ? (
+              <div className="text-center">
+                <h2 className="mb-4 text-xl font-semibold text-green-600">
+                  Registration Successful!
+                </h2>
+                <p className="mb-4">
+                  You have successfully registered for "{eventData.event_title}
+                  ".
+                </p>
+                <p className="text-sm text-gray-600">
+                  This window will close automatically...
+                </p>
+              </div>
+            ) : (
+              <div className="z-[800]">
+                <h2 className="mb-4 text-xl font-semibold">
+                  Register for Free Event
+                </h2>
+                <p className="mb-4">
+                  You're about to register for "{eventData.event_title}" which
+                  is a free event.
+                </p>
+
+                <div className="mb-4">
+                  <p className="mb-2 text-sm font-medium">Event Details:</p>
+                  <p className="text-sm">
+                    {formatDate(eventData.start_time)} at{" "}
+                    {formatTime(eventData.start_time)}
+                  </p>
+                  {eventData.location !== "null" && (
+                    <p className="text-sm capitalize">{eventData.location}</p>
+                  )}
+                </div>
+
+                <div className="flex justify-end space-x-3">
+                  <button
+                    onClick={closeFreeRegModal}
+                    className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-50"
+                    disabled={isRegistering}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={async () => {
+                      try {
+                        setIsRegistering(true);
+
+                        // Prepare registration data
+                        const registrationData = {
+                          event_id: id,
+                          user_id: userId,
+                          ticket_type: "free",
+                          amount: "0.00",
+                          payment_method: "free",
+                          payment_status: "completed",
+                        };
+
+                        // Call the API
+                        await registerEvent(registrationData, token);
+
+                        // Show success message
+                        setRegistrationSuccess(true);
+                        toast.success("Registration successful!");
+
+                        setTimeout(() => {
+                          closeFreeRegModal();
+                          getEventReg(id);
+                        }, 2000);
+                      } catch (error) {
+                        console.error("Registration failed:", error);
+                        toast.error(
+                          "Failed to register for event. Please try again.",
+                        );
+                      } finally {
+                        setIsRegistering(false);
+                      }
+                    }}
+                    className="rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+                    disabled={isRegistering}
+                  >
+                    {isRegistering ? (
+                      <span className="flex items-center justify-center">
+                        <svg
+                          className="mr-2 h-4 w-4 animate-spin"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                            fill="none"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                        Registering...
+                      </span>
+                    ) : (
+                      "Confirm Registration"
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

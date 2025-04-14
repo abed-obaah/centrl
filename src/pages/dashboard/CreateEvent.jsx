@@ -23,6 +23,8 @@ const defaultEventData = {
   event_link: "",
   location: "",
   location_type: "virtual",
+  latitude: null,
+  longitude: null,
   about: "",
   ticket_type: "Free",
   ticket_price_basic: 0,
@@ -90,12 +92,51 @@ export default function CreateEvent() {
     return requiredFields.every((field) => field);
   };
 
+  const geocodeAddress = async (address) => {
+    try {
+      // Option 1: Using OpenCage Geocoding API (you'll need an API key)
+      const apiKey = "f6a3d37b33b3483998a415ba4a4ef6ca"; // Replace with your API key
+      const response = await fetch(
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${apiKey}`,
+      );
+      const data = await response.json();
+
+      // console.log("opencage api", data);
+
+      if (data.results && data.results.length > 0) {
+        const { lat, lng } = data.results[0].geometry;
+        return { latitude: lat, longitude: lng };
+      }
+
+      return { latitude: null, longitude: null };
+    } catch (error) {
+      console.error("Error geocoding address:", error);
+      return { latitude: null, longitude: null };
+    }
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEventData({
       ...eventData,
       [name]: value,
     });
+
+    // If the location field changed and it's in-person event, geocode it
+    if (
+      name === "location" &&
+      eventData.location_type === "in-person" &&
+      value
+    ) {
+      clearTimeout(window.geocodeTimer);
+      window.geocodeTimer = setTimeout(async () => {
+        const { latitude, longitude } = await geocodeAddress(value);
+        setEventData((prev) => ({ ...prev, latitude, longitude }));
+        console.log(
+          `Geocoded "${value}" to: lat ${latitude}, lng ${longitude}`,
+        );
+      }, 1000);
+    }
   };
 
   const handleBannerUpload = (e) => {
@@ -199,6 +240,8 @@ export default function CreateEvent() {
       event_type: eventData.event_type === "public" ? "public" : "Private",
       event_link: eventData.event_link || null,
       location: eventData.location || null,
+      latitude: eventData.latitude || null,
+      longitude: eventData.longitude || null,
       about: eventData.about,
       event_category: finalCategory,
       ticket_type: eventData.ticket_type || "Free",
@@ -269,6 +312,23 @@ export default function CreateEvent() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const MapPreview = ({ latitude, longitude }) => {
+    if (!latitude || !longitude) return null;
+
+    return (
+      <div className="mb-4 mt-2">
+        <p className="mb-1 text-sm text-gray-500">Location preview:</p>
+        <iframe
+          title="Location Map"
+          width="100%"
+          height="200"
+          src={`https://www.openstreetmap.org/export/embed.html?bbox=${longitude - 0.01},${latitude - 0.01},${longitude + 0.01},${latitude + 0.01}&marker=${latitude},${longitude}`}
+          style={{ borderRadius: "8px" }}
+        ></iframe>
+      </div>
+    );
   };
 
   return (
@@ -490,6 +550,11 @@ export default function CreateEvent() {
                       className="w-full rounded-lg bg-white py-3 pl-10 pr-4 outline-none placeholder:text-[#000]/70"
                     />
                   </div>
+
+                  <MapPreview
+                    latitude={eventData.latitude}
+                    longitude={eventData.longitude}
+                  />
                 </div>
               )}
 

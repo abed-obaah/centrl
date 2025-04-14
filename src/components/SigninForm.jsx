@@ -7,7 +7,6 @@ import { setUser } from "../redux/authSlice";
 import { toast } from "sonner";
 import AuthOtpModal from "./auth/authModal";
 
-
 const SignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const SignInForm = () => {
   const [emailError, setEmailError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tempUser, setTempUser] = useState(null);
-  const [otp, setOtp] = useState(""); 
+  const [otp, setOtp] = useState("");
 
   const handleGoogleLogin = () => {
     window.location.href = "https://api.centrl.ng/google_callback.php";
@@ -32,28 +31,26 @@ const SignInForm = () => {
     return re.test(email);
   };
 
-
-
   const handleEmailSubmit = async () => {
     // Validate email
     if (!email.trim()) {
       setEmailError("Email is required");
       return;
     }
-  
+
     if (!validateEmail(email)) {
       setEmailError("Please enter a valid email address");
       return;
     }
-  
+
     setIsLoading(true);
     const loadingToast = toast.loading("Authenticating...");
-  
+
     try {
       const response = await registerEmail(email);
-  
+
       toast.dismiss(loadingToast);
-  
+
       if (response?.status === "success") {
         // Save temporary user info & open modal
         setTempUser({
@@ -61,7 +58,7 @@ const SignInForm = () => {
           user: response.user,
           profile: response.profile,
         });
-  
+
         toast.success("OTP sent to your email!");
         setIsModalOpen(true); // Show OTP modal here
       } else {
@@ -75,25 +72,30 @@ const SignInForm = () => {
       setIsLoading(false);
     }
   };
-  
+
   const handleOtpVerification = async (value) => {
     const otp = value; // ✅ use the passed value
-    console.log("Verifying OTP with email:", email, "and OTP:", otp);  // Log the email and OTP before sending request
-  
+    console.log("Verifying OTP with email:", email, "and OTP:", otp); // Log the email and OTP before sending request
+
     if (!otp.trim() || otp.length !== 6) {
       toast.error("Please enter a valid 6-digit OTP.");
       return;
     }
-  
+
     try {
       const verifyingToast = toast.loading("Verifying OTP...");
-  
-      console.log("Sending OTP verification request with email:", email, "and OTP:", otp);  // Log the data being sent to the API
-  
+
+      console.log(
+        "Sending OTP verification request with email:",
+        email,
+        "and OTP:",
+        otp,
+      ); // Log the data being sent to the API
+
       const res = await verifyOtp(email, otp); // pass both email and OTP
-  
+
       toast.dismiss(verifyingToast);
-  
+
       if (res?.status === "success") {
         dispatch(
           setUser({
@@ -105,7 +107,7 @@ const SignInForm = () => {
             profileImage: tempUser.profile.profile_image,
           }),
         );
-  
+
         toast.success("Successfully authenticated!");
         setIsModalOpen(false);
         navigate("/dashboard");
@@ -117,12 +119,6 @@ const SignInForm = () => {
       console.error("OTP verification error:", err);
     }
   };
-  
-  
-
-
-
-
 
   return (
     <div>
@@ -154,13 +150,13 @@ const SignInForm = () => {
                   value={email}
                   onChange={handleChange}
                   placeholder="you@email.com"
-                  className={`text-sm w-full rounded-lg border ${
+                  className={`w-full rounded-lg border text-sm ${
                     emailError ? "border-red-500" : "border-[#000]/15"
                   } px-4 py-2.5 outline-none transition`}
                   required
                 />
                 {emailError && (
-                  <p className="text-sm text-red-500 mt-1">{emailError}</p>
+                  <p className="mt-1 text-sm text-red-500">{emailError}</p>
                 )}
               </div>
             </div>
@@ -195,15 +191,15 @@ const SignInForm = () => {
         </div>
       </div>
       {isModalOpen && (
-          <AuthOtpModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            email={email}
-            otp={otp}
-            setOtp={setOtp}
-            onVerifyOtp={handleOtpVerification} // ✅ pass the function here
-          />
-        )}
+        <AuthOtpModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          email={email}
+          otp={otp}
+          setOtp={setOtp}
+          onVerifyOtp={handleOtpVerification}
+        />
+      )}
     </div>
   );
 };
