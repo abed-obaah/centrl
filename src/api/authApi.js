@@ -39,3 +39,29 @@ export const registerEmail = async (email) => {
     return null;
   }
 };
+export const verifyOtp = async (email, otp) => {
+  try {
+    console.log("Sending OTP request with email:", email, "and OTP:", otp);  // Log for verification
+
+    const response = await axios.post(
+      "https://api.centrl.ng/verify_otp.php",
+      {
+        email,
+        otp_code: otp,  // Change key from otp to otp_code
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("Verify OTP Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+    return null;
+  }
+};
+
+

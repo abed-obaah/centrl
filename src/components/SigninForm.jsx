@@ -2,9 +2,11 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerEmail } from "../api/authApi";
+import { registerEmail, verifyOtp } from "../api/authApi";
 import { setUser } from "../redux/authSlice";
 import { toast } from "sonner";
+import AuthOtpModal from "./auth/authModal";
+
 
 const SignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +14,9 @@ const SignInForm = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tempUser, setTempUser] = useState(null);
+  const [otp, setOtp] = useState(""); 
 
   const handleGoogleLogin = () => {
     window.location.href = "https://api.centrl.ng/google_callback.php";
@@ -27,54 +32,97 @@ const SignInForm = () => {
     return re.test(email);
   };
 
+
+
   const handleEmailSubmit = async () => {
-    // Validate email before submission
+    // Validate email
     if (!email.trim()) {
       setEmailError("Email is required");
       return;
     }
-
+  
     if (!validateEmail(email)) {
       setEmailError("Please enter a valid email address");
       return;
     }
-
+  
     setIsLoading(true);
-
+    const loadingToast = toast.loading("Authenticating...");
+  
     try {
-      const loadingToast = toast.loading("Authenticating...");
-
       const response = await registerEmail(email);
-
+  
       toast.dismiss(loadingToast);
-
-      // console.log("email response", response);
+  
       if (response?.status === "success") {
-        dispatch(
-          setUser({
-            token: response.token,
-            user_id: response.user.id,
-            name: response.user.name,
-            email: response.user.email,
-            googleId: response.user.google_id,
-            profileImage: response.profile.profile_image,
-          }),
-        );
-
-        toast.success("Successfully authenticated!");
-        navigate("/dashboard");
+        // Save temporary user info & open modal
+        setTempUser({
+          token: response.token,
+          user: response.user,
+          profile: response.profile,
+        });
+  
+        toast.success("OTP sent to your email!");
+        setIsModalOpen(true); // Show OTP modal here
       } else {
         toast.error(response?.message || "Failed to register email");
       }
     } catch (error) {
-      toast.error(
-        "Something went wrong with our service. Please try again later.",
-      );
+      toast.dismiss(loadingToast);
+      toast.error("Something went wrong. Please try again later.");
       console.error("Error during authentication:", error);
     } finally {
       setIsLoading(false);
     }
   };
+  
+  const handleOtpVerification = async (value) => {
+    const otp = value; // ✅ use the passed value
+    console.log("Verifying OTP with email:", email, "and OTP:", otp);  // Log the email and OTP before sending request
+  
+    if (!otp.trim() || otp.length !== 6) {
+      toast.error("Please enter a valid 6-digit OTP.");
+      return;
+    }
+  
+    try {
+      const verifyingToast = toast.loading("Verifying OTP...");
+  
+      console.log("Sending OTP verification request with email:", email, "and OTP:", otp);  // Log the data being sent to the API
+  
+      const res = await verifyOtp(email, otp); // pass both email and OTP
+  
+      toast.dismiss(verifyingToast);
+  
+      if (res?.status === "success") {
+        dispatch(
+          setUser({
+            token: tempUser.token,
+            user_id: tempUser.user.id,
+            name: tempUser.user.name,
+            email: tempUser.user.email,
+            googleId: tempUser.user.google_id,
+            profileImage: tempUser.profile.profile_image,
+          }),
+        );
+  
+        toast.success("Successfully authenticated!");
+        setIsModalOpen(false);
+        navigate("/dashboard");
+      } else {
+        toast.error(res?.message || "Invalid OTP");
+      }
+    } catch (err) {
+      toast.error("OTP verification failed. Try again.");
+      console.error("OTP verification error:", err);
+    }
+  };
+  
+  
+
+
+
+
 
   return (
     <div>
@@ -121,6 +169,7 @@ const SignInForm = () => {
               type="button"
               disabled={isLoading}
               onClick={handleEmailSubmit}
+              // onClick={handleOpenModal}
               className={`mt-8 w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-6 py-2 text-100 font-500 text-white transition-all duration-300 ease-in-out ${
                 !isLoading && "hover:from-[#E46708] hover:to-[#CD2574]"
               } ${isLoading && "cursor-not-allowed opacity-75"}`}
@@ -145,6 +194,16 @@ const SignInForm = () => {
           </form>
         </div>
       </div>
+      {isModalOpen && (
+          <AuthOtpModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            email={email}
+            otp={otp}
+            setOtp={setOtp}
+            onVerifyOtp={handleOtpVerification} // ✅ pass the function here
+          />
+        )}
     </div>
   );
 };
