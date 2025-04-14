@@ -84,7 +84,7 @@ const EventHeader = () => {
         <div className="mx-auto flex max-w-[1290px] items-center justify-between p-4 2xl:max-w-[1500px]">
           <div className="flex items-center gap-20 xl:gap-32 2xl:gap-[12rem]">
             {/* Logo */}
-            <Link to="/">
+            <Link to="/events">
               <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
             </Link>
 
