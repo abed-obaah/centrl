@@ -122,9 +122,7 @@ export default function PaymentSummaryStep({
               </p>
             </div>
             <p className="mb-4 text-50 text-foreground">
-              Industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type.
+              Access to main event sessions and general seating.
             </p>
           </div>
         )}
@@ -146,9 +144,8 @@ export default function PaymentSummaryStep({
               </p>
             </div>
             <p className="mb-4 text-50 text-foreground">
-              Industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type.
+              All-access pass with premium seating, networking lounge, and VIP
+              perks.
             </p>
           </div>
         )}

@@ -333,7 +333,7 @@ export default function CreateEvent() {
 
   return (
     <>
-      <div className="mb-20 mt-32 px-4 md:px-0">
+      <div className="mb-20 mt-20 px-4 md:px-0">
         <div className="container">
           {error && (
             <div className="mb-4 rounded-md bg-[red] p-4 text-red-700 text-white">
@@ -351,7 +351,7 @@ export default function CreateEvent() {
         <form onSubmit={handleCreateEvent}>
           <div className="mx-auto max-w-[800px] md:grid md:grid-cols-[1fr_2fr] md:gap-12">
             <div className="md:sticky md:top-28">
-              <div className="mx-auto max-w-[300px]">
+              <div className="md:mx-auto md:max-w-[300px]">
                 <div className="mt-2">
                   <div
                     onClick={() => setIsOpenSide(true)}
@@ -418,7 +418,7 @@ export default function CreateEvent() {
               </div>
             </div>
 
-            <div className="max-w-[800px]">
+            <div className="mt-16 max-w-[800px] md:mt-0">
               <div className="mb-10">
                 <label
                   htmlFor="last-name"

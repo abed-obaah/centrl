@@ -31,7 +31,7 @@ const EventCard = ({ event }) => {
   return (
     <div
       onClick={handleCardClick}
-      className={`cursor-pointer rounded-xl bg-white p-4 md:flex md:items-start md:gap-4`}
+      className={`flex cursor-pointer flex-wrap gap-4 rounded-xl bg-white p-4 md:items-start`}
     >
       <Image
         src={event.banner_image || "/placeholder.svg"}
