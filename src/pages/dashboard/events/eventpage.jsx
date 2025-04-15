@@ -428,7 +428,7 @@ const EventPage = () => {
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-center text-center">
+              {/* <div className="mt-4 flex justify-center text-center">
                 <Link
                   to={isEventCreator ? "/customize" : "#"}
                   onClick={handleClick}
@@ -439,6 +439,27 @@ const EventPage = () => {
                   }
                 >
                   {isEventCreator ? "Manage Event" : "Click to Register"}
+                </Link>
+              </div> */}
+
+              <div className="mt-4 flex justify-center text-center">
+                <Link
+                  to={isEventCreator ? "/customize" : "#"}
+                  onClick={handleClick}
+                  className={
+                    isEventCreator
+                      ? "mt-3 w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] py-2 text-white"
+                      : registrationSuccess
+                        ? "mt-3 w-full cursor-not-allowed rounded-lg bg-green-500 py-2 text-white opacity-50"
+                        : "mt-3 w-full rounded-lg bg-primary py-2 text-white"
+                  }
+                  disabled={registrationSuccess}
+                >
+                  {isEventCreator
+                    ? "Manage Event"
+                    : registrationSuccess
+                      ? "Registered Successfully"
+                      : "Click to Register"}
                 </Link>
               </div>
             </div>
@@ -548,9 +569,6 @@ const EventPage = () => {
                   You have successfully registered for "{eventData.event_title}
                   ".
                 </p>
-                <p className="text-sm text-gray-600">
-                  This window will close automatically...
-                </p>
               </div>
             ) : (
               <div className="z-[800]">
@@ -588,7 +606,7 @@ const EventPage = () => {
 
                         // Prepare registration data
                         const registrationData = {
-                          event_id: id,
+                          event_id: Number(id),
                           user_id: userId,
                           ticket_type: "free",
                           amount: "0.00",
@@ -601,7 +619,6 @@ const EventPage = () => {
 
                         // Show success message
                         setRegistrationSuccess(true);
-                        toast.success("Registration successful!");
 
                         setTimeout(() => {
                           closeFreeRegModal();
