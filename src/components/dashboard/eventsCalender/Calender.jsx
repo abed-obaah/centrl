@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   format,
   addMonths,
@@ -10,7 +10,7 @@ import {
   isSameDay,
   getDate,
   getDay,
-} from 'date-fns';
+} from "date-fns";
 
 const Calendar = ({ onSelectDate }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -27,7 +27,7 @@ const Calendar = ({ onSelectDate }) => {
   const daysFromPrevMonth = Array(startDay).fill(null);
 
   // Weekday headers
-  const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
   const handleDateClick = (day) => {
     setSelectedDate(day);
@@ -35,22 +35,22 @@ const Calendar = ({ onSelectDate }) => {
   };
 
   return (
-    <div className="mb-8 md:mb-0 h-fit bg-card rounded-xl p-4 shadow-sm max-w-[320px] md:mx-auto">
-      <div className="flex items-center justify-between mb-4">
+    <div className="mb-8 hidden h-fit max-w-[320px] rounded-xl bg-card p-4 shadow-sm md:mx-auto md:mb-0 md:block">
+      <div className="mb-4 flex items-center justify-between">
         <h2 className="text-200 font-600">
-          {format(currentMonth, 'MMMM yyyy')}
+          {format(currentMonth, "MMMM yyyy")}
         </h2>
         <div className="flex space-x-1">
           <button
             onClick={prevMonth}
-            className="p-1 rounded-full hover:bg-muted transition-colors"
+            className="rounded-full p-1 transition-colors hover:bg-muted"
             aria-label="Previous month"
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={nextMonth}
-            className="p-1 rounded-full hover:bg-muted transition-colors"
+            className="rounded-full p-1 transition-colors hover:bg-muted"
             aria-label="Next month"
           >
             <ChevronRight size={18} />
@@ -59,9 +59,9 @@ const Calendar = ({ onSelectDate }) => {
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      <div className="mb-2 grid grid-cols-7 gap-1">
         {weekDays.map((day, index) => (
-          <div key={index} className="text-center text-50 font-600 mb-2">
+          <div key={index} className="mb-2 text-center text-50 font-600">
             {day}
           </div>
         ))}
@@ -71,7 +71,7 @@ const Calendar = ({ onSelectDate }) => {
         {daysFromPrevMonth.map((_, index) => (
           <div
             key={`prev-${index}`}
-            className="size-[2.5rem] flex items-center justify-center rounded-full transition-colors duration-300 ease disabled:opacity-40"
+            className="ease flex size-[2.5rem] items-center justify-center rounded-full transition-colors duration-300 disabled:opacity-40"
           ></div>
         ))}
 
@@ -80,8 +80,8 @@ const Calendar = ({ onSelectDate }) => {
           <button
             key={index}
             onClick={() => handleDateClick(day)}
-            className={`size-[2.5rem] flex items-center justify-center rounded-full transition-colors duration-300 ease disabled:opacity-40 ${
-              isSameDay(day, selectedDate) ? 'bg-primary text-white' : ''
+            className={`ease flex size-[2.5rem] items-center justify-center rounded-full transition-colors duration-300 disabled:opacity-40 ${
+              isSameDay(day, selectedDate) ? "bg-primary text-white" : ""
             }`}
           >
             {getDate(day)}

@@ -6,7 +6,7 @@ import Image from "../components/Image";
 const Hero = () => {
   return (
     <main>
-      <section className="pt-36 xl:pt-24">
+      <section className="pt-24">
         <div className="container">
           <div className="relative rounded-xl bg-white p-8 lg:py-16">
             <div className="mx-auto max-w-[850px] md:grid md:grid-cols-2 md:items-center md:gap-4 lg:gap-10">
@@ -16,7 +16,7 @@ const Hero = () => {
                   <span className="text-left font-700 text-black">Centrl</span>
                 </h1>
 
-                <p className="text-base mb-4 text-black">
+                <p className="mb-4 text-base text-black">
                   Always by your side, ready to support you <br />
                   whenever and wherever you need it.
                 </p>
@@ -26,7 +26,7 @@ const Hero = () => {
                   onClick={() =>
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }
-                  className="font-medium focus:ring-indigo-300 focus:ring-offset-gray-900 inline-block rounded-full bg-gradient-to-r from-[#CD2574] to-[#E46708] px-12 py-3 text-[white] shadow-sm hover:from-[#E46708] hover:to-[#CD2574] focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="inline-block rounded-full bg-gradient-to-r from-[#CD2574] to-[#E46708] px-12 py-3 font-medium text-[white] shadow-sm hover:from-[#E46708] hover:to-[#CD2574] focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                   Create Event
                 </Link>

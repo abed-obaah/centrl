@@ -228,14 +228,14 @@ const UserProfile = () => {
               aria-label="Change banner image"
               disabled={isUpdatingBannerImage}
             >
-              <PencilIcon className="text-gray-600 h-4 w-4" />
+              <PencilIcon className="h-4 w-4 text-gray-600" />
             </button>
           </div>
 
           {/* Profile header */}
           <div className="mx-auto max-w-[1000px]">
             <div className="mb-8">
-              <div className="-mt-12 flex flex-col px-4 sm:-mt-16 sm:flex-row sm:items-end sm:justify-between sm:px-0">
+              <div className="-mt-12 flex flex-col sm:-mt-16 sm:flex-row sm:items-end sm:justify-between sm:px-0">
                 <div className="flex items-end space-x-5">
                   <div className="group relative">
                     <div className="relative h-24 w-24 sm:h-32 sm:w-32">
@@ -275,7 +275,7 @@ const UserProfile = () => {
                       aria-label="Change profile image"
                       disabled={isUpdatingProfileImage}
                     >
-                      <PencilIcon className="text-gray-600 h-4 w-4" />
+                      <PencilIcon className="h-4 w-4 text-gray-600" />
                     </button>
                   </div>
                 </div>
@@ -284,13 +284,13 @@ const UserProfile = () => {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(true)}
-                    className="text-sm font-medium inline-flex items-center rounded-lg bg-black px-4 py-2 text-white"
+                    className="inline-flex items-center rounded-lg bg-black px-4 py-2 text-sm font-medium text-white"
                   >
                     Edit Profile
                   </button>
                   <button
                     type="button"
-                    className="text-sm font-medium inline-flex items-center rounded-lg bg-white px-4 py-2 text-black transition-colors"
+                    className="inline-flex items-center rounded-lg bg-white px-4 py-2 text-sm font-medium text-black transition-colors"
                   >
                     <img
                       src={Star || "/placeholder.svg"}
@@ -364,7 +364,7 @@ const UserProfile = () => {
                 </div>
               </div>
 
-              <hr className="border-gray-200 mt-16" />
+              <hr className="mt-16 border-gray-200" />
             </div>
 
             <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-6">

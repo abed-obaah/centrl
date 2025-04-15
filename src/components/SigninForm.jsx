@@ -85,14 +85,14 @@ const SignInForm = () => {
     try {
       const verifyingToast = toast.loading("Verifying OTP...");
 
-      console.log(
-        "Sending OTP verification request with email:",
-        email,
-        "and OTP:",
-        otp,
-      ); // Log the data being sent to the API
+      // console.log(
+      //   "Sending OTP verification request with email:",
+      //   email,
+      //   "and OTP:",
+      //   otp,
+      // );
 
-      const res = await verifyOtp(email, otp); // pass both email and OTP
+      const res = await verifyOtp(email, otp);
 
       toast.dismiss(verifyingToast);
 

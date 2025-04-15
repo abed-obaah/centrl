@@ -378,7 +378,9 @@ const EventPage = () => {
                   </div>
                 ) : (
                   <div className="flex items-center gap-4">
-                    {!profileImage === "null" ? (
+                    {!profileImage ? (
+                      getInitialsAvatar(name, email, 32)
+                    ) : (
                       <Image
                         src={profileImage}
                         alt="Event"
@@ -386,8 +388,6 @@ const EventPage = () => {
                         height={32}
                         className="h-8 w-8 rounded-full object-cover"
                       />
-                    ) : (
-                      getInitialsAvatar(name, email, 32)
                     )}
 
                     <p className="text-50 font-500 text-black">{email}</p>
