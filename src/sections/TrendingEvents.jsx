@@ -37,7 +37,7 @@ const TrendingEvents = () => {
             location: event.location || "Location not specified", // Add fallback if needed
             category: event.event_category|| "General", // Add fallback if needed
             image: event.banner_image, // Since API doesn't provide images, use placeholder
-            ticket_price_basic: event.ticket_price || 0 // Adjust based on your API field
+            ticket_price_basic: event.ticket_price_diamond || "FREE" // Adjust based on your API field
           }));
           setEvents(formattedEvents);
         } else {
@@ -140,20 +140,24 @@ const TrendingEvents = () => {
           <div className="mb-2">
             <p className="text-100 text-black/50">{event.date}</p>
             <p className="text-100 text-black/50">
-  {event.location && event.location !== "null" ? event.location : "Location not specified"}
-</p>
+              {event.location && event.location !== "null" ? event.location : "Location not specified"}
+            </p>
 
           </div>
         </div>
-        <p className="text-300 font-600 text-black">
-          {event.ticket_price_basic && !isNaN(Number(event.ticket_price_basic))
-            ? Number(event.ticket_price_basic).toLocaleString("en-NG", {
-                style: "currency",
-                currency: "NGN",
-                maximumFractionDigits: 0,
-              })
-            : "Free"}
-        </p>
+             <p className="text-300 font-600 text-black">
+  {event.ticket_price_basic != null &&
+  !isNaN(Number(event.ticket_price_basic)) &&
+  Number(event.ticket_price_basic) > 0
+    ? Number(event.ticket_price_basic).toLocaleString("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        maximumFractionDigits: 0,
+      })
+    : "Free"}
+</p>
+
+
       </div>
     </div>
   ))}
