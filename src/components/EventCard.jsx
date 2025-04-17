@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const EventCard = ({ title, category, date, location, price, image }) => {
+const EventCard = ({ title, category, date, location, ticket_price_basic, image }) => {
   const getCategoryColor = (category) => {
     switch (category.toLowerCase()) {
       case 'party':
@@ -14,10 +14,13 @@ const EventCard = ({ title, category, date, location, price, image }) => {
     }
   };
 
+  // Set default ticket price if not available
+  const ticketPrice = ticket_price_basic || "Free";
+
   return (
     <div className="bg-card rounded-lg w-full mb-6">
       <Link className="inline-block" to="/details"
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
         <img
           src={image}
           alt={title}
@@ -40,12 +43,14 @@ const EventCard = ({ title, category, date, location, price, image }) => {
           <p className="text-[#000]/50 text-100">{date}</p>
           <p className="text-[#000]/50 text-100">{location}</p>
         </div>
-        <p className="text-[#000] font-600 text-300">
-          {price.toLocaleString('en-NG', {
-            style: 'currency',
-            currency: 'NGN',
-            maximumFractionDigits: 0,
-          })}
+        <p className="text-300 font-600 text-black">
+          {ticketPrice !== "Free" && !isNaN(Number(ticketPrice)) && Number(ticketPrice) > 0
+            ? Number(ticketPrice).toLocaleString("en-NG", {
+                style: "currency",
+                currency: "NGN",
+                maximumFractionDigits: 0,
+              })
+            : "Free"}
         </p>
       </div>
     </div>
@@ -53,3 +58,4 @@ const EventCard = ({ title, category, date, location, price, image }) => {
 };
 
 export default EventCard;
+

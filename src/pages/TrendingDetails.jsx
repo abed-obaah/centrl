@@ -1,94 +1,96 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterSidebar from '../components/FilterSidebar';
 import Groove from '../assets/grove.png';
-import Live from '../assets/live.png';
-import Skating from '../assets/skating.png';
-import Pride from '../assets/prideland.png';
 import EventCard from '../components/EventCard';
 import TrendingSvg from '../assets/trending-icon.svg';
-
-const events = [
-  {
-    id: 1,
-    title: 'Groove SketchPond',
-    date: '27th, Nov',
-    price: 10000,
-    location: 'Abuja, Nigeria',
-    category: 'Party',
-    image: Groove,
-  },
-  {
-    id: 2,
-    title: 'The Feels',
-    date: '27th, Nov',
-    price: 28000,
-    location: 'Abuja, Nigeria',
-    category: 'Concert',
-    image: Live,
-  },
-  {
-    id: 3,
-    title: 'Heat Wave',
-    date: '27th, Nov',
-    price: 150000,
-    location: 'Abuja, Nigeria',
-    category: 'Business',
-    image: Skating,
-  },
-  {
-    id: 4,
-    title: 'Even in the Day',
-    date: '27th, Nov',
-    price: 95000,
-    location: 'Abuja, Nigeria',
-    category: 'Technology',
-    image: Pride,
-  },
-  {
-    id: 5,
-    title: 'Groove SketchPond',
-    date: '27th, Nov',
-    price: 10000,
-    location: 'Abuja, Nigeria',
-    category: 'Party',
-    image: Groove,
-  },
-  {
-    id: 6,
-    title: 'The Feels',
-    date: '27th, Nov',
-    price: 28000,
-    location: 'Abuja, Nigeria',
-    category: 'Concert',
-    image: Live,
-  },
-  {
-    id: 7,
-    title: 'Heat Wave',
-    date: '27th, Nov',
-    price: 150000,
-    location: 'Abuja, Nigeria',
-    category: 'Business',
-    image: Skating,
-  },
-  {
-    id: 8,
-    title: 'Even in the Day',
-    date: '27th, Nov',
-    price: 95000,
-    location: 'Abuja, Nigeria',
-    category: 'Technology',
-    image: Pride,
-  },
-];
+import { getEvents } from '../api/eventApi';
+import { useDispatch, useSelector } from 'react-redux';
 
 const TrendingDetails = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { token } = useSelector((state) => state.auth);
+  
+  // Filter state
+  const [filter, setFilter] = useState({
+    price: null,
+    category: null,
+    location: null,
+  });
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        // Pass the filter values to the API
+        const response = await getEvents(token, filter);
+        console.log('events raw response:', response);
+  
+        if (response && response.status === 'success' && Array.isArray(response.data)) {
+          const formattedEvents = response.data.map(event => ({
+            id: event.id,
+            title: event.event_title,
+            date: formatDate(event.start_time),
+            location: event.location || 'Location not specified',
+            category: event.event_category || 'General',
+            image: event.banner_image,
+            ticket_price_basic: event.ticket_price_diamond || 'FREE',
+          }));
+          setEvents(formattedEvents);
+        } else {
+          console.warn('Unexpected event data format');
+          setEvents([]);
+        }
+      } catch (error) {
+        console.error('Failed to fetch events:', error);
+        setEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchEvents();
+  }, [token, filter]);  // Run whenever filter changes
+   // Run whenever filter changes
+
+  // Helper function to format date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
+
+  // Handle filter change
+  const handleFilterChange = (newFilter) => {
+    setFilter((prevFilter) => ({ ...prevFilter, ...newFilter }));
+  };
+
+  if (loading) {
+    return (
+      <section className="pt-20">
+        <div className="container 2xl:max-w-[1200px]">
+          <p>Loading events...</p>
+        </div>
+      </section>
+    );
+  }
+  
+  if (!loading && events.length === 0) {
+    return (
+      <section className="pt-20">
+        <div className="container 2xl:max-w-[1200px]">
+          <p>No events found.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <>
       <div className="mt-36 lg:mt-20">
-        {/* Overlay for mobile sidebar */}
         {isSidebarOpen && (
           <div
             className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
@@ -111,6 +113,8 @@ const TrendingDetails = () => {
             <FilterSidebar
               isOpen={isSidebarOpen}
               onClose={() => setIsSidebarOpen(false)}
+              filter={filter} // Pass current filter state
+              onFilterChange={handleFilterChange} // Pass the filter change handler
             />
 
             <div className="flex-1">

@@ -1,4 +1,9 @@
-const FilterSidebar = ({ isOpen, onClose }) => {
+const FilterSidebar = ({ isOpen, onClose, filter, onFilterChange }) => {
+  const handleRadioChange = (e, type) => {
+    const value = e.target.value;
+    onFilterChange({ [type]: value });
+  };
+
   return (
     <div
       className={`
@@ -23,10 +28,24 @@ const FilterSidebar = ({ isOpen, onClose }) => {
           <h4 className="text-md font-medium mb-2">Price</h4>
           <div className="space-y-2">
             <label className="flex items-center">
-              <input type="radio" name="price" className="mr-2" /> Paid
+              <input 
+                type="radio" 
+                name="price" 
+                value="Paid" 
+                className="mr-2" 
+                checked={filter.price === "Paid"} 
+                onChange={(e) => handleRadioChange(e, 'price')} 
+              /> Paid
             </label>
             <label className="flex items-center">
-              <input type="radio" name="price" className="mr-2" /> Free
+              <input 
+                type="radio" 
+                name="price" 
+                value="Free" 
+                className="mr-2" 
+                checked={filter.price === "Free"} 
+                onChange={(e) => handleRadioChange(e, 'price')} 
+              /> Free
             </label>
           </div>
         </div>
@@ -34,14 +53,19 @@ const FilterSidebar = ({ isOpen, onClose }) => {
         <div>
           <h4 className="text-md font-medium mb-2">Category</h4>
           <div className="space-y-2">
-            {['Party', 'Business', 'Tech', 'Education', 'Others'].map(
-              (category) => (
-                <label key={category} className="flex items-center">
-                  <input type="radio" name="category" className="mr-2" />{' '}
-                  {category}
-                </label>
-              )
-            )}
+            {['Party', 'Business', 'Tech', 'Education', 'Others'].map((category) => (
+              <label key={category} className="flex items-center">
+                <input 
+                  type="radio" 
+                  name="category" 
+                  value={category} 
+                  className="mr-2" 
+                  checked={filter.category === category} 
+                  onChange={(e) => handleRadioChange(e, 'category')} 
+                /> 
+                {category}
+              </label>
+            ))}
           </div>
         </div>
 
@@ -49,10 +73,24 @@ const FilterSidebar = ({ isOpen, onClose }) => {
           <h4 className="text-md font-medium mb-2">Location</h4>
           <div className="space-y-2">
             <label className="flex items-center">
-              <input type="radio" name="location" className="mr-2" /> Online
+              <input 
+                type="radio" 
+                name="location" 
+                value="Online" 
+                className="mr-2" 
+                checked={filter.location === "Online"} 
+                onChange={(e) => handleRadioChange(e, 'location')} 
+              /> Online
             </label>
             <label className="flex items-center">
-              <input type="radio" name="location" className="mr-2" /> Offline
+              <input 
+                type="radio" 
+                name="location" 
+                value="Offline" 
+                className="mr-2" 
+                checked={filter.location === "Offline"} 
+                onChange={(e) => handleRadioChange(e, 'location')} 
+              /> Offline
             </label>
           </div>
         </div>

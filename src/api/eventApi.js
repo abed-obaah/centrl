@@ -46,21 +46,31 @@ export const createEvent = async (
   }
 };
 
-export const getEvents = async (token) => {
+export const getEvents = async (token, filter) => {
   try {
+    const { price, category, location } = filter;
+
+    // Build the query parameters from the filter
+    const queryParams = new URLSearchParams();
+    if (price) queryParams.append('price', price);
+    if (category) queryParams.append('category', category);
+    if (location) queryParams.append('location', location);
+
     const response = await axios({
-      method: "GET",
-      url: "https://api.centrl.ng/get_events.php",
+      method: 'GET',
+      url: `https://api.centrl.ng/get_events.php?${queryParams.toString()}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
     return response.data;
   } catch (error) {
-    console.error("API Error:", error.response.data);
+    console.error('API Error:', error.response?.data || error);
     throw error;
   }
 };
+
 
 export const getEvent = async (eventId) => {
   try {
