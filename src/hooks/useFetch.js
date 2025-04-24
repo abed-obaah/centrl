@@ -4,7 +4,7 @@ export function useFetch({
   queryKey,
   fetcher,
   enabled = true,
-  staleTime = 5 * 60 * 1000,
+  staleTime = 10 * 60 * 1000,
   cacheTime = 10 * 60 * 1000,
   onSuccess,
   onError,

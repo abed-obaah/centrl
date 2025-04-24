@@ -38,7 +38,7 @@ import Settings from "./pages/Settings";
 import UserEventPage from "./pages/dashboard/events/UserEventPage";
 
 // customize page
-import HomePage from "./pages/customize/home";
+import ManageEvent from "./pages/customize/ManageEvent";
 import Overview from "./pages/customize/overview";
 
 // admin pages
@@ -105,9 +105,9 @@ const router = createBrowserRouter(
 
       <Route element={<ProtectedRoute />}>
         <Route element={<CustomizeLayout />}>
-          <Route path="/customize" element={<HomePage />} />
+          <Route path="/customize-event/:id" element={<ManageEvent />} />
           <Route path="/guests" element={<Guests />} />
-          <Route path="/overview" element={<Overview />} />
+          <Route path="/overview/:id" element={<Overview />} />
         </Route>
 
         <Route element={<UserSettingsLayout />}>

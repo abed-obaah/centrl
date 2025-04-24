@@ -16,6 +16,7 @@ import { useFetch } from "../../../hooks/useFetch";
 import { Spinner } from "../../../components/Spinner";
 import { registerEvent } from "../../../api/registerEvent";
 import { toast } from "sonner";
+import FreeRegistrationModal from "../../../components/checkout/free-registration-modal";
 
 const EventPage = () => {
   const { id } = useParams();
@@ -33,6 +34,7 @@ const EventPage = () => {
   const [isFreeRegModalOpen, setIsFreeRegModalOpen] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [formData, setFormData] = useState(null);
 
   const {
     data: eventData,
@@ -171,6 +173,9 @@ const EventPage = () => {
         Number.parseFloat(eventData.ticket_price_diamond) === 0;
 
       if (isFreeEvent) {
+        setRegistrationSuccess(false);
+        setIsRegistering(false);
+        setFormData(null);
         setIsFreeRegModalOpen(true);
       } else {
         setIsModalOpen(true);
@@ -444,7 +449,7 @@ const EventPage = () => {
 
               <div className="mt-4 flex justify-center text-center">
                 <Link
-                  to={isEventCreator ? "/customize" : "#"}
+                  to={isEventCreator ? `/overview/${eventData.id}` : "#"}
                   onClick={handleClick}
                   className={
                     isEventCreator
@@ -554,120 +559,53 @@ const EventPage = () => {
 
       {/* not fully functional yet */}
       {isFreeRegModalOpen && (
-        <div className="fixed inset-0 z-[600] mt-[5rem] flex items-start justify-center overflow-auto px-6 md:px-0">
-          <div
-            className="fixed inset-0 z-50 bg-background/80 backdrop-blur-lg"
-            onClick={closeFreeRegModal}
-          />
-          <div className="z-[800] w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-            {registrationSuccess ? (
-              <div className="text-center">
-                <h2 className="mb-4 text-xl font-semibold text-green-600">
-                  Registration Successful!
-                </h2>
-                <p className="mb-4">
-                  You have successfully registered for "{eventData.event_title}
-                  ".
-                </p>
-              </div>
-            ) : (
-              <div className="z-[800]">
-                <h2 className="mb-4 text-xl font-semibold">
-                  Register for Free Event
-                </h2>
-                <p className="mb-4">
-                  You're about to register for "{eventData.event_title}" which
-                  is a free event.
-                </p>
+        <FreeRegistrationModal
+          isOpen={isFreeRegModalOpen}
+          onClose={closeFreeRegModal}
+          eventData={eventData}
+          isRegistering={isRegistering}
+          registrationSuccess={registrationSuccess}
+          onSubmit={async (formData) => {
+            try {
+              setIsRegistering(true);
+              setFormData(formData);
 
-                <div className="mb-4">
-                  <p className="mb-2 text-sm font-medium">Event Details:</p>
-                  <p className="text-sm">
-                    {formatDate(eventData.start_time)} at{" "}
-                    {formatTime(eventData.start_time)}
-                  </p>
-                  {eventData.location !== "null" && (
-                    <p className="text-sm capitalize">{eventData.location}</p>
-                  )}
-                </div>
+              // Prepare registration data
+              const registrationData = {
+                event_id: Number(id),
+                user_id: userId,
+                ticket_type: "free",
+                amount: "0.00",
+                payment_method: "free",
+                payment_status: "completed",
+                // Add the form data
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                email: formData.email,
+                contact: formData.contact,
+                educational_background: formData.educationalBackground,
+                linkedin_profile: formData.linkedinProfile,
+                website_url: formData.websiteUrl,
+              };
 
-                <div className="flex justify-end space-x-3">
-                  <button
-                    onClick={closeFreeRegModal}
-                    className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-50"
-                    disabled={isRegistering}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={async () => {
-                      try {
-                        setIsRegistering(true);
+              // Call the API
+              await registerEvent(registrationData, token);
 
-                        // Prepare registration data
-                        const registrationData = {
-                          event_id: Number(id),
-                          user_id: userId,
-                          ticket_type: "free",
-                          amount: "0.00",
-                          payment_method: "free",
-                          payment_status: "completed",
-                        };
+              // Show success message
+              setRegistrationSuccess(true);
 
-                        // Call the API
-                        await registerEvent(registrationData, token);
-
-                        // Show success message
-                        setRegistrationSuccess(true);
-
-                        setTimeout(() => {
-                          closeFreeRegModal();
-                          getEventReg(id);
-                        }, 2000);
-                      } catch (error) {
-                        console.error("Registration failed:", error);
-                        toast.error(
-                          "Failed to register for event. Please try again.",
-                        );
-                      } finally {
-                        setIsRegistering(false);
-                      }
-                    }}
-                    className="rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-4 py-2 text-sm font-medium text-white hover:opacity-90"
-                    disabled={isRegistering}
-                  >
-                    {isRegistering ? (
-                      <span className="flex items-center justify-center">
-                        <svg
-                          className="mr-2 h-4 w-4 animate-spin"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                            fill="none"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          />
-                        </svg>
-                        Registering...
-                      </span>
-                    ) : (
-                      "Confirm Registration"
-                    )}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+              setTimeout(() => {
+                closeFreeRegModal();
+                getEventReg(id);
+              }, 2000);
+            } catch (error) {
+              console.error("Registration failed:", error);
+              toast.error("Failed to register for event. Please try again.");
+            } finally {
+              setIsRegistering(false);
+            }
+          }}
+        />
       )}
     </div>
   );

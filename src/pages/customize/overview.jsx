@@ -2,11 +2,28 @@ import Invites from "../../components/Invites";
 
 import edit from "../../assets/Edit_Fill.png";
 import addRing from "../../assets/Add_Ring.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Guests from "../../components/user/Guests";
 import Hosts from "../../components/user/Hosts";
+import { useFetch } from "../../hooks/useFetch";
 
-const Dashboard = () => {
+const Overview = () => {
+  const { id } = useParams();
+
+  const { data: eventData, isLoading } = useFetch({
+    queryKey: ["event", id],
+    fetcher: () => getEvent(id),
+    dataPath: "data",
+  });
+
+  if (!eventData) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p className="text-100 font-500">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="md:ml-20 md:max-w-[1000px]">
       <div className="mb-8">
@@ -86,9 +103,9 @@ const Dashboard = () => {
       <Guests />
 
       {/* Hosts */}
-      <Hosts />
+      <Hosts eventData={eventData} />
     </div>
   );
 };
 
-export default Dashboard;
+export default Overview;

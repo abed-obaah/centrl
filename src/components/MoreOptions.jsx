@@ -55,9 +55,6 @@ const languages = [
   "Arabic",
 ];
 
-// Ticket types
-const ticketTypes = ["Paid"];
-
 export default function MoreOptions({ eventData, onOptionChange }) {
   const [toggleStates, setToggleStates] = useState({});
   const [showCollaboratorModal, setShowCollaboratorModal] = useState(false);
@@ -73,9 +70,6 @@ export default function MoreOptions({ eventData, onOptionChange }) {
     eventData.ticket_type === "Paid" ? "Paid" : "Free",
   );
   const [showTicketModal, setShowTicketModal] = useState(false);
-  // const [ticketPrices, setTicketPrices] = useState({
-  //   Paid: eventData.ticket_price || 0,
-  // });
 
   const [ticketPrices, setTicketPrices] = useState({
     Basic: eventData.ticket_price_basic || 0,
@@ -103,9 +97,24 @@ export default function MoreOptions({ eventData, onOptionChange }) {
     });
     setToggleStates(newToggleStates);
 
-    // Initialize collaborators if they exist in eventData
-    if (eventData.collaborators && eventData.collaborators.length > 0) {
-      setCollaborators(eventData.collaborators);
+    if (eventData.collaborators) {
+      if (typeof eventData.collaborators === "string") {
+        try {
+          const collaboratorsString = eventData.collaborators.replace(
+            /^"|"$/g,
+            "",
+          );
+          const collaboratorsArray = collaboratorsString
+            .split(",")
+            .map((name) => name.trim());
+          setCollaborators(collaboratorsArray);
+        } catch (error) {
+          console.error("Error parsing collaborators:", error);
+          setCollaborators([]);
+        }
+      } else if (Array.isArray(eventData.collaborators)) {
+        setCollaborators(eventData.collaborators);
+      }
     }
 
     // Initialize language if it exists in eventData
@@ -207,7 +216,9 @@ export default function MoreOptions({ eventData, onOptionChange }) {
 
   // Remove a collaborator
   const removeCollaborator = (name) => {
-    const updatedCollaborators = collaborators.filter((c) => c.name !== name);
+    const updatedCollaborators = collaborators.filter(
+      (collaborator) => collaborator !== name,
+    );
     setCollaborators(updatedCollaborators);
     onOptionChange("collaborators", updatedCollaborators);
   };
@@ -218,20 +229,6 @@ export default function MoreOptions({ eventData, onOptionChange }) {
     onOptionChange("language", language);
     setShowLanguageDropdown(false);
   };
-
-  // Update ticket value
-  // const updateTicketValue = (value) => {
-  //   setTicketValue(value);
-  //   onOptionChange("ticket_type", value);
-
-  //   // Reset price to 0 when switching to Free
-  //   if (value === "Free") {
-  //     onOptionChange("ticket_price", 0);
-  //   } else {
-  //     // Use the saved price when switching to Paid
-  //     onOptionChange("ticket_price", ticketPrices["Paid"] || 0);
-  //   }
-  // };
 
   const updateTicketValue = (value) => {
     setTicketValue(value);
@@ -247,16 +244,6 @@ export default function MoreOptions({ eventData, onOptionChange }) {
       onOptionChange("ticket_price_diamond", ticketPrices.Diamond || 0);
     }
   };
-
-  // Update ticket price
-  // const updateTicketPrice = (type, price) => {
-  //   const numericPrice = Number(price);
-  //   setTicketPrices((prev) => ({
-  //     ...prev,
-  //     [type]: numericPrice,
-  //   }));
-  //   onOptionChange("ticket_price", numericPrice);
-  // };
 
   const updateTicketPrice = (type, price) => {
     const numericPrice = Number(price);
@@ -395,7 +382,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
         ))}
 
         {/* Display collaborators if there is any */}
-        {collaborators.length > 0 && (
+        {collaborators.length > 1 && (
           <div className="mt-2 bg-white px-4 py-2 shadow-sm sm:rounded-md sm:px-3">
             <div className="space-y-2">
               {collaborators.map((collaborator, index) => (
@@ -529,25 +516,7 @@ export default function MoreOptions({ eventData, onOptionChange }) {
                 Paid
               </div>
 
-              {/* Price input only shown when Paid is selected */}
               {ticketValue === "Paid" && (
-                // <div className="mt-4 px-3">
-                //   <label className="text-sm font-medium mb-1 block">
-                //     Ticket Price
-                //   </label>
-                //   <div className="flex items-center">
-                //     <span className="mr-2">₦</span>
-                //     <input
-                //       type="number"
-                //       value={ticketPrices["Paid"]}
-                //       onChange={(e) =>
-                //         updateTicketPrice("Paid", e.target.value)
-                //       }
-                //       className="w-full rounded-md bg-white px-3 py-2 outline-none"
-                //     />
-                //   </div>
-                // </div>
-
                 <div className="mt-4 space-y-4">
                   {/* Basic Package */}
                   <div className="px-3">
