@@ -1,5 +1,4 @@
 const SkeletonLoader = ({ type, count = 1 }) => {
-  // Base skeleton pulse animation class
   const pulseClass = "animate-pulse bg-gray-200 rounded";
 
   const renderProfileSkeleton = () => (
@@ -49,14 +48,14 @@ const SkeletonLoader = ({ type, count = 1 }) => {
                 </div>
               </div>
 
-              <hr className="border-gray-200 mt-16" />
+              <hr className="mt-16 border-gray-200" />
             </div>
 
             {/* Content skeleton */}
             <div className="md:grid md:grid-cols-[1fr_2fr] md:gap-6">
               <div>
                 {/* Bio skeleton */}
-                <div className="border-gray-200 mb-6 rounded-lg border p-4">
+                <div className="mb-6 rounded-lg border border-gray-200 p-4">
                   <div className={`${pulseClass} mb-3 h-5 w-24`}></div>
                   <div className={`${pulseClass} mb-2 h-4 w-full`}></div>
                   <div className={`${pulseClass} mb-2 h-4 w-full`}></div>
@@ -64,7 +63,7 @@ const SkeletonLoader = ({ type, count = 1 }) => {
                 </div>
 
                 {/* Calendar skeleton */}
-                <div className="border-gray-200 rounded-lg border p-4">
+                <div className="rounded-lg border border-gray-200 p-4">
                   <div className={`${pulseClass} mb-4 h-6 w-32`}></div>
                   <div className="grid grid-cols-7 gap-1">
                     {Array(35)
@@ -84,7 +83,7 @@ const SkeletonLoader = ({ type, count = 1 }) => {
                 {[1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="border-gray-200 mb-4 rounded-lg border p-4"
+                    className="mb-4 rounded-lg border border-gray-200 p-4"
                   >
                     <div className={`${pulseClass} mb-3 h-6 w-48`}></div>
                     <div className={`${pulseClass} mb-2 h-4 w-full`}></div>
@@ -109,7 +108,7 @@ const SkeletonLoader = ({ type, count = 1 }) => {
 
   const renderCardSkeleton = () => (
     <div
-      className={`${pulseClass} border-gray-200 h-48 w-full rounded-lg border p-4`}
+      className={`${pulseClass} h-48 w-full rounded-lg border border-gray-200 p-4`}
     >
       <div className={`${pulseClass} mb-4 h-6 w-1/2`}></div>
       <div className={`${pulseClass} mb-2 h-4 w-full`}></div>

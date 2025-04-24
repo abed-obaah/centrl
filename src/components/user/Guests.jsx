@@ -67,7 +67,7 @@ const Guests = () => {
   return (
     <div className="mt-12 max-w-[761px]">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-500 font-700">Guests</h2>
+        <h2 className="text-300 font-600">Guests</h2>
 
         <Link className="rounded-xl bg-white px-4 py-2 font-500" to="/guests">
           View All
