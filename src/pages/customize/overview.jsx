@@ -25,7 +25,7 @@ const Overview = () => {
   }
 
   return (
-    <div className="md:ml-20 md:max-w-[1000px]">
+    <div className="md:ml-14 md:max-w-[1000px]">
       <div className="mb-8">
         <h1 className="text-300 font-600">Overview</h1>
       </div>

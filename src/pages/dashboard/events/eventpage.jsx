@@ -14,8 +14,6 @@ import PlanImg from "../../../assets/pricing-card.svg";
 import Logo from "../../../assets/event-details-logo.svg";
 import { useFetch } from "../../../hooks/useFetch";
 import { Spinner } from "../../../components/Spinner";
-import { registerEvent } from "../../../api/registerEvent";
-import { toast } from "sonner";
 import FreeRegistrationModal from "../../../components/checkout/free-registration-modal";
 
 const EventPage = () => {
@@ -27,14 +25,12 @@ const EventPage = () => {
     email,
     profileImage,
     name,
-    token,
   } = useSelector((state) => state.auth);
 
   const [registrationCount, setRegistrationCount] = useState(0);
   const [isFreeRegModalOpen, setIsFreeRegModalOpen] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
-  const [formData, setFormData] = useState(null);
 
   const {
     data: eventData,
@@ -58,7 +54,7 @@ const EventPage = () => {
     dataPath: null,
   });
 
-  console.log("eventData", eventData);
+  // console.log("eventData", eventData);
 
   useEffect(() => {
     if (registrationData && registrationData.status === "success") {
@@ -175,7 +171,6 @@ const EventPage = () => {
       if (isFreeEvent) {
         setRegistrationSuccess(false);
         setIsRegistering(false);
-        setFormData(null);
         setIsFreeRegModalOpen(true);
       } else {
         setIsModalOpen(true);
@@ -344,11 +339,12 @@ const EventPage = () => {
                 {formatTime(eventData.start_time)} -{" "}
                 {formatDate(eventData.end_time || eventData.start_time)},{" "}
               </p>
-              {eventData.event_link !== "null" && (
+
+              {eventData.event_link && eventData.event_link !== "null" && (
                 <MeetingLink url={eventData.event_link} />
               )}
 
-              {eventData.location !== "null" && (
+              {eventData.location && eventData.location !== "null" && (
                 <p className="font-medium capitalize text-black">
                   {eventData.location}
                 </p>
@@ -432,20 +428,6 @@ const EventPage = () => {
                   )}
                 </div>
               </div>
-
-              {/* <div className="mt-4 flex justify-center text-center">
-                <Link
-                  to={isEventCreator ? "/customize" : "#"}
-                  onClick={handleClick}
-                  className={
-                    isEventCreator
-                      ? "mt-3 w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] py-2 text-white"
-                      : "mt-3 w-full rounded-lg bg-primary py-2 text-white"
-                  }
-                >
-                  {isEventCreator ? "Manage Event" : "Click to Register"}
-                </Link>
-              </div> */}
 
               <div className="mt-4 flex justify-center text-center">
                 <Link
@@ -557,54 +539,16 @@ const EventPage = () => {
         />
       )}
 
-      {/* not fully functional yet */}
+      {/* free reg modal*/}
       {isFreeRegModalOpen && (
         <FreeRegistrationModal
           isOpen={isFreeRegModalOpen}
           onClose={closeFreeRegModal}
-          eventData={eventData}
           isRegistering={isRegistering}
           registrationSuccess={registrationSuccess}
-          onSubmit={async (formData) => {
-            try {
-              setIsRegistering(true);
-              setFormData(formData);
-
-              // Prepare registration data
-              const registrationData = {
-                event_id: Number(id),
-                user_id: userId,
-                ticket_type: "free",
-                amount: "0.00",
-                payment_method: "free",
-                payment_status: "completed",
-                // Add the form data
-                first_name: formData.firstName,
-                last_name: formData.lastName,
-                email: formData.email,
-                contact: formData.contact,
-                educational_background: formData.educationalBackground,
-                linkedin_profile: formData.linkedinProfile,
-                website_url: formData.websiteUrl,
-              };
-
-              // Call the API
-              await registerEvent(registrationData, token);
-
-              // Show success message
-              setRegistrationSuccess(true);
-
-              setTimeout(() => {
-                closeFreeRegModal();
-                getEventReg(id);
-              }, 2000);
-            } catch (error) {
-              console.error("Registration failed:", error);
-              toast.error("Failed to register for event. Please try again.");
-            } finally {
-              setIsRegistering(false);
-            }
-          }}
+          eventData={eventData}
+          setIsRegistering={setIsRegistering}
+          setRegistrationSuccess={setRegistrationSuccess}
         />
       )}
     </div>

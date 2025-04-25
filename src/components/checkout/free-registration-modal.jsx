@@ -3,17 +3,21 @@ import { X } from "lucide-react";
 import { Spinner } from "../Spinner";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { toast } from "sonner";
+import axios from "axios";
+import { submitRegistration } from "../../api/freeRegApi";
 
 export default function FreeRegistrationModal({
   isOpen,
   onClose,
-  eventData,
-  onSubmit,
   isRegistering,
+  setIsRegistering,
   registrationSuccess,
+  setRegistrationSuccess,
+  eventData,
 }) {
   const [formData, setFormData] = useState({
-    firstName: "",
+    first_name: "",
     lastName: "",
     email: "",
     contact: "",
@@ -23,6 +27,8 @@ export default function FreeRegistrationModal({
   });
 
   const [errors, setErrors] = useState({});
+  const [isChecking, setIsChecking] = useState(false);
+  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,13 +38,40 @@ export default function FreeRegistrationModal({
     if (errors) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
+
+    // Check registration status when email is updated and valid
+    if (name === "email" && value && /\S+@\S+\.\S+/.test(value)) {
+      checkRegistrationStatus(value);
+    }
+  };
+
+  const checkRegistrationStatus = async (email) => {
+    if (!email || !eventData?.id) return;
+
+    setIsChecking(true);
+    try {
+      const response = await axios.get(
+        `https://api.centrl.ng/check_registration.php?event_id=${eventData.id}&email=${email}`,
+      );
+
+      if (response.data.status === "success" && response.data.is_registered) {
+        setIsAlreadyRegistered(true);
+      } else {
+        setIsAlreadyRegistered(false);
+      }
+    } catch (error) {
+      console.error("Error checking registration status:", error);
+      setIsAlreadyRegistered(false);
+    } finally {
+      setIsChecking(false);
+    }
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.firstName.trim())
-      newErrors.firstName = "First name is required";
+    if (!formData.first_name.trim())
+      newErrors.first_name = "First name is required";
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
     if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
@@ -56,7 +89,42 @@ export default function FreeRegistrationModal({
 
     if (!validateForm()) return;
 
-    await onSubmit(formData);
+    // Check if already registered before submitting
+    if (isAlreadyRegistered) {
+      toast.info("You are already registered for this event");
+      return;
+    }
+
+    setIsRegistering(true);
+
+    console.log("Submitting registration:", formData);
+
+    try {
+      // Send biodata to the server
+      const result = await submitRegistration(formData, eventData.id);
+
+      if (result.status === "success") {
+        setRegistrationSuccess(true);
+        setFormData({
+          first_name: "",
+          lastName: "",
+          email: "",
+          contact: "",
+          educationalBackground: "None selected",
+          linkedinProfile: "",
+          websiteUrl: "",
+        });
+      } else {
+        toast.error(
+          "Registration failed: " + (result.message || "Unknown error"),
+        );
+      }
+    } catch (error) {
+      console.error("Error submitting registration:", error);
+      toast.error("An error occurred during registration. Please try again.");
+    } finally {
+      setIsRegistering(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -122,23 +190,23 @@ export default function FreeRegistrationModal({
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label
-                    htmlFor="firstName"
+                    htmlFor="first_name"
                     className="block text-sm font-medium text-gray-700"
                   >
                     First Name
                   </label>
                   <input
                     type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
+                    id="first_name"
+                    name="first_name"
+                    value={formData.first_name}
                     onChange={handleChange}
-                    className={`mt-1 w-full rounded-md border ${errors.firstName ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                    className={`mt-1 w-full rounded-md border ${errors.first_name ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
                     placeholder="Nicole"
                   />
-                  {errors.firstName && (
+                  {errors.first_name && (
                     <p className="mt-1 text-xs text-red-500">
-                      {errors.firstName}
+                      {errors.first_name}
                     </p>
                   )}
                 </div>
@@ -182,8 +250,21 @@ export default function FreeRegistrationModal({
                     className={`mt-1 w-full rounded-md border ${errors.email ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
                     placeholder="nicole@gmail.com"
                   />
+
+                  {isChecking && (
+                    <span className="absolute right-2 top-1/2 -translate-y-1/2 transform">
+                      <Spinner size="small" />
+                    </span>
+                  )}
+
                   {errors.email && (
                     <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                  )}
+
+                  {isAlreadyRegistered && (
+                    <p className="mt-1 text-xs text-yellow-600">
+                      This email is already registered for this event
+                    </p>
                   )}
                 </div>
 
@@ -272,12 +353,14 @@ export default function FreeRegistrationModal({
                 <button
                   type="submit"
                   className="mt-4 w-full rounded-md bg-blue-500 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
-                  disabled={isRegistering}
+                  disabled={isRegistering || isAlreadyRegistered}
                 >
                   {isRegistering ? (
                     <span className="flex items-center justify-center">
                       <Spinner text="Submitting" />
                     </span>
+                  ) : isAlreadyRegistered ? (
+                    "Already Registered"
                   ) : (
                     "Submit"
                   )}
