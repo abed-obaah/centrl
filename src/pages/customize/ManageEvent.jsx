@@ -390,7 +390,7 @@ export default function ManageEvent() {
     <>
       <div className="mb-20 px-4 md:px-0">
         <form onSubmit={handleUpdateEvent}>
-          <div className="mx-auto max-w-[800px] md:grid md:grid-cols-[1fr_2fr] md:gap-12">
+          <div className="max-w-[800px] md:ml-14 md:grid md:grid-cols-[1fr_2fr] md:gap-12">
             <div className="md:sticky md:top-28">
               <div className="md:mx-auto md:max-w-[300px]">
                 <div className="mt-2">
