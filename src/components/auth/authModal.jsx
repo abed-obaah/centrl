@@ -24,46 +24,23 @@ const AuthOtpModal = ({
 
   if (!isOpen) return null;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
+  const handlePasteCode = async () => {
     try {
-      // Show loading toast
-      const toastId = toast.loading("Updating profile...");
+      const clipboardText = await navigator.clipboard.readText();
+      // Filter out any non-numeric characters and take only first 6 digits
+      const numericText = clipboardText.replace(/\D/g, "").substring(0, 6);
 
-      // Call the API to update the profile
-      const response = await updateUserProfile(token, profileData);
+      if (numericText.length > 0) {
+        setOtp(numericText);
 
-      toast.dismiss(toastId);
-
-      // Update Redux store with new name
-      dispatch(
-        setUser({
-          token,
-          user_id,
-          name: fullName,
-          email,
-          googleId,
-          profileImage,
-        }),
-      );
-
-      // Call the onSave callback with the updated data
-      if (onSave) {
-        onSave(response.data);
+        // If we got a complete 6-digit code, verify it automatically
+        if (numericText.length === 6 && onVerifyOtp) {
+          onVerifyOtp(numericText);
+        }
       }
-
-      // Show success toast
-      toast.success("Profile updated successfully", { id: toastId });
-
-      // Close the modal
-      onClose();
     } catch (error) {
-      console.error("Failed to update profile:", error);
-      toast.error("Failed to update profile. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      console.error("Failed to paste from clipboard:", error);
+      toast.error("Unable to access clipboard. Please check permissions.");
     }
   };
 
@@ -117,7 +94,10 @@ const AuthOtpModal = ({
 
         <div className="flex items-center justify-between rounded-xl bg-white px-6 py-4 shadow-sm">
           {/* Paste Code Button */}
-          <div className="flex items-center space-x-2 rounded-md bg-[#F1F0F0] px-3 py-1.5">
+          <div
+            onClick={handlePasteCode}
+            className="flex cursor-pointer items-center space-x-2 rounded-md bg-[#F1F0F0] px-3 py-1.5"
+          >
             <img src={copy_alt} alt="Paste" className="h-4 w-4" />
             <span className="text-sm font-semibold text-black">Paste Code</span>
           </div>

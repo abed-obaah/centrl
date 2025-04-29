@@ -18,12 +18,12 @@ export default function FreeRegistrationModal({
 }) {
   const [formData, setFormData] = useState({
     first_name: "",
-    lastName: "",
-    email: "",
-    contact: "",
-    educationalBackground: "None selected",
-    linkedinProfile: "",
-    websiteUrl: "",
+    last_name: "",
+    address: "",
+    phone_number: "",
+    education_background: "None selected",
+    linkedin_profile: "",
+    website_url: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -40,7 +40,7 @@ export default function FreeRegistrationModal({
     }
 
     // Check registration status when email is updated and valid
-    if (name === "email" && value && /\S+@\S+\.\S+/.test(value)) {
+    if (name === "address" && value && /\S+@\S+\.\S+/.test(value)) {
       checkRegistrationStatus(value);
     }
   };
@@ -72,13 +72,14 @@ export default function FreeRegistrationModal({
 
     if (!formData.first_name.trim())
       newErrors.first_name = "First name is required";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+    if (!formData.last_name.trim())
+      newErrors.lastName = "Last name is required";
+    if (!formData.address.trim()) newErrors.address = "Email is required";
+    if (formData.address && !/\S+@\S+\.\S+/.test(formData.address)) {
+      newErrors.address = "Please enter a valid email";
     }
-    if (!formData.contact.trim())
-      newErrors.contact = "Contact number is required";
+    if (!formData.phone_number.trim())
+      newErrors.phone_number = "Contact number is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -101,18 +102,18 @@ export default function FreeRegistrationModal({
 
     try {
       // Send biodata to the server
-      const result = await submitRegistration(formData, eventData.id);
+      const result = await submitRegistration(formData);
 
-      if (result.status === "success") {
+      if (result.success === true) {
         setRegistrationSuccess(true);
         setFormData({
           first_name: "",
-          lastName: "",
-          email: "",
-          contact: "",
-          educationalBackground: "None selected",
-          linkedinProfile: "",
-          websiteUrl: "",
+          last_name: "",
+          address: "",
+          phone_number: "",
+          education_background: "None selected",
+          linkedin_profile: "",
+          website_url: "",
         });
       } else {
         toast.error(
@@ -213,41 +214,41 @@ export default function FreeRegistrationModal({
 
                 <div>
                   <label
-                    htmlFor="lastName"
+                    htmlFor="last_name"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Last Name
                   </label>
                   <input
                     type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
+                    id="last_name"
+                    name="last_name"
+                    value={formData.last_name}
                     onChange={handleChange}
-                    className={`mt-1 w-full rounded-md border ${errors.lastName ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                    className={`mt-1 w-full rounded-md border ${errors.last_name ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
                     placeholder="Jackson"
                   />
-                  {errors.lastName && (
+                  {errors.last_name && (
                     <p className="mt-1 text-xs text-red-500">
-                      {errors.lastName}
+                      {errors.last_name}
                     </p>
                   )}
                 </div>
 
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="address"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Email
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
+                    type="address"
+                    id="address"
+                    name="address"
+                    value={formData.address}
                     onChange={handleChange}
-                    className={`mt-1 w-full rounded-md border ${errors.email ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                    className={`mt-1 w-full rounded-md border ${errors.address ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
                     placeholder="nicole@gmail.com"
                   />
 
@@ -257,8 +258,10 @@ export default function FreeRegistrationModal({
                     </span>
                   )}
 
-                  {errors.email && (
-                    <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                  {errors.address && (
+                    <p className="mt-1 text-xs text-red-500">
+                      {errors.address}
+                    </p>
                   )}
 
                   {isAlreadyRegistered && (
@@ -270,38 +273,38 @@ export default function FreeRegistrationModal({
 
                 <div>
                   <label
-                    htmlFor="contact"
+                    htmlFor="phone_number"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Contact
                   </label>
                   <input
                     type="text"
-                    id="contact"
-                    name="contact"
-                    value={formData.contact}
+                    id="phone_number"
+                    name="phone_number"
+                    value={formData.phone_number}
                     onChange={handleChange}
-                    className={`mt-1 w-full rounded-md border ${errors.contact ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                    className={`mt-1 w-full rounded-md border ${errors.phone_number ? "border-red-500" : "border-gray-300"} p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
                     placeholder="+234 8765432101"
                   />
-                  {errors.contact && (
+                  {errors.phone_number && (
                     <p className="mt-1 text-xs text-red-500">
-                      {errors.contact}
+                      {errors.phone_number}
                     </p>
                   )}
                 </div>
 
                 <div>
                   <label
-                    htmlFor="educationalBackground"
+                    htmlFor="education_background"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Educational Background
                   </label>
                   <select
-                    id="educationalBackground"
-                    name="educationalBackground"
-                    value={formData.educationalBackground}
+                    id="education_background"
+                    name="education_background"
+                    value={formData.education_background}
                     onChange={handleChange}
                     className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   >
@@ -316,16 +319,16 @@ export default function FreeRegistrationModal({
 
                 <div>
                   <label
-                    htmlFor="linkedinProfile"
+                    htmlFor="linkedin_profile"
                     className="block text-sm font-medium text-gray-700"
                   >
                     LinkedIn Profile
                   </label>
                   <input
                     type="text"
-                    id="linkedinProfile"
-                    name="linkedinProfile"
-                    value={formData.linkedinProfile}
+                    id="linkedin_profile"
+                    name="linkedin_profile"
+                    value={formData.linkedin_profile}
                     onChange={handleChange}
                     className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     placeholder="https://linkedin.com/in/yourprofile"
@@ -334,16 +337,16 @@ export default function FreeRegistrationModal({
 
                 <div>
                   <label
-                    htmlFor="websiteUrl"
+                    htmlFor="website_url"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Website URL
                   </label>
                   <input
                     type="text"
-                    id="websiteUrl"
-                    name="websiteUrl"
-                    value={formData.websiteUrl}
+                    id="website_url"
+                    name="website_url"
+                    value={formData.website_url}
                     onChange={handleChange}
                     className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     placeholder="https://yourwebsite.com"
