@@ -111,7 +111,7 @@ export const updateEvent = async (
 
   try {
     const response = await axios({
-      method: "POST",
+      method: "PUT",
       url: `https://api.centrl.ng/update_event.php?id=${eventId}`,
       data: formData,
       headers: {

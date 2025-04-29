@@ -139,6 +139,7 @@ export default function ManageEvent() {
   const { mutate: updateEventMutation, isLoading: updating } = useMutate({
     mutationFn: () => {
       const fullEventData = prepareEventData();
+      console.log("full event data", fullEventData);
       return updateEvent(id, fullEventData, bannerImage, videoFile, token);
     },
     onSuccess: () => {
