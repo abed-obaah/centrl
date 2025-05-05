@@ -94,20 +94,49 @@ export const updateEvent = async (
   updatedEventData,
   bannerImage,
   videoFile,
+  keepExistingBanner,
+  keepExistingVideo,
   token,
 ) => {
   const formData = new FormData();
 
-  // Append all fields from updatedEventData
+  // Append all fields from fullEventData
   Object.keys(updatedEventData).forEach((key) => {
+    // Skip these fields as we handle them separately
     if (key !== "banner_image" && key !== "video") {
-      formData.append(key, updatedEventData[key]);
+      // Handle arrays and objects properly
+      if (Array.isArray(updatedEventData[key])) {
+        formData.append(key, JSON.stringify(updatedEventData[key]));
+      } else if (
+        typeof updatedEventData[key] === "object" &&
+        updatedEventData[key] !== null
+      ) {
+        formData.append(key, JSON.stringify(updatedEventData[key]));
+      } else {
+        formData.append(key, updatedEventData[key]);
+      }
     }
   });
 
   // Append files if they exist
-  if (bannerImage) formData.append("banner_image", bannerImage);
-  if (videoFile) formData.append("video", videoFile);
+  if (bannerImage) {
+    formData.append("banner_image", bannerImage);
+  } else if (keepExistingBanner) {
+    formData.append("keep_existing_banner", "1");
+  }
+
+  if (videoFile) {
+    formData.append("video", videoFile);
+  } else if (keepExistingVideo) {
+    formData.append("keep_existing_video", "1");
+  }
+
+  console.log("Form data entries:");
+  for (var pair of formData.entries()) {
+    console.log(
+      pair[0] + ": " + (pair[1] instanceof File ? "File object" : pair[1]),
+    );
+  }
 
   try {
     const response = await axios({
@@ -122,7 +151,7 @@ export const updateEvent = async (
 
     return response.data;
   } catch (error) {
-    console.error("API Error:", error.response.data);
+    console.error("API Error:", error.response?.data || error.message);
     throw error;
   }
 };

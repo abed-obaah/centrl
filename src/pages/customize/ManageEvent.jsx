@@ -12,7 +12,7 @@ import DescriptionModal from "../../components/DescriptionModal";
 import { Spinner } from "../../components/Spinner";
 import { Link, MapPin } from "lucide-react";
 import { toast } from "sonner";
-import { useFetch, useMutate } from "../../hooks/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { getEvent, updateEvent } from "../../api/eventApi";
 
 export default function ManageEvent() {
@@ -22,7 +22,7 @@ export default function ManageEvent() {
   const [isOpenSide, setIsOpenSide] = useState(false);
   const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [customCategory, setCustomCategory] = useState("");
 
   // Form state
@@ -52,7 +52,6 @@ export default function ManageEvent() {
   const [bannerPreview, setBannerPreview] = useState(bgGradient);
   const [videoFile, setVideoFile] = useState(null);
   const [videoName, setVideoName] = useState("Upload Video");
-  const [originalBannerUrl, setOriginalBannerUrl] = useState("");
 
   const roles = [
     "Business",
@@ -66,7 +65,9 @@ export default function ManageEvent() {
   ];
 
   const userId = useSelector((state) => state.auth.user_id);
-  const { token } = useSelector((state) => state.auth);
+  const { token, name, email, profileImage } = useSelector(
+    (state) => state.auth,
+  );
 
   // Use the custom fetch hook to get event data
   const {
@@ -124,7 +125,6 @@ export default function ManageEvent() {
       // Set banner preview if available
       if (eventDetails.banner_image) {
         setBannerPreview(eventDetails.banner_image);
-        setOriginalBannerUrl(eventDetails.banner_image);
       }
 
       // Set video name if available
@@ -134,27 +134,6 @@ export default function ManageEvent() {
       }
     }
   }, [eventDetails]);
-
-  // Use the useMutate hook for update mutation
-  const { mutate: updateEventMutation, isLoading: updating } = useMutate({
-    mutationFn: () => {
-      const fullEventData = prepareEventData();
-      console.log("full event data", fullEventData);
-      return updateEvent(id, fullEventData, bannerImage, videoFile, token);
-    },
-    onSuccess: () => {
-      setSuccess(true);
-      toast.success("Event updated successfully!");
-      setTimeout(() => {
-        navigate(`/event/${id}`);
-      }, 1500);
-    },
-    onError: (err) => {
-      toast.error("Failed to update event. Please try again.");
-      console.log("Failed to update event:", err);
-    },
-    invalidateQueries: [["event", id]],
-  });
 
   const isFormComplete = () => {
     const requiredFields = [
@@ -303,7 +282,11 @@ export default function ManageEvent() {
         : eventData.event_category;
 
     return {
+      event_id: id,
       user_id: userId,
+      name: name,
+      email: email,
+      image: profileImage,
       event_title: eventData.event_title,
       start_time: startDateTime,
       event_type: eventData.event_type === "public" ? "public" : "Private",
@@ -343,7 +326,44 @@ export default function ManageEvent() {
     }
 
     // Call the mutation
-    updateEventMutation();
+    setIsUpdating(true);
+    try {
+      const fullEventData = prepareEventData();
+      console.log("full event data", fullEventData);
+
+      // Determine if we should keep existing files
+      const keepExistingBanner = !bannerImage && eventDetails?.banner_image;
+      const keepExistingVideo = !videoFile && eventDetails?.video;
+
+      console.log("bannerImage", bannerImage);
+      console.log("videoFile", videoFile);
+      console.log("keepExistingBanner", keepExistingBanner);
+      console.log("keepExistingVideo", keepExistingVideo);
+
+      // Call updateEvent directly
+
+      const response = await updateEvent(
+        id,
+        fullEventData,
+        bannerImage,
+        videoFile,
+        keepExistingBanner,
+        keepExistingVideo,
+        token,
+      );
+
+      if (response) {
+        toast.success("Event updated successfully!");
+        setTimeout(() => {
+          navigate(`/event/${id}`);
+        }, 1500);
+      }
+    } catch (err) {
+      toast.error("Failed to update event. Please try again.");
+      console.log("Failed to update event:", err);
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   const MapPreview = ({ latitude, longitude }) => {
@@ -676,15 +696,27 @@ export default function ManageEvent() {
                 onOptionChange={handleOptionChange}
               />
 
-              <button
-                type="submit"
-                disabled={!isFormComplete() || updating}
-                className={`mt-5 w-40 rounded-xl bg-primary py-2 text-white ${
-                  !isFormComplete() ? "cursor-not-allowed opacity-50" : ""
-                }`}
-              >
-                {updating ? <Spinner text="Updating Event" /> : "Update Event"}
-              </button>
+              <div className="mt-5">
+                {error && (
+                  <div className="mb-4 rounded-md bg-red-100 p-4 text-red-700">
+                    {error}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={!isFormComplete() || isUpdating}
+                  className={`w-40 rounded-xl bg-primary py-2 text-white ${
+                    !isFormComplete() ? "cursor-not-allowed opacity-50" : ""
+                  }`}
+                >
+                  {isUpdating ? (
+                    <Spinner text="Updating Event" />
+                  ) : (
+                    "Update Event"
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </form>
