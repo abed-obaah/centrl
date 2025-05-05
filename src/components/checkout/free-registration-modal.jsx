@@ -4,7 +4,6 @@ import { Spinner } from "../Spinner";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { toast } from "sonner";
-import axios from "axios";
 import { submitRegistration } from "../../api/freeRegApi";
 
 export default function FreeRegistrationModal({
@@ -27,8 +26,8 @@ export default function FreeRegistrationModal({
   });
 
   const [errors, setErrors] = useState({});
-  const [isChecking, setIsChecking] = useState(false);
-  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
+  // const [isChecking, setIsChecking] = useState(false);
+  // const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,31 +39,9 @@ export default function FreeRegistrationModal({
     }
 
     // Check registration status when email is updated and valid
-    if (name === "address" && value && /\S+@\S+\.\S+/.test(value)) {
-      checkRegistrationStatus(value);
-    }
-  };
-
-  const checkRegistrationStatus = async (email) => {
-    if (!email || !eventData?.id) return;
-
-    setIsChecking(true);
-    try {
-      const response = await axios.get(
-        `https://api.centrl.ng/check_registration.php?event_id=${eventData.id}&email=${email}`,
-      );
-
-      if (response.data.status === "success" && response.data.is_registered) {
-        setIsAlreadyRegistered(true);
-      } else {
-        setIsAlreadyRegistered(false);
-      }
-    } catch (error) {
-      console.error("Error checking registration status:", error);
-      setIsAlreadyRegistered(false);
-    } finally {
-      setIsChecking(false);
-    }
+    // if (name === "address" && value && /\S+@\S+\.\S+/.test(value)) {
+    //   checkRegistrationStatus(value);
+    // }
   };
 
   const validateForm = () => {
@@ -252,11 +229,11 @@ export default function FreeRegistrationModal({
                     placeholder="nicole@gmail.com"
                   />
 
-                  {isChecking && (
+                  {/* {isChecking && (
                     <span className="absolute right-2 top-1/2 -translate-y-1/2 transform">
                       <Spinner size="small" />
                     </span>
-                  )}
+                  )} */}
 
                   {errors.address && (
                     <p className="mt-1 text-xs text-red-500">
@@ -264,11 +241,11 @@ export default function FreeRegistrationModal({
                     </p>
                   )}
 
-                  {isAlreadyRegistered && (
+                  {/* {isAlreadyRegistered && (
                     <p className="mt-1 text-xs text-yellow-600">
                       This email is already registered for this event
                     </p>
-                  )}
+                  )} */}
                 </div>
 
                 <div>
