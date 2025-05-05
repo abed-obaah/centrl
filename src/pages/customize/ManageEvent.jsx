@@ -282,8 +282,8 @@ export default function ManageEvent() {
         : eventData.event_category;
 
     return {
-      event_id: id,
-      user_id: userId,
+      // event_id: id,
+      // user_id: userId,
       name: name,
       email: email,
       image: profileImage,
@@ -344,6 +344,7 @@ export default function ManageEvent() {
 
       const response = await updateEvent(
         id,
+        userId,
         fullEventData,
         bannerImage,
         videoFile,
@@ -352,7 +353,9 @@ export default function ManageEvent() {
         token,
       );
 
-      if (response) {
+      if (response.status === "error") {
+        toast.error("Failed to update event. Please try again.");
+      } else {
         toast.success("Event updated successfully!");
         setTimeout(() => {
           navigate(`/event/${id}`);

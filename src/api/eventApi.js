@@ -91,6 +91,7 @@ export const getEventReg = async (eventId) => {
 
 export const updateEvent = async (
   eventId,
+  userId,
   updatedEventData,
   bannerImage,
   videoFile,
@@ -100,11 +101,11 @@ export const updateEvent = async (
 ) => {
   const formData = new FormData();
 
-  // Append all fields from fullEventData
+  formData.append("event_id", eventId);
+  formData.append("user_id", userId);
+
   Object.keys(updatedEventData).forEach((key) => {
-    // Skip these fields as we handle them separately
     if (key !== "banner_image" && key !== "video") {
-      // Handle arrays and objects properly
       if (Array.isArray(updatedEventData[key])) {
         formData.append(key, JSON.stringify(updatedEventData[key]));
       } else if (
@@ -118,20 +119,15 @@ export const updateEvent = async (
     }
   });
 
-  // Append files if they exist
   if (bannerImage) {
     formData.append("banner_image", bannerImage);
-  } else if (keepExistingBanner) {
-    formData.append("keep_existing_banner", "1");
   }
 
   if (videoFile) {
     formData.append("video", videoFile);
-  } else if (keepExistingVideo) {
-    formData.append("keep_existing_video", "1");
   }
 
-  console.log("Form data entries:");
+  console.log("Final FormData before API call::");
   for (var pair of formData.entries()) {
     console.log(
       pair[0] + ": " + (pair[1] instanceof File ? "File object" : pair[1]),
@@ -141,7 +137,7 @@ export const updateEvent = async (
   try {
     const response = await axios({
       method: "PUT",
-      url: `https://api.centrl.ng/update_event.php?id=${eventId}`,
+      url: `https://api.centrl.ng/update_event.php`,
       data: formData,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -149,6 +145,7 @@ export const updateEvent = async (
       },
     });
 
+    console.log("response from backend", response.data);
     return response.data;
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
