@@ -68,10 +68,10 @@ export default function FreeRegistrationModal({
     if (!validateForm()) return;
 
     // Check if already registered before submitting
-    if (isAlreadyRegistered) {
-      toast.info("You are already registered for this event");
-      return;
-    }
+    // if (isAlreadyRegistered) {
+    //   toast.info("You are already registered for this event");
+    //   return;
+    // }
 
     setIsRegistering(true);
 
