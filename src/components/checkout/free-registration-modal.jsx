@@ -333,14 +333,12 @@ export default function FreeRegistrationModal({
                 <button
                   type="submit"
                   className="mt-4 w-full rounded-md bg-blue-500 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
-                  disabled={isRegistering || isAlreadyRegistered}
+                  disabled={isRegistering}
                 >
                   {isRegistering ? (
                     <span className="flex items-center justify-center">
                       <Spinner text="Submitting" />
                     </span>
-                  ) : isAlreadyRegistered ? (
-                    "Already Registered"
                   ) : (
                     "Submit"
                   )}
