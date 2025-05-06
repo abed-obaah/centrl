@@ -86,7 +86,7 @@ export default function FreeRegistrationModal({
         return;
       }
 
-      if (result.success === true) {
+      if (result.data.success === true) {
         setRegistrationSuccess(true);
         setFormData({
           first_name: "",
@@ -97,10 +97,6 @@ export default function FreeRegistrationModal({
           linkedin_profile: "",
           website_url: "",
         });
-      } else {
-        toast.error(
-          "Registration failed: " + (result.message || "Unknown error"),
-        );
       }
     } catch (error) {
       console.error("Error submitting registration:", error);

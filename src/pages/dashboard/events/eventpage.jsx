@@ -44,17 +44,6 @@ const EventPage = () => {
     dataPath: "data",
   });
 
-  // New query for registration count
-  // const {
-  //   data: registrationData,
-  //   isLoadingReg,
-  //   isErrorReg,
-  // } = useFetch({
-  //   queryKey: ["event-registration", id],
-  //   fetcher: () => getEventReg(id),
-  //   dataPath: null,
-  // });
-
   const {
     data: registeredUsers,
     isLoading: isLoadingRegisteredUsers,
@@ -66,17 +55,8 @@ const EventPage = () => {
     dataPath: null,
   });
 
-  // console.log("eventData", eventData);
-
-  // useEffect(() => {
-  //   if (registrationData && registrationData.status === "success") {
-  //     setRegistrationCount(registrationData.total_registered);
-  //   }
-  // }, [registrationData]);
-
   useEffect(() => {
     if (registeredUsers) {
-      // Assuming the API returns an array of registered users
       setRegistrationCount(registeredUsers.count || 0);
     }
   }, [registeredUsers]);
@@ -350,30 +330,7 @@ const EventPage = () => {
             </div>
 
             <div className="mt-5 flex w-full justify-between">
-              <div className="flex -space-x-1">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-              </div>
-
-              {renderRegistrationCount()}
+              {renderAttendeeAvatars()} {renderRegistrationCount()}
             </div>
           </div>
         </div>
@@ -542,30 +499,6 @@ const EventPage = () => {
             </div>
 
             <div className="mt-5 flex justify-between">
-              {/* <div className="flex -space-x-1">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
-                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                />
-              </div> */}
-
-              {/* {renderRegistrationCount()} */}
               {renderAttendeeAvatars()}
               {renderRegistrationCount()}
             </div>
