@@ -48,7 +48,6 @@ const EventPage = () => {
     data: registeredUsers,
     isLoading: isLoadingRegisteredUsers,
     isError: isErrorRegisteredUsers,
-    refetch: refetchRegisteredUsers,
   } = useFetch({
     queryKey: ["registered-users"],
     fetcher: getRegisteredUsers,

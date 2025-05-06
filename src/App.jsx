@@ -55,6 +55,7 @@ import LightThemes from "./pages/admin/light-themes";
 import SampleTheme from "./pages/admin/sample-theme";
 import Guests from "./pages/customize/guests";
 import { Toaster } from "sonner";
+import RegisteredUsers from "./pages/RegisteredUsers";
 
 function Contact() {
   return <h1 className="text-3xl font-bold underline">Contact Page</h1>;
@@ -74,19 +75,8 @@ const router = createBrowserRouter(
         <Route path="/calendar" element={<Calenders />} />
         <Route path="/privacy" element={<Privacy />} />
       </Route>
-      {/* 
-      <Route element={<DashboardWrapper />}>
-        <Route path="/dashboard" element={<DashboardLayout />} />
-        <Route path="/create-event" element={<CreateEvent />} />
-        <Route path="/user-profile" element={<UserProfile />} />
-        <Route path="/user-profile/:id" element={<UserViewProfile />} />
-        <Route path="/competition" element={<Competition />} />
-        <Route path="/category/:id" element={<CategoryDetails />} />
-        <Route path="/events" element={<UserEventPage />} />
-        <Route path="/event/:id" element={<EventPage />} />
-        <Route path="/dashboard/discover" element={<Discovered />} />
-      </Route> */}
       <Route path="/sign-up" element={<SignInLayout />} />
+      <Route path="/registered-users" element={<RegisteredUsers />} />
 
       {/* Protected Routes */}
       <Route element={<DashboardWrapper />}>

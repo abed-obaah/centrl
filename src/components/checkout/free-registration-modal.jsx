@@ -26,8 +26,6 @@ export default function FreeRegistrationModal({
   });
 
   const [errors, setErrors] = useState({});
-  // const [isChecking, setIsChecking] = useState(false);
-  // const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,11 +35,6 @@ export default function FreeRegistrationModal({
     if (errors) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-
-    // Check registration status when email is updated and valid
-    // if (name === "address" && value && /\S+@\S+\.\S+/.test(value)) {
-    //   checkRegistrationStatus(value);
-    // }
   };
 
   const validateForm = () => {
@@ -67,15 +60,7 @@ export default function FreeRegistrationModal({
 
     if (!validateForm()) return;
 
-    // Check if already registered before submitting
-    // if (isAlreadyRegistered) {
-    //   toast.info("You are already registered for this event");
-    //   return;
-    // }
-
     setIsRegistering(true);
-
-    // console.log("Submitting registration:", formData);
 
     try {
       // Send biodata to the server
@@ -230,23 +215,11 @@ export default function FreeRegistrationModal({
                     placeholder="nicole@gmail.com"
                   />
 
-                  {/* {isChecking && (
-                    <span className="absolute right-2 top-1/2 -translate-y-1/2 transform">
-                      <Spinner size="small" />
-                    </span>
-                  )} */}
-
                   {errors.address && (
                     <p className="mt-1 text-xs text-red-500">
                       {errors.address}
                     </p>
                   )}
-
-                  {/* {isAlreadyRegistered && (
-                    <p className="mt-1 text-xs text-yellow-600">
-                      This email is already registered for this event
-                    </p>
-                  )} */}
                 </div>
 
                 <div>
