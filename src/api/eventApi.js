@@ -95,8 +95,6 @@ export const updateEvent = async (
   updatedEventData,
   bannerImage,
   videoFile,
-  keepExistingBanner,
-  keepExistingVideo,
   token,
 ) => {
   const formData = new FormData();

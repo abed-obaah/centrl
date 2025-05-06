@@ -75,11 +75,16 @@ export default function FreeRegistrationModal({
 
     setIsRegistering(true);
 
-    console.log("Submitting registration:", formData);
+    // console.log("Submitting registration:", formData);
 
     try {
       // Send biodata to the server
       const result = await submitRegistration(formData);
+
+      if (result.status === 409) {
+        toast.error("You are already registered for this event");
+        return;
+      }
 
       if (result.success === true) {
         setRegistrationSuccess(true);

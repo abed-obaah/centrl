@@ -5,7 +5,7 @@ import bg from "../../../assets/bg.png";
 import Verified from "../../../assets/verified-small.png";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
-import { getEvent, getEventReg } from "../../../api/eventApi";
+import { getEvent } from "../../../api/eventApi";
 import MeetingLink from "../../../components/MeetingLink";
 import Image from "../../../components/Image";
 import CheckoutModal from "../../../components/checkout/checkout-modal";
@@ -15,6 +15,7 @@ import Logo from "../../../assets/event-details-logo.svg";
 import { useFetch } from "../../../hooks/useFetch";
 import { Spinner } from "../../../components/Spinner";
 import FreeRegistrationModal from "../../../components/checkout/free-registration-modal";
+import { getRegisteredUsers } from "../../../api/freeRegApi";
 
 const EventPage = () => {
   const { id } = useParams();
@@ -44,23 +45,41 @@ const EventPage = () => {
   });
 
   // New query for registration count
+  // const {
+  //   data: registrationData,
+  //   isLoadingReg,
+  //   isErrorReg,
+  // } = useFetch({
+  //   queryKey: ["event-registration", id],
+  //   fetcher: () => getEventReg(id),
+  //   dataPath: null,
+  // });
+
   const {
-    data: registrationData,
-    isLoadingReg,
-    isErrorReg,
+    data: registeredUsers,
+    isLoading: isLoadingRegisteredUsers,
+    isError: isErrorRegisteredUsers,
+    refetch: refetchRegisteredUsers,
   } = useFetch({
-    queryKey: ["event-registration", id],
-    fetcher: () => getEventReg(id),
+    queryKey: ["registered-users"],
+    fetcher: getRegisteredUsers,
     dataPath: null,
   });
 
   // console.log("eventData", eventData);
 
+  // useEffect(() => {
+  //   if (registrationData && registrationData.status === "success") {
+  //     setRegistrationCount(registrationData.total_registered);
+  //   }
+  // }, [registrationData]);
+
   useEffect(() => {
-    if (registrationData && registrationData.status === "success") {
-      setRegistrationCount(registrationData.total_registered);
+    if (registeredUsers) {
+      // Assuming the API returns an array of registered users
+      setRegistrationCount(registeredUsers.count || 0);
     }
-  }, [registrationData]);
+  }, [registeredUsers]);
 
   const handleVideoRef = (ref) => {
     if (ref) {
@@ -201,11 +220,11 @@ const EventPage = () => {
   };
 
   const renderRegistrationCount = () => {
-    if (isLoadingReg) {
-      return <p className="text-left text-50 font-500">Loading...</p>;
+    if (isLoadingRegisteredUsers) {
+      return <Spinner size="small" />;
     }
 
-    if (isErrorReg) {
+    if (isErrorRegisteredUsers) {
       return <p className="text-left text-50 font-500">0 Going</p>;
     }
 
@@ -232,6 +251,49 @@ const EventPage = () => {
           src={`https://www.openstreetmap.org/export/embed.html?bbox=${longitude - 0.01},${latitude - 0.01},${longitude + 0.01},${latitude + 0.01}&marker=${latitude},${longitude}`}
           style={{ borderRadius: "8px" }}
         ></iframe>
+      </div>
+    );
+  };
+
+  const renderAttendeeAvatars = () => {
+    if (isLoadingRegisteredUsers) {
+      return (
+        <div className="flex -space-x-1">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="h-6 w-6 rounded-full bg-gray-200"></div>
+          ))}
+        </div>
+      );
+    }
+
+    if (!registeredUsers || registeredUsers.count === 0) {
+      return <p className="text-sm text-gray-500">Be the first to register!</p>;
+    }
+
+    return (
+      <div className="flex -space-x-1">
+        {registeredUsers.records.slice(0, 4).map((user, index) => (
+          <div key={index} className="h-6 w-6 rounded-full bg-gray-200">
+            {user.image ? (
+              <img
+                src={user.image}
+                alt={user.name}
+                className="h-full w-full rounded-full object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-blue-500 text-xs text-white">
+                {user.first_name
+                  ? user.first_name.charAt(0).toUpperCase()
+                  : "U"}
+              </div>
+            )}
+          </div>
+        ))}
+        {registeredUsers.count > 4 && (
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 text-xs">
+            +{registeredUsers.count - 4}
+          </div>
+        )}
       </div>
     );
   };
@@ -480,7 +542,7 @@ const EventPage = () => {
             </div>
 
             <div className="mt-5 flex justify-between">
-              <div className="flex -space-x-1">
+              {/* <div className="flex -space-x-1">
                 <img
                   alt=""
                   src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
@@ -501,8 +563,10 @@ const EventPage = () => {
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=20&w=512&h=512&q=80"
                   className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
                 />
-              </div>
+              </div> */}
 
+              {/* {renderRegistrationCount()} */}
+              {renderAttendeeAvatars()}
               {renderRegistrationCount()}
             </div>
           </div>
