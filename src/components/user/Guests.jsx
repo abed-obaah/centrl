@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import optionsImage from "../../assets/optionsImage.png";
+import { useFetch } from "../../hooks/useFetch";
+import { getUserInvitations } from "../../api/eventApi";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const itemsData = [
   {
@@ -63,7 +67,29 @@ const itemsData = [
   },
 ];
 
-const Guests = () => {
+const Guests = ({ userId }) => {
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const fetchInvitations = async () => {
+      try {
+        const response = await getUserInvitations(userId, token);
+        console.log(response);
+      } catch (error) {
+        console.log("Error fetching invitations:", error);
+      }
+    };
+
+    fetchInvitations();
+  }, [userId, token]);
+
+  // const { data: eventData } = useFetch({
+  //   queryKey: ["userInvite", token],
+  //   fetcher: () => getUserInvitations(userId, token),
+  // });
+
+  // console.log("guest event data", eventData);
+
   return (
     <div className="mt-12 max-w-[761px]">
       <div className="mb-6 flex items-center justify-between">

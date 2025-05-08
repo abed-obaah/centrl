@@ -180,7 +180,7 @@ const SignInForm = () => {
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="flex w-full items-center justify-center rounded-lg border-[1.8px] border-[#000]/15 bg-white px-6 py-2 text-100 font-600 text-[#5c6c75] transition-all duration-300 ease-in-out"
+              className="flex w-full items-center justify-center rounded-lg bg-gray-200 px-6 py-2 text-100 font-600 text-[#5c6c75] transition-all duration-300 ease-in-out"
             >
               <div className="flex items-center gap-x-2">
                 <FcGoogle className="size-7" />

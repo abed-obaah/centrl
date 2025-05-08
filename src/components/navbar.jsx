@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 
@@ -17,8 +18,8 @@ const navigation = [
   },
 
   {
-    name: "Calendars",
-    href: "/calendar",
+    name: "About",
+    href: "/about",
   },
 
   {
@@ -27,7 +28,7 @@ const navigation = [
   },
 ];
 
-const Navbar = ({ isClicked }) => {
+const Navbar = ({ isClicked, toggleNavClick }) => {
   return (
     <>
       {/* Mobile nav */}
@@ -41,7 +42,10 @@ const Navbar = ({ isClicked }) => {
             <li className="mb-4 text-300 font-500 capitalize" key={item.name}>
               <Link
                 to={item.href}
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  toggleNavClick();
+                }}
               >
                 <span>{item.name}</span>
               </Link>
@@ -53,15 +57,26 @@ const Navbar = ({ isClicked }) => {
       {/* Desktop nav */}
       <nav className="hidden md-plus:inline-block">
         <div>
-          <ul className="flex items-center lg:ml-12 lg:mr-auto">
+          <ul className="flex items-center gap-8 lg:ml-12 lg:mr-auto">
             <SearchBar />
-            <Link
-              className="shadow-xs ml-4 inline-flex items-center justify-center rounded-[13px] border border-[#000]/15 px-4 py-2 text-50 font-500 text-foreground duration-300 ease-in hover:bg-black hover:text-white"
-              to={"/sign-up"}
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              Sign In
-            </Link>
+
+            <div className="flex items-center">
+              <Link
+                className="flex items-center gap-2 text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
+                to={"/details"}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                <span>Explore Events</span>
+                <ArrowUpRight size={15} />
+              </Link>
+              <Link
+                className="shadow-xs ml-4 inline-flex items-center justify-center rounded-[13px] bg-gray-200 px-4 py-2 text-50 font-500 text-foreground duration-300 ease-in hover:bg-black hover:text-white"
+                to={"/sign-up"}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                Sign In
+              </Link>
+            </div>
           </ul>
         </div>
       </nav>

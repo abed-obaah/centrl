@@ -150,3 +150,47 @@ export const updateEvent = async (
     throw error;
   }
 };
+
+export const inviteGuests = async (eventId, emails, userId, token) => {
+  try {
+    const response = await axios({
+      method: "POST",
+      url: "https://api.centrl.ng/invite_guests.php",
+      data: {
+        event_id: eventId,
+        user_id: userId,
+        emails: emails,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("response from backend", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error);
+    throw error;
+  }
+};
+
+export const getUserInvitations = async (userId, token) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `https://api.centrl.ng/get_user_invitations.php?user_id=${userId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log("response from backend", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error);
+    throw error;
+  }
+};

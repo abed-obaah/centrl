@@ -10,7 +10,7 @@ import { useFetch } from "../../hooks/useFetch";
 const Overview = () => {
   const { id } = useParams();
 
-  const { data: eventData, isLoading } = useFetch({
+  const { data: eventData } = useFetch({
     queryKey: ["event", id],
     fetcher: () => getEvent(id),
     dataPath: "data",
@@ -95,12 +95,12 @@ const Overview = () => {
       <hr className="pb-12 text-[#000]/15" />
 
       {/* Invites */}
-      <Invites />
+      <Invites eventId={id} userId={eventData.user_id} />
 
       <hr className="text-[#000]/15" />
 
       {/* Guests */}
-      <Guests />
+      <Guests userId={eventData.user_id} />
 
       {/* Hosts */}
       <Hosts eventData={eventData} />
