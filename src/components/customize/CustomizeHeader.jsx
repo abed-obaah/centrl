@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { getEvent } from "../../api/eventApi";
 import { useFetch } from "../../hooks/useFetch";
+import MeetingLink from "../MeetingLink";
 
 const CustomizeHeader = ({ eventId }) => {
   const { data: eventData, isLoading } = useFetch({
@@ -37,6 +38,7 @@ const CustomizeHeader = ({ eventId }) => {
   const bannerImage = eventData?.banner_image;
   const eventTitle = eventData?.event_title;
   const eventLocation = eventData?.location;
+  const eventLink = eventData?.event_link;
 
   return (
     <div className="via-neutral-100/50 supports-[backdrop-filter]:bg-white/3 fixed left-0 top-0 z-[500] w-full bg-gradient-to-r from-white/50 to-white/50 backdrop-blur-md">
@@ -56,7 +58,18 @@ const CustomizeHeader = ({ eventId }) => {
           />
           <div>
             <h1 className="text-100 font-500">{eventTitle}</h1>
-            <p className="text-100 font-500 text-foreground">{eventLocation}</p>
+
+            {eventLink !== "null" && (
+              <div className="inline-block">
+                <MeetingLink url={eventLink} />
+              </div>
+            )}
+
+            {eventLocation !== "null" && (
+              <p className="line-clamp-1 capitalize text-gray-400">
+                {eventLocation}
+              </p>
+            )}
           </div>
         </div>
       </div>

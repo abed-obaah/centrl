@@ -5,6 +5,7 @@ import ConcertImg from "../../assets/qr-image.png";
 import { Download } from "lucide-react";
 import Guest from "../../components/gueste";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const cards = [
   {

@@ -49,7 +49,7 @@ const EventPage = () => {
     isLoading: isLoadingRegisteredUsers,
     isError: isErrorRegisteredUsers,
   } = useFetch({
-    queryKey: ["registered-users"],
+    queryKey: ["registered-users", id],
     fetcher: getRegisteredUsers,
     dataPath: null,
   });
@@ -279,7 +279,7 @@ const EventPage = () => {
 
   return (
     <div className="flex w-full items-center justify-center bg-[#FEF6D5] px-4 py-8 text-black">
-      <div className="mt-12 w-full max-w-[900px] md:flex md:justify-between md:gap-6">
+      <div className="mt-12 w-full max-w-[900px] md:grid md:grid-cols-[1fr_2fr] md:gap-6">
         {/* Event Image & Title */}
         <div className="flex flex-col items-center md:items-start">
           <div className="hidden w-full md:block">
@@ -294,13 +294,13 @@ const EventPage = () => {
               ></video>
             )}
           </div>
-          <div className="w-full">
-            <Image
-              src={eventData.banner_image}
-              alt={eventData.event_title}
-              className="mt-5 w-full rounded-lg md:size-[283px]"
-            />
-          </div>
+
+          <Image
+            className="size-[286px] rounded-lg object-cover"
+            src={eventData.banner_image}
+            alt={eventData.event_title}
+          />
+
           <div className="hidden w-full md:block">
             <h2 className="mt-6 text-left text-50 font-500">Hosted by</h2>
             <div className="mt-6 flex items-center space-x-3">
@@ -328,7 +328,7 @@ const EventPage = () => {
               </div>
             </div>
 
-            <div className="mt-5 flex w-full justify-between">
+            <div className="mt-5 flex w-full flex-wrap justify-between gap-2">
               {renderAttendeeAvatars()} {renderRegistrationCount()}
             </div>
           </div>

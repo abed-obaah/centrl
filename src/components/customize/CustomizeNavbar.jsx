@@ -40,10 +40,10 @@ const CustomNavbar = ({ isOpen, toggleSidebar, eventId }) => {
               icon: UserIcon,
               href: "/registrations",
             },
-            { name: "Guests", icon: UserIcon, href: "/guests" },
-            { name: "Messages", icon: UserIcon, href: "/messages" },
-            { name: "Insights", icon: UserIcon, href: "/insights" },
-            { name: "More", icon: MoreIcon, href: "/more" },
+            { name: "Guests", icon: UserIcon, href: `/guests/${eventId}` },
+            { name: "Messages", icon: UserIcon, href: `/messages/${eventId}` },
+            // { name: "Insights", icon: UserIcon, href: "/insights" },
+            { name: "More", icon: MoreIcon, href: `/more/${eventId}` },
           ].map((item) => (
             <li key={item.name}>
               <Link

@@ -1,5 +1,5 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo-dark.png";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EventNavbar from "./EventNavbar";

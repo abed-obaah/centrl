@@ -80,9 +80,12 @@ const EventCard = ({ event }) => {
       </div>
 
       {String(userId) === String(event.user_id) && (
-        <span className="rounded-xl text-50 text-foreground/50">
+        <a
+          href={`/overview/${event.id}`}
+          className="rounded-xl text-50 text-foreground/50"
+        >
           <Edit className="size-5 text-foreground" />
-        </span>
+        </a>
       )}
     </div>
   );

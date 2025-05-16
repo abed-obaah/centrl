@@ -245,14 +245,6 @@ export default function ManageEvent() {
     }));
   };
 
-  // Handle option changes from MoreOptions component
-  const handleOptionChange = (option, value) => {
-    setEventData((prevData) => ({
-      ...prevData,
-      [option]: value,
-    }));
-  };
-
   const validateForm = () => {
     if (!eventData.event_title) {
       setError("Event title is required");
@@ -693,11 +685,6 @@ export default function ManageEvent() {
                   />
                 </div>
               )}
-
-              <MoreOptions
-                eventData={eventData}
-                onOptionChange={handleOptionChange}
-              />
 
               <div className="mt-5">
                 {error && (
