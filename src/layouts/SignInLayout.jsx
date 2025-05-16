@@ -3,6 +3,7 @@ import logo from "../assets/logo.png";
 import SignImg from "../assets/sign-in-image.png";
 import SignInForm from "../components/SigninForm";
 import Image from "../components/Image";
+import { ArrowUpRight } from "lucide-react";
 
 const SignInLayout = () => {
   return (
@@ -14,6 +15,17 @@ const SignInLayout = () => {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
+          </Link>
+        </div>
+
+        <div className="absolute right-0 top-2 z-10 mr-4 mt-4">
+          <Link
+            className="flex items-center gap-2 text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
+            to={"/details"}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <span>Explore Events</span>
+            <ArrowUpRight size={15} />
           </Link>
         </div>
       </div>

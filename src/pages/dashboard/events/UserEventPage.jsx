@@ -11,7 +11,7 @@ const UserEventPage = () => {
 
   return (
     <>
-      <div className="mx-auto mb-20 mt-20 max-w-[1000px] px-4 md:px-0">
+      <div className="mx-auto mb-20 mt-[8rem] max-w-[1000px] px-4 md:px-0">
         <div className="md:grid md:grid-cols-[2fr_1fr] md:gap-6">
           <div>
             <div className="mb-6 flex items-center justify-between">

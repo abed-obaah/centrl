@@ -24,7 +24,6 @@ export const submitRegistration = async (formData) => {
   }
 };
 
-// api/freeRegApi.js
 export const getRegisteredUsers = async () => {
   try {
     const response = await axios.get("https://api.centrl.ng/get_biodata.php");

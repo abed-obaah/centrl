@@ -56,6 +56,8 @@ import SampleTheme from "./pages/admin/sample-theme";
 import Guests from "./pages/customize/guests";
 import { Toaster } from "sonner";
 import RegisteredUsers from "./pages/RegisteredUsers";
+import Messages from "./pages/customize/messages";
+import More from "./pages/customize/more";
 
 function Contact() {
   return <h1 className="text-3xl font-bold underline">Contact Page</h1>;
@@ -96,8 +98,10 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoute />}>
         <Route element={<CustomizeLayout />}>
           <Route path="/customize-event/:id" element={<ManageEvent />} />
-          <Route path="/guests" element={<Guests />} />
+          <Route path="/guests/:id" element={<Guests />} />
           <Route path="/overview/:id" element={<Overview />} />
+          <Route path="/messages/:id" element={<Messages />} />
+          <Route path="/more/:id" element={<More />} />
         </Route>
 
         <Route element={<UserSettingsLayout />}>
