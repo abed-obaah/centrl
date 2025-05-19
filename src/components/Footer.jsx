@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import AppStore from "../assets/app.png";
 import PlayStore from "../assets/play.png";
+import SuccesshModal from "./SuccessModals";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 const navigation = {
   centrl: [
@@ -97,76 +100,81 @@ const navigation = {
 };
 
 const Footer = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+
+  const handleSubscribe = async () => {
+    if (!email) return alert('Please enter your email');
+
+    try {
+      const response = await axios.post('https://api.centrl.ng/subscribe.php', {
+        email,
+        first_name: firstName,
+      });
+
+      console.log('Response:', response.data);
+      setModalOpen(true);
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      alert('Something went wrong. Please try again.');
+    }
+  };
+
   return (
     <footer className="mt-20 bg-[#fff] py-20">
       <div className="container 2xl:max-w-[1300px]">
         <div className="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-[1fr_2fr]">
           <div>
-            <p className="mb-4 text-200 font-600 text-[#000]">
-              Join our Newsletter
-            </p>
-            <div className="relative mb-4 flex w-full gap-x-0">
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                required
-                placeholder="Enter your email"
-                autoComplete="email"
-                className="text-base text-gray-900 outline-gray-300 placeholder:text-gray-400 sm:text-sm/6 w-full rounded-md border border-[#C2C2C2] bg-white px-3.5 py-2 pr-10 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2"
-              />
-              {/* Arrow Icon */}
-              <span className="text-gray-400 absolute inset-y-0 right-3 flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </span>
+            <p className="mb-4 text-200 font-600 text-[#000]">Join our Newsletter</p>
+
+            <div className="w-full max-w-md space-y-4">
+
+              {/* Email Input Field */}
+              <div className="relative w-full">
+                <label htmlFor="email-address" className="sr-only">Email address</label>
+                <input
+                  id="email-address"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="peer block w-full rounded-md border border-[#C2C2C2] bg-white px-3.5 py-2 pr-10 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#CD2574] focus:outline-none focus:ring-1 focus:ring-[#CD2574] sm:text-base"
+                />
+                <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+
+              {/* Continue Button */}
+              <button
+                type="button"
+                onClick={handleSubscribe}
+                className="w-full rounded-lg bg-gradient-to-r from-[#CD2574] to-[#E46708] px-6 py-2 text-sm font-medium text-white transition-all duration-300 ease-in-out hover:from-[#E46708] hover:to-[#CD2574] sm:text-base"
+              >
+                Continue with Email
+              </button>
             </div>
 
             <p className="mb-4 font-600">Coming Soon to</p>
             <div className="flex gap-4">
-              <img
-                src={AppStore}
-                alt="App Store"
-                className="h-auto w-[130px]"
-                style={{ objectFit: "contain" }}
-              />
-              <img
-                src={PlayStore}
-                alt="Play Store"
-                className="h-auto w-[130px]"
-                style={{ objectFit: "contain" }}
-              />
+              <img src={AppStore} alt="App Store" className="h-auto w-[130px]" />
+              <img src={PlayStore} alt="Play Store" className="h-auto w-[130px]" />
             </div>
           </div>
 
-          {/* Links */}
+          {/* Footer Links */}
           <div className="md:flex md:flex-wrap md:gap-8 lg:gap-10 lg:justify-self-end">
             <div className="mt-16 md:mt-0">
               <h3 className="mb-4 text-200 font-700">Use Centrl</h3>
               {navigation.centrl.map((item, index) => (
                 <li key={index} className="list-none">
-                  <Link
-                    className="mb-2 inline-block text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
-                    to={item.href}
-                    onClick={() =>
-                      window.scrollTo({ top: 0, behavior: "smooth" })
-                    }
-                  >
+                  <Link to={item.href} className="mb-2 inline-block text-50 font-500 text-foreground hover:text-black" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     {item.name}
                   </Link>
                 </li>
@@ -177,13 +185,7 @@ const Footer = () => {
               <h3 className="mb-4 text-200 font-700">Company Info</h3>
               {navigation.info.map((item, index) => (
                 <li key={index} className="list-none">
-                  <Link
-                    className="mb-2 inline-block text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
-                    to={item.href}
-                    onClick={() =>
-                      window.scrollTo({ top: 0, behavior: "smooth" })
-                    }
-                  >
+                  <Link to={item.href} className="mb-2 inline-block text-50 font-500 text-foreground hover:text-black" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     {item.name}
                   </Link>
                 </li>
@@ -194,13 +196,7 @@ const Footer = () => {
               <h3 className="mb-4 text-200 font-700">Terms & Policies</h3>
               {navigation.policies.map((item, index) => (
                 <li key={index} className="list-none">
-                  <Link
-                    className="mb-2 inline-block text-50 font-500 text-foreground duration-300 ease-in hover:text-black"
-                    to={item.href}
-                    onClick={() =>
-                      window.scrollTo({ top: 0, behavior: "smooth" })
-                    }
-                  >
+                  <Link to={item.href} className="mb-2 inline-block text-50 font-500 text-foreground hover:text-black" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     {item.name}
                   </Link>
                 </li>
@@ -213,18 +209,21 @@ const Footer = () => {
           <p className="mb-4 text-200 font-700 md:mb-0">Centrl</p>
           <div className="flex gap-x-6 md:order-2">
             {navigation.social.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="hover:text-gray-300 text-[#888]"
-              >
+              <a key={item.name} href={item.href} className="hover:text-gray-300 text-[#888]">
                 <span className="sr-only">{item.name}</span>
-                <item.icon aria-hidden="true" className="size-6" />
+                <item.icon className="size-6" aria-hidden="true" />
               </a>
             ))}
           </div>
         </div>
       </div>
+
+      <SuccesshModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        email={email}
+        message="You have successfully subscribed to our newsletter!"
+      />
     </footer>
   );
 };
