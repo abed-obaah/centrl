@@ -282,7 +282,7 @@ const EventPage = () => {
       <div className="mt-12 w-full max-w-[900px] md:grid md:grid-cols-[1fr_2fr] md:gap-6">
         {/* Event Image & Title */}
         <div className="flex flex-col items-center md:items-start">
-          <div className="hidden w-full md:block">
+          <div className="mb-6 hidden w-full md:block">
             {eventData.video && (
               <video
                 className="h-[286px] w-full rounded-lg object-cover lg:h-[286px] lg:w-[283px]"

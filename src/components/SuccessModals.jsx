@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import { toast } from "sonner";
-import Confetti from 'react-confetti';
-import useWindowSize from 'react-use/lib/useWindowSize';
-// import successCheck from "../../assets/success-check.png"; // You'll need a success icon
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 const SuccessModal = ({
   isOpen,
@@ -48,25 +46,18 @@ const SuccessModal = ({
       {/* Modal content */}
       <div className="z-[800] mx-4 w-full max-w-[400px] rounded-lg bg-white p-6 text-center">
         <div className="flex justify-end">
-          <button
-            onClick={onClose}
-            className="text-black hover:text-gray-700"
-          >
+          <button onClick={onClose} className="text-black hover:text-gray-700">
             <X size={20} />
           </button>
         </div>
 
         <div className="flex flex-col items-center justify-center space-y-4">
           {/* Success icon */}
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-            {/* <img src={successCheck} alt="Success" className="h-10 w-10" /> */}
-          </div>
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100"></div>
 
           {/* Success message */}
           <h3 className="text-400 font-600">Success!</h3>
-          <p className="text-100 font-500 text-foreground">
-            {message}
-          </p>
+          <p className="text-100 font-500 text-foreground">{message}</p>
           {email && (
             <p className="text-100 font-500 text-foreground">
               Confirmation sent to {email}
