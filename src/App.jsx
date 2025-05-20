@@ -17,13 +17,11 @@ import CustomizeLayout from "./layouts/CustomizeLayout";
 import SignInLayout from "./layouts/SignInLayout";
 import UserSettingsLayout from "./layouts/UserSettingsLayout";
 
-// PAGES
-
 // landing pages
-import Home from "./pages/Home";
+import HomePage from "./pages/Home/HomePage";
+import AboutPage from "./pages/About/AboutPage";
 import Calenders from "./pages/Calenders";
 import Pricing from "./pages/Pricing";
-import About from "./pages/About";
 import Discover from "./pages/Discover";
 import Discovered from "./pages/dashboard/discover";
 import Privacy from "./pages/Privacy";
@@ -59,19 +57,13 @@ import RegisteredUsers from "./pages/RegisteredUsers";
 import Messages from "./pages/customize/messages";
 import More from "./pages/customize/more";
 
-function Contact() {
-  return <h1 className="text-3xl font-bold underline">Contact Page</h1>;
-}
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<RootLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route index element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/about" element={<About />} />
         <Route path="/discover" element={<Discover />} />
         <Route path="/details" element={<TrendingDetails />} />
         <Route path="/calendar" element={<Calenders />} />
