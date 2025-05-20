@@ -1,7 +1,7 @@
-import HeroImage from "../assets/homeimg.png";
-import StarIcon from "../assets/hero-svg-icon.svg";
+import HeroImage from "../../../assets/homeimg.png";
+import StarIcon from "../../../assets/hero-svg-icon.svg";
 import { Link } from "react-router-dom";
-import Image from "../components/Image";
+import Image from "../../../components/Image";
 
 const Hero = () => {
   return (

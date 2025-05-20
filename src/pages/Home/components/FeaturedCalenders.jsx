@@ -1,7 +1,7 @@
 import { ArrowRight } from "iconsax-react";
-import { cards } from "../libs/constants";
 import { Link } from "react-router-dom";
-import Image from "../components/Image";
+import { cards } from "../../../libs/constants";
+import Image from "../../../components/Image";
 
 const FeaturedCalendars = () => {
   return (

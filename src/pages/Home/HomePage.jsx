@@ -1,10 +1,10 @@
-import Banner from '../sections/Banner';
-import FeaturedCalendars from '../sections/FeaturedCalendars';
-import Hero from '../sections/Hero';
-import NewEvents from '../sections/NewEvents';
-import TrendingEvents from '../sections/TrendingEvents';
+import Banner from "./components/Banner";
+import FeaturedCalendars from "./components/FeaturedCalenders";
+import Hero from "./components/Hero";
+import NewEvents from "./components/NewEvents";
+import TrendingEvents from "./components/TrendingEvents";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       {/* Hero section */}
@@ -25,4 +25,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
