@@ -1,8 +1,8 @@
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import logo from '../assets/logo.png';
-import { useState } from 'react';
-import Navbar from './navbar';
-import { Link } from 'react-router-dom';
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import logo from "../assets/logo.png";
+import { useState } from "react";
+import Navbar from "./navbar";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -12,8 +12,8 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 z-[500] w-full backdrop-blur-md bg-gradient-to-r from-white/50 via-neutral-100/50 to-white/50  supports-[backdrop-filter]:bg-white/3">
-      <div className="flex items-center justify-between p-4 max-w-[1290px] 2xl:max-w-[1500px] mx-auto">
+    <header className="via-neutral-100/50 supports-[backdrop-filter]:bg-white/3 fixed top-0 z-[500] w-full bg-gradient-to-r from-white/50 to-white/50 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1290px] items-center justify-between p-4 2xl:max-w-[1500px]">
         {/* Logo */}
         <a href="/">
           <img alt="Centrl" src={logo} className="size-7" loading="lazy" />
@@ -23,9 +23,9 @@ const Header = () => {
         <ul className="hidden md-plus:flex md-plus:gap-10 xl:mr-14 2xl:mr-[20rem]">
           <li>
             <Link
-              to={'/pricing'}
-              className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              to={"/pricing"}
+              className="text-50 font-500 text-foreground transition-colors duration-300 ease-out hover:text-black"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               Pricing
             </Link>
@@ -33,9 +33,9 @@ const Header = () => {
 
           <li>
             <Link
-              to={'/discover'}
-              className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              to={"/discover"}
+              className="text-50 font-500 text-foreground transition-colors duration-300 ease-out hover:text-black"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               Discover
             </Link>
@@ -43,9 +43,9 @@ const Header = () => {
 
           <li>
             <Link
-              to={'/about'}
-              className="font-500 text-50 text-foreground hover:text-black transition-colors duration-300 ease-out"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              to={"/about"}
+              className="text-50 font-500 text-foreground transition-colors duration-300 ease-out hover:text-black"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               About
             </Link>
