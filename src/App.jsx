@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-// layouts
+// main app layouts
 import RootLayout from "./layouts/RootLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import DashboardWrapper from "./layouts/DashboardWrapper";
@@ -56,6 +56,13 @@ import { Toaster } from "sonner";
 import RegisteredUsers from "./pages/RegisteredUsers";
 import Messages from "./pages/customize/messages";
 import More from "./pages/customize/more";
+
+// nextgen layouts
+import NextGenLayout from "./layouts/NextGenLayout";
+
+// nextgen pages
+import NextGenHome from "./features/nextgen/pages/NextGenHome";
+import Neumind from "./features/nextgen/pages/Neumind";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -118,6 +125,13 @@ const router = createBrowserRouter(
           <Route path="/admin-themes/light" element={<LightThemes />} />
           <Route path="/admin-themes/sample" element={<SampleTheme />} />
         </Route>
+      </Route>
+
+      {/* NextGen  */}
+      <Route path="/nextgen" element={<NextGenLayout />}>
+        <Route index element={<NextGenHome />} />
+        <Route path="neumind" element={<Neumind />} />
+        {/* <Route path="season-1" element={<Season />} /> */}
       </Route>
     </>,
   ),
