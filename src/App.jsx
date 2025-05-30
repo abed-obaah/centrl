@@ -63,6 +63,7 @@ import NextGenLayout from "./layouts/NextGenLayout";
 // nextgen pages
 import NextGenHome from "./features/nextgen/pages/NextGenHome";
 import Neumind from "./features/nextgen/pages/Neumind";
+import Season from "./features/nextgen/pages/Season";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -131,7 +132,7 @@ const router = createBrowserRouter(
       <Route path="/nextgen" element={<NextGenLayout />}>
         <Route index element={<NextGenHome />} />
         <Route path="neumind" element={<Neumind />} />
-        {/* <Route path="season-1" element={<Season />} /> */}
+        <Route path="season-1" element={<Season />} />
       </Route>
     </>,
   ),

@@ -25,7 +25,7 @@ const eventsData = [
 const Events = () => {
   return (
     <section className="pt-24">
-      <div className="container 2xl:max-w-[1200px]">
+      <div className="container lg:max-w-[1000px]">
         <h2 className="mb-4 text-2xl font-bold text-gray-900">Event</h2>
         <p className="mb-8 text-gray-600">
           Stay up to date with all the community events. All events, like

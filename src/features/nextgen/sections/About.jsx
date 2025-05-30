@@ -3,7 +3,7 @@ import AboutImg from "../../../assets/nextgen-forum.png";
 const About = () => {
   return (
     <section className="pt-24">
-      <div className="container">
+      <div className="container lg:max-w-[1000px]">
         <div className="grid items-center gap-12 md:grid-cols-[2fr_1fr]">
           <div>
             <h2 className="mb-6 text-2xl font-bold text-gray-900">About Us</h2>

@@ -13,7 +13,7 @@ const Header = () => {
       <div className="mx-auto flex max-w-[1290px] items-center justify-between p-4 2xl:max-w-[1500px]">
         <div className="flex items-center">
           <div className="flex items-center space-x-2">
-            <a className="flex items-center" href="/">
+            <a className="flex items-center" href="/nextgen">
               <img
                 alt="Next Gen"
                 src={NextgenLogo}
@@ -29,7 +29,7 @@ const Header = () => {
             </a>
           </div>
 
-          <ul className="hidden md-plus:flex md-plus:gap-10 xl:ml-[1rem] 2xl:ml-[6rem]">
+          <ul className="hidden md-plus:flex md-plus:gap-10 xl:ml-[5rem] 2xl:ml-[10rem]">
             <li>
               <NavLink
                 to={"/pricing"}

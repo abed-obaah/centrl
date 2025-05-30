@@ -1,10 +1,14 @@
 const EventCard = ({ event }) => {
   return (
-    <div className="items-center rounded-xl bg-white shadow-md md:grid md:grid-cols-2 md:gap-2">
+    <a
+      href="/nextgen/season-1"
+      className="items-center rounded-xl bg-white shadow-md md:grid md:grid-cols-[1.5fr_2fr] md:gap-2"
+    >
       <img
         src={event.bannerImg}
         alt={event.name}
-        className="h-full w-full object-cover"
+        loading="lazy"
+        className="h-full w-full rounded-bl-xl rounded-tl-xl object-cover md:w-[227px]"
       />
 
       <div className="flex h-full flex-col justify-between px-3 py-6">
@@ -20,7 +24,7 @@ const EventCard = ({ event }) => {
           <p className="text-50 text-gray-600">{event.description}</p>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 

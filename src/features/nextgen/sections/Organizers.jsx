@@ -3,11 +3,12 @@ import CeoImg from "../../../assets/joel.png";
 const Organizers = () => {
   return (
     <section className="pt-24">
-      <div className="container">
-        <h2 className="mb-8 text-2xl font-bold text-gray-900">Organizers</h2>
+      <div className="container lg:max-w-[1000px]">
+        <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 md:text-left">
+          Organizers
+        </h2>
 
-        {/* <div className="grid gap-8 space-y-6 md:grid-cols-2 md:space-y-0 lg:grid-cols-4"> */}
-        <div className="m space-y-6 md:flex md:items-center md:justify-between md:space-y-0">
+        <div className="space-y-6 md:flex md:items-center md:justify-between md:space-y-0">
           {/* Organizer 1 */}
           <div className="text-center">
             <img
