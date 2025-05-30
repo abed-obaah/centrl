@@ -3,7 +3,7 @@ import FooterImg from "../../../assets/nextgen-forum.png";
 const Footer = () => {
   return (
     <footer className="mt-24 bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1290px] px-4 py-12 sm:px-6 lg:px-8 2xl:max-w-[1500px]">
         <div className="md:flex md:justify-between">
           {/* Newsletter */}
           <div className="mb-8 w-full flex-1 md:mb-0">
@@ -33,7 +33,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="hover:text-gray-900">
-                  Create Events with Cenri
+                  Create Events with Centrl
                 </a>
               </li>
               <li>

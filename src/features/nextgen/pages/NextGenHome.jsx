@@ -23,7 +23,7 @@ const NextGenHome = () => {
       {/* Organizers */}
       <Organizers />
 
-      <div className="container pt-24 2xl:max-w-[1200px]">
+      <div className="container pt-24 lg:max-w-[1000px]">
         <h2 className="mb-4 text-2xl font-bold text-gray-900">Partners</h2>
         <SponsorsBanner />
       </div>

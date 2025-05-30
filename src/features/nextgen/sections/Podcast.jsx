@@ -4,7 +4,7 @@ import Img from "../../../assets/podcast-banner.png";
 const Podcast = () => {
   return (
     <section className="pt-24">
-      <div className="container 2xl:max-w-[1200px]">
+      <div className="container lg:max-w-[1000px]">
         <h2 className="mb-4 text-2xl font-bold text-gray-900">Podcast</h2>
         <p className="mb-8 text-gray-600">
           Stay up to date with all the community events. All events, like
@@ -13,12 +13,12 @@ const Podcast = () => {
 
         <Link
           to={"/nextgen/neumind"}
-          className="rounded-bl-xl rounded-br-xl bg-white shadow-md md:grid md:grid-cols-[1fr_2fr] md:gap-6 md:rounded-bl-none md:rounded-br-xl md:rounded-tr-xl"
+          className="rounded-xl bg-white shadow-md md:grid md:grid-cols-[1fr_2fr] md:gap-6"
         >
           <img
             src={Img}
             alt="Podcast Banner"
-            className="h-full w-full rounded-xl object-cover md:rounded-none"
+            className="h-full w-full rounded-xl object-cover md:rounded-br-none md:rounded-tr-none"
           />
 
           <div className="px-4 py-6 md:px-0 md:pr-8 md:pt-10">

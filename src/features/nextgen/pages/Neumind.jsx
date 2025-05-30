@@ -32,7 +32,7 @@ const Neumind = () => {
     <main>
       {/* Podcast Section */}
       <section className="pt-24">
-        <div className="container 2xl:max-w-[1200px]">
+        <div className="container lg:max-w-[1000px] 2xl:max-w-[1200px]">
           <h2 className="mb-2 text-2xl font-bold text-gray-900">Podcast</h2>
           <p className="mb-8 max-w-[800px] text-gray-600">
             Stay up to date with all the community events. All events, like
@@ -74,7 +74,7 @@ const Neumind = () => {
 
       {/* Featured Playlist Section */}
       <section className="pt-16">
-        <div className="container 2xl:max-w-[1200px]">
+        <div className="container lg:max-w-[1000px] 2xl:max-w-[1200px]">
           <h2 className="mb-8 text-2xl font-bold text-gray-900">
             Featured Playlist
           </h2>
